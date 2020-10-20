@@ -1,0 +1,44 @@
+version: '3.4'
+services:
+    postgres:
+        image: postgres:13
+        container_name: postgres
+        env_file:
+            - ./.env/postgres.env
+        volumes:
+            - ./db/postgres:/data/postgres
+        ports:
+            - 5433:5432
+        networks:
+            - cgdb
+        restart:
+            unless-stopped
+    
+    backend:
+        build:
+            context: ./backend
+        container_name: backend
+        env_file:
+            - ./.env/backend.env
+        volumes:
+            - ./backend/src:/app
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8001:8000
+        depends_on:
+            - postgres
+        networks:
+            - cgdb
+
+    frontend:
+        build:
+            context: ./frontend
+        command: serve -s build -p 3000
+        ports:
+            - 3001:3000
+        networks:
+            - cgdb
+
+networks:
+    cgdb:
+        driver: bridge
