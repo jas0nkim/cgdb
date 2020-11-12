@@ -30,14 +30,14 @@ services:
         networks:
             - cgdb
 
-    frontend:
-        build:
-            context: ./frontend
-        command: serve -s build -p 3000
-        ports:
-            - 3001:3000
-        networks:
-            - cgdb
+    # frontend:
+    #     build:
+    #         context: ./frontend
+    #     command: serve -s build -p 3000
+    #     ports:
+    #         - 3001:3000
+    #     networks:
+    #         - cgdb
 
 networks:
     cgdb:

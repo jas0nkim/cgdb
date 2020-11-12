@@ -24,6 +24,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ADMIN_ENABLED = True
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # cgdb apps
+    'cgdb.cloudgames.apps.CloudgamesConfig',
 ]
 
 MIDDLEWARE = [
