@@ -134,8 +134,8 @@ class Game(models.Model):
             ]
         links format:
             {
-                "Wiki": "link...",
-                "Facebook": "link...",
+                "wikipedia": "link...",
+                "facebook": "link...",
                 ...
             }
 
@@ -155,7 +155,7 @@ class Game(models.Model):
     series = models.ManyToManyField(
                     Series,
                     related_name="games",
-                    related_query_name="game")
+                    related_query_name="game", blank=True)
     platforms = models.ManyToManyField(
                     Platform,
                     related_name="games",
@@ -167,7 +167,7 @@ class Game(models.Model):
     modes = models.ManyToManyField(
                     Mode,
                     related_name="games",
-                    related_query_name="game")
+                    related_query_name="game", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
