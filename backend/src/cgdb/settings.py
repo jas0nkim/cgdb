@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # cgdb apps
-    'cgdb.cloudgames.apps.CloudgamesConfig',
+    'cgdb_core.apps.CgdbcoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +139,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+AUTH_USER_MODEL = 'cgdb_core.User'

@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Game, Platform, Developer, Publisher, Series, Genre, Mode
+from django.contrib.auth.admin import UserAdmin
+from .models import User, Game, Platform, Developer, Publisher, Series, Genre, Mode
+
+@admin.register(User)
+class CgdbUserAdmin(UserAdmin):
+    pass
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):

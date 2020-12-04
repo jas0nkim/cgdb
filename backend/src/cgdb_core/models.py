@@ -1,5 +1,11 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    """ extend django user
+    """
+    pass
 
 class Mode(models.Model):
     """ mode model
