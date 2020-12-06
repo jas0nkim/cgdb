@@ -47,6 +47,7 @@ class Series(models.Model):
 
     class Meta:
         db_table = 'series'
+        verbose_name_plural = 'Series'
     
     def __str__(self):
         return self.name
