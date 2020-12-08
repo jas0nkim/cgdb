@@ -47,7 +47,7 @@ class PlatformSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Platform
-        fields = ('name', 'description', 'pictures',)
+        fields = ('name', 'description', 'pictures', 'slug',)
 
 class GameSerializer(serializers.ModelSerializer):
     """
@@ -71,4 +71,5 @@ class GameSerializer(serializers.ModelSerializer):
                 'series',
                 'platforms',
                 'genres',
-                'modes',)
+                'modes',
+                'slug',)

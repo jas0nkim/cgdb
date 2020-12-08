@@ -8,11 +8,11 @@ class CgdbUserAdmin(UserAdmin):
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("title",)}
 
 @admin.register(Platform)
 class PlatformAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Developer)
 class DeveloperAdmin(admin.ModelAdmin):

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser
+from django.utils.text import slugify
 
 class User(AbstractUser):
     """ extend django user
@@ -109,9 +110,10 @@ class Platform(models.Model):
                 "low": "link..."
             }
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length = 100)
     description = models.TextField()
     pictures = models.JSONField()
+    slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -120,6 +122,10 @@ class Platform(models.Model):
     
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Platform, self).save(*args, **kwargs)
 
 
 class Game(models.Model):
@@ -147,7 +153,7 @@ class Game(models.Model):
             }
 
     """
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length = 200)
     description = models.TextField()
     pictures = ArrayField(models.JSONField(), size=10)
     links = models.JSONField()
@@ -175,6 +181,7 @@ class Game(models.Model):
                     Mode,
                     related_name="games",
                     related_query_name="game", blank=True)
+    slug = models.SlugField(max_length = 200, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -183,3 +190,7 @@ class Game(models.Model):
     
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Game, self).save(*args, **kwargs)
