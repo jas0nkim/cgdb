@@ -60,7 +60,7 @@ class CoreRetrieveTests(APITestCase, URLPatternsTestCase):
         Test 002:
         retrieve single platform
         """
-        url = reverse('platform-detail', args = (2,)) # why pk = 2?
+        url = reverse('platform-detail', args = ('xbox-game-pass',))
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -78,6 +78,6 @@ class CoreRetrieveTests(APITestCase, URLPatternsTestCase):
         Test 004:
         retrieve single game
         """
-        url = reverse('game-detail', kwargs={'pk': 4}) # why pk = 4??
+        url = reverse('game-detail', kwargs={'slug': 'a-plague-tale-innocence'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
