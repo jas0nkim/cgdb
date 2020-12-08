@@ -23,3 +23,10 @@ $ docker-compose exec backend python manage.py createsuperuser
 ```
 $ docker-compose exec backend python manage.py test
 ```
+
+## References / Game list
+
+- [Xbox Game Pass cloud gaming - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
+- [GeForce Now - Nvidia](https://www.nvidia.com/en-us/geforce-now/games/)
+- [Google Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
+- [PlayStation Now - Playstation](https://www.playstation.com/en-ca/ps-now/ps-now-games/#all-ps-now-games)
