@@ -7,6 +7,13 @@ const Game = ({ game }) => {
     if (router.isFallback) {
         return <div>Loading...</div>
     }
+    const locales = (locales) => {
+        const ret = []
+        for (const locale in locales) {
+            ret.push(<li>{locale}: {locales[locale]}</li>)
+        }
+        return ret
+    }
     const pictures = game.pictures.map((picture) => {
         if ('high' in picture) {
             return <li><img src={picture.high} /></li>
@@ -35,7 +42,9 @@ const Game = ({ game }) => {
     return (
         <div>
             <div>Title: {game.title}</div>
+            <div>Title locales: {locales(game.title_lc)}</div>
             <div>Description: {game.description}</div>
+            <div>Description locales: {locales(game.description_lc)}</div>
             <div>Pictures: <ul>{ pictures }</ul></div>
             <div>Links: <ul>{ links(game.links) }</ul></div>
             <div>Developers: <ul>{ developers }</ul></div>
