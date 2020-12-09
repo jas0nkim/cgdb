@@ -233,11 +233,11 @@ class Game(models.Model):
     modes = models.ManyToManyField(
                     Mode,
                     related_name="games",
-                    related_query_name = "game", blank = True)
+                    related_query_name = "game")
     tags = models.ManyToManyField(
                     Tag,
                     related_name = "games",
-                    related_query_name="game")
+                    related_query_name="game", blank = True)
     slug = models.SlugField(max_length = 200, unique = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
