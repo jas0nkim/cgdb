@@ -258,7 +258,13 @@ class Game(models.Model):
         save tags automatically based on 'title_lc'
         """
         for iso in self.title_lc:
-            self.tags.get_or_create(tag=self.title_lc.get(iso))
+            try:
+                tag = Tag.objects.get(tag=self.title_lc.get(iso))
+            except Tag.DoesNotExist:
+                tag = Tag(tag=self.title_lc.get(iso))
+                tag.save()
+            if not self.tags.filter(tag=self.title_lc.get(iso)).exists():
+                self.tags.add(tag)
 
 
 class LanguageCode(models.Model):
