@@ -1,6 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Game, Platform, Developer, Publisher, Series, Genre, Mode
+from .models import (User,
+                    Game,
+                    Platform,
+                    Developer,
+                    Publisher,
+                    Series,
+                    Genre,
+                    Mode,
+                    Tag,
+                    LanguageCode)
 
 @admin.register(User)
 class CgdbUserAdmin(UserAdmin):
@@ -16,20 +25,28 @@ class PlatformAdmin(admin.ModelAdmin):
 
 @admin.register(Developer)
 class DeveloperAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Series)
 class SeriesAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 @admin.register(Mode)
 class ModeAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("tag",)}
+
+@admin.register(LanguageCode)
+class LanguageCodeAdmin(admin.ModelAdmin):
     pass

@@ -1,0 +1,1 @@
+COPY language_codes (iso, language_eng, language) FROM './language_codes.csv' DELIMITER '|' CSV;

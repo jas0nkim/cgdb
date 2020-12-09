@@ -13,6 +13,7 @@ class Mode(models.Model):
         db table name: modes
     """
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -22,12 +23,17 @@ class Mode(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Mode, self).save(*args, **kwargs)
+
 
 class Genre(models.Model):
     """ genre model
         db table name: genres
     """
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -37,12 +43,17 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Genre, self).save(*args, **kwargs)
+
 
 class Series(models.Model):
     """ series model
         db table name: series
     """
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,6 +63,10 @@ class Series(models.Model):
     
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Series, self).save(*args, **kwargs)
 
 
 class Publisher(models.Model):
@@ -66,6 +81,7 @@ class Publisher(models.Model):
     """
     name = models.CharField(max_length=100)
     description = models.TextField()
+    slug = models.SlugField(max_length = 100, unique=True)
     pictures = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -75,6 +91,10 @@ class Publisher(models.Model):
     
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Publisher, self).save(*args, **kwargs)
 
 
 class Developer(models.Model):
@@ -90,14 +110,35 @@ class Developer(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     pictures = models.JSONField()
+    slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'developers'
-    
+
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Developer, self).save(*args, **kwargs)
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'tags'
+
+    def __str__(self):
+        return self.tag
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.tag, allow_unicode=True)
+        super(Tag, self).save(*args, **kwargs)
 
 
 class Platform(models.Model):
@@ -151,10 +192,22 @@ class Game(models.Model):
                 "facebook": "link...",
                 ...
             }
+        title_lc format:
+            {
+                "en": "english title...",
+                "ko": "한글 제목..."
+            }
+        description_lc format:
+            {
+                "en": "english description...",
+                "ko": "한글 내용..."
+            }
 
     """
     title = models.CharField(max_length = 200)
+    title_lc = models.JSONField()
     description = models.TextField()
+    description_lc = models.JSONField()
     pictures = ArrayField(models.JSONField(), size=10)
     links = models.JSONField()
     developers = models.ManyToManyField(
@@ -180,17 +233,41 @@ class Game(models.Model):
     modes = models.ManyToManyField(
                     Mode,
                     related_name="games",
-                    related_query_name="game", blank=True)
-    slug = models.SlugField(max_length = 200, unique=True)
+                    related_query_name = "game", blank = True)
+    tags = models.ManyToManyField(
+                    Tag,
+                    related_name = "games",
+                    related_query_name="game")
+    slug = models.SlugField(max_length = 200, unique = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'games'
-    
+
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Game, self).save(*args, **kwargs)
+        self._save_tags()
+
+    def _save_tags(self):
+        """
+        save tags automatically based on 'title_lc'
+        """
+        for iso in self.title_lc:
+            self.tags.get_or_create(tag=self.title_lc.get(iso))
+
+
+class LanguageCode(models.Model):
+    iso = models.CharField(max_length=5)
+    language = models.CharField(max_length=100, blank=True, null=True)
+    language_eng = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'language_codes'
+
+    def __str__(self):
+        return f'{self.language_eng} ({self.iso})'
