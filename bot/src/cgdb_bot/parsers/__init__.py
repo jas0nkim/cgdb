@@ -106,7 +106,7 @@ class WikipediaParser:
         try:
             if len(description_pieces) < 1:
                 raise NoHtmlElementFound("No description found")
-            return ''.join(description_pieces)
+            return ''.join(description_pieces).strip('\n')
         except NoHtmlElementFound as err:
             self.logger.exception("%s - %s", str(err), response.url)
             return None
@@ -143,9 +143,13 @@ class WikipediaParser:
 
     def _extract_from_info_table(self, response, lookup=None, loglevel='exception',
                                 lowercase=False):
-        ret = response.xpath(f"""//table[@class="infobox hproduct"]
-                        /tbody/tr[th//text()[contains(., "{lookup}")]]
-                        /td//text()""").getall()
+        td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
+                            /tr[th//text()[contains(., "{lookup}")]]/td""")
+        ret = []
+        if len(td.xpath('./*[contains(@class, "NavFrame")]')) > 0:
+            ret = td.xpath('./*[not(contains(@class, "NavFrame"))]//text()').getall()
+        else:
+            ret = td.xpath('.//text()').getall()
         try:
             if len(ret) < 1:
                 raise NoHtmlElementFound(f"No {lookup} found")
