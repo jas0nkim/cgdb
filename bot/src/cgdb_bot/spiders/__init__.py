@@ -22,6 +22,6 @@ class WikipediaGameSpider(Spider):
             yield Request(url,
                         callback=parse_wikipedia_game_article,
                         errback=resp_error_handler)
-    
+
     def parse(self, response, **kwargs):
         pass

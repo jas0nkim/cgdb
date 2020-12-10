@@ -3,10 +3,17 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
 
-
-class CgdbBotItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class WikipediaGameItem(Item):
+    """
+    Wikipedia Game page Scrapy Item
+    """
+    title = Field()
+    description = Field()
+    pictures = Field()
+    developers = Field()
+    publishers = Field()
+    series = Field()
+    genres = Field()
+    modes = Field()
