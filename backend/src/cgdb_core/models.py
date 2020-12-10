@@ -23,9 +23,10 @@ class Mode(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Mode, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Genre(models.Model):
@@ -43,9 +44,10 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Genre, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Series(models.Model):
@@ -64,9 +66,10 @@ class Series(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Series, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Publisher(models.Model):
@@ -92,9 +95,10 @@ class Publisher(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Publisher, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Developer(models.Model):
@@ -120,9 +124,10 @@ class Developer(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Developer, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Tag(models.Model):
@@ -136,9 +141,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.tag, allow_unicode=True)
-        super(Tag, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Platform(models.Model):
@@ -164,9 +170,10 @@ class Platform(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.name)
-        super(Platform, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class Game(models.Model):
@@ -248,9 +255,10 @@ class Game(models.Model):
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
         self.slug = slugify(self.title)
-        super(Game, self).save(*args, **kwargs)
+        super().save(force_insert, force_update, using, update_fields)
         self._save_tags()
 
     def _save_tags(self):
