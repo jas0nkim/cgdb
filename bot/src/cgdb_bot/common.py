@@ -1,0 +1,1 @@
+WIKIPEDIA_SEARCH_LINK_FORMAT = 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search={urlencoded}&language=en&go=Go'

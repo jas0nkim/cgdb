@@ -1,0 +1,28 @@
+[
+    {
+        "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+        "expected": {
+            "title": "A Plague Tale: Innocence",
+            "description": "A Plague Tale: Innocence is an action-adventure horror stealth game developed by Asobo Studio and published by Focus Home Interactive. It was released for Microsoft Windows, PlayStation 4 and Xbox One in May 2019, and received generally positive reviews from critics.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"],
+            "developers": ["Asobo Studio"],
+            "publishers": ["Focus Home Interactive"],
+            "series": [],
+            "genres": ["action-adventure", "stealth", "survival horror"],
+            "modes": ["single-player"]
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Absolver",
+        "expected": {
+            "title": "Absolver",
+            "description": "Absolver is a martial arts-themed action role-playing video game developed by Sloclap and published by Devolver Digital for PlayStation 4, Windows, and Xbox One. In the game, players control warrior characters who fight other players and computer-controlled characters across the fictional land of Adal to prove their worthiness of joining the Absolver peacekeepers. The game's story is focused on the human development of the characters as they fight to find their place in the collapsed empire.[1] The character's fighting moves are customized in a \"combat deck\" of cards, with each card assigned to a move. Players earn cards, equipment, and weapons by progressing through the game.\n\nSloclap, a Parisian indie game developer composed of former Ubisoft Paris employees, began work on Absolver in May 2015. Their core game concept was to have fluid, dynamic movement, similar to dance. The game debuted a year later at the 2016 Electronic Entertainment Expo and was released in August 2017.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c9/Absolver_logo.png"],
+            "developers": ["Sloclap"],
+            "publishers": ["Devolver Digital"],
+            "series": [],
+            "genres": ["action role-playing"],
+            "modes": ["single-player", "multiplayer"]
+        }
+    }
+]

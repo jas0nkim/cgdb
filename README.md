@@ -21,8 +21,14 @@ $ docker-compose exec backend python manage.py createsuperuser
 ```
 
 ## Run tests
+- backend
 ```
 $ docker-compose exec backend python manage.py test
+```
+- bot
+```
+$ cd bot/src
+$ python -m unittest
 ```
 
 ## References / Game list
