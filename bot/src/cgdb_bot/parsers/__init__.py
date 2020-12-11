@@ -120,7 +120,7 @@ class WikipediaParser:
             pictures.append(image_link)
             return pictures
         except NoHtmlElementFound as err:
-            self.logger.exception("%s - %s", str(err), response.url)
+            self.logger.warning("%s - %s", str(err), response.url)
             return pictures
 
     def _extract_developers(self, response):
@@ -139,15 +139,19 @@ class WikipediaParser:
 
     def _extract_modes(self, response):
         return self._extract_from_info_table(response, lookup='Mode(s)',
+                                            loglevel='warning',
                                             lowercase=True)
 
     def _extract_from_info_table(self, response, lookup=None, loglevel='exception',
                                 lowercase=False):
         td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
                             /tr[th//text()[contains(., "{lookup}")]]/td""")
-        ret = []
         if len(td.xpath('./*[contains(@class, "NavFrame")]')) > 0:
-            ret = td.xpath('./*[not(contains(@class, "NavFrame"))]//text()').getall()
+            td = td.xpath('./*[not(contains(@class, "NavFrame"))]')
+        if len(td.xpath('.//li')) > 0:
+            ret = []
+            for li in td.xpath('.//li'):
+                ret.append(''.join(li.xpath('.//text()').getall()))
         else:
             ret = td.xpath('.//text()').getall()
         try:
@@ -158,6 +162,8 @@ class WikipediaParser:
                 ret.remove(', ')
             if lowercase:
                 ret = [x.lower() for x in ret]
+            # remove ',' within string, and strip
+            ret = [x.replace(',','').strip() for x in ret]
             return ret
         except NoHtmlElementFound as err:
             getattr(self.logger, loglevel)("%s - %s", str(err), response.url)

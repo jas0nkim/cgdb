@@ -26,6 +26,19 @@
         }
     },
     {
+        "url": "https://en.wikipedia.org/wiki/Afterparty_(video_game)",
+        "expected": {
+            "title": "Afterparty",
+            "description": "Afterparty is an adventure video game by Night School Studio for macOS, PlayStation 4, Windows, and Xbox One platforms in October 2019 and Nintendo Switch in March 2020. Set in Hell, themed as a college town, the player navigates conversations, outdrinks Satan, and returns two best friends from the afterlife.",
+            "pictures": [],
+            "developers": ["Night School Studio"],
+            "publishers": ["Night School Studio"],
+            "series": [],
+            "genres": ["adventure"],
+            "modes": ["single-player"]
+        }
+    },
+    {
         "url": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall",
         "expected": {
             "title": "Age of Wonders: Planetfall",
@@ -49,6 +62,84 @@
             "series": [],
             "genres": ["action-adventure", "survival"],
             "modes": ["single-player", "multiplayer"]
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Astroneer",
+        "expected": {
+            "title": "Astroneer",
+            "description": "Astroneer is a sandbox adventure game developed by System Era Softworks. The game was released through early access in December 2016 before a full release in 2019. The player is tasked with colonizing planets, creating structures, and collecting resources. Astroneer has no set goal or storyline, though each planet holds challenges for players to complete.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/5/5b/Astroneer_Image1.png"],
+            "developers": ["System Era Softworks"],
+            "publishers": ["System Era Softworks"],
+            "series": [],
+            "genres": ["sandbox", "adventure"],
+            "modes": ["single-player", "multiplayer"]
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight",
+        "expected": {
+            "title": "Batman: Arkham Knight",
+            "description": "Batman: Arkham Knight is a 2015 action-adventure game developed by Rocksteady Studios and published by Warner Bros. Interactive Entertainment. Based on the DC Comics superhero Batman, it is the successor to the 2013 video game Batman: Arkham Origins, and the fourth main installment in the Batman: Arkham series. Written by Sefton Hill, Ian Ball and Martin Lancaster, Arkham Knight is inspired by the long-running comic book mythos. Set nine months after the events of 2011's Batman: Arkham City, the game's main storyline follows Batman as he confronts Scarecrow, who has launched an attack on Gotham City, causing a citywide evacuation. Scarecrow, with the help of the mysterious Arkham Knight, is also able to unite Batman's greatest foes in an attempt to finally destroy Batman.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/6/6c/Batman_Arkham_Knight_Cover_Art.jpg"],
+            "developers": ["Rocksteady Studios"],
+            "publishers": ["Warner Bros. Interactive Entertainment"],
+            "series": ["Batman: Arkham"],
+            "genres": ["action-adventure"],
+            "modes": ["single-player"]
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Battletoads",
+        "expected": {
+            "title": "Battletoads",
+            "description": "Battletoads is a video game media franchise by Rare that began with the original beat 'em up game Battletoads in 1991. Starring three anthropomorphic toads named after skin conditions, Rash, Zitz, and Pimple, the series was created to rival the Teenage Mutant Ninja Turtles games series.[1] The series as a whole has been quite popular with five installments up to this date and at its apex spawned an animated television pilot.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/28/Battletoads_logo.png"],
+            "developers": ["Rare", "Dlala Studios"],
+            "publishers": ["Masaya (1991–1994)", "Tradewest (1991–1994)", "Electronic Arts (Arcade)", "Xbox Game Studios (2019–present)"],
+            "series": [],
+            "genres": ["beat 'em up", "platform game"],
+            "modes": []
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar",
+        "expected": {
+            "title": "Battle Chasers: Nightwar",
+            "description": "Battle Chasers: Nightwar is a turn-based role-playing video game developed by Airship Syndicate and published by THQ Nordic. It was released in October 2017 for Microsoft Windows, macOS, PlayStation 4 and Xbox One,[1] and in May 2018 for Nintendo Switch and Linux.[2][3] Based on the Battle Chasers fantasy comic book series by Joe Madureira, the game involves the cast of that series being marooned on an island and being forced to stop the plans of an evil sorceress in order to escape.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/44/Battle_Chasers_Nightwar_cover_art.jpg"],
+            "developers": ["Airship Syndicate"],
+            "publishers": ["THQ Nordic"],
+            "series": [],
+            "genres": ["role-playing"],
+            "modes": []
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Black_Desert_Online",
+        "expected": {
+            "title": "Black Desert Online",
+            "description": "Black Desert Online (Korean: 검은사막) is a sandbox-oriented fantasy massively multiplayer online role-playing game (MMORPG) developed by Korean video game developer Pearl Abyss and originally published for Microsoft Windows in 2015. A mobile version titled Black Desert Mobile was initially released in Asia by early 2019,[1] and worldwide in December 2019. The Xbox One and PlayStation 4 versions, known simply as Black Desert, were released in 2019. The game is free-to-play in some parts of the world, but follows a buy-to-play business model in other editions, including the English-language editions.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/8/85/Black_Desert_Online_Logo_%28En%29.png"],
+            "developers": ["Pearl Abyss"],
+            "publishers": ["WW: Pearl Abyss[a]", "NA/EU: Kakao Games", "SA: Red Fox Games"],
+            "series": [],
+            "genres": ["mmorpg"],
+            "modes": ["multiplayer"]
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)",
+        "expected": {
+            "title": "Blair Witch",
+            "description": "Blair Witch is a psychological survival horror video game developed by Bloober Team based on the Blair Witch series of horror films. It was published by Lionsgate Games for Microsoft Windows, Xbox One and Xbox Game Pass on August 30, 2019. The game is set two years after the events of the 1999 film The Blair Witch Project,  which takes place in 1994. The game follows former police officer Ellis Lynch as he joins the search in Black Hills Forest for a missing boy. The game was later ported to PlayStation 4 on December 3, 2019, Nintendo Switch on June 25, 2020 and Oculus Quest & Quest 2 on October 29, 2020.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c7/Blair_Witch_video_game_poster.jpg"],
+            "developers": ["Bloober Team"],
+            "publishers": ["Lionsgate Games"],
+            "series": ["Blair Witch"],
+            "genres": ["survival horror"],
+            "modes": ["single-player"]
         }
     }
 ]
