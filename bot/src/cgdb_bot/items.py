@@ -7,7 +7,7 @@ import json
 from dataclasses import dataclass, field, asdict
 from typing import List
 
-@dataclass(init=True)
+@dataclass
 class WikipediaGameItem:
     """
     Scraped data from Wikipedia Game page
@@ -20,8 +20,7 @@ class WikipediaGameItem:
     series: List[str]
     genres: List[str]
     modes: List[str]
+    platform: str = None
 
-    def asjson(self, stream=False, ascii=False):
-        if stream:
-            return json.dump(asdict(self), ensure_ascii=ascii)
-        return json.dumps(asdict(self), ensure_ascii=ascii)
+    def asjson(self):
+        return json.dumps(asdict(self))

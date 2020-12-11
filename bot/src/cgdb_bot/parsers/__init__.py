@@ -47,6 +47,7 @@ def resp_error_handler(failure):
                     request.url,
                     failure.getErrorMessage())
     else:
+        request = failure.request
         logger.error('ScrapyRequestError: %s - %s',
                     request.url,
                     failure.getErrorMessage())

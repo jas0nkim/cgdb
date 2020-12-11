@@ -62,9 +62,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'cgdb_bot.pipelines.CgdbBotPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'cgdb_bot.pipelines.WikipediaGamePipeline': 300,
+   'cgdb_bot.pipelines.JsonWriterPipeline': 400,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

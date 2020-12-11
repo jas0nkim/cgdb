@@ -1,7 +1,14 @@
+import json
 from urllib.parse import quote_plus
-from scrapy import Spider, Request
-from cgdb_bot.common import WIKIPEDIA_SEARCH_LINK_FORMAT
+from requests.models import stream_decode_response_unicode
+from twisted.internet.defer import inlineCallbacks
+import treq
+from scrapy import Spider, Request, signals
+from scrapy.exceptions import DropItem
+from cgdb_bot.common import (WIKIPEDIA_ARTICLE_URL_FORMAT,
+                            API_SERVER_HOST, API_SERVER_PORT)
 from cgdb_bot.parsers import parse_wikipedia_game_article, resp_error_handler
+from cgdb_bot.items import WikipediaGameItem
 
 class WikipediaGameSpider(Spider):
     """
@@ -11,17 +18,64 @@ class WikipediaGameSpider(Spider):
     allowed_domains = ('wikipedia.org',)
 
     _titles = []
+    _urls = []
+    _platform = None
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self._titles = kw['titles'].split('||') if 'titles' in kw else []
+        self._urls = kw['urls'].split('||') if 'urls' in kw else []
+        self._platform = kw['platform'] if 'platform' in kw else None
 
     def start_requests(self):
         for title in self._titles:
-            url = WIKIPEDIA_SEARCH_LINK_FORMAT.format(urlencoded=quote_plus(title))
-            yield Request(url,
-                        callback=parse_wikipedia_game_article,
-                        errback=resp_error_handler)
+            yield Request(
+                    WIKIPEDIA_ARTICLE_URL_FORMAT.format(underscored_title=title.strip().replace(' ', '_')),
+                    callback=parse_wikipedia_game_article,
+                    errback=resp_error_handler)
+        for url in self._urls:
+            yield Request(
+                    url,
+                    callback=parse_wikipedia_game_article,
+                    errback=resp_error_handler)
 
     def parse(self, response, **kwargs):
+        pass
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super().from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.item_scraped, signal=signals.item_scraped)
+        crawler.signals.connect(spider.item_dropped, signal=signals.item_dropped)
+        # crawler.signals.connect(spider.spider_closed, signal=signals.spider_closed)
+        return spider
+
+    def item_scraped(self, item, response, spider):
+        """
+        Send the scraped item to the API server
+        """
+        if not isinstance(item, WikipediaGameItem):
+            raise DropItem("Invalid item passed to item_scraped (Scrapy Signal)")
+
+        _logger = self.logger
+        @inlineCallbacks
+        def _cb(resp):
+            text = yield resp.text(encoding='UTF-8')
+            if resp.code >= 400:
+                _logger.error("API post request error [HTTP:%d] %s - %s", resp.code, resp.url, text)
+
+        # set platform to the item before sending to API
+        item.platform = spider._platform
+        d = treq.post(f'{API_SERVER_HOST}:{API_SERVER_PORT}/api/bot/game/',
+                    item.asjson().encode('ascii'),
+                    headers={b'Content-Type': [b'application/json']})
+        d.addCallback(_cb)
+        # The next item will be scraped only after
+        # deferred (d) is fired
+        return d
+
+    def item_dropped(self, item, response, exception, spider):
+        """
+        Send the error information to API server
+        """
         pass
