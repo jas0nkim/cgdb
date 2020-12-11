@@ -75,16 +75,16 @@ class WikipediaParser:
         yield self._parse_game_article_en_template(response)
 
     def _parse_game_article_en_template(self, response):
-        wiki_game_item = WikipediaGameItem()
-        wiki_game_item['title'] = self._extract_title(response)
-        wiki_game_item['description'] = self._extract_description(response)
-        wiki_game_item['pictures'] = self._extract_pictures(response)
-        wiki_game_item['developers'] = self._extract_developers(response)
-        wiki_game_item['publishers'] = self._extract_publishers(response)
-        wiki_game_item['series'] = self._extract_series(response)
-        wiki_game_item['genres'] = self._extract_genres(response)
-        wiki_game_item['modes'] = self._extract_modes(response)
-        return wiki_game_item
+        return WikipediaGameItem(
+                    title=self._extract_title(response),
+                    description=self._extract_description(response),
+                    pictures=self._extract_pictures(response),
+                    developers=self._extract_developers(response),
+                    publishers=self._extract_publishers(response),
+                    series=self._extract_series(response),
+                    genres=self._extract_genres(response),
+                    modes=self._extract_modes(response)
+                )
 
     def _extract_title(self, response):
         title = response.css('#firstHeading > i::text').get()

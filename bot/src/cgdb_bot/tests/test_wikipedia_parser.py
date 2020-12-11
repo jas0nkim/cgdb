@@ -41,19 +41,19 @@ class TestWikipediaParser(unittest.TestCase):
             with self.subTest(url=data['url']):
                 # num of item is 1, but it's still iterate since generation.
                 for i in item:
-                    self.assertEqual(i.get('title'),
+                    self.assertEqual(i.title,
                                     data['expected']['title'])
-                    self.assertEqual(i.get('description'),
+                    self.assertEqual(i.description,
                                     data['expected']['description'])
-                    self.assertEqual(i.get('pictures'),
+                    self.assertEqual(i.pictures,
                                     data['expected']['pictures'])
-                    self.assertEqual(i.get('developers'),
+                    self.assertEqual(i.developers,
                                     data['expected']['developers'])
-                    self.assertEqual(i.get('publishers'),
+                    self.assertEqual(i.publishers,
                                     data['expected']['publishers'])
-                    self.assertEqual(i.get('series'),
+                    self.assertEqual(i.series,
                                     data['expected']['series'])
-                    self.assertEqual(i.get('genres'),
+                    self.assertEqual(i.genres,
                                     data['expected']['genres'])
-                    self.assertEqual(i.get('modes'),
+                    self.assertEqual(i.modes,
                                     data['expected']['modes'])
