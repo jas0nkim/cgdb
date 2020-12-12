@@ -76,11 +76,12 @@ class Publisher(models.Model):
     """ publisher model
         db table name: publishers
         pictures format:
-            {
-                "high": "link...",
-                "mid": "link...",
-                "low": "link..."
-            }
+            [
+                "link1...",
+                "link2...",
+                "link3...",
+                ...
+            ]
     """
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -105,11 +106,12 @@ class Developer(models.Model):
     """ developer model
         db table name: developers
         pictures format:
-            {
-                "high": "link...",
-                "mid": "link...",
-                "low": "link..."
-            }
+            [
+                "link1...",
+                "link2...",
+                "link3...",
+                ...
+            ]
     """
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -151,11 +153,12 @@ class Platform(models.Model):
     """ plateform model
         db table name: platforms
         pictures format:
-            {
-                "high": "link...",
-                "mid": "link...",
-                "low": "link..."
-            }
+            [
+                "link1...",
+                "link2...",
+                "link3...",
+                ...
+            ]
     """
     name = models.CharField(max_length = 100)
     description = models.TextField()
@@ -181,16 +184,9 @@ class Game(models.Model):
         db table name: games
         pictures format:
             [
-                {
-                    "high": "link...",
-                    "mid": "link...",
-                    "low": "link..."
-                },
-                {
-                    "high": "link...",
-                    "mid": "link...",
-                    "low": "link..."
-                },
+                "link1...",
+                "link2...",
+                "link3...",
                 ...
             ]
         links format:
@@ -202,20 +198,22 @@ class Game(models.Model):
         title_lc format:
             {
                 "en": "english title...",
-                "ko": "한글 제목..."
+                "ko": "한글 제목...",
+                ...
             }
         description_lc format:
             {
                 "en": "english description...",
-                "ko": "한글 내용..."
+                "ko": "한글 내용...",
+                ...
             }
 
     """
     title = models.CharField(max_length = 200)
     title_lc = models.JSONField()
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     description_lc = models.JSONField()
-    pictures = ArrayField(models.JSONField(), size=10)
+    pictures = models.JSONField()
     links = models.JSONField()
     developers = models.ManyToManyField(
                     Developer,

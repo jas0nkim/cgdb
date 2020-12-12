@@ -65,8 +65,6 @@ class WikipediaGameSpider(Spider):
                 _logger.error("API post request error [HTTP:%d] %s %s",
                             resp.code, resp.request.absoluteURI, content)
 
-        # set platform to the item before sending to API
-        item.platform = spider._platform
         d = treq.post(f'{API_SERVER_HOST}:{API_SERVER_PORT}/api/bot/game/',
                     item.asjson().encode('ascii'),
                     headers={b'Content-Type': [b'application/json']})

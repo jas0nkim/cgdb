@@ -1,4 +1,5 @@
 import logging
+import re
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.exceptions import IgnoreRequest
@@ -57,11 +58,10 @@ class WikipediaParser:
     """
     Wikipedia page parser
     """
-
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
-    def parse_game_article(self, response):
+    def parse_game_article(self, response, english_title=None):
         """
         parse game article page
         """
@@ -73,19 +73,28 @@ class WikipediaParser:
         """
         TODO: if this page is an 'English' Wikipedia site, get links of other languages, and request those links
         """
-        yield self._parse_game_article_en_template(response)
 
-    def _parse_game_article_en_template(self, response):
+        yield self._parse_game_article_en_template(response, english_title)
+
+    def _parse_game_article_en_template(self, response, english_title=None):
         return WikipediaGameItem(
-                    title=self._extract_title(response),
-                    description=self._extract_description(response),
+                    english_title=self._get_english_title(response, english_title),
+                    language=self._extract_language(response),
+                    title_lc=self._extract_title(response),
+                    description_lc=self._extract_description(response),
                     pictures=self._extract_pictures(response),
                     developers=self._extract_developers(response),
                     publishers=self._extract_publishers(response),
                     series=self._extract_series(response),
                     genres=self._extract_genres(response),
-                    modes=self._extract_modes(response)
+                    modes=self._extract_modes(response),
+                    link=response.url,
                 )
+
+    def _get_english_title(self, response, english_title=None):
+        if not english_title or self._extract_language(response) == 'en':
+            return self._extract_title(response)
+        return english_title
 
     def _extract_title(self, response):
         title = response.css('#firstHeading > i::text').get()
@@ -93,6 +102,16 @@ class WikipediaParser:
             if title is None:
                 raise NoHtmlElementFound("No title found")
             return title
+        except NoHtmlElementFound as err:
+            self.logger.exception("%s - %s", str(err), response.url)
+            return None
+
+    def _extract_language(self, response):
+        language = response.xpath('/html/@lang').get()
+        try:
+            if language is None:
+                raise NoHtmlElementFound("No language found")
+            return language
         except NoHtmlElementFound as err:
             self.logger.exception("%s - %s", str(err), response.url)
             return None

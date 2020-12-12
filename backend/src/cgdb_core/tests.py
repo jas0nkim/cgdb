@@ -27,18 +27,18 @@ class CoreRetrieveTests(APITestCase, URLPatternsTestCase):
         self.genre3 = Genre.objects.create(name="survival horror")
         self.publisher1 = Publisher.objects.create(name="Focus Home Interactive",
                                             description="Focus Home Interactive description",
-                                            pictures=[{"high": "https://upload.wikimedia.org/wikipedia/en/7/79/Focus_Home_Interactive_logo_vectoriel.svg"}])
+                                            pictures=["https://upload.wikimedia.org/wikipedia/en/7/79/Focus_Home_Interactive_logo_vectoriel.svg"])
         self.developer1 = Developer.objects.create(name="Asobo Studio",
                                             description="Asobo Studio description",
-                                            pictures=[{"low":"https://en.wikipedia.org/wiki/Asobo_Studio#/media/File:Asobo-logo-gif-300x115.png"}])
+                                            pictures=["https://en.wikipedia.org/wiki/Asobo_Studio#/media/File:Asobo-logo-gif-300x115.png"])
         self.platform1 = Platform.objects.create(name="Xbox Game Pass",
                                             description="Xbox Game Pass description",
-                                            pictures={"high": "https://upload.wikimedia.org/wikipedia/commons/8/8c/XBOX_logo_2012.svg"})
+                                            pictures=["https://upload.wikimedia.org/wikipedia/commons/8/8c/XBOX_logo_2012.svg"])
         self.game1 = Game.objects.create(title="A Plague Tale: Innocence",
                                     title_lc={"en":"A Plague Tale: Innocence","ko":"플래그 테일: 이노센스"},
                                     description="A Plague Tale: Innocence description",
                                     description_lc={"en":"A Plague Tale: Innocence description","ko":"플래그 테일: 이노센스 내용"},
-                                    pictures=[{"low":"https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"}],
+                                    pictures=["https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"],
                                     links={"wikipedia": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence"})
         self.game1.developers.add(self.developer1)
         self.game1.publishers.add(self.publisher1)

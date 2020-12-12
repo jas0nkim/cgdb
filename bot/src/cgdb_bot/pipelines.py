@@ -7,11 +7,15 @@ from scrapy.exceptions import DropItem
 
 class WikipediaGamePipeline:
     def process_item(self, item, spider):
-        if not item.title:
-            raise DropItem("Missing title")
+        if not item.english_title:
+            raise DropItem("Missing English title")
         missing_components = []
-        if not item.description:
-            missing_components.append('description')
+        if not item.language:
+            missing_components.append('language')
+        if not item.title_lc:
+            missing_components.append('title_lc')
+        if not item.description_lc:
+            missing_components.append('description_lc')
         if not item.pictures:
             missing_components.append('pictures')
         if not item.developers:
@@ -27,6 +31,8 @@ class WikipediaGamePipeline:
         if len(missing_components) > 4:
             raise DropItem(f"""Too many missing components: 
                             {', '.join(missing_components)}""")
+        # set platform
+        item.platform = spider._platform
         return item
 
 class JsonWriterPipeline:
