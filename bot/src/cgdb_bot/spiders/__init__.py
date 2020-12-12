@@ -60,9 +60,10 @@ class WikipediaGameSpider(Spider):
         _logger = self.logger
         @inlineCallbacks
         def _cb(resp):
-            text = yield resp.text(encoding='UTF-8')
+            content = yield resp.content()
             if resp.code >= 400:
-                _logger.error("API post request error [HTTP:%d] %s - %s", resp.code, resp.url, text)
+                _logger.error("API post request error [HTTP:%d] %s %s",
+                            resp.code, resp.request.absoluteURI, content)
 
         # set platform to the item before sending to API
         item.platform = spider._platform

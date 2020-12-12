@@ -14,4 +14,5 @@ urlpatterns = [
     path('games/<slug:slug>/',
         views.GamePublicViewSet.as_view({'get': 'retrieve'}),
         name='game-detail'),
+    path('bot/game/', views.WikipediaGameBot.as_view(), name='bot-game-post')
 ]
