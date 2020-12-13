@@ -96,22 +96,53 @@ class GameSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'language': 'Missing language'})
         developers = []
         for developer_name in data.get('developers'):
-            developers.append(DeveloperSerializer(data={'name': developer_name}))
+            try:
+                developer = Developer.objects.get(name=developer_name)
+                developers.append(DeveloperSerializer(developer,
+                                                    data={'name': developer_name}))
+            except Developer.DoesNotExist:
+                developers.append(DeveloperSerializer(data={'name': developer_name}))
         publishers = []
         for publisher_name in data.get('publishers'):
-            publishers.append(PublisherSerializer(data={'name': publisher_name}))
+            try:
+                publisher = Publisher.objects.get(name=publisher_name)
+                publishers.append(PublisherSerializer(publisher,
+                                                    data={'name': publisher_name}))
+            except Publisher.DoesNotExist:
+                publishers.append(PublisherSerializer(data={'name': publisher_name}))
         series = []
         for series_name in data.get('series'):
-            series.append(SeriesSerializer(data={'name': series_name}))
+            try:
+                series_obj = Series.objects.get(name=series_name)
+                series.append(SeriesSerializer(series_obj,
+                                                data={'name': series_name}))
+            except Series.DoesNotExist:
+                series.append(SeriesSerializer(data={'name': series_name}))
         platforms = []
         if data.get('platform'):
-            platforms.append(PlatformSerializer(data={'name': data.get('platform')}))
+            try:
+                platform = Platform.objects.get(name=data.get('platform'))
+                platforms.append(PlatformSerializer(platform,
+                                                data={'name': data.get('platform')}))
+            except Platform.DoesNotExist:
+                platforms.append(
+                        PlatformSerializer(data={'name': data.get('platform')}))
         genres = []
         for genre_name in data.get('genres'):
-            genres.append(GenreSerializer(data={'name': genre_name}))
+            try:
+                genre = Genre.objects.get(name=genre_name)
+                genres.append(GenreSerializer(genre,
+                                            data={'name': genre_name}))
+            except Genre.DoesNotExist:
+                genres.append(GenreSerializer(data={'name': genre_name}))
         modes = []
         for mode_name in data.get('modes'):
-            modes.append(ModeSerializer(data={'name': mode_name}))
+            try:
+                mode = Mode.objects.get(name=mode_name)
+                modes.append(ModeSerializer(mode,
+                                        data={'name': mode_name}))
+            except Mode.DoesNotExist:
+                modes.append(ModeSerializer(data={'name': mode_name}))
 
         return {
             'title': title,
@@ -147,23 +178,29 @@ class GameSerializer(serializers.ModelSerializer):
                                 links=validated_data.get('links'),
                             )
         for developer_serializer in validated_data.get('developers'):
-            if developer_serializer.is_valid():
-                game.developers.add(developer_serializer.save())
+            if not developer_serializer.is_valid():
+                continue
+            game.developers.add(developer_serializer.save())
         for publisher_serializer in validated_data.get('publishers'):
-            if publisher_serializer.is_valid():
-                game.publishers.add(publisher_serializer.save())
+            if not publisher_serializer.is_valid():
+                continue
+            game.publishers.add(publisher_serializer.save())
         for series_serializer in validated_data.get('series'):
-            if series_serializer.is_valid():
-                game.series.add(series_serializer.save())
+            if not series_serializer.is_valid():
+                continue
+            game.series.add(series_serializer.save())
         for platform_serializer in validated_data.get('platforms'):
-            if platform_serializer.is_valid():
-                game.platforms.add(platform_serializer.save())
+            if not platform_serializer.is_valid():
+                continue
+            game.platforms.add(platform_serializer.save())
         for genre_serializer in validated_data.get('genres'):
-            if genre_serializer.is_valid():
-                game.genres.add(genre_serializer.save())
+            if not genre_serializer.is_valid():
+                continue
+            game.genres.add(genre_serializer.save())
         for mode_serializer in validated_data.get('modes'):
-            if mode_serializer.is_valid():
-                game.modes.add(mode_serializer.save())
+            if not mode_serializer.is_valid():
+                continue
+            game.modes.add(mode_serializer.save())
         return game
 
     def update(self, instance, validated_data):
@@ -177,21 +214,57 @@ class GameSerializer(serializers.ModelSerializer):
         instance.save()
 
         for developer_serializer in validated_data.get('developers'):
-            if developer_serializer.is_valid() and not instance.developers.all().filter(name=developer_serializer.validated_data.get('name')).exists():
+            if not developer_serializer.is_valid():
+                continue
+            if developer_serializer.instance:
+                developer_name = developer_serializer.instance.name
+            else:
+                developer_name = developer_serializer.validated_data.get('name')
+            if not instance.developers.all().filter(name=developer_name).exists():
                 instance.developers.add(developer_serializer.save())
         for publisher_serializer in validated_data.get('publishers'):
-            if publisher_serializer.is_valid() and not instance.publishers.all().filter(name=publisher_serializer.validated_data.get('name')).exists():
+            if not publisher_serializer.is_valid():
+                continue
+            if publisher_serializer.instance:
+                publisher_name = publisher_serializer.instance.name
+            else:
+                publisher_name = publisher_serializer.validated_data.get('name')
+            if not instance.publishers.all().filter(name=publisher_name).exists():
                 instance.publishers.add(publisher_serializer.save())
         for series_serializer in validated_data.get('series'):
-            if series_serializer.is_valid() and not instance.series.all().filter(name=series_serializer.validated_data.get('name')).exists():
+            if not series_serializer.is_valid():
+                continue
+            if series_serializer.instance:
+                series_name = series_serializer.instance.name
+            else:
+                series_name = series_serializer.validated_data.get('name')
+            if not instance.series.all().filter(name=series_name).exists():
                 instance.series.add(series_serializer.save())
         for platform_serializer in validated_data.get('platforms'):
-            if platform_serializer.is_valid() and not instance.platforms.all().filter(name=platform_serializer.validated_data.get('name')).exists():
+            if not platform_serializer.is_valid():
+                continue
+            if platform_serializer.instance:
+                platform_name = platform_serializer.instance.name
+            else:
+                platform_name = platform_serializer.validated_data.get('name')
+            if not instance.platforms.all().filter(name=platform_name).exists():
                 instance.platforms.add(platform_serializer.save())
         for genre_serializer in validated_data.get('genres'):
-            if genre_serializer.is_valid() and not instance.genres.all().filter(name=genre_serializer.validated_data.get('name')).exists():
+            if not genre_serializer.is_valid():
+                continue
+            if genre_serializer.instance:
+                genre_name = genre_serializer.instance.name
+            else:
+                genre_name = genre_serializer.validated_data.get('name')
+            if not instance.genres.all().filter(name=genre_name).exists():
                 instance.genres.add(genre_serializer.save())
         for mode_serializer in validated_data.get('modes'):
-            if mode_serializer.is_valid() and not instance.modes.all().filter(name=mode_serializer.validated_data.get('name')).exists():
+            if not mode_serializer.is_valid():
+                continue
+            if mode_serializer.instance:
+                mode_name = mode_serializer.instance.name
+            else:
+                mode_name = mode_serializer.validated_data.get('name')
+            if not instance.modes.all().filter(name=mode_name).exists():
                 instance.modes.add(mode_serializer.save())
         return instance
