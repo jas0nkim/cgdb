@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.db.utils import IntegrityError
+from rest_framework import status
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -22,5 +23,19 @@ class WikipediaGameBot(APIView):
     def post(self, request):
         """
         HTTP POST request
+        create/update game, platform, developer, genre, mode, publisher, series, tags
         """
-        return Response(request.data)
+        title = request.data.get('english_title')
+        if not title:
+            return Response({"error": "English title not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        serializer = None
+        try:
+            game = Game.objects.get(title=title)
+            serializer = GameSerializer(game, data=request.data)
+        except Game.DoesNotExist:
+            serializer = GameSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)

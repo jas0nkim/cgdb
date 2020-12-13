@@ -84,9 +84,9 @@ class Publisher(models.Model):
             ]
     """
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length = 100, unique=True)
-    pictures = models.JSONField()
+    pictures = models.JSONField(default=list)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -114,8 +114,8 @@ class Developer(models.Model):
             ]
     """
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    pictures = models.JSONField()
+    description = models.TextField(null=True, blank=True)
+    pictures = models.JSONField(default=list)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -161,8 +161,8 @@ class Platform(models.Model):
             ]
     """
     name = models.CharField(max_length = 100)
-    description = models.TextField()
-    pictures = models.JSONField()
+    description = models.TextField(null=True, blank=True)
+    pictures = models.JSONField(default=list)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -210,11 +210,11 @@ class Game(models.Model):
 
     """
     title = models.CharField(max_length = 200)
-    title_lc = models.JSONField()
+    title_lc = models.JSONField(default=dict)
     description = models.TextField(null=True, blank=True)
-    description_lc = models.JSONField()
-    pictures = models.JSONField()
-    links = models.JSONField()
+    description_lc = models.JSONField(default=dict)
+    pictures = models.JSONField(default=list)
+    links = models.JSONField(default=dict)
     developers = models.ManyToManyField(
                     Developer,
                     related_name="games",
