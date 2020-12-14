@@ -289,7 +289,7 @@ class Game(models.Model):
 
 
 class LanguageCode(models.Model):
-    iso = models.CharField(max_length=5)
+    iso = models.CharField(max_length=5, unique=True)
     language = models.CharField(max_length=100, blank=True, null=True)
     language_eng = models.CharField(max_length=100)
 

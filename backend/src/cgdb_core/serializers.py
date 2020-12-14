@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Mode, Genre, Series, Publisher, Developer, Platform, Game
+from .models import LanguageCode, Mode, Genre, Series, Publisher, Developer, Platform, Game
 
 class ModeSerializer(serializers.ModelSerializer):
     """
@@ -185,6 +185,7 @@ class GameSerializer(serializers.ModelSerializer):
             'platforms': platforms,
             'genres': genres,
             'modes': modes,
+            'language_codes': language_codes,
         }
 
     def to_representation(self, instance):
@@ -239,6 +240,11 @@ class GameSerializer(serializers.ModelSerializer):
             if not mode_serializer.is_valid():
                 continue
             game.modes.add(mode_serializer.save())
+        for lang_code in validated_data.get('language_codes'):
+            if not LanguageCode.objects.filter(iso=lang_code.get('iso')).exists():
+                LanguageCode.objects.create(iso=lang_code.get('iso'),
+                                        language=lang_code.get('language'),
+                                        language_eng=lang_code.get('language_eng'))
         return game
 
     def update(self, instance, validated_data):
@@ -305,4 +311,9 @@ class GameSerializer(serializers.ModelSerializer):
                 mode_name = mode_serializer.validated_data.get('name')
             if not instance.modes.all().filter(name=mode_name).exists():
                 instance.modes.add(mode_serializer.save())
+        for lang_code in validated_data.get('language_codes'):
+            if not LanguageCode.objects.filter(iso=lang_code.get('iso')).exists():
+                LanguageCode.objects.create(iso=lang_code.get('iso'),
+                                        language=lang_code.get('language'),
+                                        language_eng=lang_code.get('language_eng'))
         return instance
