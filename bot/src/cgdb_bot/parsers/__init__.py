@@ -6,6 +6,7 @@ from scrapy.exceptions import IgnoreRequest
 from scrapy.spidermiddlewares.httperror import HttpError
 from cgdb_bot.items import WikipediaGameItem
 from cgdb_bot.exceptions import NoHtmlElementFound
+from cgdb_bot.common import WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR
 
 def parse_wikipedia_game_article(response):
     """
@@ -89,7 +90,24 @@ class WikipediaParser:
                     genres=self._extract_genres(response),
                     modes=self._extract_modes(response),
                     link=response.url,
+                    inter_languages = self._extract_inter_languages(response),
                 )
+
+    def _extract_inter_languages(self, response):
+        ret = []
+        languages = response.xpath('//a[@class="interlanguage-link-target"]')
+        for lang_link in languages:
+            title_lc = lang_link.xpath('./@title').get().split(SPLIT_CHAR)
+            lang = title_lc.pop()
+            title_lc = SPLIT_CHAR.join(title_lc)
+            ret.append({
+                'iso': lang_link.xpath('./@lang').get(),
+                'url': lang_link.xpath('./@href').get(),
+                'lang': lang.strip(),
+                'lang_lc': lang_link.xpath('./text()').get(),
+                'title_lc': title_lc.strip(),
+            })
+        return ret
 
     def _get_english_title(self, response, english_title=None):
         if not english_title or self._extract_language(response) == 'en':

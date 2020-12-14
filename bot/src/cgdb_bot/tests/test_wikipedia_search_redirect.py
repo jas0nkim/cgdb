@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import quote_plus
 import unittest
 import requests
-from cgdb_bot.common import WIKIPEDIA_SEARCH_LINK_FORMAT
+from cgdb_bot.common import WIKIPEDIA_SEARCH_URL_FORMAT
 
 class TestWikipediaSearchRedirect(unittest.TestCase):
     """
@@ -20,7 +20,7 @@ class TestWikipediaSearchRedirect(unittest.TestCase):
         test each url active
         """
         for title in self.test_data:
-            url = WIKIPEDIA_SEARCH_LINK_FORMAT.format(urlencoded=quote_plus(title))
+            url = WIKIPEDIA_SEARCH_URL_FORMAT.format(urlencoded=quote_plus(title))
             resp = requests.get(url)
             with self.subTest(title=title):
                 self.assertEqual(resp.status_code, 200)

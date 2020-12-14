@@ -23,6 +23,7 @@ class WikipediaGameItem:
     genres: List[str]
     modes: List[str]
     link: str
+    inter_languages: List[dict]
     platform: str = None
 
     def asjson(self):

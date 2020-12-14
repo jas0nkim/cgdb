@@ -1,145 +1,308 @@
-[
-    {
-        "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
-        "expected": {
-            "title": "A Plague Tale: Innocence",
-            "description": "A Plague Tale: Innocence is an action-adventure horror stealth game developed by Asobo Studio and published by Focus Home Interactive. It was released for Microsoft Windows, PlayStation 4 and Xbox One in May 2019, and received generally positive reviews from critics.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"],
-            "developers": ["Asobo Studio"],
-            "publishers": ["Focus Home Interactive"],
-            "series": [],
-            "genres": ["action-adventure", "stealth", "survival horror"],
-            "modes": ["single-player"]
+{
+    "parse_wikipedia_game_article": [
+        {
+            "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+            "expected": {
+                "english_title": "A Plague Tale: Innocence",
+                "language": "en",
+                "title_lc": "A Plague Tale: Innocence",
+                "description_lc": "A Plague Tale: Innocence is an action-adventure horror stealth game developed by Asobo Studio and published by Focus Home Interactive. It was released for Microsoft Windows, PlayStation 4 and Xbox One in May 2019, and received generally positive reviews from critics.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"],
+                "developers": ["Asobo Studio"],
+                "publishers": ["Focus Home Interactive"],
+                "series": [],
+                "genres": ["action-adventure", "stealth", "survival horror"],
+                "modes": ["single-player"],
+                "link": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Absolver",
+            "expected": {
+                "english_title": "Absolver",
+                "language": "en",
+                "title_lc": "Absolver",
+                "description_lc": "Absolver is a martial arts-themed action role-playing video game developed by Sloclap and published by Devolver Digital for PlayStation 4, Windows, and Xbox One. In the game, players control warrior characters who fight other players and computer-controlled characters across the fictional land of Adal to prove their worthiness of joining the Absolver peacekeepers. The game's story is focused on the human development of the characters as they fight to find their place in the collapsed empire.[1] The character's fighting moves are customized in a \"combat deck\" of cards, with each card assigned to a move. Players earn cards, equipment, and weapons by progressing through the game.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c9/Absolver_logo.png"],
+                "developers": ["Sloclap"],
+                "publishers": ["Devolver Digital"],
+                "series": [],
+                "genres": ["action role-playing"],
+                "modes": ["single-player", "multiplayer"],
+                "link": "https://en.wikipedia.org/wiki/Absolver"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Afterparty_(video_game)",
+            "expected": {
+                "english_title": "Afterparty",
+                "language": "en",
+                "title_lc": "Afterparty",
+                "description_lc": "Afterparty is an adventure video game by Night School Studio for macOS, PlayStation 4, Windows, and Xbox One platforms in October 2019 and Nintendo Switch in March 2020. Set in Hell, themed as a college town, the player navigates conversations, outdrinks Satan, and returns two best friends from the afterlife.",
+                "pictures": [],
+                "developers": ["Night School Studio"],
+                "publishers": ["Night School Studio"],
+                "series": [],
+                "genres": ["adventure"],
+                "modes": ["single-player"],
+                "link": "https://en.wikipedia.org/wiki/Afterparty_(video_game)"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall",
+            "expected": {
+                "english_title": "Age of Wonders: Planetfall",
+                "language": "en",
+                "title_lc": "Age of Wonders: Planetfall",
+                "description_lc": "Age of Wonders: Planetfall is a 4X turn-based strategy video game developed by Triumph Studios and published by Paradox Interactive. The game is the fifth installment in the Age of Wonders series and features a sci-fi setting. It released for Microsoft Windows, PlayStation 4 and Xbox One in August 2019.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/3/3d/Age_of_Wonders_Planetfall_cover_art.jpg"],
+                "developers": ["Triumph Studios"],
+                "publishers": ["Paradox Interactive"],
+                "series": ["Age of Wonders"],
+                "genres": ["4x", "turn-based strategy"],
+                "modes": ["single-player", "multiplayer"],
+                "link": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Ark:_Survival_Evolved",
+            "expected": {
+                "english_title": "Ark: Survival Evolved",
+                "language": "en",
+                "title_lc": "Ark: Survival Evolved",
+                "description_lc": "Ark: Survival Evolved (stylized as ΛRK) is a 2017 action-adventure survival video game developed by Studio Wildcard, in collaboration with Instinct Games, Efecto Studios, and Virtual Basement. In the game, players must survive being stranded on an island filled with roaming dinosaurs and other prehistoric animals, natural hazards, and potentially hostile human players.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/2b/ArkSurvivalEvolved.png"],
+                "developers": ["Studio Wildcard"],
+                "publishers": ["Studio Wildcard"],
+                "series": [],
+                "genres": ["action-adventure", "survival"],
+                "modes": ["single-player", "multiplayer"],
+                "link": "https://en.wikipedia.org/wiki/Ark:_Survival_Evolved"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Astroneer",
+            "expected": {
+                "english_title": "Astroneer",
+                "language": "en",
+                "title_lc": "Astroneer",
+                "description_lc": "Astroneer is a sandbox adventure game developed by System Era Softworks. The game was released through early access in December 2016 before a full release in 2019. The player is tasked with colonizing planets, creating structures, and collecting resources. Astroneer has no set goal or storyline, though each planet holds challenges for players to complete.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/5/5b/Astroneer_Image1.png"],
+                "developers": ["System Era Softworks"],
+                "publishers": ["System Era Softworks"],
+                "series": [],
+                "genres": ["sandbox", "adventure"],
+                "modes": ["single-player", "multiplayer"],
+                "link": "https://en.wikipedia.org/wiki/Astroneer"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight",
+            "expected": {
+                "english_title": "Batman: Arkham Knight",
+                "language": "en",
+                "title_lc": "Batman: Arkham Knight",
+                "description_lc": "Batman: Arkham Knight is a 2015 action-adventure game developed by Rocksteady Studios and published by Warner Bros. Interactive Entertainment. Based on the DC Comics superhero Batman, it is the successor to the 2013 video game Batman: Arkham Origins, and the fourth main installment in the Batman: Arkham series. Written by Sefton Hill, Ian Ball and Martin Lancaster, Arkham Knight is inspired by the long-running comic book mythos. Set nine months after the events of 2011's Batman: Arkham City, the game's main storyline follows Batman as he confronts Scarecrow, who has launched an attack on Gotham City, causing a citywide evacuation. Scarecrow, with the help of the mysterious Arkham Knight, is also able to unite Batman's greatest foes in an attempt to finally destroy Batman.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/6/6c/Batman_Arkham_Knight_Cover_Art.jpg"],
+                "developers": ["Rocksteady Studios"],
+                "publishers": ["Warner Bros. Interactive Entertainment"],
+                "series": ["Batman: Arkham"],
+                "genres": ["action-adventure"],
+                "modes": ["single-player"],
+                "link": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Battletoads",
+            "expected": {
+                "english_title": "Battletoads",
+                "language": "en",
+                "title_lc": "Battletoads",
+                "description_lc": "Battletoads is a video game media franchise by Rare that began with the original beat 'em up game Battletoads in 1991. Starring three anthropomorphic toads named after skin conditions, Rash, Zitz, and Pimple, the series was created to rival the Teenage Mutant Ninja Turtles games series.[1] The series as a whole has been quite popular with five installments up to this date and at its apex spawned an animated television pilot.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/28/Battletoads_logo.png"],
+                "developers": ["Rare", "Dlala Studios"],
+                "publishers": ["Masaya (1991–1994)", "Tradewest (1991–1994)", "Electronic Arts (Arcade)", "Xbox Game Studios (2019–present)"],
+                "series": [],
+                "genres": ["beat 'em up", "platform game"],
+                "modes": [],
+                "link": "https://en.wikipedia.org/wiki/Battletoads"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar",
+            "expected": {
+                "english_title": "Battle Chasers: Nightwar",
+                "language": "en",
+                "title_lc": "Battle Chasers: Nightwar",
+                "description_lc": "Battle Chasers: Nightwar is a turn-based role-playing video game developed by Airship Syndicate and published by THQ Nordic. It was released in October 2017 for Microsoft Windows, macOS, PlayStation 4 and Xbox One,[1] and in May 2018 for Nintendo Switch and Linux.[2][3] Based on the Battle Chasers fantasy comic book series by Joe Madureira, the game involves the cast of that series being marooned on an island and being forced to stop the plans of an evil sorceress in order to escape.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/44/Battle_Chasers_Nightwar_cover_art.jpg"],
+                "developers": ["Airship Syndicate"],
+                "publishers": ["THQ Nordic"],
+                "series": [],
+                "genres": ["role-playing"],
+                "modes": [],
+                "link": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Black_Desert_Online",
+            "expected": {
+                "english_title": "Black Desert Online",
+                "language": "en",
+                "title_lc": "Black Desert Online",
+                "description_lc": "Black Desert Online (Korean: 검은사막) is a sandbox-oriented fantasy massively multiplayer online role-playing game (MMORPG) developed by Korean video game developer Pearl Abyss and originally published for Microsoft Windows in 2015. A mobile version titled Black Desert Mobile was initially released in Asia by early 2019,[1] and worldwide in December 2019. The Xbox One and PlayStation 4 versions, known simply as Black Desert, were released in 2019. The game is free-to-play in some parts of the world, but follows a buy-to-play business model in other editions, including the English-language editions.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/8/85/Black_Desert_Online_Logo_%28En%29.png"],
+                "developers": ["Pearl Abyss"],
+                "publishers": ["WW: Pearl Abyss[a]", "NA/EU: Kakao Games", "SA: Red Fox Games"],
+                "series": [],
+                "genres": ["mmorpg"],
+                "modes": ["multiplayer"],
+                "link": "https://en.wikipedia.org/wiki/Black_Desert_Online"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)",
+            "expected": {
+                "english_title": "Blair Witch",
+                "language": "en",
+                "title_lc": "Blair Witch",
+                "description_lc": "Blair Witch is a psychological survival horror video game developed by Bloober Team based on the Blair Witch series of horror films. It was published by Lionsgate Games for Microsoft Windows, Xbox One and Xbox Game Pass on August 30, 2019. The game is set two years after the events of the 1999 film The Blair Witch Project,  which takes place in 1994. The game follows former police officer Ellis Lynch as he joins the search in Black Hills Forest for a missing boy. The game was later ported to PlayStation 4 on December 3, 2019, Nintendo Switch on June 25, 2020 and Oculus Quest & Quest 2 on October 29, 2020.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c7/Blair_Witch_video_game_poster.jpg"],
+                "developers": ["Bloober Team"],
+                "publishers": ["Lionsgate Games"],
+                "series": ["Blair Witch"],
+                "genres": ["survival horror"],
+                "modes": ["single-player"],
+                "link": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)"
+            }
         }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Absolver",
-        "expected": {
-            "title": "Absolver",
-            "description": "Absolver is a martial arts-themed action role-playing video game developed by Sloclap and published by Devolver Digital for PlayStation 4, Windows, and Xbox One. In the game, players control warrior characters who fight other players and computer-controlled characters across the fictional land of Adal to prove their worthiness of joining the Absolver peacekeepers. The game's story is focused on the human development of the characters as they fight to find their place in the collapsed empire.[1] The character's fighting moves are customized in a \"combat deck\" of cards, with each card assigned to a move. Players earn cards, equipment, and weapons by progressing through the game.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c9/Absolver_logo.png"],
-            "developers": ["Sloclap"],
-            "publishers": ["Devolver Digital"],
-            "series": [],
-            "genres": ["action role-playing"],
-            "modes": ["single-player", "multiplayer"]
+    ],
+    "parse_wikipedia_game_inter_languages": [
+        {
+            "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+            "expected": {
+                "inter_languages": [
+                    {
+                        "iso": "ar",
+                        "url": "https://ar.wikipedia.org/wiki/%D8%A3%D8%A8%D9%84%D9%8A%D8%BA_%D8%AA%D9%8A%D9%84:_%D8%A5%D9%8A%D9%86%D9%88%D8%B3%D9%8A%D9%86%D8%B3",
+                        "lang": "Arabic",
+                        "lang_lc": "العربية",
+                        "title_lc": "أبليغ تيل: إينوسينس"
+                    },
+                    {
+                        "iso": "de",
+                        "url": "https://de.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "German",
+                        "lang_lc": "Deutsch",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "es",
+                        "url": "https://es.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Spanish",
+                        "lang_lc": "Español",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "fa",
+                        "url": "https://fa.wikipedia.org/wiki/%D8%A7%D9%81%D8%B3%D8%A7%D9%86%D9%87_%D8%B7%D8%A7%D8%B9%D9%88%D9%86:_%D8%A7%DB%8C%D9%86%D8%B3%D9%86%D8%B3",
+                        "lang": "Persian",
+                        "lang_lc": "فارسی",
+                        "title_lc": "افسانه طاعون: اینسنس"
+                    },
+                    {
+                        "iso": "fr",
+                        "url": "https://fr.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "French",
+                        "lang_lc": "Français",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "ko",
+                        "url": "https://ko.wikipedia.org/wiki/%ED%94%8C%EB%9E%98%EA%B7%B8_%ED%85%8C%EC%9D%BC:_%EC%9D%B4%EB%85%B8%EC%84%BC%EC%8A%A4",
+                        "lang": "Korean",
+                        "lang_lc": "한국어",
+                        "title_lc": "플래그 테일: 이노센스"
+                    },
+                    {
+                        "iso": "it",
+                        "url": "https://it.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Italian",
+                        "lang_lc": "Italiano",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "arz",
+                        "url": "https://arz.wikipedia.org/wiki/%D8%A7%D8%A8%D9%84%D8%A7%D8%AC%D9%88_%D8%AA%D8%A7%D9%8A%D9%84:_%D8%A7%D9%8A%D9%86%D9%88%D8%B3%D9%8A%D9%86%D8%B3",
+                        "lang": "Egyptian Arabic",
+                        "lang_lc": "مصرى",
+                        "title_lc": "ابلاجو تايل: اينوسينس"
+                    },
+                    {
+                        "iso": "ja",
+                        "url": "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B0_%E3%83%86%E3%82%A4%E3%83%AB_-%E3%82%A4%E3%83%8E%E3%82%BB%E3%83%B3%E3%82%B9-",
+                        "lang": "Japanese",
+                        "lang_lc": "日本語",
+                        "title_lc": "プレイグ テイル -イノセンス-"
+                    },
+                    {
+                        "iso": "pt",
+                        "url": "https://pt.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Portuguese",
+                        "lang_lc": "Português",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "ru",
+                        "url": "https://ru.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Russian",
+                        "lang_lc": "Русский",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "fi",
+                        "url": "https://fi.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Finnish",
+                        "lang_lc": "Suomi",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "th",
+                        "url": "https://th.wikipedia.org/wiki/%E0%B8%AD%E0%B8%B0%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%81%E0%B9%80%E0%B8%97%E0%B8%A5%E0%B8%AD%E0%B8%B4%E0%B8%99%E0%B9%82%E0%B8%99%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B8%8B%E0%B9%8C",
+                        "lang": "Thai",
+                        "lang_lc": "ไทย",
+                        "title_lc": "อะเพลกเทลอินโนเซนซ์"
+                    },
+                    {
+                        "iso": "uk",
+                        "url": "https://uk.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Ukrainian",
+                        "lang_lc": "Українська",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "vi",
+                        "url": "https://vi.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                        "lang": "Vietnamese",
+                        "lang_lc": "Tiếng Việt",
+                        "title_lc": "A Plague Tale: Innocence"
+                    },
+                    {
+                        "iso": "wuu",
+                        "url": "https://wuu.wikipedia.org/wiki/%E7%98%9F%E7%96%AB%E4%BC%A0%E8%AF%B4%EF%BC%9A%E6%97%A0%E7%BD%AA",
+                        "lang": "Wu Chinese",
+                        "lang_lc": "吴语",
+                        "title_lc": "瘟疫传说：无罪"
+                    },
+                    {
+                        "iso": "zh",
+                        "url": "https://zh.wikipedia.org/wiki/%E7%98%9F%E7%96%AB%E5%82%B3%E8%AA%AA%EF%BC%9A%E7%84%A1%E7%BD%AA",
+                        "lang": "Chinese",
+                        "lang_lc": "中文",
+                        "title_lc": "瘟疫傳說：無罪"
+                    }
+                ]
+            }
         }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Afterparty_(video_game)",
-        "expected": {
-            "title": "Afterparty",
-            "description": "Afterparty is an adventure video game by Night School Studio for macOS, PlayStation 4, Windows, and Xbox One platforms in October 2019 and Nintendo Switch in March 2020. Set in Hell, themed as a college town, the player navigates conversations, outdrinks Satan, and returns two best friends from the afterlife.",
-            "pictures": [],
-            "developers": ["Night School Studio"],
-            "publishers": ["Night School Studio"],
-            "series": [],
-            "genres": ["adventure"],
-            "modes": ["single-player"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall",
-        "expected": {
-            "title": "Age of Wonders: Planetfall",
-            "description": "Age of Wonders: Planetfall is a 4X turn-based strategy video game developed by Triumph Studios and published by Paradox Interactive. The game is the fifth installment in the Age of Wonders series and features a sci-fi setting. It released for Microsoft Windows, PlayStation 4 and Xbox One in August 2019.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/3/3d/Age_of_Wonders_Planetfall_cover_art.jpg"],
-            "developers": ["Triumph Studios"],
-            "publishers": ["Paradox Interactive"],
-            "series": ["Age of Wonders"],
-            "genres": ["4x", "turn-based strategy"],
-            "modes": ["single-player", "multiplayer"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Ark:_Survival_Evolved",
-        "expected": {
-            "title": "Ark: Survival Evolved",
-            "description": "Ark: Survival Evolved (stylized as ΛRK) is a 2017 action-adventure survival video game developed by Studio Wildcard, in collaboration with Instinct Games, Efecto Studios, and Virtual Basement. In the game, players must survive being stranded on an island filled with roaming dinosaurs and other prehistoric animals, natural hazards, and potentially hostile human players.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/2b/ArkSurvivalEvolved.png"],
-            "developers": ["Studio Wildcard"],
-            "publishers": ["Studio Wildcard"],
-            "series": [],
-            "genres": ["action-adventure", "survival"],
-            "modes": ["single-player", "multiplayer"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Astroneer",
-        "expected": {
-            "title": "Astroneer",
-            "description": "Astroneer is a sandbox adventure game developed by System Era Softworks. The game was released through early access in December 2016 before a full release in 2019. The player is tasked with colonizing planets, creating structures, and collecting resources. Astroneer has no set goal or storyline, though each planet holds challenges for players to complete.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/5/5b/Astroneer_Image1.png"],
-            "developers": ["System Era Softworks"],
-            "publishers": ["System Era Softworks"],
-            "series": [],
-            "genres": ["sandbox", "adventure"],
-            "modes": ["single-player", "multiplayer"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight",
-        "expected": {
-            "title": "Batman: Arkham Knight",
-            "description": "Batman: Arkham Knight is a 2015 action-adventure game developed by Rocksteady Studios and published by Warner Bros. Interactive Entertainment. Based on the DC Comics superhero Batman, it is the successor to the 2013 video game Batman: Arkham Origins, and the fourth main installment in the Batman: Arkham series. Written by Sefton Hill, Ian Ball and Martin Lancaster, Arkham Knight is inspired by the long-running comic book mythos. Set nine months after the events of 2011's Batman: Arkham City, the game's main storyline follows Batman as he confronts Scarecrow, who has launched an attack on Gotham City, causing a citywide evacuation. Scarecrow, with the help of the mysterious Arkham Knight, is also able to unite Batman's greatest foes in an attempt to finally destroy Batman.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/6/6c/Batman_Arkham_Knight_Cover_Art.jpg"],
-            "developers": ["Rocksteady Studios"],
-            "publishers": ["Warner Bros. Interactive Entertainment"],
-            "series": ["Batman: Arkham"],
-            "genres": ["action-adventure"],
-            "modes": ["single-player"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Battletoads",
-        "expected": {
-            "title": "Battletoads",
-            "description": "Battletoads is a video game media franchise by Rare that began with the original beat 'em up game Battletoads in 1991. Starring three anthropomorphic toads named after skin conditions, Rash, Zitz, and Pimple, the series was created to rival the Teenage Mutant Ninja Turtles games series.[1] The series as a whole has been quite popular with five installments up to this date and at its apex spawned an animated television pilot.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/28/Battletoads_logo.png"],
-            "developers": ["Rare", "Dlala Studios"],
-            "publishers": ["Masaya (1991–1994)", "Tradewest (1991–1994)", "Electronic Arts (Arcade)", "Xbox Game Studios (2019–present)"],
-            "series": [],
-            "genres": ["beat 'em up", "platform game"],
-            "modes": []
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar",
-        "expected": {
-            "title": "Battle Chasers: Nightwar",
-            "description": "Battle Chasers: Nightwar is a turn-based role-playing video game developed by Airship Syndicate and published by THQ Nordic. It was released in October 2017 for Microsoft Windows, macOS, PlayStation 4 and Xbox One,[1] and in May 2018 for Nintendo Switch and Linux.[2][3] Based on the Battle Chasers fantasy comic book series by Joe Madureira, the game involves the cast of that series being marooned on an island and being forced to stop the plans of an evil sorceress in order to escape.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/44/Battle_Chasers_Nightwar_cover_art.jpg"],
-            "developers": ["Airship Syndicate"],
-            "publishers": ["THQ Nordic"],
-            "series": [],
-            "genres": ["role-playing"],
-            "modes": []
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Black_Desert_Online",
-        "expected": {
-            "title": "Black Desert Online",
-            "description": "Black Desert Online (Korean: 검은사막) is a sandbox-oriented fantasy massively multiplayer online role-playing game (MMORPG) developed by Korean video game developer Pearl Abyss and originally published for Microsoft Windows in 2015. A mobile version titled Black Desert Mobile was initially released in Asia by early 2019,[1] and worldwide in December 2019. The Xbox One and PlayStation 4 versions, known simply as Black Desert, were released in 2019. The game is free-to-play in some parts of the world, but follows a buy-to-play business model in other editions, including the English-language editions.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/8/85/Black_Desert_Online_Logo_%28En%29.png"],
-            "developers": ["Pearl Abyss"],
-            "publishers": ["WW: Pearl Abyss[a]", "NA/EU: Kakao Games", "SA: Red Fox Games"],
-            "series": [],
-            "genres": ["mmorpg"],
-            "modes": ["multiplayer"]
-        }
-    },
-    {
-        "url": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)",
-        "expected": {
-            "title": "Blair Witch",
-            "description": "Blair Witch is a psychological survival horror video game developed by Bloober Team based on the Blair Witch series of horror films. It was published by Lionsgate Games for Microsoft Windows, Xbox One and Xbox Game Pass on August 30, 2019. The game is set two years after the events of the 1999 film The Blair Witch Project,  which takes place in 1994. The game follows former police officer Ellis Lynch as he joins the search in Black Hills Forest for a missing boy. The game was later ported to PlayStation 4 on December 3, 2019, Nintendo Switch on June 25, 2020 and Oculus Quest & Quest 2 on October 29, 2020.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c7/Blair_Witch_video_game_poster.jpg"],
-            "developers": ["Bloober Team"],
-            "publishers": ["Lionsgate Games"],
-            "series": ["Blair Witch"],
-            "genres": ["survival horror"],
-            "modes": ["single-player"]
-        }
-    }
-]
+    ]
+}

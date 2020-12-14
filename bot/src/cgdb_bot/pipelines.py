@@ -28,6 +28,10 @@ class WikipediaGamePipeline:
             missing_components.append('genres')
         if not item.modes:
             missing_components.append('modes')
+        if not item.link:
+            missing_components.append('link')
+        if not item.inter_languages:
+            missing_components.append('inter_languages')
         if len(missing_components) > 4:
             raise DropItem(f"""Too many missing components: 
                             {', '.join(missing_components)}""")
