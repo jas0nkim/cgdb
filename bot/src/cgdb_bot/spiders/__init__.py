@@ -75,6 +75,7 @@ class WikipediaGameSpider(Spider):
 
     def item_dropped(self, item, response, exception, spider):
         """
-        Send the error information to API server
+        Record dropped items/links
         """
-        pass
+        with open('dropped_items.csv', 'a') as file:
+            file.write(f'{response.url}|{spider._platform}|{str(exception)}\n')
