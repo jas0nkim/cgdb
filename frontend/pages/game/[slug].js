@@ -10,28 +10,28 @@ const Game = ({ game }) => {
     const locales = (locales) => {
         const ret = []
         for (const locale in locales) {
-            ret.push(<li>{locale}: {locales[locale]}</li>)
+            ret.push(<li key={locale}>{locale}: {locales[locale]}</li>)
         }
         return ret
     }
     const pictures = game.pictures.map((picture) => {
-        return <li><img src={picture} /></li>
+        return <li key={picture}><img key={picture} src={picture} /></li>
     })
     const links = (references) => {
         const ret = []
         for (const key in references) {
-            ret.push(<li><a href={references[key]} target="_blank">{key}</a></li>)
+            ret.push(<li key={key}><a key={key} href={references[key]} target="_blank">{key}</a></li>)
         }
         return ret
     }
-    const developers = game.developers.map((developer) => <li>{developer}</li>)
-    const publishers = game.publishers.map((publisher) => <li>{publisher}</li>)
-    const series = game.series.map((series) => <li>{series}</li>)
+    const developers = game.developers.map((developer) => <li key={developer}>{developer}</li>)
+    const publishers = game.publishers.map((publisher) => <li key={publisher}>{publisher}</li>)
+    const series = game.series.map((series) => <li key={series}>{series}</li>)
     const platforms = game.platforms.map((platform) => (
-        <li><Link href={'/platform/' + platform.slug}>{platform.name}</Link></li>
+        <li key={platform.slug}><Link href={'/platform/' + platform.slug}>{platform.name}</Link></li>
     ))
-    const genres = game.genres.map((genre) => <li>{genre}</li>)
-    const modes = game.modes.map((mode) => <li>{mode}</li>)
+    const genres = game.genres.map((genre) => <li key={genre}>{genre}</li>)
+    const modes = game.modes.map((mode) => <li key={mode}>{mode}</li>)
 
     return (
         <div>

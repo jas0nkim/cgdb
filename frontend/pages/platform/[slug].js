@@ -8,10 +8,10 @@ const Platform = ({ platform }) => {
         return <div>Loading...</div>
     }
     const pictures = platform.pictures.map((picture) => {
-        return <li><img src={picture} /></li>
+        return <li key={picture}><img src={picture} /></li>
     })
     const games = platform.games.map((game) => (
-        <li><Link href={'/game/' + game.slug}>{game.title}</Link></li>
+        <li key={game.slug}><Link href={'/game/' + game.slug}>{game.title}</Link></li>
     ))
 
     return (
