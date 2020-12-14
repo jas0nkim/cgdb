@@ -1,10 +1,7 @@
-from django.test import TestCase
 from django.urls import include, path, reverse
 from rest_framework import status
-from rest_framework.test import (APITestCase,
-                                URLPatternsTestCase,
-                                APIClient)
-from .models import (Mode,
+from rest_framework.test import APITestCase, URLPatternsTestCase
+from cgdb_core.models import (Mode,
                     Genre,
                     Series,
                     Publisher,
@@ -12,7 +9,7 @@ from .models import (Mode,
                     Platform,
                     Game)
 
-class CoreRetrieveTests(APITestCase, URLPatternsTestCase):
+class RetrieveTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
         path('api/', include('cgdb_core.urls')),
     ]

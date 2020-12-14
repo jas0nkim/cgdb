@@ -1,4 +1,6 @@
+import logging
 from django.db import models
+from django.db.utils import IntegrityError
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
@@ -250,6 +252,10 @@ class Game(models.Model):
     class Meta:
         db_table = 'games'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.logger = logging.getLogger(__name__)
+
     def __str__(self):
         return self.title
 
@@ -268,7 +274,16 @@ class Game(models.Model):
                 tag = Tag.objects.get(tag=self.title_lc.get(iso))
             except Tag.DoesNotExist:
                 tag = Tag(tag=self.title_lc.get(iso))
-                tag.save()
+            if tag.pk is None: # if not saved db yet
+                try:
+                    tag.save()
+                except IntegrityError as err:
+                    """
+                    known errors:
+                    - case sensitive on tag field, but not on slug field
+                    """
+                    self.logger.error('[%s] - %s', iso, str(err))
+                    continue
             if not self.tags.filter(tag=self.title_lc.get(iso)).exists():
                 self.tags.add(tag)
 

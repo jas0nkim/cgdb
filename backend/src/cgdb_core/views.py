@@ -30,12 +30,14 @@ class WikipediaGameBot(APIView):
             return Response({"error": "English title not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
         serializer = None
+        ok_status = status.HTTP_200_OK
         try:
             game = Game.objects.get(title=title)
             serializer = GameSerializer(game, data=request.data)
         except Game.DoesNotExist:
             serializer = GameSerializer(data=request.data)
+            ok_status = status.HTTP_201_CREATED
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=ok_status)
         return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)

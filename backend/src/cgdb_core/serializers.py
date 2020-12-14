@@ -84,6 +84,23 @@ class GameSerializer(serializers.ModelSerializer):
                 'genres',
                 'modes',)
 
+    def _inter_language_handler(self, data):
+        title_lc = {}
+        wikipedia_links = {}
+        language_codes = []
+        if data.get('language'):
+            title_lc[data.get('language')] = data.get('title_lc')
+            wikipedia_links[f"wikipedia_{data.get('language')}"] = data.get('link')
+        for interlang in data.get('inter_languages'):
+            title_lc[interlang.get('iso')] = interlang.get('title_lc')
+            wikipedia_links[f"wikipedia_{interlang.get('iso')}"] = interlang.get('url')
+            language_codes.append({
+                'iso': interlang.get('iso'),
+                'language': interlang.get('lang_lc'),
+                'language_eng': interlang.get('lang'),
+            })
+        return title_lc, wikipedia_links, language_codes
+
     def to_internal_value(self, data):
         """
         Override this to support deserialization, for write operations.
@@ -143,18 +160,16 @@ class GameSerializer(serializers.ModelSerializer):
                                         data={'name': mode_name}))
             except Mode.DoesNotExist:
                 modes.append(ModeSerializer(data={'name': mode_name}))
-
+        title_lc, wikipedia_links, language_codes = self._inter_language_handler(data)
         return {
             'title': title,
-            'title_lc': {
-                language: data.get('title_lc'),
-            },
+            'title_lc': title_lc,
             'description': data.get('description_lc') if language == 'en' else None,
             'description_lc': {
                 language: data.get('description_lc'),
             },
             'pictures': data.get('pictures'),
-            'links': {'wikipedia': data.get('link')},
+            'links': wikipedia_links,
             'developers': developers,
             'publishers': publishers,
             'series': series,
