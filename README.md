@@ -23,7 +23,7 @@ $ docker-compose exec backend python manage.py createsuperuser
 ## Run crawlers
 ```
 $ cd bot/src
-$ scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..."
+$ scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
 ```
 
 ## Run tests
