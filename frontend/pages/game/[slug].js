@@ -15,13 +15,7 @@ const Game = ({ game }) => {
         return ret
     }
     const pictures = game.pictures.map((picture) => {
-        if ('high' in picture) {
-            return <li><img src={picture.high} /></li>
-        } else if ('mid' in picture) {
-            return <li><img src={picture.mid} /></li>
-        } else if ('low' in picture) {
-            return <li><img src={picture.low} /></li>
-        }
+        return <li><img src={picture} /></li>
     })
     const links = (references) => {
         const ret = []
@@ -30,14 +24,14 @@ const Game = ({ game }) => {
         }
         return ret
     }
-    const developers = game.developers.map((developer) => <li>{developer.name}</li>)
-    const publishers = game.publishers.map((publisher) => <li>{publisher.name}</li>)
-    const series = game.series.map((series) => <li>{series.name}</li>)
+    const developers = game.developers.map((developer) => <li>{developer}</li>)
+    const publishers = game.publishers.map((publisher) => <li>{publisher}</li>)
+    const series = game.series.map((series) => <li>{series}</li>)
     const platforms = game.platforms.map((platform) => (
-        <Link href={'/platform/' + platform.slug}>{platform.name}</Link>
+        <li><Link href={'/platform/' + platform.slug}>{platform.name}</Link></li>
     ))
-    const genres = game.genres.map((genre) => <li>{genre.name}</li>)
-    const modes = game.modes.map((mode) => <li>{mode.name}</li>)
+    const genres = game.genres.map((genre) => <li>{genre}</li>)
+    const modes = game.modes.map((mode) => <li>{mode}</li>)
 
     return (
         <div>

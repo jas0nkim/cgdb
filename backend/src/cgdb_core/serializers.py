@@ -58,6 +58,15 @@ class PlatformSerializer(serializers.ModelSerializer):
                                                 else [],
         }
 
+    def to_representation(self, instance):
+        return {
+            'name': instance.name,
+            'description': instance.description,
+            'pictures': instance.pictures,
+            'slug': instance.slug,
+            'games': [{'title':g.title, 'slug':g.slug} for g in instance.games.all()]
+        }
+
 class GameSerializer(serializers.ModelSerializer):
     """
     Game django model serializer
@@ -178,11 +187,25 @@ class GameSerializer(serializers.ModelSerializer):
             'modes': modes,
         }
 
-    # def to_representation(self, instance):
-    #     """
-    #     Override this to support serialization, for read operations.
-    #     """
-    #     pass
+    def to_representation(self, instance):
+        """
+        Override this to support serialization, for read operations.
+        """
+        return {
+            'title': instance.title,
+            'title_lc': instance.title_lc,
+            'description': instance.description,
+            'description_lc': instance.description_lc,
+            'pictures': instance.pictures,
+            'links': instance.links,
+            'developers': [d.name for d in instance.developers.all()],
+            'publishers': [p.name for p in instance.publishers.all()],
+            'series': [s.name for s in instance.series.all()],
+            'platforms': [{'name': p.name, 'slug':p.slug} for p in instance.platforms.all()],
+            'genres': [g.name for g in instance.genres.all()],
+            'modes': [m.name for m in instance.modes.all()],
+            'slug': instance.slug,
+        }
 
     def create(self, validated_data):
         game = Game.objects.create(title=validated_data.get('title'),

@@ -1,26 +1,25 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router';
 import configData from "../../config.json";
 
 const Platform = ({ platform }) => {
-    const router = useRouter()    
+    const router = useRouter()
     if (router.isFallback) {
         return <div>Loading...</div>
     }
-    const pictures = (pictures) => {
-        if ('high' in pictures) {
-            return <li><img src={pictures.high} /></li>
-        } else if ('mid' in picture) {
-            return <li><img src={pictures.mid} /></li>
-        } else if ('low' in picture) {
-            return <li><img src={pictures.low} /></li>
-        }
-    }
+    const pictures = platform.pictures.map((picture) => {
+        return <li><img src={picture} /></li>
+    })
+    const games = platform.games.map((game) => (
+        <li><Link href={'/game/' + game.slug}>{game.title}</Link></li>
+    ))
 
     return (
         <div>
             <div>Name: {platform.name}</div>
             <div>Description: {platform.description}</div>
-            <div>Pictures: <ul>{ pictures(platform.pictures) }</ul></div>
+            <div>Pictures: <ul>{pictures}</ul></div>
+            <div>Games: <ul>{ games }</ul></div>
         </div>
     )
 };
