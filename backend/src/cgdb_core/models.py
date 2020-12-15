@@ -271,7 +271,8 @@ class Game(models.Model):
         """
         for iso in self.title_lc:
             try:
-                tag = Tag.objects.get(tag=self.title_lc.get(iso))
+                tag = Tag.objects.get(slug=slugify(self.title_lc.get(iso),
+                                                allow_unicode=True))
             except Tag.DoesNotExist:
                 tag = Tag(tag=self.title_lc.get(iso))
             if tag.pk is None: # if not saved db yet
