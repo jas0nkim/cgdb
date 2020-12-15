@@ -6,7 +6,8 @@ from scrapy.exceptions import IgnoreRequest
 from scrapy.spidermiddlewares.httperror import HttpError
 from cgdb_bot.items import WikipediaGameItem
 from cgdb_bot.exceptions import NoHtmlElementFound
-from cgdb_bot.common import WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR
+from cgdb_bot.common import (WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR,
+                        WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES as NOT_SUPPORTED_ISOS)
 
 def parse_wikipedia_game_article(response):
     """
@@ -100,6 +101,8 @@ class WikipediaParser:
             title_lc = lang_link.xpath('./@title').get().split(SPLIT_CHAR)
             lang = title_lc.pop()
             title_lc = SPLIT_CHAR.join(title_lc)
+            if lang_link.xpath('./@lang').get() in NOT_SUPPORTED_ISOS:
+                continue
             ret.append({
                 'iso': lang_link.xpath('./@lang').get(),
                 'url': lang_link.xpath('./@href').get(),

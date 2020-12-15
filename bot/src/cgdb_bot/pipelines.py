@@ -39,14 +39,16 @@ class WikipediaGamePipeline:
         item.platform = spider._platform
         return item
 
-class JsonWriterPipeline:
+class WriteScrapedItemsPipeline:
     def open_spider(self, spider):
-        self.file = open('items.json', 'w')
+        self.file = open('scraped_items.json', 'a')
+        self.file.write("[\n")
 
     def close_spider(self, spider):
+        self.file.write("]")
         self.file.close()
 
     def process_item(self, item, spider):
-        data = item.asjson() + "\n"
+        data = item.asjson() + ",\n"
         self.file.write(data)
         return item
