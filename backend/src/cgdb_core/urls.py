@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -14,6 +14,9 @@ urlpatterns = [
     path('games/<slug:slug>/',
         views.GamePublicViewSet.as_view({'get': 'retrieve'}),
         name='game-detail'),
+    path('search/<str:term>/',
+        views.SearchViewSet.as_view({'get': 'list'}),
+        name='search'),
     path('bot/game/',
         views.WikipediaGameBot.as_view(),
         name='bot-game-post')

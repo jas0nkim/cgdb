@@ -317,3 +317,21 @@ class GameSerializer(serializers.ModelSerializer):
                                         language=lang_code.get('language'),
                                         language_eng=lang_code.get('language_eng'))
         return instance
+
+class GameSearchSerializer(serializers.ModelSerializer):
+    """
+    Game django model serializer for Game Search
+    """
+
+    class Meta:
+        model = Game
+        fields = ('title', 'title_lc', 'slug', 'pictures', )
+
+    def to_representation(self, instance):
+        return {
+            'title': instance.title,
+            'title_lc': instance.title_lc,
+            'slug': instance.slug,
+            'pictures': instance.pictures,
+            'platforms': [{'name': p.name, 'slug': p.slug} for p in instance.platforms.all()]
+        }
