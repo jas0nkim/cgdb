@@ -41,12 +41,18 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(Game.objects.count(), 11)
         self.assertEqual(Tag.objects.count(), 50)
 
-    def test_search(self):
+    def test_search_game_by_english_title(self):
         url = reverse('search', kwargs={'term': 'ark'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
         self.assertEqual(response.data[0].get('title'), 'Ark: Survival Evolved')
-        self.assertEqual(len(response.data[0].get('title_lc')), 21)
-        self.assertEqual(len(response.data[0].get('pictures')), 1)
         self.assertEqual(len(response.data[0].get('platforms')), 1)
+        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
+
+    def test_search_game_by_korean_title(self):
+        url = reverse('search', kwargs={'term': '트로니어'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data[0].get('title'), 'Astroneer')
+        self.assertEqual(len(response.data[0].get('platforms')), 1)
+        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
