@@ -44,7 +44,13 @@ const SearchPage = (props) => {
                             return ret
                         }
                         const platforms = game.platforms.map(platform => {
-                            return <li key={platform.slug}>{platform.name}</li>
+                            return (
+                                <li key={platform.slug}>
+                                    <Link href={'/platform/' + platform.slug}>
+                                        {platform.name}
+                                    </Link>
+                                </li>
+                            )
                         })
 
                         return (
