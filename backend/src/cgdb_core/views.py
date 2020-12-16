@@ -28,6 +28,10 @@ class SearchViewSet(ReadOnlyModelViewSet):
             searchv=SearchVector('tags__tag'),
         ).filter(searchv__icontains=search_term).distinct('title')
 
+class AllGamesViewSet(SearchViewSet):
+    def get_queryset(self):
+        return Game.objects.all()
+
 class WikipediaGameBot(APIView):
     permission_classes = [AllowAny]
 

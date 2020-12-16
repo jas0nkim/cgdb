@@ -9,7 +9,7 @@ urlpatterns = [
         views.PlatformPublicViewSet.as_view({'get': 'retrieve'}),
         name='platform-detail'),
     path('games/',
-        views.GamePublicViewSet.as_view({'get': 'list'}),
+        views.AllGamesViewSet.as_view({'get': 'list'}),
         name='game-list'),
     path('games/<slug:slug>/',
         views.GamePublicViewSet.as_view({'get': 'retrieve'}),
