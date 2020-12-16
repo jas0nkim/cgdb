@@ -15,12 +15,12 @@ const Platform = ({ platform }) => {
     ))
 
     return (
-        <div>
+        <>
             <div>Name: {platform.name}</div>
             <div>Description: {platform.description}</div>
             <div>Pictures: <ul>{pictures}</ul></div>
             <div>Games: <ul>{ games }</ul></div>
-        </div>
+        </>
     )
 };
 

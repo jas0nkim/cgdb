@@ -34,7 +34,7 @@ const Game = ({ game }) => {
     const modes = game.modes.map((mode) => <li key={mode}>{mode}</li>)
 
     return (
-        <div>
+        <>
             <div>Title: {game.title}</div>
             <div>Title locales: {locales(game.title_lc)}</div>
             <div>Description: {game.description}</div>
@@ -47,7 +47,7 @@ const Game = ({ game }) => {
             <div>Platforms: <ul>{ platforms }</ul></div>
             <div>Genres: <ul>{ genres }</ul></div>
             <div>Modes: <ul>{ modes }</ul></div>
-        </div>
+        </>
     )
 };
 
