@@ -1,5 +1,6 @@
 from os.path import abspath, dirname
 from pathlib import Path
+from datetime import datetime
 
 # Scrapy settings for cgdb_bot project
 #
@@ -91,9 +92,10 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
+DATA_DIR = f'{SRC_DIR}/.data'
 
 FEEDS = {
-   Path(f'{SRC_DIR}/.data/scraped_items/item-%(batch_id)d-%(batch_time)s.json'): {
+   Path(f'{DATA_DIR}/scraped_items/item-%(batch_id)d-%(batch_time)s.json'): {
       'format': 'json',
       'batch_item_count': 100,
       'encoding': 'utf8',
@@ -106,6 +108,11 @@ FEEDS = {
       'overwrite': False,
    }
 }
+
+LOG_FILE = Path(f'{DATA_DIR}/logs/{datetime.now().strftime("%Y%m%d%H%M%S")}.log')
+LOG_LEVEL = 'DEBUG'
+
+CRAWL_ARG_DELIMITER = '||'
 
 API_SERVER_HOST = 'http://localhost'
 API_SERVER_PORT = '8000'

@@ -2,7 +2,6 @@ import logging
 import re
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
-from scrapy.exceptions import IgnoreRequest
 from scrapy.spidermiddlewares.httperror import HttpError
 from cgdb_bot.items import WikipediaGameItem
 from cgdb_bot.exceptions import NoHtmlElementFound
@@ -15,11 +14,7 @@ def parse_wikipedia_game_article(response):
     """
     logger = logging.getLogger(__name__)
     parser = WikipediaParser()
-    try:
-        return parser.parse_game_article(response)
-    except IgnoreRequest as err:
-        logger.exception('IgnoreRequest: %s', str(err))
-        return None
+    return parser.parse_game_article(response)
 
 def resp_error_handler(failure):
     """
@@ -38,21 +33,22 @@ def resp_error_handler(failure):
                     response.url,
                     failure.getErrorMessage(),
                     response.text)
+        yield WikipediaGameItem(link=response.url)
     elif failure.check(DNSLookupError):
         # this is the original request
         request = failure.request
         logger.error('ScrapyRequestError, DNSLookupError: %s - %s',
-                    request.url,
+                    request.cb_kwargs['main_url'],
                     failure.getErrorMessage())
     elif failure.check(TOError, TCPTimedOutError):
         request = failure.request
         logger.error('ScrapyRequestError, TimeoutError, TCPTimedOutError: %s - %s',
-                    request.url,
+                    request.cb_kwargs['main_url'],
                     failure.getErrorMessage())
     else:
         request = failure.request
         logger.error('ScrapyRequestError: %s - %s',
-                    request.url,
+                    request.cb_kwargs['main_url'],
                     failure.getErrorMessage())
 
 
@@ -70,7 +66,8 @@ class WikipediaParser:
         if response.status != 200:
             # broken link or inactive
             self.logger.error("Link not working: HTTP status code - %s", response.status)
-            raise IgnoreRequest
+            yield WikipediaGameItem(english_title=english_title,
+                                    link=response.url)
 
         """
         TODO: if this page is an 'English' Wikipedia site, get links of other languages, and request those links

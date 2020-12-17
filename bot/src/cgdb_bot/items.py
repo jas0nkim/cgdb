@@ -12,18 +12,18 @@ class WikipediaGameItem:
     """
     Scraped data from Wikipedia Game page
     """
-    english_title: str
-    language: str
-    title_lc: str
-    description_lc: str
-    pictures: List[str] = field(metadata={'values':'picture_links'})
-    developers: List[str]
-    publishers: List[str]
-    series: List[str]
-    genres: List[str]
-    modes: List[str]
-    link: str
-    inter_languages: List[dict]
+    english_title: str = None
+    language: str = None
+    title_lc: str = None
+    description_lc: str = None
+    pictures: List[str] = field(default_factory=list, metadata={'values':'picture_links'})
+    developers: List[str] = field(default_factory=list)
+    publishers: List[str] = field(default_factory=list)
+    series: List[str] = field(default_factory=list)
+    genres: List[str] = field(default_factory=list)
+    modes: List[str] = field(default_factory=list)
+    link: str = None
+    inter_languages: List[dict] = field(default_factory=list)
     platform: str = None
 
     def asjson(self):
