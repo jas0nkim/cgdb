@@ -1,12 +1,13 @@
 import json
+from datetime import datetime
 from urllib.parse import quote_plus
 from requests.models import stream_decode_response_unicode
 from twisted.internet.defer import inlineCallbacks
 import treq
 from scrapy import Spider, Request, signals
 from scrapy.exceptions import DropItem
-from cgdb_bot.common import (WIKIPEDIA_ARTICLE_URL_FORMAT,
-                            API_SERVER_HOST, API_SERVER_PORT)
+from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
+                            API_SERVER_HOST, API_SERVER_PORT, SRC_DIR)
 from cgdb_bot.parsers import parse_wikipedia_game_article, resp_error_handler
 from cgdb_bot.items import WikipediaGameItem
 
@@ -20,6 +21,8 @@ class WikipediaGameSpider(Spider):
     _titles = []
     _urls = []
     _platform = None
+
+    _dropped_items_file = None
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
@@ -47,7 +50,8 @@ class WikipediaGameSpider(Spider):
         spider = super().from_crawler(crawler, *args, **kwargs)
         crawler.signals.connect(spider.item_scraped, signal=signals.item_scraped)
         crawler.signals.connect(spider.item_dropped, signal=signals.item_dropped)
-        # crawler.signals.connect(spider.spider_closed, signal=signals.spider_closed)
+        crawler.signals.connect(spider.spider_opened, signal=signals.spider_opened)
+        crawler.signals.connect(spider.spider_closed, signal=signals.spider_closed)
         return spider
 
     def item_scraped(self, item, response, spider):
@@ -73,9 +77,15 @@ class WikipediaGameSpider(Spider):
         # deferred (d) is fired
         return d
 
+    def spider_opened(self, spider):
+        dropped_items_file = f'{SRC_DIR}/.data/dropped_items/{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
+        spider._dropped_items_file = open(dropped_items_file, 'a')
+
+    def spider_closed(self, spider, reason):
+        spider._dropped_items_file.close()
+
     def item_dropped(self, item, response, exception, spider):
         """
         Record dropped items/links
         """
-        with open('dropped_items.csv', 'a') as file:
-            file.write(f'{response.url}|{spider._platform}|{str(exception)}\n')
+        spider._dropped_items_file.write(f'{response.url}|{spider._platform}|{str(exception)}\n')

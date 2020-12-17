@@ -1,3 +1,6 @@
+from os.path import abspath, dirname
+from pathlib import Path
+
 # Scrapy settings for cgdb_bot project
 #
 # For simplicity, this file contains only settings considered important or
@@ -64,7 +67,6 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'cgdb_bot.pipelines.WikipediaGamePipeline': 300,
-   'cgdb_bot.pipelines.WriteScrapedItemsPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -87,3 +89,29 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
+
+FEEDS = {
+   Path(f'{SRC_DIR}/.data/scraped_items/item-%(batch_id)d-%(batch_time)s.json'): {
+      'format': 'json',
+      'batch_item_count': 100,
+      'encoding': 'utf8',
+      'store_empty': False,
+      'fields': None,
+      'indent': 4,
+      'item_export_kwargs': {
+         'export_empty_fields': True,
+      },
+      'overwrite': False,
+   }
+}
+
+API_SERVER_HOST = 'http://localhost'
+API_SERVER_PORT = '8000'
+
+WIKIPEDIA_SEARCH_URL_FORMAT = 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search={urlencoded}&language=en&go=Go'
+WIKIPEDIA_ARTICLE_URL_FORMAT = 'https://en.wikipedia.org/wiki/{underscored_title}'
+WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR = '–'
+WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES = ['en-simple',]
+

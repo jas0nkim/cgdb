@@ -33,8 +33,7 @@ class WikipediaGamePipeline:
         if not item.inter_languages:
             missing_components.append('inter_languages')
         if len(missing_components) > 4:
-            raise DropItem(f"""Too many missing components: 
-                            {', '.join(missing_components)}""")
+            raise DropItem(f"""Too many missing components: {', '.join(missing_components)}""")
         # set platform
         item.platform = spider._platform
         return item

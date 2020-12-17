@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import quote_plus
 import unittest
 import requests
-from cgdb_bot.common import WIKIPEDIA_SEARCH_URL_FORMAT
+from cgdb_bot.settings import WIKIPEDIA_SEARCH_URL_FORMAT
 
 class TestWikipediaSearchRedirect(unittest.TestCase):
     """
