@@ -124,7 +124,7 @@ class WikipediaParser:
                 raise NoHtmlElementFound("No title found")
             return title
         except NoHtmlElementFound as err:
-            self.logger.exception("%s - %s", str(err), response.url)
+            self.logger.warning("%s - %s", str(err), response.url)
             return None
 
     def _extract_language(self, response):
@@ -134,7 +134,7 @@ class WikipediaParser:
                 raise NoHtmlElementFound("No language found")
             return language
         except NoHtmlElementFound as err:
-            self.logger.exception("%s - %s", str(err), response.url)
+            self.logger.warning("%s - %s", str(err), response.url)
             return None
 
     def _extract_description(self, response):
@@ -149,7 +149,7 @@ class WikipediaParser:
                 raise NoHtmlElementFound("No description found")
             return ''.join(description_pieces).strip('\n')
         except NoHtmlElementFound as err:
-            self.logger.exception("%s - %s", str(err), response.url)
+            self.logger.warning("%s - %s", str(err), response.url)
             return None
 
     def _extract_pictures(self, response):
@@ -183,7 +183,7 @@ class WikipediaParser:
                                             loglevel='warning',
                                             lowercase=True)
 
-    def _extract_from_info_table(self, response, lookup=None, loglevel='exception',
+    def _extract_from_info_table(self, response, lookup=None, loglevel='warning',
                                 lowercase=False):
         td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
                             /tr[th//text()[contains(., "{lookup}")]]/td""")

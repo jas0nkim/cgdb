@@ -1,4 +1,4 @@
-import json
+import csv
 from datetime import datetime
 from urllib.parse import quote_plus
 from requests.models import stream_decode_response_unicode
@@ -88,4 +88,8 @@ class WikipediaGameSpider(Spider):
         """
         Record dropped items/links
         """
-        spider._dropped_items_file.write(f'{response.url}|{spider._platform}|{str(exception)}\n')
+        dropped_item_writer = csv.writer(spider._dropped_items_file,
+                            delimiter='|',
+                            quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+        dropped_item_writer.writerow([response.url, spider._platform, str(exception)])
