@@ -95,7 +95,7 @@ SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
 DATA_DIR = f'{SRC_DIR}/.data'
 
 FEEDS = {
-   Path(f'{DATA_DIR}/scraped_items/item-%(batch_id)d-%(batch_time)s.json'): {
+   Path(f'{DATA_DIR}/scraped_items/%(batch_time)s-items-part-%(batch_id)d.json'): {
       'format': 'json',
       'batch_item_count': 100,
       'encoding': 'utf8',
