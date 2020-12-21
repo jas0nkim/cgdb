@@ -39,7 +39,8 @@ $ python -m unittest
 
 ## References / Game list
 
-- [Xbox Game Pass cloud gaming - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
+- [xCloud - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
+- [Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
+- [Luna - Android authority](https://www.androidauthority.com/amazon-luna-1170676/)
 - [GeForce Now - Nvidia](https://www.nvidia.com/en-us/geforce-now/games/)
-- [Google Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
 - [PlayStation Now - Playstation](https://www.playstation.com/en-ca/ps-now/ps-now-games/#all-ps-now-games)

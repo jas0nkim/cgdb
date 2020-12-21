@@ -39,7 +39,7 @@
                 "language": "en",
                 "title_lc": "Afterparty",
                 "description_lc": "Afterparty is an adventure video game by Night School Studio for macOS, PlayStation 4, Windows, and Xbox One platforms in October 2019 and Nintendo Switch in March 2020. Set in Hell, themed as a college town, the player navigates conversations, outdrinks Satan, and returns two best friends from the afterlife.",
-                "pictures": [],
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/0/03/Afterparty_cover_art.jpg"],
                 "developers": ["Night School Studio"],
                 "publishers": ["Night School Studio"],
                 "series": [],
@@ -174,6 +174,22 @@
                 "genres": ["survival horror"],
                 "modes": ["single-player"],
                 "link": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Outcast_(video_game)",
+            "expected": {
+                "english_title": "Outcast",
+                "language": "en",
+                "title_lc": "Outcast",
+                "description_lc": "Outcast is an action-adventure video game developed by Belgian developer Appeal and released by Infogrames for Windows in 1999. The game was critically acclaimed and was named the \"Adventure Game of the Year\" by GameSpot in 1999.[2] In 2001, Appeal developed a sequel, called Outcast II: The Lost Paradise, which was never finished due to bankruptcy. In 2010, the game was re-released via digital distribution on GOG. In 2014, Outcast was remastered as Outcast 1.1, after the original developers reacquired the franchise IP. In 2017, a remake titled Outcast: Second Contact was released for Windows, PlayStation 4, and Xbox One.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/e/e3/Outcastbox.jpg"],
+                "developers": ["Appeal"],
+                "publishers": ["Infogrames", "Bigben Interactive"],
+                "series": [],
+                "genres": ["action-adventure"],
+                "modes": ["single player"],
+                "link": "https://en.wikipedia.org/wiki/Outcast_(video_game)"
             }
         }
     ],

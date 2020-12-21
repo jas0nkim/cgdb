@@ -158,6 +158,8 @@ class WikipediaParser:
             # remove all ', ' in the list
             while ', ' in ret:
                 ret.remove(', ')
+            while ' (remake)' in ret:
+                ret.remove(' (remake)')
             if lowercase:
                 ret = [x.lower() for x in ret]
             # remove ',' within string, and strip

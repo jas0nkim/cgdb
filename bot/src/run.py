@@ -14,8 +14,9 @@ def run(file, platform):
     urls = []
     with open(file) as f:
         csv_reader = csv.reader(f, delimiter='|', quotechar='"')
-        line_num = 1
+        line_num = 0
         for row in csv_reader:
+            line_num += 1
             """
             row[0]: title
             row[1]: platform
@@ -24,12 +25,12 @@ def run(file, platform):
             try:
                 if row[2]:
                     urls.append(row[2])
+                    continue
                 if row[0]:
                     titles.append(row[0])
             except IndexError as err:
                 print(f'IndexError: {str(err)}, on line {line_num} of {file}')
                 sys.exit(2)
-            line_num += 1
     process = CrawlerProcess(get_project_settings())
     process.crawl(WikipediaGameSpider,
                 titles=CRAWL_ARG_DELIMITER.join(titles),
