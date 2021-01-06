@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListItemNextLink = (props) => {
+    const { suggestion } = props
     return (
-        <Link href={props.suggestion.link}>
+        <Link href={suggestion.link}>
             <ListItem button component="a">
                 <ListItemText>{props.suggestion.text}</ListItemText>
             </ListItem>
@@ -26,15 +27,17 @@ const ListItemNextLink = (props) => {
 }
 
 const SearchSuggestions = (props) => {
+    const { suggestions } = props
     const classes = useStyles();
-
-    console.log("props", props);
 
     return (
         <div className={classes.root}>
             <List component="nav" aria-label="searchbox suggestions">
-                {props.suggestions.map((suggestion, index) =>
-                    <ListItemNextLink key={suggestion.slug} suggestion={suggestion} />
+                {suggestions.map((suggestion, index) =>
+                    <ListItemNextLink
+                        key={suggestion.slug}
+                        suggestion={suggestion}
+                    />
                 )}
             </List>
         </div>
