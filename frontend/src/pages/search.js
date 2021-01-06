@@ -1,85 +1,33 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Search from "../components/Search"
 import configData from "../config.json";
 
-const SearchPage = (props) => {
-    const [input, setInput] = useState('');
-    const [gameListDefault, setGameListDefault] = useState(props.games);
-    const [gameList, setGameList] = useState(props.games);
-
-    const updateInput = async (input) => {
-        const filtered = gameListDefault.filter(game => {
-         return game.title.toLowerCase().includes(input.toLowerCase())
-        })
-        setInput(input);
-        setGameList(filtered);
-    }
+const SearchResult = (props) => {
+    const router = useRouter();
+    const { games } = props;
 
     return (
         <>
-            <label htmlFor="search">Search Games</label>
-            <input type="text"
-                value={input}
-                placeholder={"Search game"}
-                onChange={(e) => updateInput(e.target.value) } />
-            <div>
-                <ul>
-                {gameList.map((game, index) => {
-                    if (game) {
-                        const picture = (pictures, slug) => {
-                            if (pictures.length < 1) {
-                                return null;
-                            }
-                            return (
-                                <Link href={'/game/' + slug}>
-                                    <img src={game.pictures[0]} style={{ cursor: 'pointer' }} />
-                                </Link>
-                            )
-                        }
-                        const translations = title_lc => {
-                            const ret = []
-                            for (const key in title_lc) {
-                                ret.push(<li key={key}><small>{title_lc[key]}: {key}</small></li>)
-                            }
-                            return ret
-                        }
-                        const platforms = game.platforms.map(platform => {
-                            return (
-                                <li key={platform.slug}>
-                                    <Link href={'/platform/' + platform.slug}>
-                                        {platform.name}
-                                    </Link>
-                                </li>
-                            )
-                        })
-
-                        return (
-                            <li key={game.title}>
-                                <div>
-                                    {picture(game.pictures, game.slug)}
-                                    <Link href={'/game/' + game.slug}>
-                                        {game.title}
-                                    </Link>
-                                    <div>Translations:
-                                        <ul>{translations(game.title_lc)}</ul>
-                                    </div>
-                                    <div>
-                                        Platforms: <ul>{platforms}</ul>
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    }
-                    return null
+            <Search term={router.query.q} />
+            <ul>
+                {games.map((game, index) => {
+                    return (
+                        <li key={game.slug}>
+                            <Link href={'/game/' + game.slug}>
+                                {game.title}
+                            </Link>                        
+                        </li>
+                    )
                 })}
-                </ul>
-            </div>
+            </ul>
         </>
-    )
+    );
 }
 
-export async function getStaticProps() {
-    const resp = await fetch(`${configData.API_SERVER_URL}games/`)
+export async function getServerSideProps({ query }) {
+    const resp =
+        await fetch(`${configData.API_SERVER_URL}search/${query.q}/`)
     const games = await resp.json()
     if (!games) {
         return {
@@ -91,5 +39,4 @@ export async function getStaticProps() {
     }
 }
 
-
-export default SearchPage;
+export default SearchResult;
