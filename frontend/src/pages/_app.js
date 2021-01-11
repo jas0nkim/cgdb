@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import MenuBar from '../components/MenuBar'
 import theme from '../theme';
 
+const useStyles = makeStyles((theme) => ({
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+}));
+
 export default function MyApp(props) {
+  const classes = useStyles();
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -25,7 +37,13 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <Container maxWidth="md">
+          <MenuBar {...pageProps} />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Component {...pageProps} />
+          </main>
+        </Container>
       </ThemeProvider>
     </React.Fragment>
   );

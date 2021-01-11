@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Search from "../components/Search"
 import configData from "../config.json";
 
 const SearchResult = (props) => {
@@ -9,14 +8,13 @@ const SearchResult = (props) => {
 
     return (
         <>
-            <Search term={router.query.q} />
             <ul>
                 {games.map((game, index) => {
                     return (
                         <li key={game.slug}>
                             <Link href={'/game/' + game.slug}>
                                 {game.title}
-                            </Link>                        
+                            </Link>
                         </li>
                     )
                 })}
