@@ -1,12 +1,38 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router'
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
+import Slide from '@material-ui/core/Slide';
 import { AppBar, IconButton, Toolbar, List, ListItem, ListItemText, Divider }
   from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchBox from "./SearchBox"
+
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 const drawerWidth = 240;
 
@@ -14,23 +40,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -41,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const MenuBar = (props) => {
-    const { window } = props;
+    const { window, pageProps } = props;
     const classes = useStyles();
     const [mobileOpen, setMobileOpen] = useState(false);
     const router = useRouter();
@@ -67,6 +78,7 @@ const MenuBar = (props) => {
     );
 
     return (
+      <HideOnScroll {...props}>
         <div className={classes.root}>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
@@ -79,11 +91,10 @@ const MenuBar = (props) => {
               >
                 <MenuIcon />
               </IconButton>
-              <SearchBox term={router.query.q} />
+              <SearchBox term={router.query.q} {...pageProps} />
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer} aria-label="manu drawer">
-            <Hidden smUp implementation="css">
               <Drawer
                 container={container}
                 variant="temporary"
@@ -99,20 +110,9 @@ const MenuBar = (props) => {
               >
                 {drawer}
               </Drawer>
-            </Hidden>
-            <Hidden xsDown implementation="css">
-              <Drawer
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-                variant="permanent"
-                open
-              >
-                {drawer}
-              </Drawer>
-            </Hidden>                
-          </nav>        
+          </nav>
         </div>
+      </HideOnScroll>
     );
 }
 

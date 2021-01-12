@@ -51,14 +51,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
       width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
     },
 }));
 
@@ -76,7 +69,7 @@ const SearchBox = ({ term }) => {
 
     const onClickSuggestion = (e, value, reason) => {
         if (reason === 'select-option') {
-            router.push(value.link);
+            router.push(value.link).then(() => window.scrollTo(0, 0));
         }
     }
 
@@ -109,12 +102,12 @@ const SearchBox = ({ term }) => {
     const doSearch = (e) => {
         e.preventDefault();
         setSuggestions([]);
-        router.push(`/search?q=${input}`)
+        router.push(`/search?q=${input}`).then(() => window.scrollTo(0, 0));
     }
 
     const inputBox = (params) =>
         <form className={classes.search} onSubmit={doSearch} ref={params.InputProps.ref}>
-            <FormControl variant="filled">
+            <FormControl fullWidth={true} variant="filled">
                 <InputBase
                     placeholder="Search Game..."
                     classes={{
@@ -146,6 +139,7 @@ const SearchBox = ({ term }) => {
             onChange={onClickSuggestion}
             renderInput={inputBox}
             freeSolo={true}
+            fullWidth={true}
         />
     )
 }
