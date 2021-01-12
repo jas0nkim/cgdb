@@ -1,6 +1,7 @@
 import logging
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.utils import DataError
+from django.db.models import Q
 from rest_framework import status
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
@@ -26,7 +27,10 @@ class SearchViewSet(ReadOnlyModelViewSet):
         search_term = self.kwargs['term']
         return Game.objects.annotate(
             searchv=SearchVector('tags__tag'),
-        ).filter(searchv__icontains=search_term).distinct('title')
+        ).filter(
+            Q(searchv=SearchQuery(search_term, search_type='websearch')) |
+            Q(searchv__icontains=search_term)
+        ).distinct('title')
 
 class AllGamesViewSet(SearchViewSet):
     def get_queryset(self):
