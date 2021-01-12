@@ -75,17 +75,12 @@ const SearchBox = ({ term }) => {
     const [suggestions, setSuggestions] = useState([]);
 
     const onClickSuggestion = (e, value, reason) => {
-        console.log("onClickSuggestion", value)
-        console.log("onClickSuggestion", reason)
-        
         if (reason === 'select-option') {
             router.push(value.link);
         }
     }
 
     const onChageInput = (e, value, reason) => {
-        console.log("onChageInput", value)
-        console.log("onChageInput", reason)
         updateSuggestionList(value);
     }
 
@@ -113,6 +108,7 @@ const SearchBox = ({ term }) => {
 
     const doSearch = (e) => {
         e.preventDefault();
+        setSuggestions([]);
         router.push(`/search?q=${input}`)
     }
 
@@ -149,7 +145,7 @@ const SearchBox = ({ term }) => {
             getOptionLabel={getSuggestionLabel}
             onChange={onClickSuggestion}
             renderInput={inputBox}
-            // noOptionsText={null}
+            freeSolo={true}
         />
     )
 }
