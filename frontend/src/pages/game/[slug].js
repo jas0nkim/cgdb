@@ -46,9 +46,6 @@ const Game = ({ game }) => {
         }
         return ret
     }
-    const pictures = game.pictures.map((picture) => {
-        return <li key={picture}><img key={picture} src={picture} /></li>
-    })
     const links = (references) => {
         const ret = []
         for (const key in references) {
@@ -87,12 +84,12 @@ const Game = ({ game }) => {
                 <meta property="og:title" content={`${configData.SITE_NAME} - ${game.title}`} key="og-title" />
                 <meta property="og:url" content={`${configData.SITE_HOST}/game/${game.slug}`} key="og-url" />
                 <meta property="og:description" content={game.description} key="og-description" />
-                <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : ""} key="og-image" />
+                <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG} key="og-image" />
             </Head>
             <Card className={classes.root} variant="outlined">
                 <CardMedia
                     className={classes.media}
-                    image={ game.pictures.length > 0 ? game.pictures[0] : "" }
+                    image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
                     title={ game.slug }
                 />
                 <CardContent>

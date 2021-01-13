@@ -37,7 +37,7 @@ const MediaCard = ({ game }) => {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={ game.pictures.length > 0 ? game.pictures[0] : "" }
+                        image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
                         title={ game.slug }
                     />
                     <CardContent>
