@@ -64,7 +64,7 @@ class PlatformSerializer(serializers.ModelSerializer):
             'description': instance.description,
             'pictures': instance.pictures,
             'slug': instance.slug,
-            'games': [{'title':g.title, 'slug':g.slug} for g in instance.games.all()]
+            'games': [{'title':g.title, 'slug':g.slug, 'pictures':g.pictures} for g in instance.games.all()]
         }
 
 class GameSerializer(serializers.ModelSerializer):
