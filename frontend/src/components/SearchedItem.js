@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
@@ -22,44 +21,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MediaCard = ({ game }) => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <Card className={classes.root}>
-        <Link href={'/game/' + game.slug}>
-          <CardActionArea>
-            <CardMedia
-                className={classes.media}
-                image={ game.pictures.length > 0 ? game.pictures[0] : "" }
-                title={ game.slug }
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    { game.title }
-                </Typography>
-                {/* <Typography variant="body2" color="textSecondary" component="p">
-                    {Object.keys(game.title_lc).map((key, index) =>
-                        <Chip
-                            key={key}
-                            avatar={<Avatar>{key}</Avatar>}
-                            label={game.title_lc[key]}
-                        />
-                    )}
-                </Typography> */}
-            </CardContent>
-          </CardActionArea>
+    const platforms = game.platforms.map((platform) =>
+        <Link key={platform.slug} href={'/platform/' + platform.slug} passHref>
+            <Button size="small" color="primary">
+                {platform.name}
+            </Button>
         </Link>
-      <CardActions>
-        {game.platforms.map((platform) => 
-            <Link key={platform.slug} href={'/platform/' + platform.slug}>
-                <Button size="small" color="primary">
-                    {platform.name}
-                </Button>
+    )
+
+    return (
+        <Card className={classes.root} variant="outlined">
+            <Link href={'/game/' + game.slug} passHref>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={ game.pictures.length > 0 ? game.pictures[0] : "" }
+                        title={ game.slug }
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            { game.title }
+                        </Typography>
+                        {/* <Typography variant="body2" color="textSecondary" component="p">
+                            {Object.keys(game.title_lc).map((key, index) =>
+                                <Chip
+                                    key={key}
+                                    avatar={<Avatar>{key}</Avatar>}
+                                    label={game.title_lc[key]}
+                                />
+                            )}
+                        </Typography> */}
+                    </CardContent>
+                </CardActionArea>
             </Link>
-        )}
-      </CardActions>
-    </Card>
-  );
+        <CardActions>
+            {platforms}
+        </CardActions>
+        </Card>
+    );
 }
 
 export default MediaCard;

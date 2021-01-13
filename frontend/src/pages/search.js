@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+import Head from 'next/head';
 import SearchedItem from "../components/SearchedItem"
 import configData from "../config.json";
 
@@ -9,6 +9,14 @@ const SearchResult = (props) => {
 
     return (
         <>
+            <Head>
+                <title>{ configData.SITE_NAME } - Search</title>
+                <meta name="description" content="" />
+                <meta property="og:title" content={`${configData.SITE_NAME} - Search`} key="og-title" />
+                <meta property="og:url" content={`${configData.SITE_HOST}/search`} key="og-url" />
+                <meta property="og:description" content="" key="og-description" />
+                <meta property="og:og-image" content="" key="description" />
+            </Head>
             {games.map((game, index) =>
                 <SearchedItem key={game.slug} game={game} />
             )}

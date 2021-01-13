@@ -1,4 +1,6 @@
 {
+    "SITE_NAME": "CGDB",
+    "SITE_HOST": "http://localhost:3000",
     "API_SERVER_URL": "http://localhost:8000/api/",
     "MAX_SUGGESTIONS": 5
 }
