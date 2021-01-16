@@ -62,6 +62,10 @@ class PlatformSerializer(serializers.ModelSerializer):
         return {
             'name': instance.name,
             'description': instance.description,
+            'verdict': instance.verdict,
+            'available_countries': instance.available_countries,
+            'internet_requirements': instance.internet_requirements,
+            'supported_devices': instance.supported_devices,
             'pictures': instance.pictures,
             'slug': instance.slug,
             'games': [{'title':g.title, 'slug':g.slug, 'pictures':g.pictures} for g in instance.games.all()]

@@ -154,6 +154,26 @@ class Tag(models.Model):
 class Platform(models.Model):
     """ plateform model
         db table name: platforms
+        verdict:
+            [
+                "...",
+                "...",
+                ...
+            ]
+        available_countries:
+            [
+                "US",
+                "Canada",
+                "South Korea",
+                ...
+            ]
+        supported_devices:
+            [
+                "Windows 10 PCs",
+                "Mac",
+                "Android Phones/Tablets",
+                ...
+            ]
         pictures format:
             [
                 "link1...",
@@ -164,6 +184,10 @@ class Platform(models.Model):
     """
     name = models.CharField(max_length = 100)
     description = models.TextField(null=True, blank=True)
+    verdict = models.JSONField(default=list)
+    available_countries = models.JSONField(default=list)
+    internet_requirements = models.TextField(null=True, blank=True)
+    supported_devices = models.JSONField(default=list)
     pictures = models.JSONField(default=list)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
