@@ -61,6 +61,18 @@ const platforms = [
     slug: 'stadia',
   },
   {
+    name: 'GeForce Now',
+    slug: 'geforce-now',
+  },
+  {
+    name: 'PlayStation Now',
+    slug: 'playstation-now',
+  },
+  {
+    name: 'Apple Arcade',
+    slug: 'apple-arcade',
+  },
+  {
     name: 'Luna',
     slug: 'luna',
   },
@@ -73,7 +85,6 @@ const MenuBar = (props) => {
   const router = useRouter();
 
   const handleDrawerToggle = () => {
-      console.log('clicked')
       setDrawerOpen(!drawerOpen);
   };
 

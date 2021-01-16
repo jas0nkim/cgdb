@@ -1,13 +1,17 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import configData from "../../config.json";
 import Head from 'next/head';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +29,47 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const Accordion = withStyles({
+    root: {
+      border: '1px solid rgba(0, 0, 0, .125)',
+      boxShadow: 'none',
+      '&:not(:last-child)': {
+        borderBottom: 0,
+      },
+      '&:before': {
+        display: 'none',
+      },
+      '&$expanded': {
+        margin: 'auto',
+      },
+    },
+    expanded: {},
+})(MuiAccordion);
+
+const AccordionSummary = withStyles({
+    root: {
+      backgroundColor: 'rgba(0, 0, 0, .03)',
+      borderBottom: '1px solid rgba(0, 0, 0, .125)',
+      marginBottom: -1,
+      minHeight: 56,
+      '&$expanded': {
+        minHeight: 56,
+      },
+    },
+    content: {
+      '&$expanded': {
+        margin: '12px 0',
+      },
+    },
+    expanded: {},
+})(MuiAccordionSummary);
+
+const AccordionDetails = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+}))(MuiAccordionDetails);
+
 const PlatformPage = ({ platform }) => {
     const classes = useStyles();
     const router = useRouter();
@@ -32,6 +77,72 @@ const PlatformPage = ({ platform }) => {
     if (router.isFallback) {
         return <div>Loading...</div>
     }
+
+    const verdict = (
+        <List>
+            {platform.verdict.map((verdict) => (
+                <ListItem key={`verdict-${Math.random()}`}>
+                    <ListItemText primary={verdict}/>
+                </ListItem>
+            ))}
+        </List>
+    );
+
+    const countries = (
+        <Accordion square>
+            <AccordionSummary
+                aria-controls="panel-countries-content"
+                id="panel-countries-header"
+            >
+                <Typography>Available regions</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <List>
+                    {platform.available_countries.map((country) => (
+                        <ListItem key={`country-${Math.random()}`}>
+                            <ListItemText primary={country}/>
+                        </ListItem>
+                    ))}
+                </List>
+            </AccordionDetails>
+        </Accordion>
+    );
+
+    const requirements = (
+        <Accordion square>
+            <AccordionSummary
+                aria-controls="panel-requirements-content"
+                id="panel-requirements-header"
+            >
+                <Typography>Internet requirements</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography>
+                    {platform.internet_requirements}
+                </Typography>
+            </AccordionDetails>
+        </Accordion>
+    );
+
+    const devices = (
+        <Accordion square>
+            <AccordionSummary
+                aria-controls="panel-devices-content"
+                id="panel-devices-header"
+            >
+                <Typography>Supported devices</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <List>
+                    {platform.supported_devices.map((device) => (
+                        <ListItem key={`device-${Math.random()}`}>
+                            <ListItemText primary={device}/>
+                        </ListItem>
+                    ))}
+                </List>
+            </AccordionDetails>
+        </Accordion>
+    );
 
     const games = platform.games.map((game) => (
         <Card className={classes.root} key={game.slug} variant="outlined">
@@ -74,9 +185,10 @@ const PlatformPage = ({ platform }) => {
                     </Typography>
                 </CardContent>
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {platform.description}
-                    </Typography>
+                    {verdict}
+                    {countries}
+                    {requirements}
+                    {devices}
                 </CardContent>
             </Card>
             <div>
