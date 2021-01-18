@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Game = ({ game }) => {
+const GamePage = ({ game }) => {
     const classes = useStyles();
     const router = useRouter();
 
@@ -200,4 +200,4 @@ export async function getStaticProps({ params }) {
     }
 }
 
-export default Game;
+export default GamePage;

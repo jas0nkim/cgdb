@@ -3,7 +3,7 @@ import Head from 'next/head';
 import SearchedItem from "../components/SearchedItem"
 import configData from "../config.json";
 
-const SearchResult = (props) => {
+const SearchResultPage = (props) => {
     const router = useRouter();
     const { games } = props;
 
@@ -38,4 +38,4 @@ export async function getServerSideProps({ query }) {
     }
 }
 
-export default SearchResult;
+export default SearchResultPage;
