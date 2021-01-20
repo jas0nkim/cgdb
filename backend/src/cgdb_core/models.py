@@ -134,6 +134,27 @@ class Developer(models.Model):
         super().save(force_insert, force_update, using, update_fields)
 
 
+class Store(models.Model):
+    """ store model
+        db table name: stores
+    """
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length = 100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'stores'
+    
+    def __str__(self):
+        return self.name
+
+    def save(self, force_insert=False, force_update=False, using=None,
+            update_fields=None):
+        self.slug = slugify(self.name)
+        super().save(force_insert, force_update, using, update_fields)
+
+
 class Tag(models.Model):
     tag = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -189,6 +210,10 @@ class Platform(models.Model):
     internet_requirements = models.TextField(null=True, blank=True)
     supported_devices = models.JSONField(default=list)
     pictures = models.JSONField(default=list)
+    stores = models.ManyToManyField(
+                    Store,
+                    related_name="platforms",
+                    related_query_name="platform")
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -235,10 +260,19 @@ class Game(models.Model):
             }
 
     """
+    ESRB_CHOICES = [
+        ('NA', 'Not available'),
+        ('E', 'Everyone'),
+        ('E10+', 'Everyone 10+'),
+        ('T', 'Teen'),
+        ('M', 'Mature 17+'),
+    ]
+
     title = models.CharField(max_length = 200)
     title_lc = models.JSONField(default=dict)
     description = models.TextField(null=True, blank=True)
     description_lc = models.JSONField(default=dict)
+    esrb = models.CharField(max_length=4, default='NA', choices=ESRB_CHOICES)
     pictures = models.JSONField(default=list)
     links = models.JSONField(default=dict)
     developers = models.ManyToManyField(
@@ -311,6 +345,27 @@ class Game(models.Model):
                     continue
             if not self.tags.filter(tag=self.title_lc.get(iso)).exists():
                 self.tags.add(tag)
+
+
+class GamePrice(models.Model):
+    """ game price model
+        db table name: game_prices
+    """
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    price_with_subscription = models.DecimalField(
+                                    max_digits=8,
+                                    decimal_places=2,
+                                    default=0.00)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'game_prices'
+
+    def __str__(self):
+        return f"{self.game} price @{self.store}"
 
 
 class LanguageCode(models.Model):

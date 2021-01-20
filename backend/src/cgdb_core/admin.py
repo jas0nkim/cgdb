@@ -8,6 +8,8 @@ from .models import (User,
                     Series,
                     Genre,
                     Mode,
+                    Store,
+                    GamePrice,
                     Tag,
                     LanguageCode)
 
@@ -42,6 +44,14 @@ class GenreAdmin(admin.ModelAdmin):
 @admin.register(Mode)
 class ModeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+
+@admin.register(Store)
+class StoreAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+
+@admin.register(GamePrice)
+class GamePriceAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
