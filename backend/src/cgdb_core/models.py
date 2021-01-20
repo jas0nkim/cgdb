@@ -368,6 +368,21 @@ class GamePrice(models.Model):
         return f"{self.game} price @{self.store}"
 
 
+class GameReleaseDate(models.Model):
+    """ game release model
+        db table name: game_release_dates
+    """
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
+    release_date = models.DateField(default=None)
+
+    class Meta:
+        db_table = 'game_release_dates'
+
+    def __str__(self):
+        return f"{self.game} released @{self.platform}"
+
+
 class LanguageCode(models.Model):
     iso = models.CharField(max_length=5, unique=True)
     language = models.CharField(max_length=100, blank=True, null=True)
