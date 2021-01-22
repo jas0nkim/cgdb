@@ -1,3 +1,4 @@
+import logging
 import csv
 from datetime import datetime
 from twisted.internet.defer import inlineCallbacks
@@ -12,6 +13,41 @@ from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
                             CRAWL_ARG_DELIMITER, DATA_DIR)
 from cgdb_bot.parsers import parse_wikipedia_game_article
 from cgdb_bot.items import WikipediaGameItem
+
+
+def general_resp_error_handler(failure):
+    """
+    Scrapy Request general error handler
+    """
+    # in case you want to do something special for some errors,
+    # you may need the failure's type:
+    logger = logging.getLogger(__name__)
+
+    if failure.check(HttpError):
+        # these exceptions come from HttpError spider middleware
+        # you can get the non-200 response
+        response = failure.value.response
+        logger.error('ScrapyRequestError, HttpError: %s - %s - %s',
+                    response.url,
+                    failure.getErrorMessage(),
+                    response.text)
+    elif failure.check(DNSLookupError):
+        # this is the original request
+        request = failure.request
+        logger.error('ScrapyRequestError, DNSLookupError: %s - %s',
+                    request.cb_kwargs['main_url'],
+                    failure.getErrorMessage())
+    elif failure.check(TOError, TCPTimedOutError):
+        request = failure.request
+        logger.error('ScrapyRequestError, TimeoutError, TCPTimedOutError: %s - %s',
+                    request.cb_kwargs['main_url'],
+                    failure.getErrorMessage())
+    else:
+        request = failure.request
+        logger.error('ScrapyRequestError: %s - %s',
+                    request.cb_kwargs['main_url'],
+                    failure.getErrorMessage())
+
 
 class WikipediaGameSpider(Spider):
     """

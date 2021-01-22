@@ -2,17 +2,8 @@ import os
 import json
 import unittest
 from pathlib import Path
-import requests
-from scrapy.http import HtmlResponse, Request
 from cgdb_bot.parsers import parse_wikipedia_game_article
-
-def build_response(url):
-    """
-    build Scrapy HtmlResponse object
-    """
-    resp = requests.get(url)
-    return HtmlResponse(url, request=Request(url, encoding=resp.encoding),
-                        body=resp.content)
+from .utils import build_response
 
 class TestWikipediaParser(unittest.TestCase):
     """
@@ -30,9 +21,9 @@ class TestWikipediaParser(unittest.TestCase):
         test each url active
         """
         for data in self.test_article_data:
-            resp = requests.get(data['url'])
+            resp = build_response(data['url'])
             with self.subTest(url=data['url']):
-                self.assertEqual(resp.status_code, 200)
+                self.assertEqual(resp.status, 200)
 
     def test_article(self):
         """

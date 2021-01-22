@@ -6,6 +6,7 @@
 import json
 from dataclasses import dataclass, field, asdict
 from typing import List
+from cgdb_bot.settings import WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR
 
 @dataclass
 class WikipediaGameItem:
@@ -25,6 +26,18 @@ class WikipediaGameItem:
     link: str = None
     inter_languages: List[dict] = field(default_factory=list)
     platform: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))
+
+@dataclass
+class RedditStadiaWikiGame:
+    """
+    Scraped data from Reddit Stadia Wiki Games List page
+    """
+    title: str = None
+    stadia_link: str = None
+    release_date: str = None
 
     def asjson(self):
         return json.dumps(asdict(self))

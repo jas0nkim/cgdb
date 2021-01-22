@@ -3,6 +3,7 @@ from cgdb_bot.items import WikipediaGameItem
 from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.settings import (WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR,
                         WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES as NOT_SUPPORTED_ISOS)
+from .reddit import RedditStadiaWikiParser
 
 def parse_wikipedia_game_article(response):
     """
@@ -11,6 +12,20 @@ def parse_wikipedia_game_article(response):
     logger = logging.getLogger(__name__)
     parser = WikipediaParser()
     return parser.parse_game_article(response)
+
+def parse_reddit_stadia_wiki(response, wiki_type):
+    """
+    parse subreddit r/Stadia/wiki/ pages
+    """
+    logger = logging.getLogger(__name__)
+    parser = RedditStadiaWikiParser()
+    if wiki_type == 'games':
+        return parser.parse_games_page(response, wiki_type)
+    else:
+        return []
+    # if wiki_type == 'pro_games':
+    #     return parser.parse_pro_games_page(response, wiki_type)
+
 
 class WikipediaParser:
     """
