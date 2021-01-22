@@ -1,17 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import (User,
-                    Game,
-                    Platform,
-                    Developer,
-                    Publisher,
-                    Series,
-                    Genre,
-                    Mode,
-                    Store,
-                    GamePrice,
-                    Tag,
-                    LanguageCode)
+from .models import *
 
 @admin.register(User)
 class CgdbUserAdmin(UserAdmin):
@@ -51,6 +40,14 @@ class StoreAdmin(admin.ModelAdmin):
 
 @admin.register(GamePrice)
 class GamePriceAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(GameReleaseDate)
+class GameReleaseDateAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(GameFreeOnSubscription)
+class GameFreeOnSubscriptionAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Tag)

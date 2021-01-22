@@ -351,8 +351,14 @@ class GamePrice(models.Model):
     """ game price model
         db table name: game_prices
     """
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game,
+                        on_delete=models.CASCADE,
+                        related_name='game_prices',
+                        related_query_name='game_price')
+    store = models.ForeignKey(Store,
+                        on_delete=models.CASCADE,
+                        related_name='game_prices',
+                        related_query_name='game_price')
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     price_with_subscription = models.DecimalField(
                                     max_digits=8,
@@ -372,12 +378,39 @@ class GameReleaseDate(models.Model):
     """ game release model
         db table name: game_release_dates
     """
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    platform = models.ForeignKey(Platform, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game,
+                        on_delete=models.CASCADE,
+                        related_name='game_release_dates',
+                        related_query_name='game_release_date')
+    platform = models.ForeignKey(Platform,
+                        on_delete=models.CASCADE,
+                        related_name='game_release_dates',
+                        related_query_name='game_release_date')
     release_date = models.DateField(default=None)
 
     class Meta:
         db_table = 'game_release_dates'
+
+    def __str__(self):
+        return f"{self.game} released @{self.platform}"
+
+class GameFreeOnSubscription(models.Model):
+    """ game release model
+        db table name: game_free_on_subscriptions
+    """
+    game = models.ForeignKey(Game,
+                        on_delete=models.CASCADE,
+                        related_name='game_free_on_subscriptions',
+                        related_query_name='game_free_on_subscription')
+    platform = models.ForeignKey(Platform,
+                        on_delete=models.CASCADE,
+                        related_name='game_free_on_subscriptions',
+                        related_query_name='game_free_on_subscription')
+    entered = models.DateField(default=None)
+    left = models.DateField(default=None)
+
+    class Meta:
+        db_table = 'game_free_on_subscriptions'
 
     def __str__(self):
         return f"{self.game} released @{self.platform}"
