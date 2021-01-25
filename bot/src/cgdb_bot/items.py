@@ -41,3 +41,15 @@ class RedditStadiaWikiGame:
 
     def asjson(self):
         return json.dumps(asdict(self))
+
+@dataclass
+class RedditStadiaWikiGamePro:
+    """
+    Scraped Stadia Pro Games data from Reddit Wiki page
+    """
+    entered_titles: str = None
+    left_titles: str = None
+    event_date: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))

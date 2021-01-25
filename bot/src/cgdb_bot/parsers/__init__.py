@@ -21,10 +21,10 @@ def parse_reddit_stadia_wiki(response, wiki_type):
     parser = RedditStadiaWikiParser()
     if wiki_type == 'games':
         return parser.parse_games_page(response, wiki_type)
+    elif wiki_type == 'pro_games':
+        return parser.parse_pro_games_page(response, wiki_type)
     else:
         return []
-    # if wiki_type == 'pro_games':
-    #     return parser.parse_pro_games_page(response, wiki_type)
 
 
 class WikipediaParser:

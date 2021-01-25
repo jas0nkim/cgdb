@@ -9,7 +9,7 @@ class TestRedditWikiParser(unittest.TestCase):
     """
 
     headers = {
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Mobile Safari/537.36'
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
     }
 
     urls = {
@@ -30,15 +30,59 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         resp = build_response(self.urls['games'], headers=self.headers)
         self.assertEqual(resp.status, 200)
-        items = parse_reddit_stadia_wiki(resp, 'games')
-        for i in items:
+        item_count = 0
+        for i in parse_reddit_stadia_wiki(resp, 'games'):
+            item_count += 1
             # fields not null
             self.assertIsNotNone(i.title)
             self.assertIsNotNone(i.stadia_link)
             self.assertIsNotNone(i.release_date)
             # valid stadia link
-            self.assertIn('https://stadia.google.com/store/details' in i.stadia_link)
+            self.assertIn('https://stadia.google.com/store/details', i.stadia_link)
             # release_date field format
             self.assertIsInstance(
                     datetime.datetime.strptime(i.release_date, '%Y %b %d'),
                     datetime.datetime)
+        # total 136 items (Jan 25 2021)
+        self.assertEqual(item_count, 136)
+
+    def test_game_pro_fields_valid_and_related(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/progameslist
+        check field (event_date - entered/left month) not null.
+        same event_date cannot be appeared more than once in the items
+        """
+        resp = build_response(self.urls['pro_games'], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        curr_item = None
+        prev_item = None
+        event_date_list = []
+        pro_titles = []
+        item_count = 0
+        for i in parse_reddit_stadia_wiki(resp, 'pro_games'):
+            item_count += 1
+            curr_item = i
+            # event_date field not null
+            self.assertIsNotNone(curr_item.event_date)
+            # previous event_date should be bigger than current one.
+            if prev_item:
+                self.assertTrue(
+                    datetime.datetime.strptime(curr_item.event_date, '%Y %b') >
+                    datetime.datetime.strptime(prev_item.event_date, '%Y %b'))
+            # event_date should not be duplicated.
+            self.assertFalse(curr_item.event_date in event_date_list)
+            event_date_list.append(curr_item.event_date)
+            # check entered/left games
+            for entered in curr_item.entered_titles:
+                self.assertFalse(entered in pro_titles)
+                pro_titles.append(entered)
+            for left in curr_item.left_titles:
+                self.assertTrue(left in pro_titles)
+                pro_titles.remove(left)
+            prev_item = curr_item
+        # total 15 items (Jan 25 2021)
+        self.assertEqual(item_count, 15)
+        self.assertEqual(len(event_date_list), item_count)
+        self.assertTrue(len(event_date_list) > 0)
+        self.assertTrue(len(pro_titles) > 0)
