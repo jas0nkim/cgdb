@@ -2,7 +2,7 @@ import logging
 from scrapy import Request
 from cgdb_bot.items import (RedditStadiaWikiGame,
                             RedditStadiaWikiGamePro,
-                            RedditStadiaWikiRating)
+                            RedditStadiaStatDetail)
 from cgdb_bot.settings import REDDIT_DOMAIN
 
 class RedditStadiaWikiParser:
@@ -19,7 +19,7 @@ class RedditStadiaWikiParser:
                             wiki_type,
                             response.status,
                             response.url)
-            return []
+            return None
 
         games = response.xpath('//div[contains(@class, "wiki")]/table/tbody/tr')
         for game in games:
@@ -49,7 +49,7 @@ class RedditStadiaWikiParser:
                             wiki_type,
                             response.status,
                             response.url)
-            return []
+            return None
 
         pro_games = response.xpath('//div[contains(@class, "wiki")]/table/tbody/tr')
         pro_games.reverse()
@@ -75,38 +75,48 @@ class RedditStadiaWikiParser:
                 current_left_titles = []
                 current_event_date = None
 
-    def parse_game_ratings_page(self, response, wiki_type):
+    def parse_game_stats_home_page(self, response, wiki_type):
         if response.status != 200:
             # broken link or inactive
             self.logger.error("Wiki page (%s) not working: HTTP status code - %s - %s",
                             wiki_type,
                             response.status,
                             response.url)
-            return []
-        esrb_ratings = response.xpath('//div[contains(@class, "wiki")]/table[1]/tbody/tr')
-        for esrb in esrb_ratings:
-            esrb_text = esrb.xpath('./td[1]/a/text()').get()
-            esrb_games_link = esrb.xpath('./td[1]/a/@href').get()
-            if esrb_games_link and esrb_text in ['E', 'E10+', 'T', 'M17+']:
+            return None
+        stats = response.xpath('//div[contains(@class, "wiki")]/table[1]/tbody/tr')
+        for stat in stats:
+            if wiki_type in ['ratings', 'genres', 'modes']:
+                stat_detail_text = stat.xpath('./td[1]/a/text()').get()
+                stat_detail_link = stat.xpath('./td[1]/a/@href').get()
+            else:
+                stat_detail_text = stat.xpath('./td[1]/a/text()').get()
+                stat_detail_link = stat.xpath('./td[2]/a/@href').get()
+            if stat_detail_link and stat_detail_text:
                 yield Request(
-                        REDDIT_DOMAIN + esrb_games_link,
-                        callback=self.parse_each_rating_page,
-                        cb_kwargs={'esrb': esrb_text})
+                        REDDIT_DOMAIN + stat_detail_link,
+                        callback=self.parse_game_stats_detail_page,
+                        cb_kwargs={
+                            'stat_type': wiki_type,
+                            'stat_detail': stat_detail_text,
+                        })
 
-    def parse_each_rating_page(self, response, esrb):
+    def parse_game_stats_detail_page(self, response, stat_type, stat_detail):
         if response.status != 200:
             # broken link or inactive
-            self.logger.error("Wiki page (%s) not working: HTTP status code - %s - %s",
-                            f'ESRB {esrb}',
+            self.logger.error("Wiki page (%s - %s) not working: HTTP status code - %s - %s",
+                            stat_type,
+                            stat_detail,
                             response.status,
                             response.url)
-            return []
+            return None
         games = response.xpath('//div[contains(@class, "wiki")]/table/tbody/tr')
         for game in games:
             title = game.xpath('./td/a/text()').get()
             if not title:
-                self.logger.warning("game title not found from ESRB %s page - %s",
-                                esrb,
+                self.logger.warning("game title not found from page (%s - %s) - %s",
+                                stat_type,
+                                stat_detail,
                                 response.url)
-            yield RedditStadiaWikiRating(title=title,
-                                        esrb=esrb)
+            yield RedditStadiaStatDetail(title=title,
+                                        stat_type=stat_type,
+                                        stat_detail=stat_detail)

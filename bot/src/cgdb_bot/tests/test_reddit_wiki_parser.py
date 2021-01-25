@@ -1,9 +1,12 @@
+import os
+import json
 import datetime
 import unittest
-
+from pathlib import Path
 import requests
 from scrapy.http.request import Request
-from cgdb_bot.parsers import parse_reddit_stadia_wiki
+from cgdb_bot.parsers import (parse_reddit_stadia_wiki,
+                            parse_reddit_game_stat_detail)
 from .utils import build_response
 
 class TestRedditWikiParser(unittest.TestCase):
@@ -11,26 +14,13 @@ class TestRedditWikiParser(unittest.TestCase):
     Test subreddit (r/Stadia) wiki page parsers
     """
 
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-    }
-
-    urls = {
-        'games': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameslist',
-        'pro_games': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/progameslist',
-        'ratings': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings',
-        'genres': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres',
-        'developers': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers',
-        'publishers': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers',
-        'modes': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes',
-    }
-
-    esrb_urls = {
-        'E': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-e10',
-        'E10+': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-e10',
-        'T': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-t',
-        'M17+': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-m17',
-    }
+    def setUp(self):
+        content = Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_data.json').read_text()
+        _json = json.loads(content)
+        self.headers = _json.get('headers')
+        self.urls = _json.get('urls')
+        self.esrb_urls = _json.get('esrb_urls')
+        self.genre_urls = _json.get('genre_urls')
 
     def test_game_fields_valid(self):
         """
@@ -38,10 +28,11 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameslist
         check all fields (game title, stadia link, release date) not null
         """
-        resp = build_response(self.urls['games'], headers=self.headers)
+        wiki_type = 'games'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
         self.assertEqual(resp.status, 200)
         item_count = 0
-        for i in parse_reddit_stadia_wiki(resp, 'games'):
+        for i in parse_reddit_stadia_wiki(resp, wiki_type):
             item_count += 1
             # fields not null
             self.assertIsNotNone(i.title)
@@ -63,14 +54,15 @@ class TestRedditWikiParser(unittest.TestCase):
         check field (event_date - entered/left month) not null.
         same event_date cannot be appeared more than once in the items
         """
-        resp = build_response(self.urls['pro_games'], headers=self.headers)
+        wiki_type = 'pro_games'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
         self.assertEqual(resp.status, 200)
         curr_item = None
         prev_item = None
         event_date_list = []
         pro_titles = []
         item_count = 0
-        for i in parse_reddit_stadia_wiki(resp, 'pro_games'):
+        for i in parse_reddit_stadia_wiki(resp, wiki_type):
             item_count += 1
             curr_item = i
             # event_date field not null
@@ -103,9 +95,10 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings
         check all fields (game title, ESRB rating) not null
         """
-        resp = build_response(self.urls['ratings'], headers=self.headers)
+        wiki_type = 'ratings'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
         self.assertEqual(resp.status, 200)
-        for request in parse_reddit_stadia_wiki(resp, 'ratings'):
+        for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
 
     def test_game_esrb_ratings_each(self):
@@ -114,14 +107,46 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/xxx
         check all fields (game title, ESRB rating) not null
         """
+        wiki_type = 'ratings'
         for esrb, url in self.esrb_urls.items():
             resp = build_response(url, headers=self.headers)
             self.assertEqual(resp.status, 200)
-            for i in parse_reddit_stadia_wiki(resp, esrb):
+            for i in parse_reddit_game_stat_detail(resp, wiki_type, esrb):
                 # fields not null
                 self.assertIsNotNone(i.title)
-                self.assertIsNotNone(i.esrb)
+                self.assertIsNotNone(i.stat_type)
+                self.assertIsNotNone(i.stat_detail)
                 if i.title == 'Just Dance 2020':
-                    self.assertEqual(i.esrb, 'E10+')
+                    self.assertEqual(i.stat_detail, 'E10+')
                 elif i.title == 'Watch Dogs 2':
-                    self.assertEqual(i.esrb, 'M17+')
+                    self.assertEqual(i.stat_detail, 'M17+')
+
+    def test_game_genres_home(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres
+        check all fields (game title, ESRB rating) not null
+        """
+        wiki_type = 'genres'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        for request in parse_reddit_stadia_wiki(resp, wiki_type):
+            self.assertIsInstance(request, Request)
+
+    def test_game_genres_each(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/xxx
+        check all fields (game title, genre) not null
+        """
+        wiki_type = 'genres'
+        for genre, url in self.genre_urls.items():
+            resp = build_response(url, headers=self.headers)
+            self.assertEqual(resp.status, 200)
+            for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
+                # fields not null
+                self.assertIsNotNone(i.title)
+                self.assertIsNotNone(i.stat_type)
+                self.assertIsNotNone(i.stat_detail)
+                if i.title == "Assassin's Creed Origins":
+                    self.assertIn(i.stat_detail, ['Action', 'Role-playing game'])
