@@ -23,9 +23,18 @@ def parse_reddit_stadia_wiki(response, wiki_type):
         return parser.parse_games_page(response, wiki_type)
     elif wiki_type == 'pro_games':
         return parser.parse_pro_games_page(response, wiki_type)
+    elif wiki_type == 'ratings':
+        return parser.parse_game_ratings_page(response, wiki_type)
     else:
         return []
 
+def parse_reddit_stadia_game_esrb_rating(response, esrb):
+    """
+    parse subreddit r/Stadia/wiki/gamestatistics/gameratings/ pages
+    """
+    logger = logging.getLogger(__name__)
+    parser = RedditStadiaWikiParser()
+    return parser.parse_each_rating_page(response, esrb)
 
 class WikipediaParser:
     """

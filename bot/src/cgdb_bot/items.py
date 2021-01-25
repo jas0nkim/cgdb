@@ -53,3 +53,14 @@ class RedditStadiaWikiGamePro:
 
     def asjson(self):
         return json.dumps(asdict(self))
+
+@dataclass
+class RedditStadiaWikiRating:
+    """
+    Scraped Stadia Game ESRB ratings from Reddit Wiki page
+    """
+    title: str = None
+    esrb: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))

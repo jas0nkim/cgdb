@@ -122,3 +122,4 @@ WIKIPEDIA_ARTICLE_URL_FORMAT = 'https://en.wikipedia.org/wiki/{underscored_title
 WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR = '–'
 WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES = ['en-simple',]
 
+REDDIT_DOMAIN = 'https://www.reddit.com'

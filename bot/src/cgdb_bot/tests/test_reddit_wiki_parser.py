@@ -1,5 +1,8 @@
 import datetime
 import unittest
+
+import requests
+from scrapy.http.request import Request
 from cgdb_bot.parsers import parse_reddit_stadia_wiki
 from .utils import build_response
 
@@ -20,6 +23,13 @@ class TestRedditWikiParser(unittest.TestCase):
         'developers': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers',
         'publishers': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers',
         'modes': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes',
+    }
+
+    esrb_urls = {
+        'E': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-e10',
+        'E10+': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-e10',
+        'T': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-t',
+        'M17+': 'https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-m17',
     }
 
     def test_game_fields_valid(self):
@@ -86,3 +96,32 @@ class TestRedditWikiParser(unittest.TestCase):
         self.assertEqual(len(event_date_list), item_count)
         self.assertTrue(len(event_date_list) > 0)
         self.assertTrue(len(pro_titles) > 0)
+
+    def test_game_ratings_home(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings
+        check all fields (game title, ESRB rating) not null
+        """
+        resp = build_response(self.urls['ratings'], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        for request in parse_reddit_stadia_wiki(resp, 'ratings'):
+            self.assertIsInstance(request, Request)
+
+    def test_game_esrb_ratings_each(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/xxx
+        check all fields (game title, ESRB rating) not null
+        """
+        for esrb, url in self.esrb_urls.items():
+            resp = build_response(url, headers=self.headers)
+            self.assertEqual(resp.status, 200)
+            for i in parse_reddit_stadia_wiki(resp, esrb):
+                # fields not null
+                self.assertIsNotNone(i.title)
+                self.assertIsNotNone(i.esrb)
+                if i.title == 'Just Dance 2020':
+                    self.assertEqual(i.esrb, 'E10+')
+                elif i.title == 'Watch Dogs 2':
+                    self.assertEqual(i.esrb, 'M17+')
