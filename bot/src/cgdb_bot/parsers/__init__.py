@@ -23,7 +23,8 @@ def parse_reddit_stadia_wiki(response, wiki_type):
         return parser.parse_games_page(response, wiki_type)
     elif wiki_type == 'pro_games':
         return parser.parse_pro_games_page(response, wiki_type)
-    elif wiki_type in ['ratings', 'genres',]:
+    elif wiki_type in ['ratings', 'genres', 'developers',
+                    'publishers', 'modes']:
         return parser.parse_game_stats_home_page(response, wiki_type)
     else:
         return []

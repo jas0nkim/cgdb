@@ -21,6 +21,9 @@ class TestRedditWikiParser(unittest.TestCase):
         self.urls = _json.get('urls')
         self.esrb_urls = _json.get('esrb_urls')
         self.genre_urls = _json.get('genre_urls')
+        self.developer_urls = _json.get('developer_urls')
+        self.publisher_urls = _json.get('publisher_urls')
+        self.mode_urls = _json.get('mode_urls')
 
     def test_game_fields_valid(self):
         """
@@ -93,7 +96,6 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         ref link:
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings
-        check all fields (game title, ESRB rating) not null
         """
         wiki_type = 'ratings'
         resp = build_response(self.urls[wiki_type], headers=self.headers)
@@ -101,11 +103,11 @@ class TestRedditWikiParser(unittest.TestCase):
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
 
-    def test_game_esrb_ratings_each(self):
+    def test_game_esrb_ratings_detail(self):
         """
         ref link:
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/xxx
-        check all fields (game title, ESRB rating) not null
+        check all fields (game title, stats type, stats detail) not null
         """
         wiki_type = 'ratings'
         for esrb, url in self.esrb_urls.items():
@@ -125,7 +127,6 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         ref link:
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres
-        check all fields (game title, ESRB rating) not null
         """
         wiki_type = 'genres'
         resp = build_response(self.urls[wiki_type], headers=self.headers)
@@ -133,11 +134,11 @@ class TestRedditWikiParser(unittest.TestCase):
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
 
-    def test_game_genres_each(self):
+    def test_game_genres_detail(self):
         """
         ref link:
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/xxx
-        check all fields (game title, genre) not null
+        check all fields (game title, stats type, stats detail) not null
         """
         wiki_type = 'genres'
         for genre, url in self.genre_urls.items():
@@ -150,3 +151,102 @@ class TestRedditWikiParser(unittest.TestCase):
                 self.assertIsNotNone(i.stat_detail)
                 if i.title == "Assassin's Creed Origins":
                     self.assertIn(i.stat_detail, ['Action', 'Role-playing game'])
+
+    def test_game_developers_home(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers
+        """
+        wiki_type = 'developers'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        for request in parse_reddit_stadia_wiki(resp, wiki_type):
+            self.assertIsInstance(request, Request)
+
+    def test_game_developers_detail(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers/xxx
+        check all fields (game title, stats type, stats detail) not null
+        """
+        wiki_type = 'developers'
+        for genre, url in self.developer_urls.items():
+            resp = build_response(url, headers=self.headers)
+            self.assertEqual(resp.status, 200)
+            for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
+                # fields not null
+                self.assertIsNotNone(i.title)
+                self.assertIsNotNone(i.stat_type)
+                self.assertIsNotNone(i.stat_detail)
+                if i.title == "Far Cry New Dawn":
+                    self.assertIn(i.stat_detail, ['Ubisoft',])
+                elif i.title == "Just Dance 2021":
+                    self.assertIn(i.stat_detail, ['Ubisoft',])
+                elif i.title == "Marvel's Avengers":
+                    self.assertIn(i.stat_detail, ['Nixxes', 'Crystal Dynamics', 'Eidos Interactive'])
+
+    def test_game_publishers_home(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers
+        """
+        wiki_type = 'publishers'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        for request in parse_reddit_stadia_wiki(resp, wiki_type):
+            self.assertIsInstance(request, Request)
+
+    def test_game_publishers_detail(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers/xxx
+        check all fields (game title, stats type, stats detail) not null
+        """
+        wiki_type = 'publishers'
+        for genre, url in self.publisher_urls.items():
+            resp = build_response(url, headers=self.headers)
+            self.assertEqual(resp.status, 200)
+            for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
+                # fields not null
+                self.assertIsNotNone(i.title)
+                self.assertIsNotNone(i.stat_type)
+                self.assertIsNotNone(i.stat_detail)
+                if i.title == "Assassin's Creed Origins":
+                    self.assertIn(i.stat_detail, ['Ubisoft',])
+                elif i.title == "Family Feud":
+                    self.assertIn(i.stat_detail, ['Ubisoft',])
+                elif i.title == "Doom":
+                    self.assertIn(i.stat_detail, ['Bethesda Softworks',])
+
+    def test_game_modes_home(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes
+        """
+        wiki_type = 'modes'
+        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        self.assertEqual(resp.status, 200)
+        for request in parse_reddit_stadia_wiki(resp, wiki_type):
+            self.assertIsInstance(request, Request)
+
+    def test_game_modes_detail(self):
+        """
+        ref link:
+        https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/xxx
+        check all fields (game title, stats type, stats detail) not null
+        """
+        wiki_type = 'modes'
+        for genre, url in self.mode_urls.items():
+            resp = build_response(url, headers=self.headers)
+            self.assertEqual(resp.status, 200)
+            for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
+                # fields not null
+                self.assertIsNotNone(i.title)
+                self.assertIsNotNone(i.stat_type)
+                self.assertIsNotNone(i.stat_detail)
+                if i.title == "DRAGON BALL XENOVERSE 2":
+                    self.assertIn(i.stat_detail, ['Local multiplayer games', 'Single player', 'Online multiplayer', 'Competitive', 'Online co-op', 'Local multiplayer',])
+                elif i.title == "Human: Fall Flat":
+                    self.assertIn(i.stat_detail, ['Local co-op', 'Single player', 'Online multiplayer', 'Online co-op', 'Local multiplayer', 'Split screen',])
+                elif i.title == "UNO":
+                    self.assertIn(i.stat_detail, ['Local multiplayer', 'Single player', 'Online multiplayer', 'Competitive', 'Online co-op', 'Local co-op',])
