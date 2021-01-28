@@ -3,11 +3,10 @@ import json
 import logging
 from pathlib import Path
 from django.urls import include, path, reverse
-from django.db import transaction, IntegrityError
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
 from cgdb_core.models import Game, Tag
-from cgdb_core.serializers import GameSerializer
+from cgdb_core.serializers import WikipediaGameSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -23,16 +22,12 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         for _data in test_data:
             try:
                 game = Game.objects.get(title=_data.get('english_title'))
-                serializer = GameSerializer(game, data=_data)
+                serializer = WikipediaGameSerializer(game, data=_data)
             except Game.DoesNotExist:
-                serializer = GameSerializer(data=_data)
+                serializer = WikipediaGameSerializer(data=_data)
             if not serializer.is_valid():
                 continue
-            try:
-                with transaction.atomic():
-                    serializer.save()
-            except IntegrityError as err:
-                logger.error(str(err))
+            serializer.save()
 
     def test_initial_data(self):
         """

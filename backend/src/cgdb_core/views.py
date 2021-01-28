@@ -8,7 +8,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from .models import Platform, Game
-from .serializers import PlatformSerializer, GameSerializer, GameSearchSerializer
+from .serializers import (PlatformSerializer,
+                        GameSerializer,
+                        WikipediaGameSerializer,
+                        GameSearchSerializer,)
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
@@ -48,6 +51,8 @@ class WikipediaGameBot(APIView):
         HTTP POST request
         create/update game, platform, developer, genre, mode, publisher, series, tags
         """
+        # since request object in DRF is immutable
+        _request_data = request.data.copy()
         title = request.data.get('english_title')
         if not title:
             return Response({"error": "English title not found"},
@@ -56,16 +61,16 @@ class WikipediaGameBot(APIView):
         ok_status = status.HTTP_200_OK
         try:
             game = Game.objects.get(title=title)
-            serializer = GameSerializer(game, data=request.data)
+            serializer = WikipediaGameSerializer(game, data=_request_data)
         except Game.DoesNotExist:
-            serializer = GameSerializer(data=request.data)
+            serializer = WikipediaGameSerializer(data=_request_data)
             ok_status = status.HTTP_201_CREATED
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
         try:
             serializer.save()
         except DataError as err:
-            self.logger.error('%s - %s', request.data.get('link'), str(err))
+            self.logger.error('%s - %s', _request_data.get('link'), str(err))
             return Response(serializer.errors,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
