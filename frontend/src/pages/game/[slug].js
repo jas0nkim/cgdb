@@ -61,19 +61,19 @@ const GamePage = ({ game }) => {
         </Link>
     )
     const developers = game.developers.map((developer) =>
-        <div key={developer}>{developer}</div>
+        <div key={developer.name}>{developer.name}</div>
     )
     const publishers = game.publishers.map((publisher) =>
-        <div key={publisher}>{publisher}</div>
+        <div key={publisher.name}>{publisher.name}</div>
     )
     const series = game.series.map((series) =>
-        <div key={series}>{series}</div>
+        <div key={series.name}>{series.name}</div>
     )
     const genres = game.genres.map((genre) =>
-        <div key={genre}>{genre}</div>
+        <div key={genre.name}>{genre.name}</div>
     )
     const modes = game.modes.map((mode) =>
-        <div key={mode}>{mode}</div>
+        <div key={mode.name}>{mode.name}</div>
     )
 
     return (
