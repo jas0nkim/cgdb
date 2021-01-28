@@ -17,7 +17,17 @@ urlpatterns = [
     path('search/<str:term>/',
         views.SearchViewSet.as_view({'get': 'list'}),
         name='search'),
+    # POST from bot
     path('bot/game/',
         views.WikipediaGameBot.as_view(),
-        name='bot-game-post')
+        name='bot-game-post'),
+    path('bot/reddit/stadia/game/',
+        views.RedditStadiaGameBot.as_view(),
+        name='bot-stadia-game-post'),
+    path('bot/reddit/stadia/gamepro/',
+        views.RedditStadiaGameProBot.as_view(),
+        name='bot-stadia-game-pro-post'),
+    path('bot/reddit/stadia/gamestats/',
+        views.RedditStadiaGameStatsBot.as_view(),
+        name='bot-stadia-game-stats-post'),
 ]

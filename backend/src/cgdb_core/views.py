@@ -11,6 +11,7 @@ from .models import Platform, Game
 from .serializers import (PlatformSerializer,
                         GameSerializer,
                         WikipediaGameSerializer,
+                        RedditStadiaGameSerializer,
                         GameSearchSerializer,)
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
@@ -74,3 +75,45 @@ class WikipediaGameBot(APIView):
             return Response(serializer.errors,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
+
+class RedditStadiaGameBot(APIView):
+    permission_classes = [AllowAny]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.logger = logging.getLogger(__name__)
+
+    def post(self, request):
+        """
+        HTTP POST request
+        create/update game title, stadia link, stadia release date
+        """
+        # since request object in DRF is immutable
+        _request_data = request.data.copy()
+        title = _request_data.get('title')
+        if not title:
+            return Response({"error": "Stadia game title not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        serializer = None
+        ok_status = status.HTTP_200_OK
+        try:
+            game = Game.objects.get(title=title)
+            serializer = RedditStadiaGameSerializer(game, data=_request_data)
+        except Game.DoesNotExist:
+            serializer = RedditStadiaGameSerializer(data=_request_data)
+            ok_status = status.HTTP_201_CREATED
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            serializer.save()
+        except DataError as err:
+            self.logger.error('Reddit Stadia Game (%s) - %s', title, str(err))
+            return Response(serializer.errors,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.data, status=ok_status)
+
+class RedditStadiaGameProBot(APIView):
+    permission_classes = [AllowAny]
+
+class RedditStadiaGameStatsBot(APIView):
+    permission_classes = [AllowAny]

@@ -392,7 +392,7 @@ class GameReleaseDate(models.Model):
         db_table = 'game_release_dates'
 
     def __str__(self):
-        return f"{self.game} released @{self.platform}"
+        return f"{self.game} released on {self.release_date} @{self.platform}"
 
 class GameFreeOnSubscription(models.Model):
     """ game release model

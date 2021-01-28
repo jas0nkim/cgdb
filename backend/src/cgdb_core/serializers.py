@@ -1,6 +1,7 @@
 import datetime
 from django.utils.text import slugify
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 from .models import (GameReleaseDate,
                     LanguageCode,
                     Mode,
@@ -51,6 +52,24 @@ class DeveloperSerializer(serializers.ModelSerializer):
         model = Developer
         fields = ('name',)
 
+class LanguageCodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LanguageCode
+        fields = ('iso',
+                'language',
+                'language_eng',)
+
+class SimplePlatformSerializer(serializers.ModelSerializer):
+    """
+    Platform model serializer for simply display-only purpose
+    """
+    slug = serializers.CharField(required=False)
+    class Meta:
+        model = Platform
+        fields = ('name',
+                'pictures',
+                'slug',)
+
 class SimpleGameSerializer(serializers.ModelSerializer):
     """
     Game model serializer for simply display-only purpose
@@ -83,22 +102,25 @@ class GameReleaseDateSerializer(serializers.ModelSerializer):
     """
     GameReleaseDate django model serializer
     """
-    platform = PlatformSerializer()
+    release_date = serializers.DateField(input_formats=['%Y %b %d',])
 
     class Meta:
         model = GameReleaseDate
         fields = ('game', 'platform', 'release_date',)
 
-class SimplePlatformSerializer(serializers.ModelSerializer):
+class GameSearchSerializer(serializers.ModelSerializer):
     """
-    Platform model serializer for simply display-only purpose
+    Game django model serializer for Game Search
     """
-    slug = serializers.CharField(required=False)
+    platforms = SimplePlatformSerializer(many=True)
+
     class Meta:
-        model = Platform
-        fields = ('name',
+        model = Game
+        fields = ('title',
+                'title_lc',
+                'slug',
                 'pictures',
-                'slug',)
+                'platforms')
 
 class GameSerializer(serializers.ModelSerializer):
     """
@@ -110,8 +132,8 @@ class GameSerializer(serializers.ModelSerializer):
     series = SeriesSerializer(many=True, required=False)
     genres = GenreSerializer(many=True, required=False)
     modes = ModeSerializer(many=True, required=False)
+    # game_release_dates = GameReleaseDateSerializer(many=True, required=False)
     slug = serializers.CharField(required=False)
-    # release_dates = GameReleaseDateSerializer(many=True, required=False)
 
     class Meta:
         model = Game
@@ -128,68 +150,64 @@ class GameSerializer(serializers.ModelSerializer):
                 'platforms',
                 'genres',
                 'modes',
+                # 'game_release_dates'
                 'slug',)
 
     def create(self, validated_data):
-        platforms_data = validated_data.pop('platforms')
-        developers_data = validated_data.pop('developers')
-        publishers_data = validated_data.pop('publishers')
-        series_data = validated_data.pop('series')
-        genres_data = validated_data.pop('genres')
-        modes_data = validated_data.pop('modes')
-        # release_dates_data = validated_data.pop('release_dates')
+        platforms_data = validated_data.pop('platforms') if validated_data.get('platforms') else []
+        developers_data = validated_data.pop('developers') if validated_data.get('developers') else []
+        publishers_data = validated_data.pop('publishers') if validated_data.get('publishers') else []
+        series_data = validated_data.pop('series') if validated_data.get('series') else []
+        genres_data = validated_data.pop('genres') if validated_data.get('genres') else []
+        modes_data = validated_data.pop('modes') if validated_data.get('modes') else []
 
-        game = Game.objects.create(**validated_data)
+        instance = super().create(validated_data)
+
         for platform_data in platforms_data:
             try:
                 obj = Platform.objects.get(**platform_data)
             except Platform.DoesNotExist:
                 obj = Platform.objects.create(**platform_data)
-            game.platforms.add(obj)
+            instance.platforms.add(obj)
         for developer_data in developers_data:
             try:
                 obj = Developer.objects.get(**developer_data)
             except Developer.DoesNotExist:
                 obj = Developer.objects.create(**developer_data)
-            game.developers.add(obj)
+            instance.developers.add(obj)
         for publisher_data in publishers_data:
             try:
                 obj = Publisher.objects.get(**publisher_data)
             except Publisher.DoesNotExist:
                 obj = Publisher.objects.create(**publisher_data)
-            game.publishers.add(obj)
+            instance.publishers.add(obj)
         for single_series_data in series_data:
             try:
                 obj = Series.objects.get(**single_series_data)
             except Series.DoesNotExist:
                 obj = Series.objects.create(**single_series_data)
-            game.series.add(obj)
+            instance.series.add(obj)
         for genre_data in genres_data:
             try:
                 obj = Genre.objects.get(**genre_data)
             except Genre.DoesNotExist:
                 obj = Genre.objects.create(**genre_data)
-            game.genres.add(obj)
+            instance.genres.add(obj)
         for mode_data in modes_data:
             try:
                 obj = Mode.objects.get(**mode_data)
             except Mode.DoesNotExist:
                 obj = Mode.objects.create(**mode_data)
-            game.modes.add(obj)
-        # for release_date in validated_data.get('release_dates'):
-        #     if not GameReleaseDate.objects.filter(iso=release_date.get('iso')).exists():
-        #         LanguageCode.objects.create(iso=lang_code.get('iso'),
-        #                                 language=lang_code.get('language'),
-        #                                 language_eng=lang_code.get('language_eng'))
-        return game
+            instance.modes.add(obj)
+        return instance
 
     def update(self, instance, validated_data):
-        platforms_data = validated_data.pop('platforms')
-        developers_data = validated_data.pop('developers')
-        publishers_data = validated_data.pop('publishers')
-        series_data = validated_data.pop('series')
-        genres_data = validated_data.pop('genres')
-        modes_data = validated_data.pop('modes')
+        platforms_data = validated_data.pop('platforms') if validated_data.get('platforms') else []
+        developers_data = validated_data.pop('developers') if validated_data.get('developers') else []
+        publishers_data = validated_data.pop('publishers') if validated_data.get('publishers') else []
+        series_data = validated_data.pop('series') if validated_data.get('series') else []
+        genres_data = validated_data.pop('genres') if validated_data.get('genres') else []
+        modes_data = validated_data.pop('modes') if validated_data.get('modes') else []
 
         instance = super().update(instance, validated_data)
 
@@ -237,13 +255,6 @@ class GameSerializer(serializers.ModelSerializer):
                 instance.modes.add(obj)
         return instance
 
-class LanguageCodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LanguageCode
-        fields = ('iso',
-                'language',
-                'language_eng',)
-
 class WikipediaGameSerializer(GameSerializer):
     """
     Game django model serializer (POST from wikipedia bot)
@@ -290,28 +301,72 @@ class WikipediaGameSerializer(GameSerializer):
         data['title_lc'] = title_lc
         data['description'] = description
         data['description_lc'] = description_lc
+        data['links'] = links
         data['platforms'] = [self._convert_str_to_dict(data['platform'])]
         data['developers'] = [self._convert_str_to_dict(v) for v in data['developers']]
         data['publishers'] = [self._convert_str_to_dict(v) for v in data['publishers']]
         data['series'] = [self._convert_str_to_dict(v) for v in data['series']]
         data['genres'] = [self._convert_str_to_dict(v) for v in data['genres']]
         data['modes'] = [self._convert_str_to_dict(v) for v in data['modes']]
-        data['links'] = links
         return data
 
     def to_internal_value(self, data):
         return super().to_internal_value(self._handle_post_data(data))
 
-class GameSearchSerializer(serializers.ModelSerializer):
+class RedditStadiaGameSerializer(GameSerializer):
     """
-    Game django model serializer for Game Search
+    Game django model serializer (POST from reddit bot)
     """
-    platforms = SimplePlatformSerializer(many=True)
+    _platform = 'Stadia'
+    _release_date = None
 
-    class Meta:
-        model = Game
-        fields = ('title',
-                'title_lc',
-                'slug',
-                'pictures',
-                'platforms')
+    def _handle_post_data(self, data):
+        """
+        set extra values into POST data: title_lc, links, platforms
+        """
+        links = {}
+        if data.get('stadia_link'):
+            links['stadia'] = data.get('stadia_link')
+
+        data['title_lc'] = {'en': data.get('title')}
+        data['links'] = links
+        data['platforms'] = [{'name': self._platform}]
+        self._release_date = data.get('release_date')
+        return data
+
+    def to_internal_value(self, data):
+        return super().to_internal_value(self._handle_post_data(data))
+
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+
+        # insert or update game release date info
+        platform = Platform.objects.get(name=self._platform)
+        grds = GameReleaseDateSerializer(data={
+            'game': instance.pk,
+            'platform': platform.pk,
+            'release_date': self._release_date,
+        })
+        if not grds.is_valid():
+            raise ValidationError(grds.errors)
+        else:
+            grds.save()
+
+        return instance
+
+    def update(self, instance, validated_data):
+        instance = super().update(instance, validated_data)
+
+        # insert or update game release date info
+        platform = Platform.objects.get(name=self._platform)
+        grds = GameReleaseDateSerializer(data={
+            'game': instance.pk,
+            'platform': platform.pk,
+            'release_date': self._release_date,
+        })
+        if not grds.is_valid():
+            raise ValidationError(grds.errors)
+        else:
+            grds.save()
+
+        return instance
