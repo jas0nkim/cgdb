@@ -26,6 +26,7 @@ class SearchTests(APITestCase, URLPatternsTestCase):
             except Game.DoesNotExist:
                 serializer = WikipediaGameSerializer(data=_data)
             if not serializer.is_valid():
+                logger.error(serializer.errors)
                 continue
             serializer.save()
 
