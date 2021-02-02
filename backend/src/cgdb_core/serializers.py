@@ -154,14 +154,14 @@ class GameSerializer(serializers.ModelSerializer):
                 'slug',)
 
     def create(self, validated_data):
-        platforms_data = validated_data.pop('platforms') if validated_data.get('platforms') else []
-        developers_data = validated_data.pop('developers') if validated_data.get('developers') else []
-        publishers_data = validated_data.pop('publishers') if validated_data.get('publishers') else []
-        series_data = validated_data.pop('series') if validated_data.get('series') else []
-        genres_data = validated_data.pop('genres') if validated_data.get('genres') else []
-        modes_data = validated_data.pop('modes') if validated_data.get('modes') else []
+        platforms_data = validated_data.pop('platforms') if 'platforms' in validated_data else []
+        developers_data = validated_data.pop('developers') if 'developers' in validated_data else []
+        publishers_data = validated_data.pop('publishers') if 'publishers' in validated_data else []
+        series_data = validated_data.pop('series') if 'series' in validated_data else []
+        genres_data = validated_data.pop('genres') if 'genres' in validated_data else []
+        modes_data = validated_data.pop('modes') if 'modes' in validated_data else []
 
-        instance = super().create(validated_data)
+        instance = Game.objects.create(**validated_data)
 
         for platform_data in platforms_data:
             try:
@@ -202,12 +202,12 @@ class GameSerializer(serializers.ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-        platforms_data = validated_data.pop('platforms') if validated_data.get('platforms') else []
-        developers_data = validated_data.pop('developers') if validated_data.get('developers') else []
-        publishers_data = validated_data.pop('publishers') if validated_data.get('publishers') else []
-        series_data = validated_data.pop('series') if validated_data.get('series') else []
-        genres_data = validated_data.pop('genres') if validated_data.get('genres') else []
-        modes_data = validated_data.pop('modes') if validated_data.get('modes') else []
+        platforms_data = validated_data.pop('platforms') if 'platforms' in validated_data else []
+        developers_data = validated_data.pop('developers') if 'developers' in validated_data else []
+        publishers_data = validated_data.pop('publishers') if 'publishers' in validated_data else []
+        series_data = validated_data.pop('series') if 'series' in validated_data else []
+        genres_data = validated_data.pop('genres') if 'genres' in validated_data else []
+        modes_data = validated_data.pop('modes') if 'modes' in validated_data else []
 
         instance = super().update(instance, validated_data)
 
