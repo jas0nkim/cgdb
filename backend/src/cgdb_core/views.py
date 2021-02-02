@@ -7,12 +7,14 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+from rest_framework.exceptions import ValidationError
 from .models import Platform, Game
 from .serializers import (PlatformSerializer,
                         GameSerializer,
                         WikipediaGameSerializer,
                         RedditStadiaGameSerializer,
-                        GameSearchSerializer,)
+                        GameSearchSerializer,
+                        RedditStadiaGameProSerializer,)
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
@@ -72,7 +74,7 @@ class WikipediaGameBot(APIView):
             serializer.save()
         except DataError as err:
             self.logger.error('%s - %s', _request_data.get('link'), str(err))
-            return Response(serializer.errors,
+            return Response(err,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
 
@@ -108,12 +110,38 @@ class RedditStadiaGameBot(APIView):
             serializer.save()
         except DataError as err:
             self.logger.error('Reddit Stadia Game (%s) - %s', title, str(err))
-            return Response(serializer.errors,
+            return Response(err,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
 
 class RedditStadiaGameProBot(APIView):
     permission_classes = [AllowAny]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.logger = logging.getLogger(__name__)
+
+    def post(self, request):
+        """
+        HTTP POST request
+        entered/left game titles of a month
+        """
+        # since request object in DRF is immutable
+        _request_data = request.data.copy()
+        event_date = _request_data.get('event_date')
+        if not event_date:
+            return Response({"error": "Event date not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        serializer = RedditStadiaGameProSerializer(data=_request_data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            serializer.save()
+        except DataError as err:
+            self.logger.error('Reddit Stadia Pro Game (%s) - %s', event_date, str(err))
+            return Response(err,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class RedditStadiaGameStatsBot(APIView):
     permission_classes = [AllowAny]

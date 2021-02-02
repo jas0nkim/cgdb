@@ -1,0 +1,222 @@
+[
+    {
+        "entered_titles": [
+            "SAMURAI SHODOWN",
+            "Destiny 2: The Collection"
+        ],
+        "left_titles": [],
+        "event_date": "2019 Nov"
+    },
+    {
+        "entered_titles": [
+            "Tomb Raider: Definitive Edition",
+            "Farming Simulator 19 Platinum Edition"
+        ],
+        "left_titles": [],
+        "event_date": "2019 Dec"
+    },
+    {
+        "entered_titles": [
+            "Thumper",
+            "Rise of the Tomb Raider: 20 Year Celebration"
+        ],
+        "left_titles": [
+            "Tomb Raider: Definitive Edition"
+        ],
+        "event_date": "2020 Jan"
+    },
+    {
+        "entered_titles": [
+            "Metro Exodus",
+            "GYLT"
+        ],
+        "left_titles": [
+            "SAMURAI SHODOWN",
+            "Rise of the Tomb Raider: 20 Year Celebration"
+        ],
+        "event_date": "2020 Feb"
+    },
+    {
+        "entered_titles": [
+            "SteamWorld Quest: Hand of Gilgamech",
+            "SteamWorld Dig 2",
+            "GRID"
+        ],
+        "left_titles": [
+            "Farming Simulator 19 Platinum Edition"
+        ],
+        "event_date": "2020 Mar"
+    },
+    {
+        "entered_titles": [
+            "Stacks On Stacks (On Stacks)",
+            "Spitlings",
+            "Serious Sam Collection",
+            "PlayerUnknown's Battlegrounds - Pioneer Edition"
+        ],
+        "left_titles": [
+            "Metro Exodus"
+        ],
+        "event_date": "2020 Apr"
+    },
+    {
+        "entered_titles": [
+            "Zombie Army 4: Dead War",
+            "SteamWorld Heist",
+            "The Turing Test"
+        ],
+        "left_titles": [
+            "Thumper"
+        ],
+        "event_date": "2020 May"
+    },
+    {
+        "entered_titles": [
+            "The Elder Scrolls Online",
+            "SUPERHOT",
+            "Power Rangers: Battle for the Grid",
+            "Panzer Dragoon: Remake",
+            "Little Nightmares",
+            "Get Packed"
+        ],
+        "left_titles": [],
+        "event_date": "2020 Jun"
+    },
+    {
+        "entered_titles": [
+            "West of Loathing",
+            "SteamWorld Dig",
+            "Orcs Must Die! 3",
+            "Monster Boy and the Cursed Kingdom",
+            "Crayta: Premium Edition"
+        ],
+        "left_titles": [
+            "The Elder Scrolls Online",
+            "Stacks On Stacks (On Stacks)",
+            "Spitlings",
+            "Serious Sam Collection"
+        ],
+        "event_date": "2020 Jul"
+    },
+    {
+        "entered_titles": [
+            "Strange Brigade",
+            "Rock of Ages 3: Make & Break",
+            "Metro 2033 Redux",
+            "Kona",
+            "Just Shapes & Beats"
+        ],
+        "left_titles": [
+            "Zombie Army 4: Dead War"
+        ],
+        "event_date": "2020 Aug"
+    },
+    {
+        "entered_titles": [
+            "SUPER BOMBERMAN R ONLINE Premium Edition",
+            "Metro: Last Light Redux",
+            "HITMAN - The Complete First Season",
+            "Hello Neighbor",
+            "Gunsport",
+            "Embr"
+        ],
+        "left_titles": [
+            "Kona",
+            "GRID",
+            "Get Packed"
+        ],
+        "event_date": "2020 Sep"
+    },
+    {
+        "entered_titles": [
+            "SUPERHOT: MIND CONTROL DELETE",
+            "Lara Croft: Temple of Osiris",
+            "Jotun: Valhalla Edition",
+            "Human: Fall Flat",
+            "Dead by Daylight",
+            "Celeste"
+        ],
+        "left_titles": [
+            "The Turing Test",
+            "Monster Boy and the Cursed Kingdom",
+            "Metro 2033 Redux"
+        ],
+        "event_date": "2020 Oct"
+    },
+    {
+        "entered_titles": [
+            "The Gardens Between",
+            "Sundered: Eldritch Edition",
+            "Sniper Elite 4",
+            "Risk of Rain 2",
+            "République",
+            "Hello Neighbor: Hide & Seek"
+        ],
+        "left_titles": [
+            "West of Loathing",
+            "Strange Brigade",
+            "Metro: Last Light Redux",
+            "Just Shapes & Beats",
+            "Destiny 2: The Collection"
+        ],
+        "event_date": "2020 Nov"
+    },
+    {
+        "entered_titles": [
+            "Submerged: Hidden Depths",
+            "Secret Neighbor",
+            "Outcasters",
+            "Monster Jam Steel Titans",
+            "Kine",
+            "Into The Breach",
+            "HITMAN 2",
+            "EVERSPACE",
+            "Cthulhu Saves Christmas"
+        ],
+        "left_titles": [
+            "SUPER BOMBERMAN R ONLINE Premium Edition",
+            "SUPERHOT",
+            "Power Rangers: Battle for the Grid",
+            "Little Nightmares",
+            "Hello Neighbor"
+        ],
+        "event_date": "2020 Dec"
+    },
+    {
+        "entered_titles": [
+            "Hotline Miami",
+            "Figment",
+            "F1 2020",
+            "El Hijo - A Wild West Tale",
+            "Ary and the Secret of Seasons"
+        ],
+        "left_titles": [
+            "Sundered: Eldritch Edition",
+            "Rock of Ages 3: Make & Break",
+            "Risk of Rain 2",
+            "Lara Croft: Temple of Osiris",
+            "Jotun: Valhalla Edition",
+            "GYLT",
+            "Embr",
+            "Dead by Daylight",
+            "Celeste"
+        ],
+        "event_date": "2021 Jan"
+    },
+    {
+        "entered_titles": [
+            "Lara Croft and the Guardian of Light",
+            "Journey to the Savage Planet",
+            "Enter The Gungeon"
+        ],
+        "left_titles": [
+            "The Gardens Between",
+            "Sniper Elite 4",
+            "Panzer Dragoon: Remake",
+            "Into The Breach",
+            "HITMAN 2",
+            "Hello Neighbor: Hide & Seek"
+        ],
+        "event_date": "2021 Feb"
+    }
+]

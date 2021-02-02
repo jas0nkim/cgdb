@@ -2,7 +2,7 @@ import datetime
 from django.utils.text import slugify
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import (GameReleaseDate,
+from .models import (GameFreeOnSubscription, GameReleaseDate,
                     LanguageCode,
                     Mode,
                     Genre,
@@ -341,7 +341,10 @@ class RedditStadiaGameSerializer(GameSerializer):
         instance = super().create(validated_data)
 
         # insert or update game release date info
-        platform = Platform.objects.get(name=self._platform)
+        try:
+            platform = Platform.objects.get(name=self._platform)
+        except Platform.DoesNotExist:
+            raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
             'platform': platform.pk,
@@ -358,7 +361,10 @@ class RedditStadiaGameSerializer(GameSerializer):
         instance = super().update(instance, validated_data)
 
         # insert or update game release date info
-        platform = Platform.objects.get(name=self._platform)
+        try:
+            platform = Platform.objects.get(name=self._platform)
+        except Platform.DoesNotExist:
+            raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
             'platform': platform.pk,
@@ -370,3 +376,88 @@ class RedditStadiaGameSerializer(GameSerializer):
             grds.save()
 
         return instance
+
+class RedditStadiaGameProSerializer(serializers.Serializer):
+    _platform = 'Stadia'
+
+    # some titles in pro games are not matching with titles in games:
+    #   'pro games': 'games', ...
+    _game_title_map = {
+        'Destiny 2: The Collection': 'Destiny 2',
+        'Farming Simulator 19 Platinum Edition': 'Farming Simulator 19',
+        "PlayerUnknown's Battlegrounds - Pioneer Edition": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        'Crayta: Premium Edition': 'Crayta',
+        'SUPER BOMBERMAN R ONLINE Premium Edition': 'SUPER BOMBERMAN R ONLINE',
+        'HITMAN - The Complete First Season': 'HITMAN',
+        'Lara Croft: Temple of Osiris': 'Lara Croft and the Temple of Osiris',
+        'Hello Neighbor: Hide & Seek': 'Hello Neighbor: Hide and Seek',
+    }
+
+    entered_titles = serializers.ListField(
+        child=serializers.CharField(max_length=200),
+        allow_empty=True,
+    )
+    left_titles = serializers.ListField(
+        child=serializers.CharField(max_length=200),
+        allow_empty=True,
+    )
+    event_date = serializers.DateField(input_formats=['%Y %b',])
+
+    class Meta:
+        fields = ('entered_titles',
+                'left_titles',
+                'event_date',)
+
+    def create(self, validated_data):
+        try:
+            platform = Platform.objects.get(name=self._platform)
+        except Platform.DoesNotExist:
+            raise ValidationError("Platform, Stadia, not exists in DB")
+
+        # insert entered games in 'game_free_on_subscriptions'
+        for entered_title in validated_data.get('entered_titles'):
+            if entered_title in self._game_title_map:
+                entered_title = self._game_title_map[entered_title]
+            game = None
+            try:
+                game = Game.objects.get(title=entered_title)
+            except Game.DoesNotExist:
+                raise ValidationError(f"Entering Stadia pro game title, {entered_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
+
+            try:
+                _inst = GameFreeOnSubscription.objects.get(
+                                game=game,
+                                platform=platform,
+                                entered=validated_data.get('event_date'))
+            except GameFreeOnSubscription.DoesNotExist:
+                _inst = GameFreeOnSubscription.objects.create(
+                                game=game,
+                                platform=platform,
+                                entered=validated_data.get('event_date'))
+        # update left games in 'game_free_on_subscriptions'
+        for left_title in validated_data.get('left_titles'):
+            if left_title in self._game_title_map:
+                left_title = self._game_title_map[left_title]
+            game = None
+            try:
+                game = Game.objects.get(title=left_title)
+            except Game.DoesNotExist:
+                raise ValidationError(f"Leaving Stadia pro game title, {left_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
+
+            gfos = None
+            try:
+                gfos = GameFreeOnSubscription.objects.get(
+                                game=game,
+                                platform=platform,
+                                entered__lt=validated_data.get('event_date'),
+                                left__isnull=True,)
+            except GameFreeOnSubscription.DoesNotExist:
+                pass
+            else:
+                gfos.left = validated_data.get('event_date')
+                gfos.save()
+
+        return validated_data
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)

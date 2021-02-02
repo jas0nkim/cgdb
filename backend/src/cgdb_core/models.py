@@ -407,7 +407,7 @@ class GameFreeOnSubscription(models.Model):
                         related_name='game_free_on_subscriptions',
                         related_query_name='game_free_on_subscription')
     entered = models.DateField(default=None)
-    left = models.DateField(default=None)
+    left = models.DateField(default=None, null=True, blank=True)
 
     class Meta:
         db_table = 'game_free_on_subscriptions'
