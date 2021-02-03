@@ -1,0 +1,677 @@
+[
+    {
+        "title": "Destiny 2",
+        "stat_type": "publishers",
+        "stat_detail": "Bungie"
+    },
+    {
+        "title": "République",
+        "stat_type": "publishers",
+        "stat_detail": "Camouflaj Studios"
+    },
+    {
+        "title": "Kine",
+        "stat_type": "publishers",
+        "stat_detail": "Chump Squad"
+    },
+    {
+        "title": "Cyberpunk",
+        "stat_type": "publishers",
+        "stat_detail": "CD Projekt Red"
+    },
+    {
+        "title": "Assassin's Creed Odyssey",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Origins",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Syndicate",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Unity",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Valhalla",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Far Cry New Dawn",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Immortals Fenyx Rising",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Trials Rising",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs 2",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs: Legion",
+        "stat_type": "publishers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "The Turing Test",
+        "stat_type": "publishers",
+        "stat_detail": "Bulkhead Interactive"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "publishers",
+        "stat_detail": "BHVR"
+    },
+    {
+        "title": "Figment",
+        "stat_type": "publishers",
+        "stat_detail": "Bedtime Digital Games"
+    },
+    {
+        "title": "Unto The End",
+        "stat_type": "publishers",
+        "stat_detail": "Big Sugar Games"
+    },
+    {
+        "title": "Metro 2033 Redux",
+        "stat_type": "publishers",
+        "stat_detail": "Deep Silver"
+    },
+    {
+        "title": "Metro: Last Light Redux",
+        "stat_type": "publishers",
+        "stat_detail": "Deep Silver"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "publishers",
+        "stat_detail": "Electronic Arts"
+    },
+    {
+        "title": "STAR WARS Jedi: Fallen Order",
+        "stat_type": "publishers",
+        "stat_detail": "Electronic Arts"
+    },
+    {
+        "title": "West of Loathing",
+        "stat_type": "publishers",
+        "stat_detail": "Asymmetric"
+    },
+    {
+        "title": "Cthulhu Saves Christmas",
+        "stat_type": "publishers",
+        "stat_detail": "Zeboyd Digital Entertainment"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "publishers",
+        "stat_detail": "Berzerk"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "publishers",
+        "stat_detail": "Curve Digital"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "publishers",
+        "stat_detail": "Curve Digital"
+    },
+    {
+        "title": "SUPERHOT",
+        "stat_type": "publishers",
+        "stat_detail": "SUPERHOT"
+    },
+    {
+        "title": "SUPERHOT: MIND CONTROL DELETE",
+        "stat_type": "publishers",
+        "stat_detail": "SUPERHOT"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "publishers",
+        "stat_detail": "Unit 2 Games"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "publishers",
+        "stat_detail": "Milestone"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "publishers",
+        "stat_detail": "Milestone"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "publishers",
+        "stat_detail": "WB Games"
+    },
+    {
+        "title": "The Gardens Between",
+        "stat_type": "publishers",
+        "stat_detail": "The Voxel Agents"
+    },
+    {
+        "title": "Phoenix Point",
+        "stat_type": "publishers",
+        "stat_detail": "Snapshot Games"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "publishers",
+        "stat_detail": "SNK"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "publishers",
+        "stat_detail": "Sega Europe"
+    },
+    {
+        "title": "Valkyria Chronicles 4",
+        "stat_type": "publishers",
+        "stat_detail": "Sega"
+    },
+    {
+        "title": "Red Dead Redemption 2",
+        "stat_type": "publishers",
+        "stat_detail": "Rockstar Games"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "publishers",
+        "stat_detail": "NWay"
+    },
+    {
+        "title": "Celeste",
+        "stat_type": "publishers",
+        "stat_detail": "Matt Makes Games"
+    },
+    {
+        "title": "GYLT",
+        "stat_type": "publishers",
+        "stat_detail": "Tequila Works"
+    },
+    {
+        "title": "Into The Breach",
+        "stat_type": "publishers",
+        "stat_detail": "Subset Games"
+    },
+    {
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        "stat_type": "publishers",
+        "stat_detail": "PUBG Corporation"
+    },
+    {
+        "title": "EVERSPACE",
+        "stat_type": "publishers",
+        "stat_detail": "ROCKFISH Games"
+    },
+    {
+        "title": "Epistory - Typing Chronicles",
+        "stat_type": "publishers",
+        "stat_detail": "Fishing Cactus"
+    },
+    {
+        "title": "Panzer Dragoon: Remake",
+        "stat_type": "publishers",
+        "stat_detail": "Forever Entertainment"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "publishers",
+        "stat_detail": "Funktronic Labs"
+    },
+    {
+        "title": "Risk of Rain 2",
+        "stat_type": "publishers",
+        "stat_detail": "Gearbox Publishing"
+    },
+    {
+        "title": "Sekiro: Shadows Die Twice",
+        "stat_type": "publishers",
+        "stat_detail": "FromSoftware"
+    },
+    {
+        "title": "Monster Boy and the Cursed Kingdom",
+        "stat_type": "publishers",
+        "stat_detail": "FDG Entertainment"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "publishers",
+        "stat_detail": "Codemasters"
+    },
+    {
+        "title": "GRID",
+        "stat_type": "publishers",
+        "stat_detail": "Codemasters"
+    },
+    {
+        "title": "Hello Neighbor",
+        "stat_type": "publishers",
+        "stat_detail": "TinyBuild"
+    },
+    {
+        "title": "Hello Neighbor: Hide and Seek",
+        "stat_type": "publishers",
+        "stat_detail": "TinyBuild"
+    },
+    {
+        "title": "Secret Neighbor",
+        "stat_type": "publishers",
+        "stat_detail": "TinyBuild"
+    },
+    {
+        "title": "Ary and the Secret of Seasons",
+        "stat_type": "publishers",
+        "stat_detail": "Modus Games"
+    },
+    {
+        "title": "Lost Words: Beyond the Page",
+        "stat_type": "publishers",
+        "stat_detail": "Modus Games"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "publishers",
+        "stat_detail": "Modus Games"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "publishers",
+        "stat_detail": "Coatsink"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "publishers",
+        "stat_detail": "Coatsink"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "publishers",
+        "stat_detail": "Coatsink"
+    },
+    {
+        "title": "Jotun: Valhalla Edition",
+        "stat_type": "publishers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "Spiritfarer",
+        "stat_type": "publishers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "Sundered: Eldritch Edition",
+        "stat_type": "publishers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "HITMAN",
+        "stat_type": "publishers",
+        "stat_detail": "IO Interactive"
+    },
+    {
+        "title": "HITMAN 2",
+        "stat_type": "publishers",
+        "stat_detail": "IO Interactive"
+    },
+    {
+        "title": "HITMAN 3",
+        "stat_type": "publishers",
+        "stat_detail": "IO Interactive"
+    },
+    {
+        "title": "Sniper Elite 4",
+        "stat_type": "publishers",
+        "stat_detail": "Rebellion"
+    },
+    {
+        "title": "Strange Brigade",
+        "stat_type": "publishers",
+        "stat_detail": "Rebellion"
+    },
+    {
+        "title": "Zombie Army 4: Dead War",
+        "stat_type": "publishers",
+        "stat_detail": "Rebellion"
+    },
+    {
+        "title": "Thumper",
+        "stat_type": "publishers",
+        "stat_detail": "Drool"
+    },
+    {
+        "title": "Journey to the Savage Planet",
+        "stat_type": "publishers",
+        "stat_detail": "Stadia Games and Entertainment"
+    },
+    {
+        "title": "Orcs Must Die! 3",
+        "stat_type": "publishers",
+        "stat_detail": "Stadia Games and Entertainment"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "publishers",
+        "stat_detail": "Stadia Games and Entertainment"
+    },
+    {
+        "title": "Submerged: Hidden Depths",
+        "stat_type": "publishers",
+        "stat_detail": "Stadia Games and Entertainment"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "publishers",
+        "stat_detail": "BANDAI NAMCO Entertainment"
+    },
+    {
+        "title": "Little Nightmares",
+        "stat_type": "publishers",
+        "stat_detail": "BANDAI NAMCO Entertainment"
+    },
+    {
+        "title": "PAC-MAN Mega Tunnel Battle",
+        "stat_type": "publishers",
+        "stat_detail": "BANDAI NAMCO Entertainment"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "publishers",
+        "stat_detail": "2K"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "publishers",
+        "stat_detail": "2K"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "publishers",
+        "stat_detail": "2K"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "publishers",
+        "stat_detail": "2K"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "publishers",
+        "stat_detail": "2K"
+    },
+    {
+        "title": "Enter The Gungeon",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Hotline Miami",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Hotline Miami 2: Wrong Number",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Reigns",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Serious Sam 4",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "publishers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "SteamWorld Dig",
+        "stat_type": "publishers",
+        "stat_detail": "Image and Form"
+    },
+    {
+        "title": "SteamWorld Dig 2",
+        "stat_type": "publishers",
+        "stat_detail": "Image and Form"
+    },
+    {
+        "title": "SteamWorld Heist",
+        "stat_type": "publishers",
+        "stat_detail": "Image and Form"
+    },
+    {
+        "title": "SteamWorld Quest: Hand of Gilgamech",
+        "stat_type": "publishers",
+        "stat_detail": "Image and Form"
+    },
+    {
+        "title": "Gods Will Fall",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Kona",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Metro Exodus",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Relicta",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Windbound",
+        "stat_type": "publishers",
+        "stat_detail": "Koch Media"
+    },
+    {
+        "title": "Chronos: Before the Ashes",
+        "stat_type": "publishers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "publishers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "Destroy All Humans!",
+        "stat_type": "publishers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "Monster Jam Steel Titans",
+        "stat_type": "publishers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "SpongeBob SquarePants: Battle for Bikini Bottom Rehydrated",
+        "stat_type": "publishers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "El Hijo - A Wild West Tale",
+        "stat_type": "publishers",
+        "stat_detail": "Handy Games"
+    },
+    {
+        "title": "Little Big Workshop",
+        "stat_type": "publishers",
+        "stat_detail": "Handy Games"
+    },
+    {
+        "title": "One Hand Clapping",
+        "stat_type": "publishers",
+        "stat_detail": "Handy Games"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "publishers",
+        "stat_detail": "Handy Games"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Marvel's Avengers",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "OCTOPATH TRAVELER",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Rise of the Tomb Raider: 20 Year Celebration",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Shadow of the Tomb Raider Definitive Edition",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Tomb Raider: Definitive Edition",
+        "stat_type": "publishers",
+        "stat_detail": "Square Enix"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    },
+    {
+        "title": "DOOM 64",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    },
+    {
+        "title": "RAGE 2",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    },
+    {
+        "title": "Wolfenstein: Youngblood",
+        "stat_type": "publishers",
+        "stat_detail": "Bethesda Softworks"
+    }
+]

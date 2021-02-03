@@ -1,0 +1,442 @@
+[
+    {
+        "title": "Assassin's Creed Odyssey",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Origins",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Syndicate",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Unity",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Assassin's Creed Valhalla",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Far Cry New Dawn",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Immortals Fenyx Rising",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Trials Rising",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs 2",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "Watch Dogs: Legion",
+        "stat_type": "developers",
+        "stat_detail": "Ubisoft"
+    },
+    {
+        "title": "West of Loathing",
+        "stat_type": "developers",
+        "stat_detail": "Asymmetric"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "developers",
+        "stat_detail": "Bit Loom Games"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "developers",
+        "stat_detail": "Airship Syndicate"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "developers",
+        "stat_detail": "BHVR"
+    },
+    {
+        "title": "RAGE 2",
+        "stat_type": "developers",
+        "stat_detail": "Avalanche Studios"
+    },
+    {
+        "title": "Figment",
+        "stat_type": "developers",
+        "stat_detail": "Bedtime Digital Games"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "developers",
+        "stat_detail": "Berzerk"
+    },
+    {
+        "title": "Windbound",
+        "stat_type": "developers",
+        "stat_detail": "5 Lives Studios"
+    },
+    {
+        "title": "SUPERHOT",
+        "stat_type": "developers",
+        "stat_detail": "SUPERHOT"
+    },
+    {
+        "title": "SUPERHOT: MIND CONTROL DELETE",
+        "stat_type": "developers",
+        "stat_detail": "SUPERHOT"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "developers",
+        "stat_detail": "Milestone"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "developers",
+        "stat_detail": "Milestone"
+    },
+    {
+        "title": "Hello Neighbor",
+        "stat_type": "developers",
+        "stat_detail": "TinyBuild"
+    },
+    {
+        "title": "Hello Neighbor: Hide and Seek",
+        "stat_type": "developers",
+        "stat_detail": "TinyBuild"
+    },
+    {
+        "title": "Little Big Workshop",
+        "stat_type": "developers",
+        "stat_detail": "Massive Miniteam"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "developers",
+        "stat_detail": "Massive Miniteam"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "developers",
+        "stat_detail": "ID Software"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "developers",
+        "stat_detail": "ID Software"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "developers",
+        "stat_detail": "Unit 2 Games"
+    },
+    {
+        "title": "Submerged: Hidden Depths",
+        "stat_type": "developers",
+        "stat_detail": "Uppercut Games"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "developers",
+        "stat_detail": "Zenimax Online"
+    },
+    {
+        "title": "Hotline Miami",
+        "stat_type": "developers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Hotline Miami 2: Wrong Number",
+        "stat_type": "developers",
+        "stat_detail": "Devolver Digital"
+    },
+    {
+        "title": "Cthulhu Saves Christmas",
+        "stat_type": "developers",
+        "stat_detail": "Zeboyd Digital Entertainment"
+    },
+    {
+        "title": "GYLT",
+        "stat_type": "developers",
+        "stat_detail": "Tequila Works"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "developers",
+        "stat_detail": "Splash Damage"
+    },
+    {
+        "title": "The Gardens Between",
+        "stat_type": "developers",
+        "stat_detail": "The Voxel Agents"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "developers",
+        "stat_detail": "Square Enix Japan"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "developers",
+        "stat_detail": "SNK"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "developers",
+        "stat_detail": "Sports Interactive"
+    },
+    {
+        "title": "Journey to the Savage Planet",
+        "stat_type": "developers",
+        "stat_detail": "Stadia Games and Entertainment"
+    },
+    {
+        "title": "Into The Breach",
+        "stat_type": "developers",
+        "stat_detail": "Subset Games"
+    },
+    {
+        "title": "Phoenix Point",
+        "stat_type": "developers",
+        "stat_detail": "Snapshot Games"
+    },
+    {
+        "title": "Chronos: Before the Ashes",
+        "stat_type": "developers",
+        "stat_detail": "THQ Nordic"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "developers",
+        "stat_detail": "High Tea Frog"
+    },
+    {
+        "title": "Farming Simulator 19",
+        "stat_type": "developers",
+        "stat_detail": "GIANTS Software"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "developers",
+        "stat_detail": "Herringbone Games"
+    },
+    {
+        "title": "Secret Neighbor",
+        "stat_type": "developers",
+        "stat_detail": "Hologryph"
+    },
+    {
+        "title": "PAC-MAN Mega Tunnel Battle",
+        "stat_type": "developers",
+        "stat_detail": "Heavy Iron"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "developers",
+        "stat_detail": "HB Studios"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "developers",
+        "stat_detail": "Funktronic Labs"
+    },
+    {
+        "title": "Sekiro: Shadows Die Twice",
+        "stat_type": "developers",
+        "stat_detail": "FromSoftware"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "developers",
+        "stat_detail": "Giant Monkey Robot"
+    },
+    {
+        "title": "Epistory - Typing Chronicles",
+        "stat_type": "developers",
+        "stat_detail": "Fishing Cactus"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "developers",
+        "stat_detail": "Gearbox"
+    },
+    {
+        "title": "One Hand Clapping",
+        "stat_type": "developers",
+        "stat_detail": "Handy Games"
+    },
+    {
+        "title": "Monster Boy and the Cursed Kingdom",
+        "stat_type": "developers",
+        "stat_detail": "FDG Entertainment"
+    },
+    {
+        "title": "Enter The Gungeon",
+        "stat_type": "developers",
+        "stat_detail": "Dodge Roll"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "developers",
+        "stat_detail": "Electronic Arts"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "developers",
+        "stat_detail": "Dimps"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "developers",
+        "stat_detail": "Coatsink"
+    },
+    {
+        "title": "Thumper",
+        "stat_type": "developers",
+        "stat_detail": "Drool"
+    },
+    {
+        "title": "Gods Will Fall",
+        "stat_type": "developers",
+        "stat_detail": "Clever Beans"
+    },
+    {
+        "title": "République",
+        "stat_type": "developers",
+        "stat_detail": "Camouflaj Studios"
+    },
+    {
+        "title": "Cyberpunk",
+        "stat_type": "developers",
+        "stat_detail": "CD Projekt Red"
+    },
+    {
+        "title": "Kine",
+        "stat_type": "developers",
+        "stat_detail": "Chump Squad"
+    },
+    {
+        "title": "Serious Sam 4",
+        "stat_type": "developers",
+        "stat_detail": "Croteam"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "developers",
+        "stat_detail": "Croteam"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "developers",
+        "stat_detail": "Bungie"
+    },
+    {
+        "title": "Jotun: Valhalla Edition",
+        "stat_type": "developers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "Spiritfarer",
+        "stat_type": "developers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "Sundered: Eldritch Edition",
+        "stat_type": "developers",
+        "stat_detail": "Thunder Lotus Games"
+    },
+    {
+        "title": "Panzer Dragoon: Remake",
+        "stat_type": "developers",
+        "stat_detail": "Forever Entertainment"
+    },
+    {
+        "title": "The Turing Test",
+        "stat_type": "developers",
+        "stat_detail": "Bulkhead Interactive"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "developers",
+        "stat_detail": "Codemasters"
+    },
+    {
+        "title": "GRID",
+        "stat_type": "developers",
+        "stat_detail": "Codemasters"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "developers",
+        "stat_detail": "2K Visual Concepts"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "developers",
+        "stat_detail": "2K Visual Concepts"
+    },
+    {
+        "title": "Destroy All Humans!",
+        "stat_type": "developers",
+        "stat_detail": "Black Forest Games"
+    }
+]

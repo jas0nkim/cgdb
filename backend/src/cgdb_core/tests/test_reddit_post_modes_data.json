@@ -1,0 +1,1757 @@
+[
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Farming Simulator 19",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "modes",
+        "stat_detail": "Cross platform multiplayer"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Trials rising",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "PAC-MAN Mega Tunnel Battle",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "SUPER BOMBERMAN R ONLINE",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "modes",
+        "stat_detail": "Competitive"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Spiritfarer",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Sundered: Eldritch Edition",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "modes",
+        "stat_detail": "Local co-op"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "SpongeBob SquarePants: Battle for Bikini Bottom Rehydrated",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Wolfenstein: Youngblood",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Baldur's Gate 3",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Marvel's Avengers",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Risk of Rain 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Zombie Army 4: Dead War",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Secret Neighbor",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Tomb Raider: Definitive Edition",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Trials rising",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Sniper Elite 4",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Red Dead Redemption 2",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "GRID",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "PAC-MAN Mega Tunnel Battle",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "SUPER BOMBERMAN R ONLINE",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Farming Simulator 19",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "modes",
+        "stat_detail": "Online multiplayer"
+    },
+    {
+        "title": "Ary and the Secret of Seasons",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Assassin's Creed Odyssey",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Assassin's Creed Origins",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Assassin's Creed Syndicate",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Assassin's Creed Unity",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Assassin's Creed Valhalla",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Baldur's Gate 3",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Celeste",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Chronos: Before the Ashes",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Cthulhu Saves Christmas",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Cyberpunk",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Destroy All Humans!",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "DOOM 64",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "El Hijo - A Wild West Tale",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Enter The Gungeon",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Epistory - Typing Chronicles",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "EVERSPACE",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Far Cry New Dawn",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Farming Simulator 19",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Figment",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Gods Will Fall",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "GRID",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "GYLT",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Hello Neighbor",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Hello Neighbor: Hide and Seek",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "HITMAN",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "HITMAN 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "HITMAN 3",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Hotline Miami",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Hotline Miami 2: Wrong Number",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Immortals Fenyx Rising",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Into The Breach",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Jotun: Valhalla Edition",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Journey to the Savage Planet",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Kine",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Kona",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Little Big Workshop",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Little Nightmares",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Lost Words: Beyond the Page",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Marvel's Avengers",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Metro 2033 Redux",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Metro Exodus",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Metro: Last Light Redux",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Monster Boy and the Cursed Kingdom",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Monster Jam Steel Titans",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "OCTOPATH TRAVELER",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "One Hand Clapping",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Orcs Must Die! 3",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Panzer Dragoon: Remake",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Phoenix Point",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "RAGE 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Red Dead Redemption 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Reigns",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Relicta",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "République",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Rise of the Tomb Raider: 20 Year Celebration",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Risk of Rain 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Sekiro: Shadows Die Twice",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Serious Sam 4",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Shadow of the Tomb Raider Definitive Edition",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Sniper Elite 4",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Spiritfarer",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SpongeBob SquarePants: Battle for Bikini Bottom Rehydrated",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "STAR WARS Jedi: Fallen Order",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SteamWorld Dig",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SteamWorld Dig 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SteamWorld Heist",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SteamWorld Quest: Hand of Gilgamech",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Strange Brigade",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Submerged: Hidden Depths",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Sundered: Eldritch Edition",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SUPERHOT",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "SUPERHOT: MIND CONTROL DELETE",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "The Gardens Between",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "The Turing Test",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Thumper",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "TOHU",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Tomb Raider: Definitive Edition",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Trials rising",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Unto The End",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Valkyria Chronicles 4",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Watch Dogs",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Watch Dogs 2",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Watch Dogs: Legion",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "West of Loathing",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Windbound",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Wolfenstein: Youngblood",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Zombie Army 4: Dead War",
+        "stat_type": "modes",
+        "stat_detail": "Single player"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Far Cry New Dawn",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Journey to the Savage Planet",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Orcs Must Die! 3",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Rise of the Tomb Raider: 20 Year Celebration",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Shadow of the Tomb Raider Definitive Edition",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Wolfenstein: Youngblood",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Assassin's Creed Unity",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Marvel's Avengers",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Risk of Rain 2",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Serious Sam 4",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Sniper Elite 4",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Strange Brigade",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "modes",
+        "stat_detail": "Online co-op"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "modes",
+        "stat_detail": "Split screen"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Enter The Gungeon",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Monster Jam Steel Titans",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "SpongeBob SquarePants: Battle for Bikini Bottom Rehydrated",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Cake Bash",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Trials rising",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "modes",
+        "stat_detail": "Local multiplayer"
+    }
+]

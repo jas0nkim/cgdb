@@ -1,4 +1,5 @@
 import datetime
+from os import stat
 from django.utils.text import slugify
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -456,6 +457,91 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
             else:
                 gfos.left = validated_data.get('event_date')
                 gfos.save()
+
+        return validated_data
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
+
+class RedditStadiaGameStatSerializer(serializers.Serializer):
+    _platform = 'Stadia'
+    STAT_TYPE_CHOICES = [
+        ('ratings', 'ratings'),
+        ('genres', 'genres'),
+        ('developers', 'developers'),
+        ('publishers', 'publishers'),
+        ('modes', 'modes'),
+    ]
+
+    # some titles in game stats are not matching with titles in games:
+    #   'game stats': 'games', ...
+    _game_title_map = {
+        'NBA 2K20': 'NBA 2k20',
+        'Doom Eternal': 'DOOM Eternal',
+        'Trials rising': 'Trials Rising',
+    }
+
+    title = serializers.CharField(max_length=200)
+    stat_type = serializers.ChoiceField(choices=STAT_TYPE_CHOICES)
+    stat_detail = serializers.CharField(max_length=200)
+
+    class Meta:
+        fields = ('title',
+                'stat_type',
+                'stat_detail',)
+
+    def create(self, validated_data):
+        try:
+            platform = Platform.objects.get(name=self._platform)
+        except Platform.DoesNotExist:
+            raise ValidationError("Platform, Stadia, not exists in DB")
+
+        title = validated_data.get('title')
+        if title in self._game_title_map:
+            title = self._game_title_map[title]
+        stat_type = validated_data.get('stat_type')
+        stat_detail = validated_data.get('stat_detail')
+
+        game = None
+        try:
+            game = Game.objects.get(title=title, platforms__name=self._platform)
+        except Game.DoesNotExist:
+            raise ValidationError(f"Stadia game title, {title} - {stat_type}, not exists in DB (table: games)")
+
+        # store stats into game
+        if stat_type == 'ratings':
+            game.esrb = stat_detail
+            game.save()
+        elif stat_type == 'genres':
+            if not game.genres.all().filter(name=stat_detail).exists():
+                try:
+                    obj = Genre.objects.get(name=stat_detail)
+                except Genre.DoesNotExist:
+                    obj = Genre.objects.create(name=stat_detail)
+                game.genres.add(obj)
+        elif stat_type == 'developers':
+            if not game.developers.all().filter(name=stat_detail).exists():
+                try:
+                    obj = Developer.objects.get(name=stat_detail)
+                except Developer.DoesNotExist:
+                    obj = Developer.objects.create(name=stat_detail)
+                game.developers.add(obj)
+        elif stat_type == 'publishers':
+            if not game.publishers.all().filter(name=stat_detail).exists():
+                try:
+                    obj = Publisher.objects.get(name=stat_detail)
+                except Publisher.DoesNotExist:
+                    obj = Publisher.objects.create(name=stat_detail)
+                game.publishers.add(obj)
+        elif stat_type == 'modes':
+            if not game.modes.all().filter(name=stat_detail).exists():
+                try:
+                    obj = Mode.objects.get(name=stat_detail)
+                except Mode.DoesNotExist:
+                    obj = Mode.objects.create(name=stat_detail)
+                game.modes.add(obj)
+        else:
+            raise ValidationError(f"Invalid Stats type passed: {stat_type}")
 
         return validated_data
 

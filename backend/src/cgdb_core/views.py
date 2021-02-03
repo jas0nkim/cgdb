@@ -14,7 +14,8 @@ from .serializers import (PlatformSerializer,
                         WikipediaGameSerializer,
                         RedditStadiaGameSerializer,
                         GameSearchSerializer,
-                        RedditStadiaGameProSerializer,)
+                        RedditStadiaGameProSerializer,
+                        RedditStadiaGameStatSerializer,)
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
@@ -88,7 +89,7 @@ class RedditStadiaGameBot(APIView):
     def post(self, request):
         """
         HTTP POST request
-        create/update game title, stadia link, stadia release date
+        create/update Stadia game title, link, release date
         """
         # since request object in DRF is immutable
         _request_data = request.data.copy()
@@ -124,7 +125,7 @@ class RedditStadiaGameProBot(APIView):
     def post(self, request):
         """
         HTTP POST request
-        entered/left game titles of a month
+        entered/left Stadia game titles of a month
         """
         # since request object in DRF is immutable
         _request_data = request.data.copy()
@@ -145,3 +146,33 @@ class RedditStadiaGameProBot(APIView):
 
 class RedditStadiaGameStatsBot(APIView):
     permission_classes = [AllowAny]
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.logger = logging.getLogger(__name__)
+
+    def post(self, request):
+        """
+        HTTP POST request
+        Stadia game stats: ratings, genres, developers, publishers, modes
+        """
+        # since request object in DRF is immutable
+        _request_data = request.data.copy()
+        title = _request_data.get('title')
+        stat_type = _request_data.get('stat_type')
+        if not title:
+            return Response({"error": "Gamd title not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        if not stat_type:
+            return Response({"error": "Gamd stats type not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        serializer = RedditStadiaGameStatSerializer(data=_request_data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            serializer.save()
+        except DataError as err:
+            self.logger.error('Reddit Stadia Game Stats (%s - %s) - %s', title, stat_type, str(err))
+            return Response(err,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.data, status=status.HTTP_200_OK)

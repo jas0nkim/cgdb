@@ -1,0 +1,712 @@
+[
+    {
+        "title": "Cake Bash",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "El Hijo - A Wild West Tale",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Epistory - Typing Chronicles",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "F1 2020",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Family Feud",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Farming Simulator 19",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Football Manager 2020",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "GRID",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Gunsport",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Human: Fall Flat",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Just Dance 2021",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Kine",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Little Big Workshop",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Lost Words: Beyond the Page",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Madden NFL 21",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Monopoly",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Monster Energy Supercross 3",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Monster Jam Steel Titans",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "MotoGP20",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "NBA 2K20",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "NBA 2K21",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "One Hand Clapping",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "PAC-MAN Mega Tunnel Battle",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "PGA TOUR 2K21",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "PHOGS!",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Spitlings",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Stacks On Stacks (On Stacks)",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Submerged: Hidden Depths",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "The Gardens Between",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "TOHU",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "UNO",
+        "stat_type": "ratings",
+        "stat_detail": "E"
+    },
+    {
+        "title": "Chronos: Before the Ashes",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Crayta",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Cthulhu Saves Christmas",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Darksiders Genesis",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Destiny 2",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Destroy All Humans!",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "DRAGON BALL XENOVERSE 2",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Enter The Gungeon",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "EVERSPACE",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "FINAL FANTASY XV",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Gods Will Fall",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "GYLT",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Hello Neighbor: Hide and Seek",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Immortals Fenyx Rising",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Jotun: Valhalla Edition",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Journey to the Savage Planet",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Kona",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Lara Croft and the Guardian of Light",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Lara Croft and the Temple of Osiris",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Little Nightmares",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Marvel's Avengers",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "OCTOPATH TRAVELER",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Orcs Must Die! 3",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Panzer Dragoon: Remake",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Phoenix Point",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "PLAYERUNKNOWN'S BATTLEGROUNDS",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Power Rangers: Battle for the Grid",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Risk of Rain 2",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Scott Pilgrim vs. The World",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Secret Neighbor",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Spiritfarer",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "STAR WARS Jedi: Fallen Order",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Strange Brigade",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "SUPERHOT",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "SUPERHOT: MIND CONTROL DELETE",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "The Crew 2",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "The Turing Test",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Trials Rising",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Unto The End",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Valkyria Chronicles 4",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "West of Loathing",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "WWE 2K Battlegrounds",
+        "stat_type": "ratings",
+        "stat_detail": "T"
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "stat_type": "ratings",
+        "stat_detail": "N/A"
+    },
+    {
+        "title": "HITMAN 3",
+        "stat_type": "ratings",
+        "stat_detail": "N/A"
+    },
+    {
+        "title": "Rock of Ages 3: Make & Break",
+        "stat_type": "ratings",
+        "stat_detail": "N/A"
+    },
+    {
+        "title": "Assassin's Creed Odyssey",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Assassin's Creed Origins",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Assassin's Creed Syndicate",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Assassin's Creed Unity",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Assassin's Creed Valhalla",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Baldur's Gate 3",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Borderlands 3",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Cyberpunk",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Dead by Daylight",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Doom",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "DOOM 64",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Doom Eternal",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Far Cry 5",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Far Cry New Dawn",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Ghost Recon Breakpoint",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Ghost Recon Wildlands",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "HITMAN",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "HITMAN 2",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Hotline Miami",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Hotline Miami 2: Wrong Number",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Metro 2033 Redux",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Metro Exodus",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Metro: Last Light Redux",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Mortal Kombat 11",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Outward",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "RAGE 2",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Red Dead Redemption 2",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Relicta",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "République",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Rise of the Tomb Raider: 20 Year Celebration",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "SAMURAI SHODOWN",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Sekiro: Shadows Die Twice",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Serious Sam 4",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Serious Sam Collection",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Shadow of the Tomb Raider Definitive Edition",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Sniper Elite 4",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "The Division 2",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "The Elder Scrolls Online",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Tomb Raider: Definitive Edition",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Watch Dogs",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Watch Dogs 2",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Watch Dogs: Legion",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Wave Break",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Wolfenstein: Youngblood",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Zombie Army 4: Dead War",
+        "stat_type": "ratings",
+        "stat_detail": "M17+"
+    },
+    {
+        "title": "Ary and the Secret of Seasons",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Celeste",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Embr",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Figment",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Get Packed",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Hello Neighbor",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Into The Breach",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Just Dance 2020",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Just Shapes & Beats",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Monster Boy and the Cursed Kingdom",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Outcasters",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Reigns",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SpongeBob SquarePants: Battle for Bikini Bottom Rehydrated",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SteamWorld Dig",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SteamWorld Dig 2",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SteamWorld Heist",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SteamWorld Quest: Hand of Gilgamech",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Sundered: Eldritch Edition",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "SUPER BOMBERMAN R ONLINE",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Thumper",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    },
+    {
+        "title": "Windbound",
+        "stat_type": "ratings",
+        "stat_detail": "E10+"
+    }
+]
