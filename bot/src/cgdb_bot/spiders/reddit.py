@@ -1,6 +1,13 @@
-from scrapy import Spider, Request
-from cgdb_bot.parsers import parse_reddit_stadia_wiki
-from . import general_resp_error_handler
+from twisted.internet.defer import inlineCallbacks
+import treq
+from scrapy import Spider, Request, signals
+from scrapy.exceptions import DropItem
+from cgdb_bot.parsers import (parse_reddit_stadia_wiki,
+                            general_resp_error_handler)
+from cgdb_bot.items import (RedditStadiaWikiGame,
+                        RedditStadiaWikiGamePro,
+                        RedditStadiaStatDetail)
+from cgdb_bot.settings import API_SERVER_HOST, API_SERVER_PORT
 
 class RedditStadiaSpider(Spider):
     """
@@ -22,13 +29,58 @@ class RedditStadiaSpider(Spider):
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
-        self._type = kw['type'] if 'type' in kw and kw['type'] in self.urls else 'games'
+        self._type = kw['type'] if 'type' in kw and kw['type'] in self.urls or kw['type'] == 'allstats' else 'games'
 
     def start_requests(self):
-        # for wiki_type, url in self.urls.items():
-        yield Request(
+        if self._type == 'allstats':
+            for stat in ['ratings', 'genres', 'developers', 'publishers', 'modes']:
+                yield Request(
+                    self.urls[stat],
+                    callback=parse_reddit_stadia_wiki,
+                    errback=general_resp_error_handler,
+                    cb_kwargs={'wiki_type': stat})
+        else:
+            yield Request(
                 self.urls[self._type],
                 callback=parse_reddit_stadia_wiki,
                 errback=general_resp_error_handler,
                 cb_kwargs={'wiki_type': self._type})
 
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super().from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.item_scraped, signal=signals.item_scraped)
+        return spider
+
+    def item_scraped(self, item, response, spider):
+        """
+        Send the scraped item to the API server
+        """
+        api_endpoint = None
+        if isinstance(item, RedditStadiaWikiGame):
+            api_endpoint = '/api/bot/reddit/stadia/game/'
+        elif isinstance(item, RedditStadiaWikiGamePro):
+            api_endpoint = '/api/bot/reddit/stadia/gamepro/'
+        elif isinstance(item, RedditStadiaStatDetail):
+            api_endpoint = '/api/bot/reddit/stadia/gamestats/'
+        else:
+            raise DropItem(f"Invalid item passed to item_scraped (Scrapy Signal) - {type(item).__name__}")
+
+        _logger = self.logger
+        @inlineCallbacks
+        def _cb(resp):
+            content = yield resp.content()
+            if resp.code >= 400:
+                _logger.error("API post request error [HTTP:%d] %s %s %s",
+                            resp.code,
+                            resp.request.absoluteURI,
+                            item.asjson(),
+                            content[0:2000])
+
+        d = treq.post(f'{API_SERVER_HOST}:{API_SERVER_PORT}{api_endpoint}',
+                    item.asjson().encode('ascii'),
+                    headers={b'Content-Type': [b'application/json']})
+        d.addCallback(_cb)
+        # The next item will be scraped only after
+        # deferred (d) is fired
+        return d

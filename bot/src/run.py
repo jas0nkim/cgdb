@@ -2,9 +2,11 @@ import sys
 import getopt
 from os import path
 import csv
-from scrapy.crawler import CrawlerProcess
+from twisted.internet import reactor, defer
+from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from cgdb_bot.spiders import WikipediaGameSpider
+from scrapy.utils.log import configure_logging
+from cgdb_bot.spiders import WikipediaGameSpider, RedditStadiaSpider
 from cgdb_bot.settings import CRAWL_ARG_DELIMITER
 
 ALLOWED_PLATFORMS = ('xCloud', 'Stadia', 'Luna',)
@@ -38,6 +40,20 @@ def run(file, platform):
                 platform=platform)
     process.start()
 
+def run_stadia():
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+
+    @defer.inlineCallbacks
+    def crawl():
+        yield runner.crawl(RedditStadiaSpider, type='games')
+        yield runner.crawl(RedditStadiaSpider, type='pro_games')
+        yield runner.crawl(RedditStadiaSpider, type='allstats')
+        reactor.stop()
+
+    crawl()
+    reactor.run() # the script will block here until the last crawl call is finished
+
 def main(argv):
     try:
         opts, args = getopt.getopt(argv, 'hf:p:', ['file=', 'platform=', 'help'])
@@ -55,14 +71,6 @@ def main(argv):
             file = str(arg)
         elif opt in ('-p', '--platform'):
             platform = str(arg)
-    if not file:
-        print("Please enter -f or --file")
-        usage()
-        sys.exit(2)
-    if not path.exists(file):
-        print(f"File ({file}) does not exists. Please enter correct file.")
-        usage()
-        sys.exit(2)
     if not platform:
         print("Please enter -p or --platform")
         usage()
@@ -71,18 +79,31 @@ def main(argv):
         print(f"Platform must be one of fillowings: {', '.join(ALLOWED_PLATFORMS)}")
         usage()
         sys.exit(2)
-    run(file=file, platform=platform)
+    if platform == 'Stadia':
+        run_stadia()
+    else:
+        if not file:
+            print("Please enter -f or --file")
+            usage()
+            sys.exit(2)
+        if not path.exists(file):
+            print(f"File ({file}) does not exists. Please enter correct file.")
+            usage()
+            sys.exit(2)
+        run(file=file, platform=platform)
 
 def usage():
     print(f"""Run scrapy for crawling Wikipedia artlcles for games
 
 Usage:
-    run.py -f FILE -p PLATFORM
+    run.py -p PLATFORM [-f FILE]
 
 Options:
-    -f, --file FILE                 Csv file has list of game titles to crawl
     -p, --platform PLATFORM         Give a platform where games belong to 
                                     ({', '.join(ALLOWED_PLATFORMS)})
+    -f, --file FILE                 CSV file has list of game titles to
+                                    crawl
+                                    (Required for platforms: xCloud, Luna)
 """)
 
 if __name__ == "__main__":

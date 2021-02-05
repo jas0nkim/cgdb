@@ -13,40 +13,7 @@ from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
                             CRAWL_ARG_DELIMITER, DATA_DIR)
 from cgdb_bot.parsers import parse_wikipedia_game_article
 from cgdb_bot.items import WikipediaGameItem
-
-
-def general_resp_error_handler(failure):
-    """
-    Scrapy Request general error handler
-    """
-    # in case you want to do something special for some errors,
-    # you may need the failure's type:
-    logger = logging.getLogger(__name__)
-
-    if failure.check(HttpError):
-        # these exceptions come from HttpError spider middleware
-        # you can get the non-200 response
-        response = failure.value.response
-        logger.error('ScrapyRequestError, HttpError: %s - %s - %s',
-                    response.url,
-                    failure.getErrorMessage(),
-                    response.text)
-    elif failure.check(DNSLookupError):
-        # this is the original request
-        request = failure.request
-        logger.error('ScrapyRequestError, DNSLookupError: %s - %s',
-                    request.cb_kwargs['main_url'],
-                    failure.getErrorMessage())
-    elif failure.check(TOError, TCPTimedOutError):
-        request = failure.request
-        logger.error('ScrapyRequestError, TimeoutError, TCPTimedOutError: %s - %s',
-                    request.cb_kwargs['main_url'],
-                    failure.getErrorMessage())
-    else:
-        request = failure.request
-        logger.error('ScrapyRequestError: %s - %s',
-                    request.cb_kwargs['main_url'],
-                    failure.getErrorMessage())
+from .reddit import RedditStadiaSpider
 
 
 class WikipediaGameSpider(Spider):
@@ -97,7 +64,7 @@ class WikipediaGameSpider(Spider):
         Send the scraped item to the API server
         """
         if not isinstance(item, WikipediaGameItem):
-            raise DropItem("Invalid item passed to item_scraped (Scrapy Signal)")
+            raise DropItem(f"Invalid item passed to item_scraped (Scrapy Signal) - {type(item).__name__}")
 
         _logger = self.logger
         @inlineCallbacks
@@ -105,7 +72,7 @@ class WikipediaGameSpider(Spider):
             content = yield resp.content()
             if resp.code >= 400:
                 _logger.error("API post request error [HTTP:%d] %s %s",
-                            resp.code, resp.request.absoluteURI, content)
+                            resp.code, resp.request.absoluteURI, content[0:2000])
 
         d = treq.post(f'{API_SERVER_HOST}:{API_SERVER_PORT}/api/bot/game/',
                     item.asjson().encode('ascii'),
