@@ -2,6 +2,7 @@ import logging
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.utils import DataError
 from django.db.models import Q
+from django.utils.text import slugify
 from rest_framework import status
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
@@ -64,7 +65,7 @@ class WikipediaGameBot(APIView):
         serializer = None
         ok_status = status.HTTP_200_OK
         try:
-            game = Game.objects.get(title=title)
+            game = Game.objects.get(slug=slugify(title))
             serializer = WikipediaGameSerializer(game, data=_request_data)
         except Game.DoesNotExist:
             serializer = WikipediaGameSerializer(data=_request_data)
@@ -100,7 +101,7 @@ class RedditStadiaGameBot(APIView):
         serializer = None
         ok_status = status.HTTP_200_OK
         try:
-            game = Game.objects.get(title=title)
+            game = Game.objects.get(slug=slugify(title))
             serializer = RedditStadiaGameSerializer(game, data=_request_data)
         except Game.DoesNotExist:
             serializer = RedditStadiaGameSerializer(data=_request_data)
@@ -161,10 +162,10 @@ class RedditStadiaGameStatsBot(APIView):
         title = _request_data.get('title')
         stat_type = _request_data.get('stat_type')
         if not title:
-            return Response({"error": "Gamd title not found"},
+            return Response({"error": "Game title not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
         if not stat_type:
-            return Response({"error": "Gamd stats type not found"},
+            return Response({"error": "Game stats type not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
         serializer = RedditStadiaGameStatSerializer(data=_request_data)
         if not serializer.is_valid():

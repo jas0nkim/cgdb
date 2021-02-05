@@ -413,12 +413,12 @@ class GameFreeOnSubscription(models.Model):
         db_table = 'game_free_on_subscriptions'
 
     def __str__(self):
-        return f"{self.game} released @{self.platform}"
+        return f"{self.game} w/ {self.platform} subscription"
 
 
 class LanguageCode(models.Model):
     iso = models.CharField(max_length=5, unique=True)
-    language = models.CharField(max_length=100, blank=True, null=True)
+    language = models.CharField(max_length=255, blank=True, null=True)
     language_eng = models.CharField(max_length=100)
 
     class Meta:

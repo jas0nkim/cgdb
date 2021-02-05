@@ -9,6 +9,7 @@ class CgdbUserAdmin(UserAdmin):
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
+    search_fields = ['title__icontains']
 
 @admin.register(Platform)
 class PlatformAdmin(admin.ModelAdmin):
@@ -17,22 +18,27 @@ class PlatformAdmin(admin.ModelAdmin):
 @admin.register(Developer)
 class DeveloperAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ['name__icontains']
 
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ['name__icontains']
 
 @admin.register(Series)
 class SeriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ['name__icontains']
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ['name__icontains']
 
 @admin.register(Mode)
 class ModeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    search_fields = ['name__icontains']
 
 @admin.register(Store)
 class StoreAdmin(admin.ModelAdmin):
@@ -48,11 +54,12 @@ class GameReleaseDateAdmin(admin.ModelAdmin):
 
 @admin.register(GameFreeOnSubscription)
 class GameFreeOnSubscriptionAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['game__title__icontains']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("tag",)}
+    search_fields = ['tag__icontains']
 
 @admin.register(LanguageCode)
 class LanguageCodeAdmin(admin.ModelAdmin):

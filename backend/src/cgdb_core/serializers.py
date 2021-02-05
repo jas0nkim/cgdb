@@ -155,104 +155,146 @@ class GameSerializer(serializers.ModelSerializer):
                 'slug',)
 
     def create(self, validated_data):
-        platforms_data = validated_data.pop('platforms') if 'platforms' in validated_data else []
-        developers_data = validated_data.pop('developers') if 'developers' in validated_data else []
-        publishers_data = validated_data.pop('publishers') if 'publishers' in validated_data else []
-        series_data = validated_data.pop('series') if 'series' in validated_data else []
-        genres_data = validated_data.pop('genres') if 'genres' in validated_data else []
-        modes_data = validated_data.pop('modes') if 'modes' in validated_data else []
+        platforms_data = validated_data.pop('platforms', [])
+        developers_data = validated_data.pop('developers', [])
+        publishers_data = validated_data.pop('publishers', [])
+        series_data = validated_data.pop('series', [])
+        genres_data = validated_data.pop('genres', [])
+        modes_data = validated_data.pop('modes', [])
 
         instance = Game.objects.create(**validated_data)
 
         for platform_data in platforms_data:
+            name = platform_data.pop('name')
             try:
-                obj = Platform.objects.get(**platform_data)
+                obj = Platform.objects.get(slug=slugify(name))
             except Platform.DoesNotExist:
-                obj = Platform.objects.create(**platform_data)
+                obj = Platform.objects.create(
+                                        name=name,
+                                        **platform_data)
             instance.platforms.add(obj)
         for developer_data in developers_data:
+            name = developer_data.pop('name')
             try:
-                obj = Developer.objects.get(**developer_data)
+                obj = Developer.objects.get(slug=slugify(name))
             except Developer.DoesNotExist:
-                obj = Developer.objects.create(**developer_data)
+                obj = Developer.objects.create(
+                                        name=name,
+                                        **developer_data)
             instance.developers.add(obj)
         for publisher_data in publishers_data:
+            name = publisher_data.pop('name')
             try:
-                obj = Publisher.objects.get(**publisher_data)
+                obj = Publisher.objects.get(slug=slugify(name))
             except Publisher.DoesNotExist:
-                obj = Publisher.objects.create(**publisher_data)
+                obj = Publisher.objects.create(
+                                        name=name,
+                                        **publisher_data)
             instance.publishers.add(obj)
         for single_series_data in series_data:
+            name = single_series_data.pop('name')
             try:
-                obj = Series.objects.get(**single_series_data)
+                obj = Series.objects.get(slug=slugify(name))
             except Series.DoesNotExist:
-                obj = Series.objects.create(**single_series_data)
+                obj = Series.objects.create(
+                                        name=name,
+                                        **single_series_data)
             instance.series.add(obj)
         for genre_data in genres_data:
+            name = genre_data.pop('name')
             try:
-                obj = Genre.objects.get(**genre_data)
+                obj = Genre.objects.get(slug=slugify(name))
             except Genre.DoesNotExist:
-                obj = Genre.objects.create(**genre_data)
+                obj = Genre.objects.create(
+                                        name=name,
+                                        **genre_data)
             instance.genres.add(obj)
         for mode_data in modes_data:
+            name = mode_data.pop('name')
             try:
-                obj = Mode.objects.get(**mode_data)
+                obj = Mode.objects.get(slug=slugify(name))
             except Mode.DoesNotExist:
-                obj = Mode.objects.create(**mode_data)
+                obj = Mode.objects.create(
+                                        name=name,
+                                        **mode_data)
             instance.modes.add(obj)
         return instance
 
     def update(self, instance, validated_data):
-        platforms_data = validated_data.pop('platforms') if 'platforms' in validated_data else []
-        developers_data = validated_data.pop('developers') if 'developers' in validated_data else []
-        publishers_data = validated_data.pop('publishers') if 'publishers' in validated_data else []
-        series_data = validated_data.pop('series') if 'series' in validated_data else []
-        genres_data = validated_data.pop('genres') if 'genres' in validated_data else []
-        modes_data = validated_data.pop('modes') if 'modes' in validated_data else []
+        platforms_data = validated_data.pop('platforms', [])
+        developers_data = validated_data.pop('developers', [])
+        publishers_data = validated_data.pop('publishers', [])
+        series_data = validated_data.pop('series', [])
+        genres_data = validated_data.pop('genres', [])
+        modes_data = validated_data.pop('modes', [])
 
         instance = super().update(instance, validated_data)
 
         for platform_data in platforms_data:
-            if not instance.platforms.all().filter(**platform_data).exists():
+            name = platform_data.pop('name')
+            if not instance.platforms.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Platform.objects.get(**platform_data)
+                    obj = Platform.objects.get(slug=slugify(name))
                 except Platform.DoesNotExist:
-                    obj = Platform.objects.create(**platform_data)
+                    obj = Platform.objects.create(
+                                            name=name,
+                                            **platform_data)
                 instance.platforms.add(obj)
         for developer_data in developers_data:
-            if not instance.developers.all().filter(**developer_data).exists():
+            name = developer_data.pop('name')
+            if not instance.developers.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Developer.objects.get(**developer_data)
+                    obj = Developer.objects.get(slug=slugify(name))
                 except Developer.DoesNotExist:
-                    obj = Developer.objects.create(**developer_data)
+                    obj = Developer.objects.create(
+                                            name=name,
+                                            **developer_data)
                 instance.developers.add(obj)
         for publisher_data in publishers_data:
-            if not instance.publishers.all().filter(**publisher_data).exists():
+            name = publisher_data.pop('name')
+            if not instance.publishers.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Publisher.objects.get(**publisher_data)
+                    obj = Publisher.objects.get(slug=slugify(name))
                 except Publisher.DoesNotExist:
-                    obj = Publisher.objects.create(**publisher_data)
+                    obj = Publisher.objects.create(
+                                            name=name,
+                                            **publisher_data)
                 instance.publishers.add(obj)
         for single_series_data in series_data:
-            if not instance.series.all().filter(**single_series_data).exists():
+            name = single_series_data.pop('name')
+            if not instance.series.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Series.objects.get(**single_series_data)
+                    obj = Series.objects.get(slug=slugify(name))
                 except Series.DoesNotExist:
-                    obj = Series.objects.create(**single_series_data)
+                    obj = Series.objects.create(
+                                            name=name,
+                                            **single_series_data)
                 instance.series.add(obj)
         for genre_data in genres_data:
-            if not instance.genres.all().filter(**genre_data).exists():
+            name = genre_data.pop('name')
+            if not instance.genres.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Genre.objects.get(**genre_data)
+                    obj = Genre.objects.get(slug=slugify(name))
                 except Genre.DoesNotExist:
-                    obj = Genre.objects.create(**genre_data)
+                    obj = Genre.objects.create(
+                                            name=name,
+                                            **genre_data)
                 instance.genres.add(obj)
         for mode_data in modes_data:
-            if not instance.modes.all().filter(**mode_data).exists():
+            name = mode_data.pop('name')
+            if not instance.modes.all().filter(
+                                            slug=slugify(name)).exists():
                 try:
-                    obj = Mode.objects.get(**mode_data)
+                    obj = Mode.objects.get(slug=slugify(name))
                 except Mode.DoesNotExist:
-                    obj = Mode.objects.create(**mode_data)
+                    obj = Mode.objects.create(
+                                            name=name,
+                                            **mode_data)
                 instance.modes.add(obj)
         return instance
 
@@ -343,7 +385,7 @@ class RedditStadiaGameSerializer(GameSerializer):
 
         # insert or update game release date info
         try:
-            platform = Platform.objects.get(name=self._platform)
+            platform = Platform.objects.get(slug=slugify(self._platform))
         except Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
@@ -363,7 +405,7 @@ class RedditStadiaGameSerializer(GameSerializer):
 
         # insert or update game release date info
         try:
-            platform = Platform.objects.get(name=self._platform)
+            platform = Platform.objects.get(slug=slugify(self._platform))
         except Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
@@ -411,7 +453,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         try:
-            platform = Platform.objects.get(name=self._platform)
+            platform = Platform.objects.get(slug=slugify(self._platform))
         except Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
 
@@ -421,7 +463,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
                 entered_title = self._game_title_map[entered_title]
             game = None
             try:
-                game = Game.objects.get(title=entered_title)
+                game = Game.objects.get(slug=slugify(entered_title))
             except Game.DoesNotExist:
                 raise ValidationError(f"Entering Stadia pro game title, {entered_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
@@ -441,7 +483,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
                 left_title = self._game_title_map[left_title]
             game = None
             try:
-                game = Game.objects.get(title=left_title)
+                game = Game.objects.get(slug=slugify(left_title))
             except Game.DoesNotExist:
                 raise ValidationError(f"Leaving Stadia pro game title, {left_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
@@ -475,11 +517,7 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
 
     # some titles in game stats are not matching with titles in games:
     #   'game stats': 'games', ...
-    _game_title_map = {
-        'NBA 2K20': 'NBA 2k20',
-        'Doom Eternal': 'DOOM Eternal',
-        'Trials rising': 'Trials Rising',
-    }
+    _game_title_map = {}
 
     title = serializers.CharField(max_length=200)
     stat_type = serializers.ChoiceField(choices=STAT_TYPE_CHOICES)
@@ -504,7 +542,7 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
 
         game = None
         try:
-            game = Game.objects.get(title=title, platforms__name=self._platform)
+            game = Game.objects.get(slug=slugify(title), platforms__name=self._platform)
         except Game.DoesNotExist:
             raise ValidationError(f"Stadia game title, {title} - {stat_type}, not exists in DB (table: games)")
 
@@ -513,30 +551,30 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
             game.esrb = stat_detail
             game.save()
         elif stat_type == 'genres':
-            if not game.genres.all().filter(name=stat_detail).exists():
+            if not game.genres.all().filter(slug=slugify(stat_detail)).exists():
                 try:
-                    obj = Genre.objects.get(name=stat_detail)
+                    obj = Genre.objects.get(slug=slugify(stat_detail))
                 except Genre.DoesNotExist:
                     obj = Genre.objects.create(name=stat_detail)
                 game.genres.add(obj)
         elif stat_type == 'developers':
-            if not game.developers.all().filter(name=stat_detail).exists():
+            if not game.developers.all().filter(slug=slugify(stat_detail)).exists():
                 try:
-                    obj = Developer.objects.get(name=stat_detail)
+                    obj = Developer.objects.get(slug=slugify(stat_detail))
                 except Developer.DoesNotExist:
                     obj = Developer.objects.create(name=stat_detail)
                 game.developers.add(obj)
         elif stat_type == 'publishers':
-            if not game.publishers.all().filter(name=stat_detail).exists():
+            if not game.publishers.all().filter(slug=slugify(stat_detail)).exists():
                 try:
-                    obj = Publisher.objects.get(name=stat_detail)
+                    obj = Publisher.objects.get(slug=slugify(stat_detail))
                 except Publisher.DoesNotExist:
                     obj = Publisher.objects.create(name=stat_detail)
                 game.publishers.add(obj)
         elif stat_type == 'modes':
-            if not game.modes.all().filter(name=stat_detail).exists():
+            if not game.modes.all().filter(slug=slugify(stat_detail)).exists():
                 try:
-                    obj = Mode.objects.get(name=stat_detail)
+                    obj = Mode.objects.get(slug=slugify(stat_detail))
                 except Mode.DoesNotExist:
                     obj = Mode.objects.create(name=stat_detail)
                 game.modes.add(obj)

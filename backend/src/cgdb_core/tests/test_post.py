@@ -97,5 +97,13 @@ class PostTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(game.modes.get().name, 'single-player')
         self.assertEqual(game.tags.count(), 9)
         
-
-
+    def test_multiple_posts(self):
+        url = reverse('bot-game-post')
+        resp = self.client.post(url, self.test_data_1, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        resp = self.client.post(url, self.test_data_2, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        resp = self.client.post(url, self.test_data_3, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        resp = self.client.post(url, self.test_data_4, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
