@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 DEBUG = True
 ADMIN_ENABLED = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost']
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 
 
