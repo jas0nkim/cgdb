@@ -121,7 +121,7 @@
                 "description_lc": "Battletoads is a video game media franchise by Rare that began with the original beat 'em up game Battletoads in 1991. Starring three anthropomorphic toads named after skin conditions, Rash, Zitz, and Pimple, the series was created to rival the Teenage Mutant Ninja Turtles games series.[1] The original Battletoads game for the NES was renowned for its difficulty, but still received a cult following, spawning sequels for various platforms including a crossover with the Double Dragon series and a modern reboot after a 25 year gap in releases. In each of the games, the objective is to defeat the toads' nemesis the Dark Queen and her army of space mutants.",
                 "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/28/Battletoads_logo.png"],
                 "developers": ["Rare", "Dlala Studios"],
-                "publishers": ["Masaya (1991–1994)", "Tradewest (1991–1994)", "Electronic Arts (Arcade)", "Xbox Game Studios (2019–present)"],
+                "publishers": ["Masaya", "Tradewest", "Electronic Arts", "Xbox Game Studios"],
                 "series": [],
                 "genres": ["beat 'em up", "platform game"],
                 "modes": [],
@@ -153,7 +153,7 @@
                 "description_lc": "Black Desert Online (Korean: 검은사막) is a sandbox-oriented fantasy massively multiplayer online role-playing game (MMORPG) developed by Korean video game developer Pearl Abyss and originally published for Microsoft Windows in 2015. A mobile version titled Black Desert Mobile was initially released in Asia by early 2019,[1] and worldwide in December 2019. The Xbox One and PlayStation 4 versions, known simply as Black Desert, were released in 2019. The game is free-to-play in some parts of the world, but follows a buy-to-play business model in other editions, including the English-language editions.[2]",
                 "pictures": ["https://upload.wikimedia.org/wikipedia/en/8/85/Black_Desert_Online_Logo_%28En%29.png"],
                 "developers": ["Pearl Abyss"],
-                "publishers": ["WW: Pearl Abyss[a]", "NA/EU: Kakao Games", "SA: Red Fox Games"],
+                "publishers": ["Pearl Abyss", "Kakao Games", "Red Fox Games"],
                 "series": [],
                 "genres": ["mmorpg"],
                 "modes": ["multiplayer"],
@@ -190,6 +190,22 @@
                 "genres": ["action-adventure"],
                 "modes": ["single player"],
                 "link": "https://en.wikipedia.org/wiki/Outcast_(video_game)"
+            }
+        },
+        {
+            "url": "https://en.wikipedia.org/wiki/Shantae_and_the_Pirate%27s_Curse",
+            "expected": {
+                "english_title": "Shantae and the Pirate's Curse",
+                "language": "en",
+                "title_lc": "Shantae and the Pirate's Curse",
+                "description_lc": "Shantae and the Pirate's Curse is a platform game developed by WayForward Technologies for the Nintendo 3DS and the Wii U. It is the third game in the Shantae series, following Shantae: Risky's Revenge. It was released in North America on the 3DS eShop on October 23, 2014 and on the Wii U eShop on December 25, 2014, and in PAL regions on both platforms on February 5, 2015. The game was later ported to PlayStation 4, Xbox One, Microsoft Windows, Amazon Fire TV, and Nintendo Switch. The game follows the adventures of the eponymous half-genie Shantae as she once again has to save Sequin Land from a new foe, the Pirate Master, with help from her nemesis Risky Boots.",
+                "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/41/Shantae_3_cover.png"],
+                "developers": ["WayForward Technologies"],
+                "publishers": ["WayForward Technologies", "Rising Star Games", "Oizumi Amuzio Inc."],
+                "series": ["Shantae"],
+                "genres": ["platform", "metroidvania"],
+                "modes": ["single-player"],
+                "link": "https://en.wikipedia.org/wiki/Shantae_and_the_Pirate%27s_Curse"
             }
         }
     ],

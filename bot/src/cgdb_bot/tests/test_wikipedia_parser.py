@@ -42,18 +42,18 @@ class TestWikipediaParser(unittest.TestCase):
                                     data['expected']['title_lc'])
                     self.assertEqual(i.description_lc,
                                     data['expected']['description_lc'])
-                    self.assertEqual(i.pictures,
-                                    data['expected']['pictures'])
-                    self.assertEqual(i.developers,
-                                    data['expected']['developers'])
-                    self.assertEqual(i.publishers,
-                                    data['expected']['publishers'])
-                    self.assertEqual(i.series,
-                                    data['expected']['series'])
-                    self.assertEqual(i.genres,
-                                    data['expected']['genres'])
-                    self.assertEqual(i.modes,
-                                    data['expected']['modes'])
+                    self.assertEqual(frozenset(i.pictures),
+                                    frozenset(data['expected']['pictures']))
+                    self.assertEqual(frozenset(i.developers),
+                                    frozenset(data['expected']['developers']))
+                    self.assertEqual(frozenset(i.publishers),
+                                    frozenset(data['expected']['publishers']))
+                    self.assertEqual(frozenset(i.series),
+                                    frozenset(data['expected']['series']))
+                    self.assertEqual(frozenset(i.genres),
+                                    frozenset(data['expected']['genres']))
+                    self.assertEqual(frozenset(i.modes),
+                                    frozenset(data['expected']['modes']))
                     self.assertEqual(i.link,
                                     data['expected']['link'])
 
