@@ -97,7 +97,8 @@ class WikipediaParser:
         try:
             if len(description_pieces) < 1:
                 raise NoHtmlElementFound("No description found")
-            return ''.join(description_pieces).strip()
+            # remove wikipedia's reference numbers (i.e [3])
+            return re.sub(r'\[(.*?)\]', '', ''.join(description_pieces).strip())
         except NoHtmlElementFound as err:
             self.logger.warning("%s - %s", str(err), response.url)
             return None
