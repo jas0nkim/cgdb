@@ -37,15 +37,26 @@ $ cd bot/src
 $ python -m unittest
 ```
 
-## Backup data
+## Backup/restore data
+- Backup
 ```
 $ docker-compose exec postgres pg_dump -h postgres -U cgdb cgdb > .sql/cgdb-backup-xxxx.sql
 ```
 Enter password after
 
+- Restore
+```
+$ docker-compose exec postgres sh
+# cd /etc
+# psql -U cgdb cgdb < .sql/cgdb-backup-xxxx.sql
+```
+
+## Access postgres db
+```
+$ docker-compose exec postgres psql -h postgres -U cgdb cgdb
+```
 
 ## References / Game list
-
 - [Stadia - Reddit](https://www.reddit.com/r/Stadia/wiki/index)
 - [Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
 - [xCloud - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
