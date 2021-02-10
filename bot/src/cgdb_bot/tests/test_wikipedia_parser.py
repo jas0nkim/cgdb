@@ -10,11 +10,10 @@ class TestWikipediaParser(unittest.TestCase):
     Test Wikipedia page parsers
     """
 
-    def setUp(self):
-        content = Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_data.json').read_text()
-        _json = json.loads(content)
-        self.test_article_data = _json.get('parse_wikipedia_game_article')
-        self.test_interlang_data = _json.get('parse_wikipedia_game_inter_languages')
+    @classmethod
+    def setUpClass(cls):
+        cls.test_article_data = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_games_data.json').read_text())
+        cls.test_interlang_data = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_game_inter_languages_data.json').read_text())
 
     def test_url_responses(self):
         """

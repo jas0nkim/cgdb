@@ -1,0 +1,128 @@
+[
+    {
+        "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+        "expected": {
+            "inter_languages": [
+                {
+                    "iso": "ar",
+                    "url": "https://ar.wikipedia.org/wiki/%D8%A3%D8%A8%D9%84%D9%8A%D8%BA_%D8%AA%D9%8A%D9%84:_%D8%A5%D9%8A%D9%86%D9%88%D8%B3%D9%8A%D9%86%D8%B3",
+                    "lang": "Arabic",
+                    "lang_lc": "العربية",
+                    "title_lc": "أبليغ تيل: إينوسينس"
+                },
+                {
+                    "iso": "de",
+                    "url": "https://de.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "German",
+                    "lang_lc": "Deutsch",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "es",
+                    "url": "https://es.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Spanish",
+                    "lang_lc": "Español",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "fa",
+                    "url": "https://fa.wikipedia.org/wiki/%D8%A7%D9%81%D8%B3%D8%A7%D9%86%D9%87_%D8%B7%D8%A7%D8%B9%D9%88%D9%86:_%D8%A7%DB%8C%D9%86%D8%B3%D9%86%D8%B3",
+                    "lang": "Persian",
+                    "lang_lc": "فارسی",
+                    "title_lc": "افسانه طاعون: اینسنس"
+                },
+                {
+                    "iso": "fr",
+                    "url": "https://fr.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "French",
+                    "lang_lc": "Français",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "ko",
+                    "url": "https://ko.wikipedia.org/wiki/%ED%94%8C%EB%9E%98%EA%B7%B8_%ED%85%8C%EC%9D%BC:_%EC%9D%B4%EB%85%B8%EC%84%BC%EC%8A%A4",
+                    "lang": "Korean",
+                    "lang_lc": "한국어",
+                    "title_lc": "플래그 테일: 이노센스"
+                },
+                {
+                    "iso": "it",
+                    "url": "https://it.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Italian",
+                    "lang_lc": "Italiano",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "arz",
+                    "url": "https://arz.wikipedia.org/wiki/%D8%A7%D8%A8%D9%84%D8%A7%D8%AC%D9%88_%D8%AA%D8%A7%D9%8A%D9%84:_%D8%A7%D9%8A%D9%86%D9%88%D8%B3%D9%8A%D9%86%D8%B3",
+                    "lang": "Egyptian Arabic",
+                    "lang_lc": "مصرى",
+                    "title_lc": "ابلاجو تايل: اينوسينس"
+                },
+                {
+                    "iso": "ja",
+                    "url": "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B0_%E3%83%86%E3%82%A4%E3%83%AB_-%E3%82%A4%E3%83%8E%E3%82%BB%E3%83%B3%E3%82%B9-",
+                    "lang": "Japanese",
+                    "lang_lc": "日本語",
+                    "title_lc": "プレイグ テイル -イノセンス-"
+                },
+                {
+                    "iso": "pt",
+                    "url": "https://pt.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Portuguese",
+                    "lang_lc": "Português",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "ru",
+                    "url": "https://ru.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Russian",
+                    "lang_lc": "Русский",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "fi",
+                    "url": "https://fi.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Finnish",
+                    "lang_lc": "Suomi",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "th",
+                    "url": "https://th.wikipedia.org/wiki/%E0%B8%AD%E0%B8%B0%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%81%E0%B9%80%E0%B8%97%E0%B8%A5%E0%B8%AD%E0%B8%B4%E0%B8%99%E0%B9%82%E0%B8%99%E0%B9%80%E0%B8%8B%E0%B8%99%E0%B8%8B%E0%B9%8C",
+                    "lang": "Thai",
+                    "lang_lc": "ไทย",
+                    "title_lc": "อะเพลกเทลอินโนเซนซ์"
+                },
+                {
+                    "iso": "uk",
+                    "url": "https://uk.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Ukrainian",
+                    "lang_lc": "Українська",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "vi",
+                    "url": "https://vi.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+                    "lang": "Vietnamese",
+                    "lang_lc": "Tiếng Việt",
+                    "title_lc": "A Plague Tale: Innocence"
+                },
+                {
+                    "iso": "wuu",
+                    "url": "https://wuu.wikipedia.org/wiki/%E7%98%9F%E7%96%AB%E4%BC%A0%E8%AF%B4%EF%BC%9A%E6%97%A0%E7%BD%AA",
+                    "lang": "Wu Chinese",
+                    "lang_lc": "吴语",
+                    "title_lc": "瘟疫传说：无罪"
+                },
+                {
+                    "iso": "zh",
+                    "url": "https://zh.wikipedia.org/wiki/%E7%98%9F%E7%96%AB%E5%82%B3%E8%AA%AA%EF%BC%9A%E7%84%A1%E7%BD%AA",
+                    "lang": "Chinese",
+                    "lang_lc": "中文",
+                    "title_lc": "瘟疫傳說：無罪"
+                }
+            ]
+        }
+    }
+]

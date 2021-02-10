@@ -97,7 +97,7 @@ class WikipediaParser:
         try:
             if len(description_pieces) < 1:
                 raise NoHtmlElementFound("No description found")
-            return ''.join(description_pieces).strip('\n')
+            return ''.join(description_pieces).strip()
         except NoHtmlElementFound as err:
             self.logger.warning("%s - %s", str(err), response.url)
             return None
@@ -133,8 +133,9 @@ class WikipediaParser:
                                             loglevel='warning',
                                             lowercase=True)
 
-    def _extract_from_info_table(self, response, lookup=None, loglevel='warning',
-                                lowercase=False):
+    def _extract_from_info_table(self, response, lookup=None,
+                                            loglevel='warning',
+                                            lowercase=False):
         td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
                             /tr[th//text()[contains(., "{lookup}")]]/td""")
         if len(td.xpath('./*[contains(@class, "NavFrame")]')) > 0:
@@ -147,6 +148,8 @@ class WikipediaParser:
                 ret = ret + li.xpath("""
                                 *[not(self::span[@style="font-size:95%;"])]
                                 //text()""").getall()
+            # get any items outside list(ul/li). ref: https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)
+            ret = ret + td.xpath('./*[not(ul)]//text()').getall()
         else:
             # for filtering publishers on https://en.wikipedia.org/wiki/Black_Desert_Online
             ret = td.xpath('./text()').getall() + td.xpath("""
@@ -154,6 +157,9 @@ class WikipediaParser:
                                 //text()""").getall()
         
         def __filter_ret(_ret):
+            """
+            remove ',' , empty string, (...), [...] items from the return list
+            """
             r = []
             for x in _ret:
                 x = x.replace(',','').strip()
@@ -168,9 +174,6 @@ class WikipediaParser:
         try:
             if len(ret) < 1:
                 raise NoHtmlElementFound(f"No {lookup} found")
-            while ' (remake)' in ret:
-                ret.remove(' (remake)')
-            # remove ',' within string, and strip, lower case
             ret = __filter_ret(ret)
             return ret
         except NoHtmlElementFound as err:

@@ -1,0 +1,258 @@
+[
+    {
+        "url": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence",
+        "expected": {
+            "english_title": "A Plague Tale: Innocence",
+            "language": "en",
+            "title_lc": "A Plague Tale: Innocence",
+            "description_lc": "A Plague Tale: Innocence is an action-adventure horror stealth game developed by Asobo Studio and published by Focus Home Interactive. It was released for Microsoft Windows, PlayStation 4 and Xbox One in May 2019, and received generally positive reviews from critics.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg"],
+            "developers": ["Asobo Studio"],
+            "publishers": ["Focus Home Interactive"],
+            "series": [],
+            "genres": ["action-adventure", "stealth", "survival horror"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Absolver",
+        "expected": {
+            "english_title": "Absolver",
+            "language": "en",
+            "title_lc": "Absolver",
+            "description_lc": "Absolver is a martial arts-themed action role-playing video game developed by Sloclap and published by Devolver Digital for PlayStation 4, Windows, and Xbox One. In the game, players control warrior characters who fight other players and computer-controlled characters across the fictional land of Adal to prove their worthiness of joining the Absolver peacekeepers. The game's story is focused on the human development of the characters as they fight to find their place in the collapsed empire.[1] The character's fighting moves are customized in a \"combat deck\" of cards, with each card assigned to a move. Players earn cards, equipment, and weapons by progressing through the game.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c9/Absolver_logo.png"],
+            "developers": ["Sloclap"],
+            "publishers": ["Devolver Digital"],
+            "series": [],
+            "genres": ["action role-playing"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Absolver"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Afterparty_(video_game)",
+        "expected": {
+            "english_title": "Afterparty",
+            "language": "en",
+            "title_lc": "Afterparty",
+            "description_lc": "Afterparty is an adventure video game by Night School Studio for macOS, PlayStation 4, Windows, and Xbox One platforms in October 2019 and Nintendo Switch in March 2020. Set in Hell, themed as a college town, the player navigates conversations, outdrinks Satan, and returns two best friends from the afterlife.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/0/03/Afterparty_cover_art.jpg"],
+            "developers": ["Night School Studio"],
+            "publishers": ["Night School Studio"],
+            "series": [],
+            "genres": ["adventure"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/Afterparty_(video_game)"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall",
+        "expected": {
+            "english_title": "Age of Wonders: Planetfall",
+            "language": "en",
+            "title_lc": "Age of Wonders: Planetfall",
+            "description_lc": "Age of Wonders: Planetfall is a 4X turn-based strategy video game developed by Triumph Studios and published by Paradox Interactive. The game is the fifth installment in the Age of Wonders series and features a sci-fi setting. It released for Microsoft Windows, PlayStation 4 and Xbox One in August 2019.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/3/3d/Age_of_Wonders_Planetfall_cover_art.jpg"],
+            "developers": ["Triumph Studios"],
+            "publishers": ["Paradox Interactive"],
+            "series": ["Age of Wonders"],
+            "genres": ["4x", "turn-based strategy"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Age_of_Wonders:_Planetfall"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Ark:_Survival_Evolved",
+        "expected": {
+            "english_title": "Ark: Survival Evolved",
+            "language": "en",
+            "title_lc": "Ark: Survival Evolved",
+            "description_lc": "Ark: Survival Evolved (stylized as ΛRK) is a 2017 action-adventure survival video game developed by Studio Wildcard, in collaboration with Instinct Games, Efecto Studios, and Virtual Basement. In the game, players must survive being stranded on an island filled with roaming dinosaurs and other prehistoric animals, natural hazards, and potentially hostile human players.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/2b/ArkSurvivalEvolved.png"],
+            "developers": ["Studio Wildcard"],
+            "publishers": ["Studio Wildcard"],
+            "series": [],
+            "genres": ["action-adventure", "survival"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Ark:_Survival_Evolved"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Astroneer",
+        "expected": {
+            "english_title": "Astroneer",
+            "language": "en",
+            "title_lc": "Astroneer",
+            "description_lc": "Astroneer is a sandbox adventure game developed by System Era Softworks. The game was released through early access in December 2016 before a full release in 2019. The player is tasked with colonizing planets, creating structures, and collecting resources. Astroneer has no set goal or storyline, though each planet holds challenges for players to complete.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/5/5b/Astroneer_Image1.png"],
+            "developers": ["System Era Softworks"],
+            "publishers": ["System Era Softworks"],
+            "series": [],
+            "genres": ["sandbox", "adventure"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Astroneer"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight",
+        "expected": {
+            "english_title": "Batman: Arkham Knight",
+            "language": "en",
+            "title_lc": "Batman: Arkham Knight",
+            "description_lc": "Batman: Arkham Knight is a 2015 action-adventure game developed by Rocksteady Studios and published by Warner Bros. Interactive Entertainment. Based on the DC Comics superhero Batman, it is the successor to the 2013 video game Batman: Arkham Origins, and the fourth main installment in the Batman: Arkham series. Written by Sefton Hill, Ian Ball and Martin Lancaster, Arkham Knight is inspired by the long-running comic book mythos. Set nine months after the events of 2011's Batman: Arkham City, the game's main storyline follows Batman as he confronts Scarecrow, who has launched an attack on Gotham City, causing a citywide evacuation. Scarecrow, with the help of the mysterious Arkham Knight, is also able to unite Batman's greatest foes in an attempt to finally destroy Batman.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/6/6c/Batman_Arkham_Knight_Cover_Art.jpg"],
+            "developers": ["Rocksteady Studios"],
+            "publishers": ["Warner Bros. Interactive Entertainment"],
+            "series": ["Batman: Arkham"],
+            "genres": ["action-adventure"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/Batman:_Arkham_Knight"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Battletoads",
+        "expected": {
+            "english_title": "Battletoads",
+            "language": "en",
+            "title_lc": "Battletoads",
+            "description_lc": "Battletoads is a video game media franchise by Rare that began with the original beat 'em up game Battletoads in 1991. Starring three anthropomorphic toads named after skin conditions, Rash, Zitz, and Pimple, the series was created to rival the Teenage Mutant Ninja Turtles games series.[1] The original Battletoads game for the NES was renowned for its difficulty, but still received a cult following, spawning sequels for various platforms including a crossover with the Double Dragon series and a modern reboot after a 25 year gap in releases. In each of the games, the objective is to defeat the toads' nemesis the Dark Queen and her army of space mutants.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/28/Battletoads_logo.png"],
+            "developers": ["Rare", "Dlala Studios"],
+            "publishers": ["Masaya", "Tradewest", "Electronic Arts", "Xbox Game Studios"],
+            "series": [],
+            "genres": ["beat 'em up", "platform game"],
+            "modes": [],
+            "link": "https://en.wikipedia.org/wiki/Battletoads"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar",
+        "expected": {
+            "english_title": "Battle Chasers: Nightwar",
+            "language": "en",
+            "title_lc": "Battle Chasers: Nightwar",
+            "description_lc": "Battle Chasers: Nightwar is a turn-based role-playing video game developed by Airship Syndicate and published by THQ Nordic. It was released in October 2017 for Microsoft Windows, macOS, PlayStation 4 and Xbox One,[1] and in May 2018 for Nintendo Switch and Linux.[2][3] Based on the Battle Chasers fantasy comic book series by Joe Madureira, the game involves the cast of that series being marooned on an island and being forced to stop the plans of an evil sorceress in order to escape.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/44/Battle_Chasers_Nightwar_cover_art.jpg"],
+            "developers": ["Airship Syndicate"],
+            "publishers": ["THQ Nordic"],
+            "series": [],
+            "genres": ["role-playing"],
+            "modes": [],
+            "link": "https://en.wikipedia.org/wiki/Battle_Chasers:_Nightwar"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Black_Desert_Online",
+        "expected": {
+            "english_title": "Black Desert Online",
+            "language": "en",
+            "title_lc": "Black Desert Online",
+            "description_lc": "Black Desert Online (Korean: 검은사막) is a sandbox-oriented fantasy massively multiplayer online role-playing game (MMORPG) developed by Korean video game developer Pearl Abyss and originally published for Microsoft Windows in 2015. A mobile version titled Black Desert Mobile was initially released in Asia by early 2019,[1] and worldwide in December 2019. The Xbox One and PlayStation 4 versions, known simply as Black Desert, were released in 2019. The game is free-to-play in some parts of the world, but follows a buy-to-play business model in other editions, including the English-language editions.[2]",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/8/85/Black_Desert_Online_Logo_%28En%29.png"],
+            "developers": ["Pearl Abyss"],
+            "publishers": ["Pearl Abyss", "Kakao Games", "Red Fox Games"],
+            "series": [],
+            "genres": ["mmorpg"],
+            "modes": ["multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Black_Desert_Online"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)",
+        "expected": {
+            "english_title": "Blair Witch",
+            "language": "en",
+            "title_lc": "Blair Witch",
+            "description_lc": "Blair Witch is a psychological survival horror video game developed by Bloober Team based on the Blair Witch series of horror films. It was published by Lionsgate Games for Microsoft Windows, Xbox One and Xbox Game Pass on August 30, 2019. The game is set two years after the events of the 1999 film The Blair Witch Project,  which takes place in 1994. The game follows former police officer Ellis Lynch as he joins the search in Black Hills Forest for a missing boy. The game was later ported to PlayStation 4 on December 3, 2019, Nintendo Switch on June 25, 2020 and Oculus Quest & Quest 2 on October 29, 2020.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/c/c7/Blair_Witch_video_game_poster.jpg"],
+            "developers": ["Bloober Team"],
+            "publishers": ["Lionsgate Games"],
+            "series": ["Blair Witch"],
+            "genres": ["survival horror"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/Blair_Witch_(video_game)"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Outcast_(video_game)",
+        "expected": {
+            "english_title": "Outcast",
+            "language": "en",
+            "title_lc": "Outcast",
+            "description_lc": "Outcast is an action-adventure video game developed by Belgian developer Appeal and released by Infogrames for Windows in 1999. The game was critically acclaimed and was named the \"Adventure Game of the Year\" by GameSpot in 1999.[2] In 2001, Appeal developed a sequel, called Outcast II: The Lost Paradise, which was never finished due to bankruptcy. In 2010, the game was re-released via digital distribution on GOG. In 2014, Outcast was remastered as Outcast 1.1, after the original developers reacquired the franchise IP. In 2017, a remake titled Outcast: Second Contact was released for Windows, PlayStation 4, and Xbox One.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/e/e3/Outcastbox.jpg"],
+            "developers": ["Appeal"],
+            "publishers": ["Infogrames", "Bigben Interactive"],
+            "series": [],
+            "genres": ["action-adventure"],
+            "modes": ["single player"],
+            "link": "https://en.wikipedia.org/wiki/Outcast_(video_game)"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Shantae_and_the_Pirate%27s_Curse",
+        "expected": {
+            "english_title": "Shantae and the Pirate's Curse",
+            "language": "en",
+            "title_lc": "Shantae and the Pirate's Curse",
+            "description_lc": "Shantae and the Pirate's Curse is a platform game developed by WayForward Technologies for the Nintendo 3DS and the Wii U. It is the third game in the Shantae series, following Shantae: Risky's Revenge. It was released in North America on the 3DS eShop on October 23, 2014 and on the Wii U eShop on December 25, 2014, and in PAL regions on both platforms on February 5, 2015. The game was later ported to PlayStation 4, Xbox One, Microsoft Windows, Amazon Fire TV, and Nintendo Switch. The game follows the adventures of the eponymous half-genie Shantae as she once again has to save Sequin Land from a new foe, the Pirate Master, with help from her nemesis Risky Boots.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/4/41/Shantae_3_cover.png"],
+            "developers": ["WayForward Technologies"],
+            "publishers": ["WayForward Technologies", "Rising Star Games", "Oizumi Amuzio Inc."],
+            "series": ["Shantae"],
+            "genres": ["platform", "metroidvania"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/Shantae_and_the_Pirate%27s_Curse"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)",
+        "expected": {
+            "english_title": "Wonder Boy",
+            "language": "en",
+            "title_lc": "Wonder Boy",
+            "description_lc": "Wonder Boy (ワンダーボーイ, Wandā Bōi) is a 1986 platform game published by Sega and developed by Escape (now known as Westone Bit Entertainment).",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/f/ff/WonderBoy_arcadeflyer.png"],
+            "developers": ["Escape", "Sega", "Activision"],
+            "publishers": ["Sega", "Activision", "Hit Squad"],
+            "series": [],
+            "genres": ["platform"],
+            "modes": ["single-player"],
+            "link": "https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Tom_Clancy%27s_Ghost_Recon_Wildlands",
+        "expected": {
+            "english_title": "Tom Clancy's Ghost Recon Wildlands",
+            "language": "en",
+            "title_lc": "Tom Clancy's Ghost Recon Wildlands",
+            "description_lc": "Tom Clancy's Ghost Recon Wildlands is a tactical shooter video game developed by Ubisoft Paris and Ubisoft Milan and published by Ubisoft. It was released worldwide on March 7, 2017, for Microsoft Windows, PlayStation 4 and Xbox One, as the tenth installment in the Tom Clancy's Ghost Recon franchise and is the first game in the Ghost Recon series to feature an open world environment.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/b/b9/Ghost_Recon_Wildlands_cover_art.jpg"],
+            "developers": ["Ubisoft Paris", "Ubisoft Milan"],
+            "publishers": ["Ubisoft"],
+            "series": ["Tom Clancy's Ghost Recon"],
+            "genres": ["tactical shooter"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Tom_Clancy%27s_Ghost_Recon_Wildlands"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Uno_(video_game)",
+        "expected": {
+            "english_title": "Uno",
+            "language": "en",
+            "title_lc": "Uno",
+            "description_lc": "Uno is the video game adaptation of the card game of the same name. It has been released for a number of platforms. The Xbox 360 version by Carbonated Games and Microsoft Game Studios was released on May 9, 2006, as a digital download via Xbox Live Arcade. A version for iPhone OS devices was released in 2008 by Gameloft. Gameloft released the PlayStation 3 version on October 1, 2009, and also released a version for iPod, WiiWare, Nintendo DSi via DSiWare, and PlayStation Portable.[1] An updated version developed and published by Ubisoft was released for Xbox One and PlayStation 4 in August 2016, with a Steam version to follow later in the year.[2] On November 7, 2017, Uno was released for the Nintendo Switch.[3] The game was also released for the Stadia cloud gaming service, operated by Google, on September 15, 2020.[4]",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/f/f1/Cboxuno.jpg"],
+            "developers": ["Carbonated Games", "Gameloft", "Ubisoft Chengdu"],
+            "publishers": ["Microsoft Game Studios", "Gameloft", "Ubisoft"],
+            "series": ["Uno"],
+            "genres": ["card game"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Uno_(video_game)"
+        }
+    }
+]
