@@ -7,7 +7,7 @@ services:
             - ./.env/postgres.env
         volumes:
             - ./db/postgres:/data/postgres
-            # - ./.sql:/etc/.sql
+            - ./.sql:/etc/.sql
         expose:
             - 5432
         networks:

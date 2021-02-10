@@ -37,6 +37,13 @@ $ cd bot/src
 $ python -m unittest
 ```
 
+## Backup data
+```
+$ docker-compose exec postgres pg_dump -h postgres -U cgdb cgdb > .sql/cgdb-backup-xxxx.sql
+```
+Enter password after
+
+
 ## References / Game list
 
 - [Stadia - Reddit](https://www.reddit.com/r/Stadia/wiki/index)
