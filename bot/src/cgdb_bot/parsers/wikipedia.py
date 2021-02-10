@@ -137,6 +137,9 @@ class WikipediaParser:
     def _extract_from_info_table(self, response, lookup=None,
                                             loglevel='warning',
                                             lowercase=False):
+        _special_merge_cases = [
+            ('Square Enix', 'Business Division 11'),
+        ]
         td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
                             /tr[th//text()[contains(., "{lookup}")]]/td""")
         if len(td.xpath('./*[contains(@class, "NavFrame")]')) > 0:
@@ -147,15 +150,15 @@ class WikipediaParser:
                 # for filtering publishers on https://en.wikipedia.org/wiki/Black_Desert_Online
                 ret = ret + li.xpath('./text()').getall()
                 ret = ret + li.xpath("""
-                                *[not(self::span[@style="font-size:95%;"])]
-                                //text()""").getall()
+                                *[not(self::span[@style="font-size:95%;"])
+                                and not(self::small)]//text()""").getall()
             # get any items outside list(ul/li). ref: https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)
             ret = ret + td.xpath('./*[not(ul)]//text()').getall()
         else:
             # for filtering publishers on https://en.wikipedia.org/wiki/Black_Desert_Online
             ret = td.xpath('./text()').getall() + td.xpath("""
-                                *[not(self::span[@style="font-size:95%;"])]
-                                //text()""").getall()
+                                *[not(self::span[@style="font-size:95%;"])
+                                and not(self::small)]//text()""").getall()
         
         def __filter_ret(_ret):
             """
@@ -163,13 +166,20 @@ class WikipediaParser:
             """
             r = []
             for x in _ret:
-                x = x.replace(',','').strip()
+                x = x.rstrip(',').lstrip(',').strip()
                 # remove empty, (...), [...]
                 if not x or re.match(r'\((.*?)\)|\[(.*?)\]', x):
                     continue
                 if lowercase:
                     x = x.lower()
                 r.append(x)
+            # special merge cases
+            for merge_case in _special_merge_cases:
+                # check sublist
+                if set(merge_case) <= set(r):
+                    r.append(' '.join(merge_case))
+                    for m in merge_case:
+                        r.remove(m)
             return r
 
         try:
