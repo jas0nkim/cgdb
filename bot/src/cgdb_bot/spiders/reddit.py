@@ -29,7 +29,7 @@ class RedditStadiaSpider(Spider):
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
-        self._type = kw['type'] if 'type' in kw and kw['type'] in self.urls or kw['type'] == 'allstats' else 'games'
+        self._type = kw['type'] if 'type' in kw and (kw['type'] in self.urls or kw['type'] == 'allstats') else 'games'
 
     def start_requests(self):
         if self._type == 'allstats':
