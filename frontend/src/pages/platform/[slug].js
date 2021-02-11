@@ -11,7 +11,7 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import configData from "../../config.json";
 import Head from 'next/head';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { Button, Divider, List, ListItem, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -143,26 +143,6 @@ const PlatformPage = ({ platform }) => {
             </AccordionDetails>
         </Accordion>
     );
-
-    const games = platform.games.map((game) => (
-        <Card className={classes.root} key={game.slug} variant="outlined">
-            <Link href={'/game/' + game.slug} passHref>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
-                        title={ game.slug }
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            { game.title }
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Link>
-        </Card>
-    ))
-
     return (
         <>
             <Head>
@@ -183,20 +163,17 @@ const PlatformPage = ({ platform }) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         { platform.name }
                     </Typography>
-                </CardContent>
-                <CardContent>
                     {verdict}
                     {countries}
                     {requirements}
                     {devices}
+                    <Link href={`/platform/${platform.slug}/games`}>
+                        <Button color="primary">
+                            Stadia Games
+                        </Button>
+                    </Link>
                 </CardContent>
             </Card>
-            <div>
-                <Typography gutterBottom variant="h5" component="h5">
-                    Games
-                </Typography>
-                {games}
-            </div>
         </>
     );
 };

@@ -51,30 +51,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const platforms = [
+const links = [
   {
     name: 'xCloud',
-    slug: 'xcloud',
+    url: '/platform/xcloud',
   },
   {
     name: 'Stadia',
-    slug: 'stadia',
+    url: '/platform/stadia',
+  },
+  {
+    name: 'Stadia Games',
+    url: '/platform/stadia/games',
   },
   {
     name: 'GeForce Now',
-    slug: 'geforce-now',
+    url: '/platform/geforce-now',
   },
   {
     name: 'PlayStation Now',
-    slug: 'playstation-now',
+    url: '/platform/playstation-now',
   },
   {
     name: 'Apple Arcade',
-    slug: 'apple-arcade',
+    url: '/platform/apple-arcade',
   },
   {
     name: 'Luna',
-    slug: 'luna',
+    url: '/platform/luna',
   },
 ]
 
@@ -95,10 +99,10 @@ const MenuBar = (props) => {
           <div className={classes.toolbar} />
           <Divider />
           <List>
-          {platforms.map((platform, index) => (
-              <Link href={`/platform/${platform.slug}`} passHref key={platform.slug}>
+          {links.map((link, index) => (
+              <Link href={link.url} passHref key={link.url}>
                 <ListItem button component="a" onClick={handleDrawerToggle}>
-                    <ListItemText primary={platform.name} />
+                    <ListItemText primary={link.name} />
                 </ListItem>
               </Link>
           ))}
