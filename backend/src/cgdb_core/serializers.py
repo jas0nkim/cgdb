@@ -1,6 +1,8 @@
 import datetime
 from os import stat
+from django.db.models.enums import IntegerChoices
 from django.utils.text import slugify
+from django.db.utils import IntegrityError
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from .models import (GameFreeOnSubscription, GameReleaseDate,
@@ -154,6 +156,18 @@ class GameSerializer(serializers.ModelSerializer):
                 # 'game_release_dates'
                 'slug',)
 
+    def _get_or_create_game_stat_instance(self, game_stat_cls, stat_name, stat_data):
+        try:
+            return game_stat_cls.objects.get(slug=slugify(stat_name))
+        except game_stat_cls.DoesNotExist:
+            pass
+        try:
+            return game_stat_cls.objects.create(
+                                            name=stat_name,
+                                            **stat_data)
+        except IntegrityError:
+            return game_stat_cls.objects.get(slug=slugify(stat_name))
+
     def create(self, validated_data):
         platforms_data = validated_data.pop('platforms', [])
         developers_data = validated_data.pop('developers', [])
@@ -165,58 +179,40 @@ class GameSerializer(serializers.ModelSerializer):
         instance = Game.objects.create(**validated_data)
 
         for platform_data in platforms_data:
-            name = platform_data.pop('name')
-            try:
-                obj = Platform.objects.get(slug=slugify(name))
-            except Platform.DoesNotExist:
-                obj = Platform.objects.create(
-                                        name=name,
-                                        **platform_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Platform,
+                            stat_name=platform_data.pop('name'),
+                            stat_data=platform_data)
             instance.platforms.add(obj)
         for developer_data in developers_data:
-            name = developer_data.pop('name')
-            try:
-                obj = Developer.objects.get(slug=slugify(name))
-            except Developer.DoesNotExist:
-                obj = Developer.objects.create(
-                                        name=name,
-                                        **developer_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Developer,
+                            stat_name=developer_data.pop('name'),
+                            stat_data=developer_data)
             instance.developers.add(obj)
         for publisher_data in publishers_data:
-            name = publisher_data.pop('name')
-            try:
-                obj = Publisher.objects.get(slug=slugify(name))
-            except Publisher.DoesNotExist:
-                obj = Publisher.objects.create(
-                                        name=name,
-                                        **publisher_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Publisher,
+                            stat_name=publisher_data.pop('name'),
+                            stat_data=publisher_data)
             instance.publishers.add(obj)
         for single_series_data in series_data:
-            name = single_series_data.pop('name')
-            try:
-                obj = Series.objects.get(slug=slugify(name))
-            except Series.DoesNotExist:
-                obj = Series.objects.create(
-                                        name=name,
-                                        **single_series_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Series,
+                            stat_name=single_series_data.pop('name'),
+                            stat_data=single_series_data)
             instance.series.add(obj)
         for genre_data in genres_data:
-            name = genre_data.pop('name')
-            try:
-                obj = Genre.objects.get(slug=slugify(name))
-            except Genre.DoesNotExist:
-                obj = Genre.objects.create(
-                                        name=name,
-                                        **genre_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Genre,
+                            stat_name=genre_data.pop('name'),
+                            stat_data=genre_data)
             instance.genres.add(obj)
         for mode_data in modes_data:
-            name = mode_data.pop('name')
-            try:
-                obj = Mode.objects.get(slug=slugify(name))
-            except Mode.DoesNotExist:
-                obj = Mode.objects.create(
-                                        name=name,
-                                        **mode_data)
+            obj = self._get_or_create_game_stat_instance(
+                            Mode,
+                            stat_name=mode_data.pop('name'),
+                            stat_data=mode_data)
             instance.modes.add(obj)
         return instance
 
@@ -234,67 +230,55 @@ class GameSerializer(serializers.ModelSerializer):
             name = platform_data.pop('name')
             if not instance.platforms.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Platform.objects.get(slug=slugify(name))
-                except Platform.DoesNotExist:
-                    obj = Platform.objects.create(
-                                            name=name,
-                                            **platform_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Platform,
+                                stat_name=name,
+                                stat_data=platform_data)
                 instance.platforms.add(obj)
         for developer_data in developers_data:
             name = developer_data.pop('name')
             if not instance.developers.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Developer.objects.get(slug=slugify(name))
-                except Developer.DoesNotExist:
-                    obj = Developer.objects.create(
-                                            name=name,
-                                            **developer_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Developer,
+                                stat_name=name,
+                                stat_data=developer_data)
                 instance.developers.add(obj)
         for publisher_data in publishers_data:
             name = publisher_data.pop('name')
             if not instance.publishers.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Publisher.objects.get(slug=slugify(name))
-                except Publisher.DoesNotExist:
-                    obj = Publisher.objects.create(
-                                            name=name,
-                                            **publisher_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Publisher,
+                                stat_name=name,
+                                stat_data=publisher_data)
                 instance.publishers.add(obj)
         for single_series_data in series_data:
             name = single_series_data.pop('name')
             if not instance.series.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Series.objects.get(slug=slugify(name))
-                except Series.DoesNotExist:
-                    obj = Series.objects.create(
-                                            name=name,
-                                            **single_series_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Series,
+                                stat_name=name,
+                                stat_data=single_series_data)
                 instance.series.add(obj)
         for genre_data in genres_data:
             name = genre_data.pop('name')
             if not instance.genres.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Genre.objects.get(slug=slugify(name))
-                except Genre.DoesNotExist:
-                    obj = Genre.objects.create(
-                                            name=name,
-                                            **genre_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Genre,
+                                stat_name=name,
+                                stat_data=genre_data)
                 instance.genres.add(obj)
         for mode_data in modes_data:
             name = mode_data.pop('name')
             if not instance.modes.all().filter(
                                             slug=slugify(name)).exists():
-                try:
-                    obj = Mode.objects.get(slug=slugify(name))
-                except Mode.DoesNotExist:
-                    obj = Mode.objects.create(
-                                            name=name,
-                                            **mode_data)
+                obj = self._get_or_create_game_stat_instance(
+                                Mode,
+                                stat_name=name,
+                                stat_data=mode_data)
                 instance.modes.add(obj)
         return instance
 
@@ -528,6 +512,16 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
                 'stat_type',
                 'stat_detail',)
 
+    def _get_or_create_game_stat_instance(self, game_stat_cls, stat_name):
+        try:
+            return game_stat_cls.objects.get(slug=slugify(stat_name))
+        except game_stat_cls.DoesNotExist:
+            pass
+        try:
+            return game_stat_cls.objects.create(name=stat_name)
+        except IntegrityError:
+            return game_stat_cls.objects.get(slug=slugify(stat_name))
+
     def create(self, validated_data):
         try:
             platform = Platform.objects.get(name=self._platform)
@@ -552,31 +546,27 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
             game.save()
         elif stat_type == 'genres':
             if not game.genres.all().filter(slug=slugify(stat_detail)).exists():
-                try:
-                    obj = Genre.objects.get(slug=slugify(stat_detail))
-                except Genre.DoesNotExist:
-                    obj = Genre.objects.create(name=stat_detail)
+                obj = self._get_or_create_game_stat_instance(
+                                                Genre,
+                                                stat_name=stat_detail)
                 game.genres.add(obj)
         elif stat_type == 'developers':
             if not game.developers.all().filter(slug=slugify(stat_detail)).exists():
-                try:
-                    obj = Developer.objects.get(slug=slugify(stat_detail))
-                except Developer.DoesNotExist:
-                    obj = Developer.objects.create(name=stat_detail)
+                obj = self._get_or_create_game_stat_instance(
+                                                Developer,
+                                                stat_name=stat_detail)
                 game.developers.add(obj)
         elif stat_type == 'publishers':
             if not game.publishers.all().filter(slug=slugify(stat_detail)).exists():
-                try:
-                    obj = Publisher.objects.get(slug=slugify(stat_detail))
-                except Publisher.DoesNotExist:
-                    obj = Publisher.objects.create(name=stat_detail)
+                obj = self._get_or_create_game_stat_instance(
+                                                Publisher,
+                                                stat_name=stat_detail)
                 game.publishers.add(obj)
         elif stat_type == 'modes':
             if not game.modes.all().filter(slug=slugify(stat_detail)).exists():
-                try:
-                    obj = Mode.objects.get(slug=slugify(stat_detail))
-                except Mode.DoesNotExist:
-                    obj = Mode.objects.create(name=stat_detail)
+                obj = self._get_or_create_game_stat_instance(
+                                                Mode,
+                                                stat_name=stat_detail)
                 game.modes.add(obj)
         else:
             raise ValidationError(f"Invalid Stats type passed: {stat_type}")

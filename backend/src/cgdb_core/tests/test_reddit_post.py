@@ -6,7 +6,7 @@ from pathlib import Path
 from django.urls import include, path, reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
-from cgdb_core.models import Game, GameFreeOnSubscription
+from cgdb_core.models import Developer, Game, GameFreeOnSubscription, Genre, Mode, Publisher
 
 logger = logging.getLogger(__name__)
 
@@ -138,3 +138,15 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
         self.assertTrue(game.publishers.all().filter(name='Bethesda Softworks').exists())
         self.assertTrue(game.modes.all().filter(name='Single player').exists())
         self.assertEqual(game.modes.all().count(), 1)
+        # modes
+        modes = Mode.objects.all()
+        self.assertEqual(modes.count(), 8)
+        # genres
+        genres = Genre.objects.all()
+        self.assertEqual(genres.count(), 18)
+        # publishers
+        publishers = Publisher.objects.all()
+        self.assertEqual(publishers.count(), 55)
+        # developers
+        developers = Developer.objects.all()
+        self.assertEqual(developers.count(), 59)

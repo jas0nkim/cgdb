@@ -20,23 +20,6 @@ $ docker-compose exec backend python manage.py migrate
 $ docker-compose exec backend python manage.py createsuperuser
 ```
 
-## Run crawlers
-```
-$ cd bot/src
-$ scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
-```
-
-## Run tests
-- backend
-```
-$ docker-compose exec backend python manage.py test
-```
-- bot
-```
-$ cd bot/src
-$ python -m unittest
-```
-
 ## Backup/restore data
 - Backup
 ```
@@ -54,6 +37,29 @@ $ docker-compose exec postgres sh
 ## Access postgres db
 ```
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
+```
+
+## Run crawlers
+- Reddit (Stadia)
+```
+$ cd bot/src
+$ python run.py -p Stadia
+```
+- Wikipedia
+```
+$ cd bot/src
+$ scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
+```
+
+## Run tests
+- backend
+```
+$ docker-compose exec backend python manage.py test
+```
+- bot
+```
+$ cd bot/src
+$ python -m unittest
 ```
 
 ## References / Game list
