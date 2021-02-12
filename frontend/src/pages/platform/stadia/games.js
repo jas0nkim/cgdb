@@ -1,53 +1,49 @@
 import Link from "next/link";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardContent, CardMedia, Typography }
-    from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import { CardMedia, Grid, Paper, Typography } from "@material-ui/core";
 import configData from "../../../config.json";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      maxWidth: '100%',
-      marginBottom: theme.spacing(2),
+        flexGrow: 1,
+    },
+    paper: {
+        width: 100,
     },
     media: {
-      height: 140,
+        height: 100,
     },
-    table: {
-        minWidth: 'sm',
-    },
-    tableCell: {
-        color: theme.palette.text.secondary,
+    control: {
+        padding: theme.spacing(2),
     },
 }));
 
 const StadiaGamesPage = ({ platform }) => {
     const classes = useStyles();
 
-    const games = platform.games.map((game) => (
-        <Card className={classes.root} key={game.slug} variant="outlined">
-            <Link href={'/game/' + game.slug} passHref>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
-                        title={ game.slug }
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            { game.title }
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Link>
-        </Card>
-    ))
-
     return (
         <>
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
-            {games}
+            <Grid container className={classes.root} spacing={2}>
+                {platform.games.map((game) => (
+                    <Grid key={game.slug} item>
+                        <Paper className={classes.paper} elevation={0}>
+                            <Link href={'/game/' + game.slug} passHref>
+                                <CardMedia
+                                    className={classes.media}
+                                    image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
+                                    title={ game.slug }
+                                />
+                            </Link>
+                            <Link href={'/game/' + game.slug}>
+                                { game.title }
+                            </Link>
+                        </Paper>
+                    </Grid>
+                ))}
+            </Grid>
         </>
     )
 }
