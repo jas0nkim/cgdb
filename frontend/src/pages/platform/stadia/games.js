@@ -2,6 +2,7 @@ import Link from "next/link";
 import { makeStyles } from '@material-ui/core/styles';
 import { CardMedia, Grid, Paper, Typography } from "@material-ui/core";
 import configData from "../../../config.json";
+import GameFilterDrawer from "../../../components/GameFilterDrawer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +27,7 @@ const StadiaGamesPage = ({ platform }) => {
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
+            <GameFilterDrawer />
             <Grid container className={classes.root} spacing={2}>
                 {platform.games.map((game) => (
                     <Grid key={game.slug} item>
