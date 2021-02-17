@@ -1,7 +1,8 @@
 import { Button, Checkbox, Divider, Drawer, FormControl, FormControlLabel, FormGroup, FormLabel, makeStyles } from "@material-ui/core"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 
-const drawerWidth = 360;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,114 +18,179 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(2),
-  },  
+  },
 }));
 
 const GameFilterDrawer = (props) => {
-    const { window, genres } = props;
     const classes = useStyles();
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [genresMore, setGenresMore] = useState(false);
-    const [filters, setFilters] = useState({});
-    const esrbs = [
+    const defaultFilters = [
         {
-            'name': 'Everyone',
-            'value': 'E',
+            groupValue: 'subscription',
+            groupLabel: 'Stadia Pro',
+            groupShowMore: false,
+            groupItems: [
+                {
+                    label: 'Free with Pro',
+                    value: 'free',
+                    checked: false,
+                },
+            ],
         },
         {
-            'name': 'Everyone 10+',
-            'value': 'E10+',
+            groupValue: 'esrb',
+            groupLabel: 'ESRB rating',
+            groupShowMore: false,
+            groupItems: [
+                {
+                    label: 'Everyone',
+                    value: 'E',
+                    checked: false,
+                },
+                {
+                    label: 'Everyone 10+',
+                    value: 'E10+',
+                    checked: false,
+                },
+                {
+                    label: 'Teen',
+                    value: 'T',
+                    checked: false,
+                },
+                {
+                    label: 'Mature 17+',
+                    value: 'M',
+                    checked: false,
+                },
+                {
+                    label: 'Not available',
+                    value: 'NA',
+                    checked: false,
+                },
+            ],
         },
         {
-            'name': 'Teen',
-            'value': 'T',
-        },
-        {
-            'name': 'Mature 17+',
-            'value': 'M',
-        },
-        {
-            'name': 'Not available',
-            'value': 'NA',
+            groupValue: 'genre',
+            groupLabel: 'Genre',
+            groupShowMore: false,
+            groupItems: props.genres.map((genre) => {
+                return {
+                    label: genre.name,
+                    value: genre.id,
+                    checked: false,
+                }
+            }),
         },
     ]
+
+    const { window } = props;
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [filters, setFilters] = useState(defaultFilters);
+
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
     };
 
-    const handleGenreToggle = () => {
-        setGenresMore(!genresMore);
-    };
-
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const handleClearFilters = (event) => {
+        setFilters(defaultFilters)
+    }
 
     const handleChangeFilter = (event) => {
-        setFilters({
-            ...filters,
-            [event.target.name]: {
-                ...filters[event.target.name],
-                [event.target.value]: event.target.checked
+        setFilters(filters.map((filterGroup) => {
+            if (filterGroup.groupValue != event.target.name) {
+                return {
+                    ...filterGroup
+                }
+            } else {
+                return {
+                    ...filterGroup,
+                    ['groupItems']: filterGroup.groupItems.map((item) => {
+                        if (item.value.toString() != event.target.value) {
+                            return {
+                                ...item
+                            }
+                        } else {
+                            return {
+                                ...item,
+                                ['checked']: !item.checked
+                            }
+                        }
+                    })
+                }
             }
-        });
+        }))
     };
 
-    const esrbHtml = esrbs.map((esrb) =>
-        <FormControlLabel
-            key={`esrb-${esrb.value}`}
-            control={<Checkbox onChange={handleChangeFilter}
-                                name="esrb"
-                                value={esrb.value} />}
-            label={esrb.name}
-        />
-    )
+    const handleFilterGroupToggle = (event) => {
+        setFilters(filters.map((filterGroup) => {
+            if (filterGroup.groupValue != event.currentTarget.name) {
+                return {
+                    ...filterGroup
+                }
+            } else {
+                return {
+                    ...filterGroup,
+                    ['groupShowMore']: !filterGroup.groupShowMore
+                }
+            }
+        }))
+    }
 
-    const genresHtml = genres.map((genre, index) => {
-        const template = (
-            <FormControlLabel
-                key={`genre-${genre.id}`}
-                control={<Checkbox onChange={handleChangeFilter}
-                                    name="genre"
-                                    value={genre.id.toString()}/>}
-                label={genre.name}
-            />
-        );
+    const filtersHtml = filters.map((filter) =>
+        <React.Fragment key={filter.groupValue}>
+            <FormLabel component="legend">{filter.groupLabel}</FormLabel>
+            <FormGroup>
+                {filter.groupItems.map((gItem, index) => {
+                    const template = (
+                        <FormControlLabel
+                            key={`${filter.groupValue}-${gItem.value}`}
+                            control={<Checkbox
+                                        onChange={handleChangeFilter}
+                                        name={filter.groupValue}
+                                        value={gItem.value.toString()}
+                                        checked={gItem.checked}
+                                    />}
+                            label={gItem.label}
+                        />
+                    );
 
-        if (index < 5) {
-            return template;
-        } else if (genresMore) {
-            return template;
-        } else {
-            return null;
-        }
-    })
+                    if (index < 5) {
+                        return template;
+                    } else if (filter.groupShowMore) {
+                        return template;
+                    } else {
+                        return null;
+                    }
+                })}
+                {(filter.groupItems.length > 5) ?
+                    <Button name={filter.groupValue} onClick={handleFilterGroupToggle}>
+                        { filter.groupShowMore ? 'Less' : 'More' }
+                    </Button>
+                    :
+                    null
+                }
+            </FormGroup>
+        </React.Fragment>
+    );
 
     const drawer = (
         <div>
-            <div className={classes.toolbar} />
+            <div className={classes.toolbar}>
+                <Button onClick={handleClearFilters}>Clear</Button>
+            </div>
             <Divider />
             <FormControl component="fieldset" className={classes.formControl}>
-                <FormLabel component="legend">Stadia Pro</FormLabel>
-                <FormGroup>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChangeFilter} name="free" />}
-                        label="Free with Pro"
-                    />
-                </FormGroup>
-                <FormLabel component="legend">ESRB rating</FormLabel>
-                <FormGroup>
-                    {esrbHtml}
-                </FormGroup>
-                <FormLabel component="legend">Genre</FormLabel>
-                <FormGroup>
-                    {genresHtml}
-                    <Button onClick={handleGenreToggle}>
-                        { genresMore ? 'Less' : 'More' }
-                    </Button>
-                </FormGroup>
+                {filtersHtml}
             </FormControl>
         </div>
     );
+
+    useEffect(() => {
+        if (props.onChange) {
+            props.onChange(filters)
+        }
+    }, [filters]);
   
     return (
         <>

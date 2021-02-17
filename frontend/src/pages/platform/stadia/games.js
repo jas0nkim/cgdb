@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
 const StadiaGamesPage = ({ platform, gameGenres }) => {
     const classes = useStyles();
 
+    const handleFilters = (filters) => {
+        console.log(filters);
+    };
+
     return (
         <>
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
-            <GameFilterDrawer genres={ gameGenres } />
+            <GameFilterDrawer genres={gameGenres} onChange={ handleFilters } />
             <Grid container className={classes.root} spacing={2}>
                 {platform.games.map((game) => (
                     <Grid key={game.slug} item>
@@ -50,7 +54,7 @@ const StadiaGamesPage = ({ platform, gameGenres }) => {
     )
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     let resp = await fetch(`${configData.API_SERVER_URL}platforms/stadia/`)
     const platform = await resp.json()
     if (!platform) {
