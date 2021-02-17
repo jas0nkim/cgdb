@@ -1,5 +1,4 @@
-import { Button, Checkbox, Divider, Drawer, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, List, ListItem, ListItemText, makeStyles } from "@material-ui/core"
-import Link from "next/link";
+import { Button, Checkbox, Divider, Drawer, FormControl, FormControlLabel, FormGroup, FormLabel, makeStyles } from "@material-ui/core"
 import { useState } from "react";
 
 const drawerWidth = 360;
@@ -21,61 +20,84 @@ const useStyles = makeStyles((theme) => ({
   },  
 }));
 
-const links = [
-    {
-      name: 'xCloud',
-      url: '/platform/xcloud',
-    },
-    {
-      name: 'Stadia',
-      url: '/platform/stadia',
-    },
-    {
-      name: 'Stadia Games',
-      url: '/platform/stadia/games',
-    },
-    {
-      name: 'GeForce Now',
-      url: '/platform/geforce-now',
-    },
-    {
-      name: 'PlayStation Now',
-      url: '/platform/playstation-now',
-    },
-    {
-      name: 'Apple Arcade',
-      url: '/platform/apple-arcade',
-    },
-    {
-      name: 'Luna',
-      url: '/platform/luna',
-    },
-]
-  
 const GameFilterDrawer = (props) => {
-    const { window } = props;
+    const { window, genres } = props;
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [toggleGenres, setToggleGenres] = useState(false);
-    const [state, setState] = useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-    });
+    const [genresMore, setGenresMore] = useState(false);
+    const [filters, setFilters] = useState({});
+    const esrbs = [
+        {
+            'name': 'Everyone',
+            'value': 'E',
+        },
+        {
+            'name': 'Everyone 10+',
+            'value': 'E10+',
+        },
+        {
+            'name': 'Teen',
+            'value': 'T',
+        },
+        {
+            'name': 'Mature 17+',
+            'value': 'M',
+        },
+        {
+            'name': 'Not available',
+            'value': 'NA',
+        },
+    ]
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
     };
 
     const handleGenreToggle = () => {
-        setToggleGenres(!toggleGenres);
+        setGenresMore(!genresMore);
     };
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
+    const handleChangeFilter = (event) => {
+        setFilters({
+            ...filters,
+            [event.target.name]: {
+                ...filters[event.target.name],
+                [event.target.value]: event.target.checked
+            }
+        });
     };
+
+    const esrbHtml = esrbs.map((esrb) =>
+        <FormControlLabel
+            key={`esrb-${esrb.value}`}
+            control={<Checkbox onChange={handleChangeFilter}
+                                name="esrb"
+                                value={esrb.value} />}
+            label={esrb.name}
+        />
+    )
+
+    const genresHtml = genres.map((genre, index) => {
+        const template = (
+            <FormControlLabel
+                key={`genre-${genre.id}`}
+                control={<Checkbox onChange={handleChangeFilter}
+                                    name="genre"
+                                    value={genre.id.toString()}/>}
+                label={genre.name}
+            />
+        );
+
+        if (index < 5) {
+            return template;
+        } else if (genresMore) {
+            return template;
+        } else {
+            return null;
+        }
+    })
 
     const drawer = (
         <div>
@@ -85,78 +107,20 @@ const GameFilterDrawer = (props) => {
                 <FormLabel component="legend">Stadia Pro</FormLabel>
                 <FormGroup>
                     <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="free" />}
+                        control={<Checkbox onChange={handleChangeFilter} name="free" />}
                         label="Free with Pro"
                     />
                 </FormGroup>
                 <FormLabel component="legend">ESRB rating</FormLabel>
                 <FormGroup>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="e" />}
-                        label="Everyone"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="e10+" />}
-                        label="Everyone 10+"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="t" />}
-                        label="Teen"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="m" />}
-                        label="Mature 17+"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="na" />}
-                        label="Not available"
-                    />
+                    {esrbHtml}
                 </FormGroup>
                 <FormLabel component="legend">Genre</FormLabel>
                 <FormGroup>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="e" />}
-                        label="Shooter"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="e10+" />}
-                        label="Indie"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="t" />}
-                        label="Role-playing game"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="m" />}
-                        label="Arcade"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="m" />}
-                        label="Kids & family"
-                        display="none"
-                    />
-                    { toggleGenres ?
-                        <Button onClick={handleGenreToggle}>More</Button>
-                        :
-                        <>
-                            <FormControlLabel
-                                control={<Checkbox onChange={handleChange} name="m" />}
-                                label="Kids & family"
-                                display="none"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox onChange={handleChange} name="m" />}
-                                label="Kids & family"
-                                display="none"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox onChange={handleChange} name="m" />}
-                                label="Kids & family"
-                                display="none"
-                            />
-                            <Button onClick={handleGenreToggle}>Less</Button>
-                        </>
-                    }
+                    {genresHtml}
+                    <Button onClick={handleGenreToggle}>
+                        { genresMore ? 'Less' : 'More' }
+                    </Button>
                 </FormGroup>
             </FormControl>
         </div>
