@@ -8,9 +8,9 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from rest_framework.exceptions import ValidationError
-from .models import Platform, Game
-from .serializers import (PlatformSerializer,
+from .models import Genre, Platform, Game
+from .serializers import (GenreSerializer,
+                        PlatformSerializer,
                         GameSerializer,
                         WikipediaGameSerializer,
                         RedditStadiaGameSerializer,
@@ -43,6 +43,12 @@ class SearchViewSet(ReadOnlyModelViewSet):
 class AllGamesViewSet(SearchViewSet):
     def get_queryset(self):
         return Game.objects.all()
+
+class GameGenresViewSet(ReadOnlyModelViewSet):
+    serializer_class = GenreSerializer
+
+    def get_queryset(self):
+        return Genre.objects.all().order_by('name')
 
 class WikipediaGameBot(APIView):
     permission_classes = [AllowAny]

@@ -31,6 +31,12 @@ class GenreSerializer(serializers.ModelSerializer):
         model = Genre
         fields = ('name',)
 
+    def to_representation(self, instance):
+        return {
+            'id': instance.pk,
+            'name': instance.name,
+        }
+
 class SeriesSerializer(serializers.ModelSerializer):
     """
     Series django model serializer
