@@ -9,7 +9,7 @@ urlpatterns = [
         views.PlatformPublicViewSet.as_view({'get': 'retrieve'}),
         name='platform-detail'),
     path('games/',
-        views.AllGamesViewSet.as_view({'get': 'list'}),
+        views.FilteredGamesViewSet.as_view({'get': 'list'}),
         name='game-list'),
     path('games/<slug:slug>/',
         views.GamePublicViewSet.as_view({'get': 'retrieve'}),
@@ -18,7 +18,7 @@ urlpatterns = [
         views.GameGenresViewSet.as_view({'get': 'list'}),
         name='game-genre-list'),
     path('search/<str:term>/',
-        views.SearchViewSet.as_view({'get': 'list'}),
+        views.GameSearchViewSet.as_view({'get': 'list'}),
         name='search'),
     # POST from bot
     path('bot/game/',

@@ -1,4 +1,5 @@
 import logging
+import datetime
 from django.contrib.postgres.search import SearchVector, SearchQuery
 from django.db.utils import DataError
 from django.db.models import Q
@@ -28,7 +29,7 @@ class GamePublicViewSet(ReadOnlyModelViewSet):
     serializer_class = GameSerializer
     lookup_field = 'slug'
 
-class SearchViewSet(ReadOnlyModelViewSet):
+class GameSearchViewSet(ReadOnlyModelViewSet):
     serializer_class = GameSearchSerializer
 
     def get_queryset(self):
@@ -40,9 +41,33 @@ class SearchViewSet(ReadOnlyModelViewSet):
             Q(searchv__icontains=search_term)
         ).distinct('title')
 
-class AllGamesViewSet(SearchViewSet):
+class FilteredGamesViewSet(ReadOnlyModelViewSet):
+    serializer_class = GameSearchSerializer
+
     def get_queryset(self):
-        return Game.objects.all()
+        querydict = self.request.query_params
+        platforms = querydict.getlist('platform')
+        subscriptions = querydict.getlist('subscription')
+        esrbs = querydict.getlist('esrb')
+        genres = querydict.getlist('genre')
+
+        qs = Game.objects.all()
+        if platforms:
+            qs = qs.filter(platforms__in=platforms)
+        if subscriptions:
+            qs = qs.filter(
+                    game_free_on_subscription__platform__in=platforms
+                ).filter(
+                    game_free_on_subscription__entered__lte=datetime.date.today()
+                ).exclude(
+                    game_free_on_subscription__left__lte=datetime.date.today()
+                )
+        if esrbs:
+            qs = qs.filter(esrb__in=esrbs)
+        if genres:
+            qs = qs.filter(genres__in=genres)
+
+        return qs.order_by('title')
 
 class GameGenresViewSet(ReadOnlyModelViewSet):
     serializer_class = GenreSerializer
