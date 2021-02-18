@@ -93,8 +93,6 @@ class PlatformSerializer(serializers.ModelSerializer):
     """
     Platform django model serializer
     """
-    games = SimpleGameSerializer(many=True)
-
     class Meta:
         model = Platform
         fields = ('name',
@@ -104,8 +102,7 @@ class PlatformSerializer(serializers.ModelSerializer):
                 'internet_requirements',
                 'supported_devices',
                 'pictures',
-                'slug',
-                'games',)
+                'slug',)
 
 class GameReleaseDateSerializer(serializers.ModelSerializer):
     """
