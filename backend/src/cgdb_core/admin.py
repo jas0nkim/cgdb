@@ -102,6 +102,7 @@ class GameReleaseDateAdmin(admin.ModelAdmin):
 @admin.register(GameFreeOnSubscription)
 class GameFreeOnSubscriptionAdmin(admin.ModelAdmin):
     search_fields = ['game__title__icontains',]
+    list_display = ['game', 'platform', 'entered', 'left']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
