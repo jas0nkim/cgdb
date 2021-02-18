@@ -21,9 +21,67 @@ const useStyles = makeStyles((theme) => ({
 
 const StadiaGamesPage = ({ platform, gameGenres }) => {
     const classes = useStyles();
+    const defaultFilters = [
+        {
+            value: 'subscription',
+            label: 'Stadia Pro',
+            showMore: false,
+            items: [
+                {
+                    label: 'Free with Pro',
+                    value: 'free',
+                    checked: false,
+                },
+            ],
+        },
+        {
+            value: 'esrb',
+            label: 'ESRB rating',
+            showMore: false,
+            items: [
+                {
+                    label: 'Everyone',
+                    value: 'E',
+                    checked: false,
+                },
+                {
+                    label: 'Everyone 10+',
+                    value: 'E10+',
+                    checked: false,
+                },
+                {
+                    label: 'Teen',
+                    value: 'T',
+                    checked: false,
+                },
+                {
+                    label: 'Mature 17+',
+                    value: 'M',
+                    checked: false,
+                },
+                {
+                    label: 'Not available',
+                    value: 'NA',
+                    checked: false,
+                },
+            ],
+        },
+        {
+            value: 'genre',
+            label: 'Genre',
+            showMore: false,
+            items: gameGenres.map((genre) => {
+                return {
+                    label: genre.name,
+                    value: genre.id.toString(),
+                    checked: false,
+                }
+            }),
+        },
+    ]
 
-    const handleFilters = (filters) => {
-        console.log(filters);
+    const getQueryString = (qs) => {
+        console.log(qs);
     };
 
     return (
@@ -31,7 +89,7 @@ const StadiaGamesPage = ({ platform, gameGenres }) => {
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
-            <GameFilterDrawer genres={gameGenres} onChange={ handleFilters } />
+            <GameFilterDrawer defaultFilters={defaultFilters} onChange={ getQueryString } />
             <Grid container className={classes.root} spacing={2}>
                 {platform.games.map((game) => (
                     <Grid key={game.slug} item>

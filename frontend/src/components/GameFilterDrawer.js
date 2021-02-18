@@ -23,66 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const GameFilterDrawer = (props) => {
     const classes = useStyles();
-    const defaultFilters = [
-        {
-            groupValue: 'subscription',
-            groupLabel: 'Stadia Pro',
-            groupShowMore: false,
-            groupItems: [
-                {
-                    label: 'Free with Pro',
-                    value: 'free',
-                    checked: false,
-                },
-            ],
-        },
-        {
-            groupValue: 'esrb',
-            groupLabel: 'ESRB rating',
-            groupShowMore: false,
-            groupItems: [
-                {
-                    label: 'Everyone',
-                    value: 'E',
-                    checked: false,
-                },
-                {
-                    label: 'Everyone 10+',
-                    value: 'E10+',
-                    checked: false,
-                },
-                {
-                    label: 'Teen',
-                    value: 'T',
-                    checked: false,
-                },
-                {
-                    label: 'Mature 17+',
-                    value: 'M',
-                    checked: false,
-                },
-                {
-                    label: 'Not available',
-                    value: 'NA',
-                    checked: false,
-                },
-            ],
-        },
-        {
-            groupValue: 'genre',
-            groupLabel: 'Genre',
-            groupShowMore: false,
-            groupItems: props.genres.map((genre) => {
-                return {
-                    label: genre.name,
-                    value: genre.id,
-                    checked: false,
-                }
-            }),
-        },
-    ]
-
-    const { window } = props;
+    const { window, defaultFilters } = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [filters, setFilters] = useState(defaultFilters);
 
@@ -98,14 +39,14 @@ const GameFilterDrawer = (props) => {
 
     const handleChangeFilter = (event) => {
         setFilters(filters.map((filterGroup) => {
-            if (filterGroup.groupValue != event.target.name) {
+            if (filterGroup.value != event.target.name) {
                 return {
                     ...filterGroup
                 }
             } else {
                 return {
                     ...filterGroup,
-                    ['groupItems']: filterGroup.groupItems.map((item) => {
+                    ['items']: filterGroup.items.map((item) => {
                         if (item.value.toString() != event.target.value) {
                             return {
                                 ...item
@@ -124,30 +65,30 @@ const GameFilterDrawer = (props) => {
 
     const handleFilterGroupToggle = (event) => {
         setFilters(filters.map((filterGroup) => {
-            if (filterGroup.groupValue != event.currentTarget.name) {
+            if (filterGroup.value != event.currentTarget.name) {
                 return {
                     ...filterGroup
                 }
             } else {
                 return {
                     ...filterGroup,
-                    ['groupShowMore']: !filterGroup.groupShowMore
+                    ['showMore']: !filterGroup.showMore
                 }
             }
         }))
     }
 
     const filtersHtml = filters.map((filter) =>
-        <React.Fragment key={filter.groupValue}>
-            <FormLabel component="legend">{filter.groupLabel}</FormLabel>
+        <React.Fragment key={filter.value}>
+            <FormLabel component="legend">{filter.label}</FormLabel>
             <FormGroup>
-                {filter.groupItems.map((gItem, index) => {
+                {filter.items.map((gItem, index) => {
                     const template = (
                         <FormControlLabel
-                            key={`${filter.groupValue}-${gItem.value}`}
+                            key={`${filter.value}-${gItem.value}`}
                             control={<Checkbox
                                         onChange={handleChangeFilter}
-                                        name={filter.groupValue}
+                                        name={filter.value}
                                         value={gItem.value.toString()}
                                         checked={gItem.checked}
                                     />}
@@ -157,15 +98,15 @@ const GameFilterDrawer = (props) => {
 
                     if (index < 5) {
                         return template;
-                    } else if (filter.groupShowMore) {
+                    } else if (filter.showMore) {
                         return template;
                     } else {
                         return null;
                     }
                 })}
-                {(filter.groupItems.length > 5) ?
-                    <Button name={filter.groupValue} onClick={handleFilterGroupToggle}>
-                        { filter.groupShowMore ? 'Less' : 'More' }
+                {(filter.items.length > 5) ?
+                    <Button name={filter.value} onClick={handleFilterGroupToggle}>
+                        { filter.showMore ? 'Less' : 'More' }
                     </Button>
                     :
                     null
@@ -186,9 +127,22 @@ const GameFilterDrawer = (props) => {
         </div>
     );
 
+    const filtersToQueryString = () => {
+        let qs = [];
+        let i, j;
+        for (i = 0; i < filters.length; i++) {
+            for (j = 0; j < filters[i].items.length; j++) {
+                if (filters[i].items[j].checked) {
+                    qs.push(encodeURIComponent(filters[i].value) + '=' + encodeURIComponent(filters[i].items[j].value))
+                }
+            }
+        }
+        return qs.join('&');
+    }
+
     useEffect(() => {
         if (props.onChange) {
-            props.onChange(filters)
+            props.onChange(filtersToQueryString())
         }
     }, [filters]);
   
