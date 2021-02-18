@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { CardMedia, Grid, Paper, Typography } from "@material-ui/core";
 import configData from "../../../config.json";
@@ -19,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const StadiaGamesPage = ({ platform, gameGenres }) => {
+const StadiaGamesPage = ({ allGames, gameGenres }) => {
     const classes = useStyles();
+    const [games, setGames] = useState(allGames);
     const defaultFilters = [
         {
             value: 'subscription',
@@ -80,8 +82,14 @@ const StadiaGamesPage = ({ platform, gameGenres }) => {
         },
     ]
 
-    const getQueryString = (qs) => {
-        console.log(qs);
+    const handleFilterChanged = (querystring) => {
+        querystring = 'platform=3&' + querystring
+        fetch(
+            `${configData.API_SERVER_URL}games/?${querystring}`
+        ).then(async (resp) => {
+            const filteredGames = await resp.json()
+            setGames(filteredGames)
+        })
     };
 
     return (
@@ -89,9 +97,9 @@ const StadiaGamesPage = ({ platform, gameGenres }) => {
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
-            <GameFilterDrawer defaultFilters={defaultFilters} onChange={ getQueryString } />
+            <GameFilterDrawer defaultFilters={defaultFilters} onChange={ handleFilterChanged } />
             <Grid container className={classes.root} spacing={2}>
-                {platform.games.map((game) => (
+                {games.map((game) => (
                     <Grid key={game.slug} item>
                         <Paper className={classes.paper} elevation={0}>
                             <Link href={'/game/' + game.slug} passHref>
@@ -113,9 +121,9 @@ const StadiaGamesPage = ({ platform, gameGenres }) => {
 }
 
 export async function getServerSideProps({ params }) {
-    let resp = await fetch(`${configData.API_SERVER_URL}platforms/stadia/`)
-    const platform = await resp.json()
-    if (!platform) {
+    let resp = await fetch(`${configData.API_SERVER_URL}games/?platform=3`)
+    const allGames = await resp.json()
+    if (!allGames) {
         return {
             notFound: true,
         }
@@ -123,7 +131,7 @@ export async function getServerSideProps({ params }) {
     resp = await fetch(`${configData.API_SERVER_URL}game-genres/`)
     const gameGenres = await resp.json()
     return {
-        props: { platform, gameGenres },
+        props: { allGames, gameGenres },
     }
 }
 

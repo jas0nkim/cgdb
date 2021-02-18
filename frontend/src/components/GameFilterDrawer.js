@@ -1,6 +1,5 @@
 import { Button, Checkbox, Divider, Drawer, FormControl, FormControlLabel, FormGroup, FormLabel, makeStyles } from "@material-ui/core"
-import { useEffect, useState } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const drawerWidth = 300;
 
