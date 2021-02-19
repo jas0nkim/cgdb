@@ -8,6 +8,7 @@ from cgdb_bot.items import (RedditStadiaWikiGame,
                         RedditStadiaWikiGamePro,
                         RedditStadiaStatDetail)
 from cgdb_bot.settings import API_SERVER_HOST, API_SERVER_PORT
+from cgdb_bot.utils import to_bool
 
 class RedditStadiaSpider(Spider):
     """
@@ -30,6 +31,7 @@ class RedditStadiaSpider(Spider):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self._type = kw['type'] if 'type' in kw and (kw['type'] in self.urls or kw['type'] == 'allstats') else 'games'
+        self._postdata = to_bool(kw['postdata']) if 'postdata' in kw else False
 
     def start_requests(self):
         if self._type == 'allstats':
@@ -56,6 +58,8 @@ class RedditStadiaSpider(Spider):
         """
         Send the scraped item to the API server
         """
+        if not self._postdata:
+            return None
         api_endpoint = None
         if isinstance(item, RedditStadiaWikiGame):
             api_endpoint = '/api/bot/reddit/stadia/game/'

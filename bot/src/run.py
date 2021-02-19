@@ -6,7 +6,8 @@ from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
-from cgdb_bot.spiders import WikipediaGameSpider, RedditStadiaSpider
+from cgdb_bot.spiders.wikipedia import WikipediaGameSpider
+from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.settings import CRAWL_ARG_DELIMITER
 
 ALLOWED_PLATFORMS = ('xCloud', 'Stadia', 'Luna',)
@@ -37,7 +38,8 @@ def run(file, platform):
     process.crawl(WikipediaGameSpider,
                 titles=CRAWL_ARG_DELIMITER.join(titles),
                 urls=CRAWL_ARG_DELIMITER.join(urls),
-                platform=platform)
+                platform=platform,
+                postdata='True')
     process.start()
 
 def run_stadia():
@@ -46,9 +48,12 @@ def run_stadia():
 
     @defer.inlineCallbacks
     def crawl():
-        yield runner.crawl(RedditStadiaSpider, type='games')
-        yield runner.crawl(RedditStadiaSpider, type='pro_games')
-        yield runner.crawl(RedditStadiaSpider, type='allstats')
+        yield runner.crawl(RedditStadiaSpider,
+                            type='games', postdata='True')
+        yield runner.crawl(RedditStadiaSpider,
+                            type='pro_games', postdata='True')
+        yield runner.crawl(RedditStadiaSpider,
+                            type='allstats', postdata='True')
         reactor.stop()
 
     crawl()
