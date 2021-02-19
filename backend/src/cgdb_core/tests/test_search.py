@@ -30,6 +30,10 @@ class SearchTests(APITestCase, URLPatternsTestCase):
                 continue
             serializer.save()
 
+    def setUp(self):
+        # reset all games inactive
+        Game.objects.all().update(active=False)
+
     def test_initial_data(self):
         """
         Check initial data
@@ -41,12 +45,19 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         url = reverse('search', kwargs={'term': 'ark'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+        # set all games active
+        Game.objects.all().update(active=True)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
         self.assertEqual(response.data[0].get('title'), 'Ark: Survival Evolved')
         self.assertEqual(len(response.data[0].get('platforms')), 1)
         self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
 
     def test_search_game_by_korean_title(self):
+        # set all games active
+        Game.objects.all().update(active=True)
         url = reverse('search', kwargs={'term': '트로니어'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -56,6 +67,8 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
 
     def test_search_game_by_english_title_with_wrong_order_like_google_search(self):
+        # set all games active
+        Game.objects.all().update(active=True)
         url = reverse('search', kwargs={'term': 'witch blair'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
