@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const defaultQueryString = "platform=3"
+
 const StadiaGamesPage = ({ allGames, gameGenres }) => {
     const classes = useStyles();
     const [games, setGames] = useState(allGames);
@@ -83,7 +85,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
     ]
 
     const handleFilterChanged = (querystring) => {
-        querystring = 'platform=3&' + querystring
+        querystring = defaultQueryString + '&' + querystring
         fetch(
             `${configData.API_SERVER_URL}games/?${querystring}`
         ).then(async (resp) => {
@@ -94,6 +96,11 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
 
     return (
         <>
+            <CardMedia
+                className={classes.media}
+                image="https://ssl.gstatic.com/stadia/gamers/assets/stadia_logo_and_text_v1.jpg"
+                title="Stadia logo"
+            />
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
@@ -121,7 +128,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
 }
 
 export async function getServerSideProps({ params }) {
-    let resp = await fetch(`${configData.API_SERVER_URL}games/?platform=3`)
+    let resp = await fetch(`${configData.API_SERVER_URL}games/?${defaultQueryString}`)
     const allGames = await resp.json()
     if (!allGames) {
         return {

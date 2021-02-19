@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
@@ -11,12 +8,11 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import configData from "../../config.json";
 import Head from 'next/head';
-import { Button, Divider, List, ListItem, ListItemText } from '@material-ui/core';
+import { Button, List, ListItem, ListItemText, Paper } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: '100%',
-      marginBottom: theme.spacing(2),
     },
     media: {
       height: 140,
@@ -153,27 +149,25 @@ const PlatformPage = ({ platform }) => {
                 <meta property="og:description" content={platform.description} key="og-description" />
                 <meta property="og:image" content={platform.pictures.length > 0 ? platform.pictures[0] : configData.PLACEHOLDER_IMG} key="og-image" />
             </Head>
-            <Card className={classes.root} variant="outlined">
-                <CardMedia
-                    className={classes.media}
-                    image={ platform.pictures.length > 0 ? platform.pictures[0] : configData.PLACEHOLDER_IMG }
-                    title={ platform.slug }
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        { platform.name }
-                    </Typography>
-                    {verdict}
-                    {countries}
-                    {requirements}
-                    {devices}
-                    <Link href={`/platform/${platform.slug}/games`}>
-                        <Button color="primary">
-                            Stadia Games
-                        </Button>
-                    </Link>
-                </CardContent>
-            </Card>
+            <CardMedia
+                className={classes.media}
+                image={ platform.pictures.length > 0 ? platform.pictures[0] : configData.PLACEHOLDER_IMG }
+                title={ platform.slug }
+            />
+            <Paper elevation={0}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    { platform.name }
+                </Typography>
+                {verdict}
+                {countries}
+                {requirements}
+                {devices}
+                <Link href={`/platform/${platform.slug}/games`}>
+                    <Button color="primary">
+                        Stadia Games
+                    </Button>
+                </Link>
+            </Paper>
         </>
     );
 };

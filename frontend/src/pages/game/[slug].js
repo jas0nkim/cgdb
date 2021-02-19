@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import configData from "../../config.json";
 import Head from 'next/head';
+import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -86,92 +84,86 @@ const GamePage = ({ game }) => {
                 <meta property="og:description" content={game.description} key="og-description" />
                 <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG} key="og-image" />
             </Head>
-            <Card className={classes.root} variant="outlined">
-                <CardMedia
-                    className={classes.media}
-                    image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
-                    title={ game.slug }
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        { game.title }
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    {platforms}
-                </CardActions>
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {game.description}
-                    </Typography>
-                    <TableContainer>
-                        <Table className={classes.table} size="small" aria-label="description table">
-                            <TableBody>
-                                <TableRow key="developers">
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="left"
-                                    >
-                                        Developers
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="right"
-                                    >
-                                        {developers}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="publishers">
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="left"
-                                    >
-                                        Publishers
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="right"
-                                    >
-                                        {publishers}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="series">
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="left"
-                                    >
-                                        Series
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="right"
-                                    >
-                                        {series}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="genres">
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="left"
-                                    >
-                                        Genres
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.tableCell}
-                                        align="right"
-                                    >
-                                        {genres}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="modes">
-                                    <TableCell className={classes.tableCell} align="left">Modes</TableCell>
-                                    <TableCell className={classes.tableCell} align="right">{modes}</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
+            <CardMedia
+                className={classes.media}
+                image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
+                title={ game.slug }
+            />
+            <Paper elevation={0}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    { game.title }
+                </Typography>
+                {platforms}
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {game.description}
+                </Typography>
+                <TableContainer>
+                    <Table className={classes.table} size="small" aria-label="description table">
+                        <TableBody>
+                            <TableRow key="developers">
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="left"
+                                >
+                                    Developers
+                                </TableCell>
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="right"
+                                >
+                                    {developers}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key="publishers">
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="left"
+                                >
+                                    Publishers
+                                </TableCell>
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="right"
+                                >
+                                    {publishers}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key="series">
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="left"
+                                >
+                                    Series
+                                </TableCell>
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="right"
+                                >
+                                    {series}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key="genres">
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="left"
+                                >
+                                    Genres
+                                </TableCell>
+                                <TableCell
+                                    className={classes.tableCell}
+                                    align="right"
+                                >
+                                    {genres}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key="modes">
+                                <TableCell className={classes.tableCell} align="left">Modes</TableCell>
+                                <TableCell className={classes.tableCell} align="right">{modes}</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
         </>
       );
 };
