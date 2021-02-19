@@ -275,6 +275,7 @@ class Game(models.Model):
     esrb = models.CharField(max_length=4, default='NA', choices=ESRB_CHOICES)
     pictures = models.JSONField(default=list)
     links = models.JSONField(default=dict)
+    active = models.BooleanField(default=False)
     developers = models.ManyToManyField(
                     Developer,
                     related_name="games",

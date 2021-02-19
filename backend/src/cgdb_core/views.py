@@ -34,7 +34,7 @@ class GameSearchViewSet(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         search_term = self.kwargs['term']
-        return Game.objects.annotate(
+        return Game.objects.filter(active=True).annotate(
             searchv=SearchVector('tags__tag'),
         ).filter(
             Q(searchv=SearchQuery(search_term, search_type='websearch')) |
@@ -51,7 +51,7 @@ class FilteredGamesViewSet(ReadOnlyModelViewSet):
         esrbs = querydict.getlist('esrb')
         genres = querydict.getlist('genre')
 
-        qs = Game.objects.all()
+        qs = Game.objects.all().filter(active=True)
         if platforms:
             qs = qs.filter(platforms__in=platforms)
         if subscriptions:

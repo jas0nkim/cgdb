@@ -35,8 +35,9 @@ class GameAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title__icontains',]
-    list_filter = ('platforms',)
+    list_filter = ('platforms', 'active',)
     exclude = ('genres', 'developers', 'publishers', 'series', 'modes',)
+    list_display = ['title', 'active',]
 
 @admin.register(Platform)
 class PlatformAdmin(admin.ModelAdmin):
