@@ -2,7 +2,9 @@ import os
 import json
 import unittest
 from pathlib import Path
-from cgdb_bot.parsers import parse_wikipedia_game_article
+from cgdb_bot.parsers import (parse_wikipedia_game_article,
+                            WikipediaStadiaGamesParser)
+from cgdb_bot.settings import WIKIPEDIA_STADIA_GAMES_URL
 from .utils import build_response
 
 class TestWikipediaParser(unittest.TestCase):
@@ -78,3 +80,12 @@ class TestWikipediaParser(unittest.TestCase):
                                 data['expected']['inter_languages'][j]['lang_lc'])
                         self.assertEqual(i.inter_languages[j]['title_lc'],
                                 data['expected']['inter_languages'][j]['title_lc'])
+
+    def test_stadia_game_links(self):
+        """
+        test parsing stadia game links are valid:
+        https://en.wikipedia.org/wiki/List_of_Stadia_games
+        """
+        for link in WikipediaStadiaGamesParser()._extract_game_links(
+                    build_response(WIKIPEDIA_STADIA_GAMES_URL)):
+            self.assertRegex(link, r'/wiki/(.+)')

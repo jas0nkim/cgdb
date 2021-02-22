@@ -1,9 +1,11 @@
 import re
 import logging
+from scrapy import Request
 from cgdb_bot.items import WikipediaGameItem
 from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.settings import (WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR,
-                        WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES as NOT_SUPPORTED_ISOS)
+            WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES as NOT_SUPPORTED_ISOS,
+            WIKIPEDIA_ENGLISH_DOMAIN)
 
 class WikipediaParser:
     """
@@ -190,3 +192,26 @@ class WikipediaParser:
         except NoHtmlElementFound as err:
             getattr(self.logger, loglevel)("%s - %s", str(err), response.url)
             return ret
+
+class WikipediaStadiaGamesParser:
+    """
+    Wikipedia list of stadia games page parser
+    """
+    def __init__(self):
+        self.logger = logging.getLogger(__name__)
+
+    def parse_stadia_games(self, response):
+        """
+        parse list of stadia games page
+        """
+        if response.status != 200:
+            # broken link or inactive
+            self.logger.error("List of Stadia games link not working: HTTP status code - %s", response.status)
+            yield None
+        for link in self._extract_game_links(response):
+            yield Request(
+                    f"{WIKIPEDIA_ENGLISH_DOMAIN}{link}",
+                    callback=WikipediaParser().parse_game_article)
+
+    def _extract_game_links(self, response):
+        return response.xpath('//table[@id="softwarelist"]/tbody/tr[position()>1]/th//a/@href').getall()

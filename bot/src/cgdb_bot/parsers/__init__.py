@@ -2,7 +2,7 @@ import logging
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.spidermiddlewares.httperror import HttpError
-from .wikipedia import WikipediaParser
+from .wikipedia import WikipediaParser, WikipediaStadiaGamesParser
 from .reddit import RedditStadiaWikiParser
 
 def general_resp_error_handler(failure):
@@ -38,13 +38,21 @@ def general_resp_error_handler(failure):
                     request.cb_kwargs['main_url'],
                     failure.getErrorMessage())
 
-def parse_wikipedia_game_article(response):
+def parse_wikipedia_game_article(response, english_title=None):
     """
     parse en.wikipedia.org article page
     """
     logger = logging.getLogger(__name__)
     parser = WikipediaParser()
-    return parser.parse_game_article(response)
+    return parser.parse_game_article(response, english_title=english_title)
+
+def parse_wikipedia_stadia_games(response):
+    """
+    parse list of stadia games page
+    """
+    logger = logging.getLogger(__name__)
+    parser = WikipediaStadiaGamesParser()
+    return parser.parse_stadia_games(response)
 
 def parse_reddit_stadia_wiki(response, wiki_type):
     """
