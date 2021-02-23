@@ -6,7 +6,8 @@ from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
-from cgdb_bot.spiders.wikipedia import WikipediaGameSpider
+from cgdb_bot.spiders.wikipedia import (WikipediaGameSpider,
+                                        WikipediaStadiaSpider)
 from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.settings import CRAWL_ARG_DELIMITER
 
@@ -54,6 +55,7 @@ def run_stadia():
                             type='pro_games', postdata='True')
         yield runner.crawl(RedditStadiaSpider,
                             type='allstats', postdata='True')
+        yield runner.crawl(WikipediaStadiaSpider, postdata='True')
         reactor.stop()
 
     crawl()
