@@ -219,6 +219,17 @@ class GameSerializer(serializers.ModelSerializer):
             instance.modes.add(obj)
         return instance
 
+
+    def _updated_pictures(self, instance, validated_data_pictures):
+        if not instance.pictures:
+            return validated_data_pictures
+        return instance.pictures + validated_data_pictures
+
+    def _updated_links(self, instance, validated_data_links):
+        if not instance.links:
+            return validated_data_links
+        return {**instance.links, **validated_data_links}
+
     def update(self, instance, validated_data):
         platforms_data = validated_data.pop('platforms', [])
         developers_data = validated_data.pop('developers', [])
@@ -227,6 +238,14 @@ class GameSerializer(serializers.ModelSerializer):
         genres_data = validated_data.pop('genres', [])
         modes_data = validated_data.pop('modes', [])
 
+        validated_data['pictures'] = self._updated_pictures(
+                                                instance,
+                                                validated_data['pictures']
+                                            )
+        validated_data['links'] = self._updated_links(
+                                                instance,
+                                                validated_data['links']
+                                            )
         instance = super().update(instance, validated_data)
 
         for platform_data in platforms_data:

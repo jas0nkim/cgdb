@@ -4,15 +4,9 @@ from pathlib import Path
 from django.urls import include, path, reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
-from cgdb_core.models import (Mode,
-                    Genre,
-                    Series,
-                    Publisher,
-                    Developer,
-                    Platform,
-                    Game)
+from cgdb_core.models import Game
 
-class PostTests(APITestCase, URLPatternsTestCase):
+class WikipediaPostTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
         path('api/', include('cgdb_core.urls')),
     ]

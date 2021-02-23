@@ -1,0 +1,225 @@
+{
+    "reddit_games": [
+        {
+            "title": "Destiny 2",
+            "stadia_link": "https://stadia.google.com/store/details/20e792017ab34ad89b70dc17a5c72d68rcp1/sku/4950959380034dcda0aecf98f675e11f",
+            "release_date": "2019 Nov 19"
+        }
+    ],
+    "reddit_games_pro": [
+        {
+            "entered_titles": [
+                "Destiny 2: The Collection"
+            ],
+            "left_titles": [],
+            "event_date": "2019 Nov"
+        },
+        {
+            "entered_titles": [],
+            "left_titles": [
+                "Destiny 2: The Collection"
+            ],
+            "event_date": "2020 Nov"
+        }        
+    ],
+    "reddit_game_stats": [
+        {
+            "title": "Destiny 2",
+            "stat_type": "developers",
+            "stat_detail": "Bungie"
+        },    
+        {
+            "title": "Destiny 2",
+            "stat_type": "genres",
+            "stat_detail": "Action"
+        },    
+        {
+            "title": "Destiny 2",
+            "stat_type": "genres",
+            "stat_detail": "Adventure"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "genres",
+            "stat_detail": "Shooter"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "modes",
+            "stat_detail": "Competitive"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "modes",
+            "stat_detail": "Online multiplayer"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "modes",
+            "stat_detail": "Single player"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "modes",
+            "stat_detail": "Online co-op"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "publishers",
+            "stat_detail": "Bungie"
+        },
+        {
+            "title": "Destiny 2",
+            "stat_type": "ratings",
+            "stat_detail": "T"
+        }    
+    ],
+    "wikipedia_games": [
+        {
+            "english_title": "Destiny 2",
+            "language": "en",
+            "title_lc": "Destiny 2",
+            "description_lc": "Destiny 2 (also known as Destiny 2: New Light) is a free-to-play online-only multiplayer first-person shooter video game developed by Bungie. It was originally released as a pay to play game in 2017 for the PlayStation 4, Xbox One, and Microsoft Windows platforms. It became free-to-play, utilizing the games as a service model, under the New Light title on October 1, 2019, followed by the game's release on Stadia the following month, and then the PlayStation 5 and Xbox Series X/S platforms in November 2020. The game was published by Activision until December 31, 2018, when Bungie acquired the publishing rights to the franchise. It is the sequel to 2014's Destiny and its subsequent expansions. Set in a \"mythic science fiction\" world, the game features a multiplayer \"shared-world\" environment with elements of role-playing games. Like the original, activities in Destiny 2 are divided among player versus environment (PvE) and player versus player (PvP) game types. In addition to normal story missions, PvE features three-player \"strikes\" and dungeons and six-player raids. A free roam patrol mode is also available for each destination which feature public events as well as activities not available in the original. These activities have an emphasis on exploration of the destinations and interactions with non-player characters (NPCs); the original Destiny only featured NPCs in social spaces. PvP features objective-based modes, as well as traditional deathmatch game modes.",
+            "pictures": [
+                "https://upload.wikimedia.org/wikipedia/en/0/05/Destiny_2_%28artwork%29.jpg"
+            ],
+            "developers": [
+                "Bungie"
+            ],
+            "publishers": [
+                "Activision",
+                "Bungie"
+            ],
+            "series": [],
+            "genres": [
+                "first-person shooter"
+            ],
+            "modes": [
+                "multiplayer"
+            ],
+            "link": "https://en.wikipedia.org/wiki/Destiny_2",
+            "inter_languages": [
+                {
+                    "iso": "ar",
+                    "url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%8A%D8%B3%D8%AA%D9%86%D9%8A_2",
+                    "lang": "Arabic",
+                    "lang_lc": "العربية",
+                    "title_lc": "ديستني 2"
+                },
+                {
+                    "iso": "ast",
+                    "url": "https://ast.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Asturian",
+                    "lang_lc": "Asturianu",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "de",
+                    "url": "https://de.wikipedia.org/wiki/Destiny_2",
+                    "lang": "German",
+                    "lang_lc": "Deutsch",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "es",
+                    "url": "https://es.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Spanish",
+                    "lang_lc": "Español",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "fa",
+                    "url": "https://fa.wikipedia.org/wiki/%D8%B3%D8%B1%D9%86%D9%88%D8%B4%D8%AA_%DB%B2_(%D8%A8%D8%A7%D8%B2%DB%8C_%D9%88%DB%8C%D8%AF%D8%A6%D9%88%DB%8C%DB%8C)",
+                    "lang": "Persian",
+                    "lang_lc": "فارسی",
+                    "title_lc": "سرنوشت ۲ (بازی ویدئویی)"
+                },
+                {
+                    "iso": "fr",
+                    "url": "https://fr.wikipedia.org/wiki/Destiny_2",
+                    "lang": "French",
+                    "lang_lc": "Français",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "ko",
+                    "url": "https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%8A%A4%ED%8B%B0%EB%8B%88_%EA%B0%80%EB%94%94%EC%96%B8%EC%A6%88",
+                    "lang": "Korean",
+                    "lang_lc": "한국어",
+                    "title_lc": "데스티니 가디언즈"
+                },
+                {
+                    "iso": "it",
+                    "url": "https://it.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Italian",
+                    "lang_lc": "Italiano",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "arz",
+                    "url": "https://arz.wikipedia.org/wiki/%D8%AF%D9%8A%D8%B3%D8%AA%D9%86%D9%89_2",
+                    "lang": "Egyptian Arabic",
+                    "lang_lc": "مصرى",
+                    "title_lc": "ديستنى 2"
+                },
+                {
+                    "iso": "nl",
+                    "url": "https://nl.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Dutch",
+                    "lang_lc": "Nederlands",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "ja",
+                    "url": "https://ja.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Japanese",
+                    "lang_lc": "日本語",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "pt",
+                    "url": "https://pt.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Portuguese",
+                    "lang_lc": "Português",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "ru",
+                    "url": "https://ru.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Russian",
+                    "lang_lc": "Русский",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "fi",
+                    "url": "https://fi.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Finnish",
+                    "lang_lc": "Suomi",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "th",
+                    "url": "https://th.wikipedia.org/wiki/%E0%B9%80%E0%B8%94%E0%B8%AA%E0%B8%95%E0%B8%B4%E0%B8%99%E0%B8%B5_2",
+                    "lang": "Thai",
+                    "lang_lc": "ไทย",
+                    "title_lc": "เดสตินี 2"
+                },
+                {
+                    "iso": "uk",
+                    "url": "https://uk.wikipedia.org/wiki/Destiny_2",
+                    "lang": "Ukrainian",
+                    "lang_lc": "Українська",
+                    "title_lc": "Destiny 2"
+                },
+                {
+                    "iso": "zh",
+                    "url": "https://zh.wikipedia.org/wiki/%E5%91%BD%E8%BF%902",
+                    "lang": "Chinese",
+                    "lang_lc": "中文",
+                    "title_lc": "命运2"
+                }
+            ],
+            "platform": "Stadia"
+        }        
+    ]
+}
