@@ -18,11 +18,11 @@
         "M17+": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings/esrb-m17"
     },
     "genre_urls": {
-        "Action": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/action",
-        "Adventure": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/adventure",
-        "Shooter": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/shooter",
-        "Indie": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/indie",
-        "Role-playing game": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/role-playinggame"
+        "action": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/action",
+        "adventure": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/adventure",
+        "shooter": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/shooter",
+        "indie": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/indie",
+        "role-playing game": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres/role-playinggame"
     },
     "developer_urls": {
         "Ubisoft": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers/ubisoft",
@@ -39,13 +39,13 @@
         "2K": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers/2k"
     },
     "mode_urls": {
-        "Single player": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/singleplayergames",
-        "Online multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/onlinemultiplayergames",
-        "Competitive": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/competitivegames",
-        "Online co-op": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/onlinecoopgames",
-        "Local multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/localmultiplayergames",
-        "Local co-op": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/localcoopgames",
-        "Cross platform multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/crossplatformmultiplayergames",
-        "Split screen": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/splitscreengames"
+        "single player": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/singleplayergames",
+        "online multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/onlinemultiplayergames",
+        "competitive": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/competitivegames",
+        "online co-op": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/onlinecoopgames",
+        "local multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/localmultiplayergames",
+        "local co-op": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/localcoopgames",
+        "cross platform multiplayer": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/crossplatformmultiplayergames",
+        "split screen": "https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes/splitscreengames"
     }
 }

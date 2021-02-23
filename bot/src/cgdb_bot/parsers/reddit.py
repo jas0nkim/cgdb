@@ -92,6 +92,8 @@ class RedditStadiaWikiParser:
                 stat_detail_text = stat.xpath('./td[1]/a/text()').get()
                 stat_detail_link = stat.xpath('./td[2]/a/@href').get()
             if stat_detail_link and stat_detail_text:
+                if wiki_type in ['genres', 'modes']:
+                    stat_detail_text = stat_detail_text.lower()
                 yield Request(
                         REDDIT_DOMAIN + stat_detail_link,
                         callback=self.parse_game_stats_detail_page,

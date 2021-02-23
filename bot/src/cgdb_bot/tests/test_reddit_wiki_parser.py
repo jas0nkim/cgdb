@@ -150,7 +150,7 @@ class TestRedditWikiParser(unittest.TestCase):
                 self.assertIsNotNone(i.stat_type)
                 self.assertIsNotNone(i.stat_detail)
                 if i.title == "Assassin's Creed Origins":
-                    self.assertIn(i.stat_detail, ['Action', 'Role-playing game'])
+                    self.assertIn(i.stat_detail, ['action', 'role-playing game'])
 
     def test_game_developers_home(self):
         """
@@ -245,8 +245,8 @@ class TestRedditWikiParser(unittest.TestCase):
                 self.assertIsNotNone(i.stat_type)
                 self.assertIsNotNone(i.stat_detail)
                 if i.title == "DRAGON BALL XENOVERSE 2":
-                    self.assertIn(i.stat_detail, ['Local multiplayer games', 'Single player', 'Online multiplayer', 'Competitive', 'Online co-op', 'Local multiplayer',])
+                    self.assertIn(i.stat_detail, ['local multiplayer games', 'single player', 'online multiplayer', 'competitive', 'online co-op', 'local multiplayer',])
                 elif i.title == "Human: Fall Flat":
-                    self.assertIn(i.stat_detail, ['Local co-op', 'Single player', 'Online multiplayer', 'Online co-op', 'Local multiplayer', 'Split screen',])
+                    self.assertIn(i.stat_detail, ['local co-op', 'single player', 'online multiplayer', 'online co-op', 'local multiplayer', 'split screen',])
                 elif i.title == "UNO":
-                    self.assertIn(i.stat_detail, ['Local multiplayer', 'Single player', 'Online multiplayer', 'Competitive', 'Online co-op', 'Local co-op',])
+                    self.assertIn(i.stat_detail, ['local multiplayer', 'single player', 'online multiplayer', 'competitive', 'online co-op', 'local co-op',])
