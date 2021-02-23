@@ -219,16 +219,17 @@ class GameSerializer(serializers.ModelSerializer):
             instance.modes.add(obj)
         return instance
 
+    def _updated_title_lc(self, instance, validated_data):
+        instance_title_lc = instance.title_lc if instance.title_lc else {}
+        return {**instance_title_lc, **validated_data.get('title_lc', {})}
 
-    def _updated_pictures(self, instance, validated_data_pictures):
-        if not instance.pictures:
-            return validated_data_pictures
-        return instance.pictures + validated_data_pictures
+    def _updated_pictures(self, instance, validated_data):
+        instance_pictures = instance.pictures if instance.pictures else []
+        return instance_pictures + validated_data.get('pictures', [])
 
-    def _updated_links(self, instance, validated_data_links):
-        if not instance.links:
-            return validated_data_links
-        return {**instance.links, **validated_data_links}
+    def _updated_links(self, instance, validated_data):
+        instance_links = instance.links if instance.links else {}
+        return {**instance_links, **validated_data.get('links', {})}
 
     def update(self, instance, validated_data):
         platforms_data = validated_data.pop('platforms', [])
@@ -238,13 +239,17 @@ class GameSerializer(serializers.ModelSerializer):
         genres_data = validated_data.pop('genres', [])
         modes_data = validated_data.pop('modes', [])
 
+        validated_data['title_lc'] = self._updated_title_lc(
+                                                instance,
+                                                validated_data
+                                            )
         validated_data['pictures'] = self._updated_pictures(
                                                 instance,
-                                                validated_data['pictures']
+                                                validated_data
                                             )
         validated_data['links'] = self._updated_links(
                                                 instance,
-                                                validated_data['links']
+                                                validated_data
                                             )
         instance = super().update(instance, validated_data)
 
@@ -407,6 +412,10 @@ class RedditStadiaGameSerializer(GameSerializer):
         return instance
 
     def update(self, instance, validated_data):
+        validated_data['title_lc'] = self._updated_title_lc(
+                                                instance,
+                                                validated_data
+                                            )
         instance = super().update(instance, validated_data)
 
         # insert or update game release date info
