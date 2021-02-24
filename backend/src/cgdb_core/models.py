@@ -418,7 +418,7 @@ class GameFreeOnSubscription(models.Model):
 
 
 class LanguageCode(models.Model):
-    iso = models.CharField(max_length=5, unique=True)
+    iso = models.CharField(max_length=10, unique=True)
     language = models.CharField(max_length=255, blank=True, null=True)
     language_eng = models.CharField(max_length=100)
 
