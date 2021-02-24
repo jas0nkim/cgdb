@@ -71,7 +71,7 @@
             "title_lc": "Ark: Survival Evolved",
             "description_lc": "Ark: Survival Evolved (stylized as ΛRK) is a 2017 action-adventure survival video game developed by Studio Wildcard, in collaboration with Instinct Games, Efecto Studios, and Virtual Basement. In the game, players must survive being stranded on an island filled with roaming dinosaurs and other prehistoric animals, natural hazards, and potentially hostile human players.",
             "pictures": ["https://upload.wikimedia.org/wikipedia/en/2/2b/ArkSurvivalEvolved.png"],
-            "developers": ["Studio Wildcard"],
+            "developers": ["Studio Wildcard", "Instinct Games", "Efecto Studios", "Virtual Basement"],
             "publishers": ["Studio Wildcard"],
             "series": [],
             "genres": ["action-adventure", "survival"],
@@ -333,6 +333,22 @@
             "genres": ["first-person shooter"],
             "modes": ["single-player", "multiplayer"],
             "link": "https://en.wikipedia.org/wiki/Far_Cry_5"
+        }
+    },
+    {
+        "url": "https://en.wikipedia.org/wiki/Human:_Fall_Flat",
+        "expected": {
+            "english_title": "Human: Fall Flat",
+            "language": "en",
+            "title_lc": "Human: Fall Flat",
+            "description_lc": "Human: Fall Flat is a platform-puzzle video game developed by Lithuanian studio No Brakes Games and published by Curve Digital. It was released for Microsoft Windows, Linux and MacOS in July 2016, with PlayStation 4 and Xbox One versions in May 2017 and a Nintendo Switch version in December 2017. A mobile port developed by Codeglue and published by 505 Games was released on 26 June 2019 for iOS and Android. A Stadia version was released on 1 October 2020.",
+            "pictures": ["https://upload.wikimedia.org/wikipedia/en/0/0e/Human_Fall_Flat_logo.png"],
+            "developers": ["No Brakes Games"],
+            "publishers": ["Curve Digital"],
+            "series": [],
+            "genres": ["platform", "puzzle"],
+            "modes": ["single-player", "multiplayer"],
+            "link": "https://en.wikipedia.org/wiki/Human:_Fall_Flat"
         }
     }
 ]

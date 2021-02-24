@@ -140,6 +140,7 @@ class WikipediaParser:
                                             loglevel='warning',
                                             lowercase=False):
         _special_merge_cases = [
+            # https://en.wikipedia.org/wiki/Octopath_Traveler
             ('Square Enix', 'Business Division 11'),
         ]
         td = response.xpath(f"""//table[@class="infobox hproduct"]/tbody
@@ -154,7 +155,7 @@ class WikipediaParser:
                 ret = ret + li.xpath("""
                                 *[not(self::span[@style="font-size:95%;"])
                                 and not(self::small)]//text()""").getall()
-            # get any items outside list(ul/li). ref: https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)
+            # get any items outside list(ul/li). ref: publishers in https://en.wikipedia.org/wiki/Wonder_Boy_(video_game)
             ret = ret + td.xpath('./*[not(ul)]//text()').getall()
         else:
             # for filtering publishers on https://en.wikipedia.org/wiki/Black_Desert_Online
@@ -169,8 +170,8 @@ class WikipediaParser:
             r = []
             for x in _ret:
                 x = x.rstrip(',').lstrip(',').strip()
-                # remove empty, (...), [...]
-                if not x or re.match(r'\((.*?)\)|\[(.*?)\]', x):
+                # remove empty, -, _, :, (...), [...]
+                if not x or x in ['-', '_', ':',] or re.match(r'\((.*?)\)|\[(.*?)\]', x):
                     continue
                 if lowercase:
                     x = x.lower()
