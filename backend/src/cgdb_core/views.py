@@ -18,6 +18,7 @@ from .serializers import (GenreSerializer,
                         GameSearchSerializer,
                         RedditStadiaGameProSerializer,
                         RedditStadiaGameStatSerializer,)
+from . import utils
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
@@ -77,10 +78,17 @@ class GameGenresViewSet(ReadOnlyModelViewSet):
 
 class WikipediaGameBot(APIView):
     permission_classes = [AllowAny]
+    _title_map = utils.stadia_game_title_map_from_wikipedia_to_reddit
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
+
+    def _get_english_title(self, data):
+        _title = data.get('english_title')
+        if data.get('platform') == 'Stadia' and _title in self._title_map:
+            return self._title_map[_title]
+        return _title
 
     def post(self, request):
         """
@@ -89,7 +97,7 @@ class WikipediaGameBot(APIView):
         """
         # since request object in DRF is immutable
         _request_data = request.data.copy()
-        title = request.data.get('english_title')
+        title = _request_data['english_title'] = self._get_english_title(_request_data)
         if not title:
             return Response({"error": "English title not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)

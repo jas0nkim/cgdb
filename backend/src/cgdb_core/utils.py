@@ -1,0 +1,26 @@
+# some stadia titles in wikipedia are not matching with titles in reddit:
+#   'title in wikipedia': 'title in reddit', ...
+stadia_game_title_map_from_wikipedia_to_reddit = {
+    "Attack on Titan 2": "Attack on Titan 2: Final Battle",
+    "Baldur's Gate III": "Baldur's Gate 3",
+    "Chronos": "Chronos: Before the Ashes",
+    "Cyberpunk 2077": "Cyberpunk",
+    "Jotun": "Jotun: Valhalla Edition",
+    "Metro 2033": "Metro 2033 Redux",
+    "Metro: Last Light": "Metro: Last Light",
+    "Monster Energy Supercross: The Official Videogame": "Monster Energy Supercross 3",
+    "List of Monster Jam video games": "Monster Jam Steel Titans",
+    "MotoGP 20": "MotoGP20",
+    "Panzer Dragoon": "Panzer Dragoon: Remake",
+    "Rise of the Tomb Raider": "Rise of the Tomb Raider: 20 Year Celebration",
+    "Rock of Ages": "Rock of Ages 3: Make & Break",
+    "Scott Pilgrim vs. the World: The Game": "Scott Pilgrim vs. The World",
+    "Serious Sam": "Serious Sam Collection",
+    "Shadow of the Tomb Raider": "Shadow of the Tomb Raider Definitive Edition",
+    "SteamWorld Quest": "SteamWorld Quest: Hand of Gilgamech",
+    "Submerged": "Submerged: Hidden Depths",
+    "Sundered": "Sundered: Eldritch Edition",
+    "Super Bomberman R": "SUPER BOMBERMAN R ONLINE",
+    "Tomb Raider": "Tomb Raider: Definitive Edition",
+    "Farming Simulator": "Farming Simulator 19",
+}
