@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 100,
+        cursor: 'pointer',
     },
     control: {
         padding: theme.spacing(2),
@@ -113,7 +114,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
                                 <CardMedia
                                     className={classes.media}
                                     image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
-                                    title={ game.slug }
+                                    title={game.slug}
                                 />
                             </Link>
                             <Link href={'/game/' + game.slug}>
