@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { CardMedia, Grid, Paper, Typography } from "@material-ui/core";
-import configData from "../../../config.json";
 import GameFilterDrawer from "../../../components/GameFilterDrawer";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +87,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
     const handleFilterChanged = (querystring) => {
         querystring = defaultQueryString + '&' + querystring
         fetch(
-            `${configData.API_SERVER_URL}games/?${querystring}`
+            `${process.env.NEXT_PUBLIC_API_SERVER_URL}games/?${querystring}`
         ).then(async (resp) => {
             const filteredGames = await resp.json()
             setGames(filteredGames)
@@ -113,7 +112,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
                             <Link href={'/game/' + game.slug} passHref>
                                 <CardMedia
                                     className={classes.media}
-                                    image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
+                                    image={ game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
                                     title={game.slug}
                                 />
                             </Link>
@@ -129,14 +128,14 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
 }
 
 export async function getServerSideProps({ params }) {
-    let resp = await fetch(`${configData.API_SERVER_URL}games/?${defaultQueryString}`)
+    let resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}games/?${defaultQueryString}`)
     const allGames = await resp.json()
     if (!allGames) {
         return {
             notFound: true,
         }
     }
-    resp = await fetch(`${configData.API_SERVER_URL}game-genres/`)
+    resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}game-genres/`)
     const gameGenres = await resp.json()
     return {
         props: { allGames, gameGenres },

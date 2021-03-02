@@ -1,7 +1,0 @@
-{
-    "SITE_NAME": "CGDB",
-    "SITE_HOST": "http://localhost:3000",
-    "API_SERVER_URL": "http://localhost:8000/api/",
-    "MAX_SUGGESTIONS": 5,
-    "PLACEHOLDER_IMG": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zm2HEMg-i1OfKqgFRy4bV3joE5jzFTv8aA&usqp=CAU"
-}

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link'
-import configData from "../config.json";
 
 const SearchPage = (props) => {
     const [input, setInput] = useState('');
@@ -79,7 +78,7 @@ const SearchPage = (props) => {
 }
 
 export async function getStaticProps() {
-    const resp = await fetch(`${configData.API_SERVER_URL}games/`)
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}games/`)
     const games = await resp.json()
     if (!games) {
         return {

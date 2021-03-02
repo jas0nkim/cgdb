@@ -5,7 +5,6 @@ import { FormControl, InputBase, InputAdornment, IconButton }
     from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import configData from "../config.json";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,10 +83,10 @@ const SearchBox = ({ term }) => {
             return false;
         }
         const resp =
-            await fetch(`${configData.API_SERVER_URL}search/${inputValue}/`);
+            await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}search/${inputValue}/`);
         const games = await resp.json();
         const suggestionList =
-            games.slice(0, configData.MAX_SUGGESTIONS).map((game) => {
+            games.slice(0, process.env.NEXT_PUBLIC_MAX_SUGGESTIONS).map((game) => {
                 return {
                     slug: game.slug,
                     text: game.title,

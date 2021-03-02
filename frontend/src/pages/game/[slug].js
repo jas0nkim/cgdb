@@ -9,7 +9,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-import configData from "../../config.json";
 import Head from 'next/head';
 import { Paper } from '@material-ui/core';
 
@@ -77,16 +76,16 @@ const GamePage = ({ game }) => {
     return (
         <>
             <Head>
-                <title>{configData.SITE_NAME} - {game.title}</title>
+                <title>{process.env.NEXT_PUBLIC_SITE_NAME} - {game.title}</title>
                 <meta name="description" content={game.description} />
-                <meta property="og:title" content={`${configData.SITE_NAME} - ${game.title}`} key="og-title" />
-                <meta property="og:url" content={`${configData.SITE_HOST}/game/${game.slug}`} key="og-url" />
+                <meta property="og:title" content={`${process.env.NEXT_PUBLIC_SITE_NAME} - ${game.title}`} key="og-title" />
+                <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_HOST}/game/${game.slug}`} key="og-url" />
                 <meta property="og:description" content={game.description} key="og-description" />
-                <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG} key="og-image" />
+                <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG} key="og-image" />
             </Head>
             <CardMedia
                 className={classes.media}
-                image={ game.pictures.length > 0 ? game.pictures[0] : configData.PLACEHOLDER_IMG }
+                image={ game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
                 title={ game.slug }
             />
             <Paper elevation={0}>
@@ -169,7 +168,7 @@ const GamePage = ({ game }) => {
 };
 
 export async function getStaticPaths() {
-    const resp = await fetch(`${configData.API_SERVER_URL}games/`)
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}games/`)
     const games = await resp.json()
     const paths = games.map((game) => {
         return {
@@ -180,7 +179,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const resp = await fetch(`${configData.API_SERVER_URL}games/${params.slug}/`)
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}games/${params.slug}/`)
     const game = await resp.json()
     if (!game) {
         return {

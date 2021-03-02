@@ -6,7 +6,6 @@ import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import configData from "../../config.json";
 import Head from 'next/head';
 import { Button, List, ListItem, ListItemText, Paper } from '@material-ui/core';
 
@@ -142,16 +141,16 @@ const PlatformPage = ({ platform }) => {
     return (
         <>
             <Head>
-                <title>{configData.SITE_NAME} - {platform.name}</title>
+                <title>{process.env.NEXT_PUBLIC_SITE_NAME} - {platform.name}</title>
                 <meta name="description" content={platform.description} />
-                <meta property="og:title" content={`${configData.SITE_NAME} - ${platform.name}`} key="og-title" />
-                <meta property="og:url" content={`${configData.SITE_HOST}/platform/${platform.slug}`} key="og-url" />
+                <meta property="og:title" content={`${process.env.NEXT_PUBLIC_SITE_NAME} - ${platform.name}`} key="og-title" />
+                <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_HOST}/platform/${platform.slug}`} key="og-url" />
                 <meta property="og:description" content={platform.description} key="og-description" />
-                <meta property="og:image" content={platform.pictures.length > 0 ? platform.pictures[0] : configData.PLACEHOLDER_IMG} key="og-image" />
+                <meta property="og:image" content={platform.pictures.length > 0 ? platform.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG} key="og-image" />
             </Head>
             <CardMedia
                 className={classes.media}
-                image={ platform.pictures.length > 0 ? platform.pictures[0] : configData.PLACEHOLDER_IMG }
+                image={ platform.pictures.length > 0 ? platform.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
                 title={ platform.slug }
             />
             <Paper elevation={0}>
@@ -173,7 +172,7 @@ const PlatformPage = ({ platform }) => {
 };
 
 export async function getStaticPaths() {
-    const resp = await fetch(`${configData.API_SERVER_URL}platforms/`)
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}platforms/`)
     const platforms = await resp.json()
     const paths = platforms.map((platform) => {
         return {
@@ -184,7 +183,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const resp = await fetch(`${configData.API_SERVER_URL}platforms/${params.slug}/`)
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}platforms/${params.slug}/`)
     const platform = await resp.json()
     if (!platform) {
         return {

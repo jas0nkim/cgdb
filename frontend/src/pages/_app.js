@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import MenuBar from '../components/MenuBar'
 import theme from '../theme';
-import configData from "../config.json";
 
 const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
@@ -33,10 +32,10 @@ export default function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>{ configData.SITE_NAME } - Cloud Gaming Database</title>
+        <title>{ process.env.NEXT_PUBLIC_SITE_NAME } - Cloud Gaming Database</title>
         <meta name="description" content="" />
-        <meta property="og:title" content={`${configData.SITE_NAME} - Cloud Gaming Database`} key="og-title" />
-        <meta property="og:url" content={`${configData.SITE_HOST}/`} key="og-url" />
+        <meta property="og:title" content={`${process.env.NEXT_PUBLIC_SITE_NAME} - Cloud Gaming Database`} key="og-title" />
+        <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_HOST}/`} key="og-url" />
         <meta property="og:description" content="" key="og-description" />
         <meta property="og:og-image" content="" key="description" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
