@@ -39,6 +39,12 @@ PGDATA=/data/postgres
 1. Run containers
 - backend
 ```
+# initialize postgres database
+$ docker-compose run --rm postgres
+```
+ctrl+c to kill the container
+```
+# run both backend and postgres
 $ docker-compose up -d
 ```
 - frontend (after backend container running)
