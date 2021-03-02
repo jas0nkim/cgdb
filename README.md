@@ -8,9 +8,42 @@ Provides easily searchable game titles by cloud gaming platforms, such as micros
 
 ## Installation
 
+0. create environment files
+```
+$ mkdir .env
+$ touch .env/backend.env
+$ touch .env/postgres.env
+```
+copy and paste following lines into backend.env file
+```
+DJANGO_SETTINGS_MODULE=cgdb.settings
+PYTHONUNBUFFERED=1
+DJANGO_SECRET_KEY='YOUR-DJANGO-SECRET-KEY'
+DEBUG=True or False
+ALLOWED_HOSTS=HOST_ADDRESS_1||HOST_ADDRESS_2||...
+CORS_ALLOWED_ORIGINS=ORIGIN_ADDRESS_1||ORIGIN_ADDRESS_2||...
+DATABASE_NAME=YOUR-DB-NAME
+DATABASE_USER=YOUR-DB-USER
+DATABASE_PASS=YOUR-DB-PASSWORD
+DATABASE_HOST=postgres
+DATABASE_PORT=5432
+```
+copy and paste following lines into postgres.env file
+```
+POSTGRES_USER=YOUR-DB-USER
+POSTGRES_PASSWORD=YOUR-DB-PASSWORD
+POSTGRES_DB=YOUR-DB-NAME
+PGDATA=/data/postgres
+```
+
 1. Run containers
+- backend
 ```
 $ docker-compose up -d
+```
+- frontend (after backend container running)
+```
+$ docker-compose -f docker-compose-frontend.yml up -d
 ```
 
 2. Initialize django database and create a superuser
