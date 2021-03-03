@@ -32,6 +32,20 @@ services:
         networks:
             - cgdb
 
+    bot:
+        build:
+            context: ./bot
+        container_name: bot
+        env_file:
+            - ./.env/bot.env
+        volumes:
+            - ./bot/src:/app
+            - ./bot/.data:/etc/.data
+        depends_on:
+            - backend
+        networks:
+            - cgdb
+
 networks:
     cgdb:
         driver: bridge

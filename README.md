@@ -8,10 +8,11 @@ Provides easily searchable game titles by cloud gaming platforms, such as micros
 
 ## Installation
 
-0. create environment files
+1. create environment files
 ```
 $ mkdir .env
 $ touch .env/backend.env
+$ touch .env/bot.env
 $ touch .env/postgres.env
 ```
 copy and paste following lines into backend.env file
@@ -28,6 +29,11 @@ DATABASE_PASS=YOUR-DB-PASSWORD
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
 ```
+copy and paste following lines into bot.env file
+```
+SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
+API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://backend:8000
+```
 copy and paste following lines into postgres.env file
 ```
 POSTGRES_USER=YOUR-DB-USER
@@ -36,7 +42,7 @@ POSTGRES_DB=YOUR-DB-NAME
 PGDATA=/data/postgres
 ```
 
-1. Run containers
+2. Run containers
 - backend
 ```
 # initialize postgres database
@@ -52,10 +58,8 @@ $ docker-compose up -d
 $ docker-compose -f docker-compose-frontend.yml up -d
 ```
 
-2. Initialize django database and create a superuser
+3. Create a superuser
 ```
-$ docker-compose exec backend python manage.py makemigrations
-$ docker-compose exec backend python manage.py migrate
 $ docker-compose exec backend python manage.py createsuperuser
 ```
 
@@ -68,11 +72,16 @@ Enter password after
 
 - Restore
 ```
-$ docker-compose exec postgres sh
+$ docker-compose exec postgres bash
 # cd /etc
 # psql -U cgdb cgdb < .sql/cgdb-backup-xxxx.sql
 ```
 
+- Django migration
+```
+$ docker-compose exec backend python manage.py makemigrations
+$ docker-compose exec backend python manage.py migrate
+```
 ## Access postgres db
 ```
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
@@ -81,13 +90,11 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ## Run crawlers
 - Reddit (Stadia)
 ```
-$ cd bot/src
-$ python run.py -p Stadia
+$ docker-compose run --rm bot python run.py -p Stadia
 ```
 - Wikipedia
 ```
-$ cd bot/src
-$ scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
+$ docker-compose run --rm bot scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
 ```
 
 ## Run tests
@@ -97,8 +104,7 @@ $ docker-compose exec backend python manage.py test
 ```
 - bot
 ```
-$ cd bot/src
-$ python -m unittest
+$ docker-compose run --rm bot python -m unittest
 ```
 
 ## References / Game list

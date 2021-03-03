@@ -7,7 +7,7 @@ from cgdb_bot.parsers import (parse_reddit_stadia_wiki,
 from cgdb_bot.items import (RedditStadiaWikiGame,
                         RedditStadiaWikiGamePro,
                         RedditStadiaStatDetail)
-from cgdb_bot.settings import API_SERVER_HOST, API_SERVER_PORT
+from cgdb_bot.settings import API_SERVER_HOST
 from cgdb_bot.utils import to_bool
 
 class RedditStadiaSpider(Spider):
@@ -81,7 +81,7 @@ class RedditStadiaSpider(Spider):
                             item.asjson(),
                             content[0:2000])
 
-        d = treq.post(f'{API_SERVER_HOST}:{API_SERVER_PORT}{api_endpoint}',
+        d = treq.post(f'{API_SERVER_HOST}{api_endpoint}',
                     item.asjson().encode('ascii'),
                     headers={b'Content-Type': [b'application/json']})
         d.addCallback(_cb)

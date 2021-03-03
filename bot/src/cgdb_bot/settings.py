@@ -1,4 +1,4 @@
-from os.path import abspath, dirname
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -92,8 +92,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-SRC_DIR = dirname(dirname(dirname(abspath(__file__))))
-DATA_DIR = f'{SRC_DIR}/.data'
+# SRC_DIR = os.path.dirname(
+#                os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA_DIR = '/etc/.data'
 
 FEEDS = {
    Path(f'{DATA_DIR}/scraped_items/%(name)s/%(time)s-part-%(batch_id)d.json'): {
@@ -115,8 +116,7 @@ LOG_LEVEL = 'DEBUG'
 
 CRAWL_ARG_DELIMITER = '||'
 
-API_SERVER_HOST = 'http://localhost'
-API_SERVER_PORT = '8000'
+API_SERVER_HOST = os.getenv('API_SERVER_HOST', 'http://localhost:8000')
 
 WIKIPEDIA_SEARCH_URL_FORMAT = 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search={urlencoded}&language=en&go=Go'
 WIKIPEDIA_ENGLISH_DOMAIN = 'https://en.wikipedia.org'
