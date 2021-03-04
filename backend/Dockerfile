@@ -1,8 +1,27 @@
+# Based on official Python 3.8
 FROM python:3.8
 
-COPY ./requirements.txt /tmp/requirements.txt
+# Run container as non-root (unprivileged) user
+# Create new user: appuser
+RUN groupadd -g 1000 appuser \
+    && useradd -r -m -d /home/appuser/ -u 1000 -g appuser appuser \
+    && chown -R appuser /home/appuser/
+USER appuser
+
+# Create working directory
+RUN mkdir /home/appuser/app
+WORKDIR /home/appuser/app
+
+# Copy requirements.txt and install dependencies before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY --chown=appuser:appuser ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
-RUN mkdir /app
-COPY ./src /app
-WORKDIR /app
+# Copy all source files
+COPY --chown=appuser:appuser ./src ./
+
+# Expose app port
+EXPOSE 8000
+
+# Run npm start script when container starts
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]

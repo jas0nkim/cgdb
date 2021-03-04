@@ -21,8 +21,6 @@ services:
         container_name: backend
         env_file:
             - ./.env/backend.env
-        volumes:
-            - ./backend/src:/app
         command: bash -c "python manage.py migrate &&
                         python manage.py runserver 0.0.0.0:8000"
         ports:
@@ -39,7 +37,6 @@ services:
         env_file:
             - ./.env/bot.env
         volumes:
-            - ./bot/src:/app
             - ./bot/.data:/etc/.data
         depends_on:
             - backend
