@@ -4,6 +4,6 @@ services:
         build:
             context: ./frontend
         container_name: frontend
-        command: npm run start -- -H 0.0.0.0
+        command: pm2-runtime npm -- start -- -H 0.0.0.0
         ports:
             - 80:3000

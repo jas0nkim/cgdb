@@ -1,6 +1,9 @@
 # Based on official Node.js latest LTS
 FROM node:lts
 
+# Install PM2 globally
+RUN npm install --global pm2
+
 # Run container as non-root (unprivileged) user
 # The node user is provided in the Node.js Alpine base image
 # Create new user: appuser (node uid = 1000)
@@ -31,4 +34,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Run npm start script when container starts
-CMD [ "npm", "start" ]
+CMD [ "pm2-runtime", "npm", "--", "start" ]
