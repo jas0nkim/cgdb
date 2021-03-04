@@ -37,7 +37,7 @@ class GameAdmin(admin.ModelAdmin):
     search_fields = ['title__icontains',]
     list_filter = ('platforms', 'active',)
     exclude = ('genres', 'developers', 'publishers', 'series', 'modes',)
-    list_display = ['title', 'active',]
+    list_display = ['title', 'active', 'created_at',]
 
 @admin.register(Platform)
 class PlatformAdmin(admin.ModelAdmin):
