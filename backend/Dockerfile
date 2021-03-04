@@ -1,6 +1,11 @@
 # Based on official Python 3.8
 FROM python:3.8
 
+# Install netcat
+RUN apt-get update \
+    && apt-get -y dist-upgrade \
+    && apt install -y netcat
+
 # Run container as non-root (unprivileged) user
 # Create new user: appuser
 RUN groupadd -g 1000 appuser \
@@ -24,4 +29,4 @@ COPY --chown=appuser:appuser ./src ./
 EXPOSE 8000
 
 # Run npm start script when container starts
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+ENTRYPOINT [ "/home/appuser/app/entrypoint.sh" ]
