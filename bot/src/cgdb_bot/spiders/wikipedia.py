@@ -8,7 +8,7 @@ from scrapy import Spider, Request, signals
 from scrapy.exceptions import DropItem
 import treq
 from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
-                            API_SERVER_HOST, CRAWL_ARG_DELIMITER, DATA_DIR,
+                            API_SERVER_HOST, CRAWL_ARG_DELIMITER, DATA_ROOT,
                             WIKIPEDIA_STADIA_GAMES_URL)
 from cgdb_bot.parsers import (general_resp_error_handler,
                             parse_wikipedia_game_article,
@@ -54,7 +54,7 @@ class BaseWikipediaGameSpider(Spider):
         return d
 
     def spider_opened(self, spider):
-        dropped_items_file = f'{DATA_DIR}/dropped_items/{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
+        dropped_items_file = f'{DATA_ROOT}/dropped_items/{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
         spider._dropped_items_file = open(dropped_items_file, 'a')
 
     def spider_closed(self, spider, reason):
