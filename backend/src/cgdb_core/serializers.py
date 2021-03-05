@@ -224,8 +224,11 @@ class GameSerializer(serializers.ModelSerializer):
         return {**instance_title_lc, **validated_data.get('title_lc', {})}
 
     def _updated_pictures(self, instance, validated_data):
-        instance_pictures = instance.pictures if instance.pictures else []
-        return instance_pictures + validated_data.get('pictures', [])
+        existing_pics = instance.pictures if instance.pictures else []
+        set_existing_pics = set(existing_pics)
+        set_new_pics = set(validated_data.get('pictures', []))
+        new_pics_not_in_existing_pics = list(set_new_pics - set_existing_pics)
+        return existing_pics + new_pics_not_in_existing_pics
 
     def _updated_links(self, instance, validated_data):
         instance_links = instance.links if instance.links else {}
