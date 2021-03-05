@@ -20,6 +20,10 @@ RUN mkdir -p /home/appuser/public/media
 # Add user .local/bin in PATH
 ENV PATH=/home/appuser/.local/bin:$PATH
 
+# Set environment variable for app
+ENV DJANGO_SETTINGS_MODULE=cgdb.settings
+ENV PYTHONUNBUFFERED=1
+
 # Create working directory
 RUN mkdir /home/appuser/app
 WORKDIR /home/appuser/app

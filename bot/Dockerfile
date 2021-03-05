@@ -20,6 +20,10 @@ USER appuser
 # Add user .local/bin in PATH
 ENV PATH=/home/appuser/.local/bin:$PATH
 
+# Set environment variable for app
+ENV SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
+ENV DATA_ROOT=/etc/.data
+
 # Create working directory
 RUN mkdir /home/appuser/app
 WORKDIR /home/appuser/app

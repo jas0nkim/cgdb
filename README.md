@@ -17,8 +17,6 @@ $ touch .env/postgres.env
 ```
 copy and paste following lines into backend.env file
 ```
-DJANGO_SETTINGS_MODULE=cgdb.settings
-PYTHONUNBUFFERED=1
 DJANGO_SECRET_KEY='YOUR-DJANGO-SECRET-KEY'
 DEBUG=True or False
 ALLOWED_HOSTS=HOST_ADDRESS_1||HOST_ADDRESS_2||...
@@ -31,9 +29,7 @@ DATABASE_PORT=5432
 ```
 copy and paste following lines into bot.env file
 ```
-SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
 API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
-DATA_ROOT=/etc/.data
 ```
 copy and paste following lines into postgres.env file
 ```
@@ -44,7 +40,7 @@ PGDATA=/data/postgres
 ```
 2. Run containers
 ```
-# (option) initialize postgres database
+# (optional) initialize postgres database
 $ docker-compose run --rm postgres
 # ctrl+c to kill the postgres container
 
