@@ -65,7 +65,7 @@ services:
         build:
             context: ./frontend
         container_name: frontend
-        command: pm2-runtime npm -- run dev -- -H 0.0.0.0
+        command: pm2-runtime npm -- start -- -H 0.0.0.0
         depends_on:
             - backend
         expose:
