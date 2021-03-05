@@ -132,3 +132,6 @@ dmypy.json
 
 # database
 /db
+
+# local docker compose
+docker-compose.local.yml

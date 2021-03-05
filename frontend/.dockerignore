@@ -1,2 +1,9 @@
+# node build
 /.next
+
+# node dependencies
 /node_modules
+
+# docker
+.dockerignore
+Dockerfile
