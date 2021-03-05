@@ -94,10 +94,10 @@ ITEM_PIPELINES = {
 
 # SRC_DIR = os.path.dirname(
 #                os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA_DIR = '/etc/.data'
+DATA_ROOT = os.getenv('DATA_ROOT', '/etc/.data')
 
 FEEDS = {
-   Path(f'{DATA_DIR}/scraped_items/%(name)s/%(time)s-part-%(batch_id)d.json'): {
+   Path(f'{DATA_ROOT}/scraped_items/%(name)s/%(time)s-part-%(batch_id)d.json'): {
       'format': 'json',
       'batch_item_count': 100,
       'encoding': 'utf8',
@@ -111,7 +111,7 @@ FEEDS = {
    }
 }
 
-LOG_FILE = Path(f'{DATA_DIR}/logs/{datetime.now().strftime("%Y%m%d%H%M%S")}.log')
+LOG_FILE = Path(f'{DATA_ROOT}/logs/{datetime.now().strftime("%Y%m%d%H%M%S")}.log')
 LOG_LEVEL = 'DEBUG'
 
 CRAWL_ARG_DELIMITER = '||'

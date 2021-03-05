@@ -33,6 +33,7 @@ copy and paste following lines into bot.env file
 ```
 SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
 API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
+DATA_ROOT=/etc/.data
 ```
 copy and paste following lines into postgres.env file
 ```
@@ -53,11 +54,11 @@ $ docker-compose up --build nginx_backend
 # run nginx/frontend containers
 $ docker-compose up --build nginx_frontend
 ```
-4. Collect Django static files
+3. Collect Django static files
 ```
 $ docker-compose exec backend python manage.py collectstatic
 ```
-5. Create a superuser
+4. Create a superuser
 ```
 $ docker-compose exec backend python manage.py createsuperuser
 ```

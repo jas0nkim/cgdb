@@ -3,8 +3,8 @@ FROM python:3.8
 
 # Run container as non-root (unprivileged) user
 # Create new user: appuser
-RUN groupadd -g 1000 appuser \
-    && useradd -r -m -d /home/appuser/ -u 1000 -g appuser appuser \
+RUN groupadd -g 1001 appuser \
+    && useradd -r -m -d /home/appuser/ -u 1001 -g appuser appuser \
     && chown -R appuser /home/appuser/
 
 # Create data folders
