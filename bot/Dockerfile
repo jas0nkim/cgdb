@@ -17,6 +17,9 @@ RUN mkdir /etc/.data \
 
 USER appuser
 
+# Add user .local/bin in PATH
+ENV PATH=/home/appuser/.local/bin:$PATH
+
 # Create working directory
 RUN mkdir /home/appuser/app
 WORKDIR /home/appuser/app

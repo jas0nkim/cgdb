@@ -13,6 +13,13 @@ RUN groupadd -g 1000 appuser \
     && chown -R appuser /home/appuser/
 USER appuser
 
+# Create django static/media root directories
+RUN mkdir -p /home/appuser/public/static
+RUN mkdir -p /home/appuser/public/media
+
+# Add user .local/bin in PATH
+ENV PATH=/home/appuser/.local/bin:$PATH
+
 # Create working directory
 RUN mkdir /home/appuser/app
 WORKDIR /home/appuser/app
@@ -28,5 +35,5 @@ COPY --chown=appuser:appuser ./src ./
 # Expose app port
 EXPOSE 8000
 
-# Run npm start script when container starts
+# Run entrypoint.sh script when container starts
 ENTRYPOINT [ "/home/appuser/app/entrypoint.sh" ]

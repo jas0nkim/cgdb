@@ -32,7 +32,7 @@ DATABASE_PORT=5432
 copy and paste following lines into bot.env file
 ```
 SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
-API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://backend:8000
+API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
 ```
 copy and paste following lines into postgres.env file
 ```
@@ -41,24 +41,23 @@ POSTGRES_PASSWORD=YOUR-DB-PASSWORD
 POSTGRES_DB=YOUR-DB-NAME
 PGDATA=/data/postgres
 ```
-
 2. Run containers
-- backend
 ```
-# initialize postgres database
+# (option) initialize postgres database
 $ docker-compose run --rm postgres
-```
-ctrl+c to kill the container
-```
-# run both backend and postgres
-$ docker-compose up -d
-```
-- frontend (after backend container running)
-```
-$ docker-compose -f docker-compose-frontend.yml up -d
-```
+# ctrl+c to kill the postgres container
 
-3. Create a superuser
+# run backend containers
+$ docker-compose up --build nginx_backend
+
+# run nginx/frontend containers
+$ docker-compose up --build nginx_frontend
+```
+4. Collect Django static files
+```
+$ docker-compose exec backend python manage.py collectstatic
+```
+5. Create a superuser
 ```
 $ docker-compose exec backend python manage.py createsuperuser
 ```
@@ -82,6 +81,7 @@ $ docker-compose exec postgres bash
 $ docker-compose exec backend python manage.py makemigrations
 $ docker-compose exec backend python manage.py migrate
 ```
+
 ## Access postgres db
 ```
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
@@ -95,6 +95,15 @@ $ docker-compose run --rm bot python run.py -p Stadia
 - Wikipedia
 ```
 $ docker-compose run --rm bot scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
+```
+
+## Bulk Game status updates
+- Stadia games
+```
+$ docker-compose exec postgres psql -h postgres -U cgdb cgdb
+...
+cgdb=# select count(*) from games where links->'stadia' IS NOT NULL;
+cgdb=# update games set active = true where links->'stadia' IS NOT NULL;
 ```
 
 ## Run tests

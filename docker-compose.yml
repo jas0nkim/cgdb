@@ -21,11 +21,29 @@ services:
         container_name: backend
         env_file:
             - ./.env/backend.env
-        command: python manage.py runserver 0.0.0.0:8000
-        ports:
-            - 8000:8000
+        volumes:
+            - backend_static_volume:/home/appuser/public/static
+            - backend_media_volume:/home/appuser/public/media
+            - ./backend/src:/app
+        command: gunicorn cgdb.wsgi:application --bind 0.0.0.0:8000
+        expose:
+            - 8000
         depends_on:
             - postgres
+        networks:
+            - cgdb
+
+    nginx_backend:
+        build:
+            context: ./nginx_backend
+        container_name: nginx_backend
+        volumes:
+            - backend_static_volume:/home/backend/public/static
+            - backend_media_volume:/home/backend/public/media
+        depends_on:
+            - backend
+        ports:
+            - 8765:8765
         networks:
             - cgdb
 
@@ -36,12 +54,40 @@ services:
         env_file:
             - ./.env/bot.env
         volumes:
+            - ./bot/src:/app
             - ./bot/.data:/etc/.data
         depends_on:
+            - nginx_backend
+        networks:
+            - cgdb
+
+    frontend:
+        build:
+            context: ./frontend
+        container_name: frontend
+        command: pm2-runtime npm -- run dev -- -H 0.0.0.0
+        depends_on:
             - backend
+        expose:
+            - 3000
+        networks:
+            - cgdb
+
+    nginx_frontend:
+        build:
+            context: ./nginx_frontend
+        container_name: nginx_frontend
+        depends_on:
+            - frontend
+        ports:
+            - 80:80
         networks:
             - cgdb
 
 networks:
     cgdb:
         driver: bridge
+
+volumes:
+    backend_static_volume:
+    backend_media_volume:
