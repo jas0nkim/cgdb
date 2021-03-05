@@ -15,7 +15,7 @@ $ touch .env/backend.env
 $ touch .env/bot.env
 $ touch .env/postgres.env
 ```
-copy and paste following lines into backend.env file
+copy and paste following lines into `backend.env` file
 ```
 DJANGO_SECRET_KEY='YOUR-DJANGO-SECRET-KEY'
 DEBUG=True or False
@@ -27,34 +27,34 @@ DATABASE_PASS=YOUR-DB-PASSWORD
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
 ```
-copy and paste following lines into bot.env file
+copy and paste following lines into `bot.env` file
 ```
 API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
 ```
-copy and paste following lines into postgres.env file
+copy and paste following lines into `postgres.env` file
 ```
 POSTGRES_USER=YOUR-DB-USER
 POSTGRES_PASSWORD=YOUR-DB-PASSWORD
 POSTGRES_DB=YOUR-DB-NAME
 PGDATA=/data/postgres
 ```
-2. Run containers
+2. Build containers
 ```
+$ docker-compose build
+
 # (optional) initialize postgres database
 $ docker-compose run --rm postgres
 # ctrl+c to kill the postgres container
-
-# run backend containers
-$ docker-compose up --build nginx_backend
-
-# run nginx/frontend containers
-$ docker-compose up --build nginx_frontend
 ```
-3. Collect Django static files
+3. Run containers
+```
+$ docker-compose up -d
+```
+4. Collect Django static files
 ```
 $ docker-compose exec backend python manage.py collectstatic
 ```
-4. Create a superuser
+5. Create a superuser
 ```
 $ docker-compose exec backend python manage.py createsuperuser
 ```
@@ -63,16 +63,14 @@ $ docker-compose exec backend python manage.py createsuperuser
 - Backup
 ```
 $ docker-compose exec postgres pg_dump -h postgres -U cgdb cgdb > .sql/cgdb-backup-xxxx.sql
+# Enter db password after
 ```
-Enter password after
-
 - Restore
 ```
 $ docker-compose exec postgres bash
 # cd /etc
 # psql -U cgdb cgdb < .sql/cgdb-backup-xxxx.sql
 ```
-
 - Django migration
 ```
 $ docker-compose exec backend python manage.py makemigrations
