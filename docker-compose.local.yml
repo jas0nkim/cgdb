@@ -1,0 +1,125 @@
+version: '3.4'
+services:
+    postgres:
+        image: postgres:13
+        container_name: postgres
+        env_file:
+            - ./.env/postgres.env
+        volumes:
+            - ./db/postgres:/data/postgres
+            - ./.sql:/etc/.sql
+        expose:
+            - 5432
+        networks:
+            - cgdb
+        restart:
+            unless-stopped
+    
+    backend:
+        build:
+            context: ./backend
+        container_name: backend
+        env_file:
+            - ./.env/backend.env
+        volumes:
+            - backend_static_volume:/home/appuser/public/static
+            - backend_media_volume:/home/appuser/public/media
+            - ./backend/src:/home/appuser/app
+        ####### production #######
+        #
+        # command: gunicorn cgdb.wsgi:application --bind 0.0.0.0:8000
+        # expose:
+        #     - 8000
+        #
+        # remove ports
+        #
+        ##########################
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8765:8000
+        depends_on:
+            - postgres
+        networks:
+            - cgdb
+
+    ####### production #######
+    #
+    # nginx_backend:
+    #     build:
+    #         context: ./nginx_backend
+    #     container_name: nginx_backend
+    #     volumes:
+    #         - backend_static_volume:/home/backend/public/static
+    #         - backend_media_volume:/home/backend/public/media
+    #     depends_on:
+    #         - backend
+    #     ports:
+    #         - 8765:8765
+    #     networks:
+    #         - cgdb
+    #
+    ##########################
+
+    ####### production #######
+    #
+    # bot:
+    #     build:
+    #         context: ./bot
+    #     container_name: bot
+    #     env_file:
+    #         - ./.env/bot.env
+    #     volumes:
+    #         - ./bot/.data:/etc/.data
+    #     depends_on:
+    #         - nginx_backend
+    #     networks:
+    #         - cgdb
+    #
+    ##########################
+
+    frontend:
+        build:
+            context: ./frontend
+        container_name: frontend
+        ####### production #######
+        #
+        # command: bash -c "npm run build &&
+        #                 pm2-runtime npm -- start -- -H 0.0.0.0"
+        # expose:
+        #     - 3000
+        #
+        # remove ports
+        #
+        ##########################
+        command: npm run dev -- -H 0.0.0.0
+        volumes:
+            - ./frontend:/home/node/app
+        depends_on:
+            - backend
+        ports:
+            - 80:3000
+        networks:
+            - cgdb
+
+    ####### production #######
+    #
+    # nginx_frontend:
+    #     build:
+    #         context: ./nginx_frontend
+    #     container_name: nginx_frontend
+    #     depends_on:
+    #         - frontend
+    #     ports:
+    #         - 80:80
+    #     networks:
+    #         - cgdb
+    #
+    ##########################
+
+networks:
+    cgdb:
+        driver: bridge
+
+volumes:
+    backend_static_volume:
+    backend_media_volume:

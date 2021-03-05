@@ -4,20 +4,16 @@ FROM node:lts
 # Install PM2 globally
 RUN npm install --global pm2
 
-# Run container as non-root (unprivileged) user
-# The node user is provided in the Node.js Alpine base image
-# Create new user: appuser (node uid = 1000)
-RUN useradd -r -m -d /home/appuser/ -u 999 -g node appuser \
-    && chown -R appuser /home/appuser/
-USER appuser
+# Change to user node (uid:1000)
+USER node
 
 # Create working directory
-RUN mkdir /home/appuser/app
-WORKDIR /home/appuser/app
+RUN mkdir /home/node/app
+WORKDIR /home/node/app
 
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
-COPY --chown=appuser:node ./package*.json ./
+COPY --chown=node:node ./package*.json ./
 
 RUN npx browserslist@latest --update-db
 
@@ -25,13 +21,10 @@ RUN npx browserslist@latest --update-db
 RUN npm ci
 
 # Copy all source files
-COPY --chown=appuser:node ./ ./
-
-# Build app
-RUN npm run build
+COPY --chown=node:node ./ ./
 
 # Expose app port
 EXPOSE 3000
 
-# Run npm start script when container starts
-CMD [ "pm2-runtime", "npm", "--", "start" ]
+# Run app when container starts
+CMD [ "npm", "run", "dev" ]

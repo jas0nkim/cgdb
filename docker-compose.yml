@@ -24,7 +24,6 @@ services:
         volumes:
             - backend_static_volume:/home/appuser/public/static
             - backend_media_volume:/home/appuser/public/media
-            - ./backend/src:/app
         command: gunicorn cgdb.wsgi:application --bind 0.0.0.0:8000
         expose:
             - 8000
@@ -54,7 +53,6 @@ services:
         env_file:
             - ./.env/bot.env
         volumes:
-            - ./bot/src:/app
             - ./bot/.data:/etc/.data
         depends_on:
             - nginx_backend
@@ -65,7 +63,8 @@ services:
         build:
             context: ./frontend
         container_name: frontend
-        command: pm2-runtime npm -- start -- -H 0.0.0.0
+        command: bash -c "npm run build &&
+                        pm2-runtime npm -- start -- -H 0.0.0.0"
         depends_on:
             - backend
         expose:
