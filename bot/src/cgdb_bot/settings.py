@@ -117,7 +117,7 @@ LOG_LEVEL = 'DEBUG'
 
 CRAWL_ARG_DELIMITER = '||'
 
-API_SERVER_HOST = os.getenv('API_SERVER_HOST', 'http://172.30.64.239:8765')
+API_SERVER_HOST = os.getenv('API_SERVER_HOST', 'http://localhost')
 
 WIKIPEDIA_SEARCH_URL_FORMAT = 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search={urlencoded}&language=en&go=Go'
 WIKIPEDIA_ENGLISH_DOMAIN = 'https://en.wikipedia.org'
@@ -129,3 +129,4 @@ WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES = ['en-simple',]
 REDDIT_DOMAIN = 'https://www.reddit.com'
 
 REDDIT_STADIA_POST_DELAY = 1
+AUTH_TOKEN = os.getenv('AUTH_TOKEN')

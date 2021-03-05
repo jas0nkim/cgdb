@@ -8,7 +8,10 @@ from scrapy import Spider, Request, signals
 from scrapy.exceptions import DropItem
 import treq
 from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
-                            API_SERVER_HOST, CRAWL_ARG_DELIMITER, DATA_ROOT,
+                            AUTH_TOKEN,
+                            API_SERVER_HOST,
+                            CRAWL_ARG_DELIMITER,
+                            DATA_ROOT,
                             WIKIPEDIA_STADIA_GAMES_URL)
 from cgdb_bot.parsers import (general_resp_error_handler,
                             parse_wikipedia_game_article,
@@ -43,11 +46,14 @@ class BaseWikipediaGameSpider(Spider):
             content = yield resp.content()
             if resp.code >= 400:
                 _logger.error("API post request error [HTTP:%d] %s %s",
-                            resp.code, resp.request.absoluteURI, content[0:2000])
+                            resp.code, resp.request.absoluteURI, str(content)[0:2000])
 
         d = treq.post(f'{API_SERVER_HOST}/api/bot/game/',
                     item.asjson().encode('ascii'),
-                    headers={b'Content-Type': [b'application/json']})
+                    headers={
+                        'Authorization': f'Token {AUTH_TOKEN}',
+                        'Content-Type': ['application/json'],
+                    })
         d.addCallback(_cb)
         # The next item will be scraped only after
         # deferred (d) is fired

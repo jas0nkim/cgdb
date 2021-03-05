@@ -7,7 +7,7 @@ from cgdb_bot.parsers import (parse_reddit_stadia_wiki,
 from cgdb_bot.items import (RedditStadiaWikiGame,
                         RedditStadiaWikiGamePro,
                         RedditStadiaStatDetail)
-from cgdb_bot.settings import API_SERVER_HOST
+from cgdb_bot.settings import API_SERVER_HOST, AUTH_TOKEN
 from cgdb_bot.utils import to_bool
 
 class RedditStadiaSpider(Spider):
@@ -79,11 +79,14 @@ class RedditStadiaSpider(Spider):
                             resp.code,
                             resp.request.absoluteURI,
                             item.asjson(),
-                            content[0:2000])
+                            str(content)[0:2000])
 
         d = treq.post(f'{API_SERVER_HOST}{api_endpoint}',
                     item.asjson().encode('ascii'),
-                    headers={b'Content-Type': [b'application/json']})
+                    headers={
+                        'Authorization': f'Token {AUTH_TOKEN}',
+                        'Content-Type': ['application/json'],
+                    })
         d.addCallback(_cb)
         # The next item will be scraped only after
         # deferred (d) is fired

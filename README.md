@@ -7,8 +7,7 @@ Provides easily searchable game titles by cloud gaming platforms, such as micros
 - Multi-language support
 
 ## Installation
-
-1. create environment files
+1. Create environment files
 ```
 $ mkdir .env
 $ touch .env/backend.env
@@ -29,6 +28,7 @@ DATABASE_PORT=5432
 ```
 copy and paste following lines into `bot.env` file
 ```
+AUTH_TOKEN=YOUR-AUTH-TOKEN
 API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
 ```
 copy and paste following lines into `postgres.env` file
@@ -58,6 +58,7 @@ $ docker-compose exec backend python manage.py collectstatic
 ```
 $ docker-compose exec backend python manage.py createsuperuser
 ```
+6. Generate auth tokens
 
 ## Backup/restore data
 - Backup
