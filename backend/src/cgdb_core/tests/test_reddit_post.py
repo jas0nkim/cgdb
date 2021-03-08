@@ -106,6 +106,8 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
         for game_release in game.game_release_dates.all():
             self.assertEqual(game_release.release_date, datetime.datetime.strptime('2019 Nov 19', '%Y %b %d').date())
             break
+        self.assertEqual(game.description_lc, {})
+        self.assertEqual(game.pictures, [])
 
     def test_post_stadia_games_data_multiple_times(self):
         """
@@ -117,6 +119,8 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
         for game_release in game.game_release_dates.all():
             self.assertEqual(game_release.release_date, datetime.datetime.strptime('2019 Nov 19', '%Y %b %d').date())
             break
+        self.assertEqual(game.description_lc, {})
+        self.assertEqual(game.pictures, [])
 
     def test_post_stadia_games_with_pro_subs(self):
         """

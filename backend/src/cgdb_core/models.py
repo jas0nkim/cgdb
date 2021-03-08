@@ -5,6 +5,15 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 
+from django import forms
+
+class MyJSONFormField(forms.JSONField):
+    empty_values = []
+
+class MyJSONField(models.JSONField):
+    def formfield(self, **kwargs):
+        return super().formfield(**{"form_class": MyJSONFormField, **kwargs})
+
 class User(AbstractUser):
     """ extend django user
     """
@@ -88,7 +97,7 @@ class Publisher(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length = 100, unique=True)
-    pictures = models.JSONField(default=list)
+    pictures = models.JSONField(blank=True, default=list)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -97,6 +106,10 @@ class Publisher(models.Model):
     
     def __str__(self):
         return self.name
+
+    def clean(self, *args, **kwargs):
+        if self.pictures is None:
+            self.pictures = []
 
     def save(self, force_insert=False, force_update=False, using=None,
             update_fields=None):
@@ -117,7 +130,7 @@ class Developer(models.Model):
     """
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    pictures = models.JSONField(default=list)
+    pictures = models.JSONField(blank=True, default=list)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -127,6 +140,10 @@ class Developer(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self, *args, **kwargs):
+        if self.pictures is None:
+            self.pictures = []
 
     def save(self, force_insert=False, force_update=False, using=None,
             update_fields=None):
@@ -205,11 +222,11 @@ class Platform(models.Model):
     """
     name = models.CharField(max_length = 100)
     description = models.TextField(null=True, blank=True)
-    verdict = models.JSONField(default=list)
-    available_countries = models.JSONField(default=list)
+    verdict = models.JSONField(blank=True, default=list)
+    available_countries = models.JSONField(blank=True, default=list)
     internet_requirements = models.TextField(null=True, blank=True)
-    supported_devices = models.JSONField(default=list)
-    pictures = models.JSONField(default=list)
+    supported_devices = models.JSONField(blank=True, default=list)
+    pictures = models.JSONField(blank=True, default=list)
     stores = models.ManyToManyField(
                     Store,
                     related_name="platforms",
@@ -223,6 +240,16 @@ class Platform(models.Model):
     
     def __str__(self):
         return self.name
+
+    def clean(self, *args, **kwargs):
+        if self.verdict is None:
+            self.verdict = []
+        if self.available_countries is None:
+            self.available_countries = []
+        if self.supported_devices is None:
+            self.supported_devices = []
+        if self.pictures is None:
+            self.pictures = []
 
     def save(self, force_insert=False, force_update=False, using=None,
             update_fields=None):
@@ -269,12 +296,12 @@ class Game(models.Model):
     ]
 
     title = models.CharField(max_length = 200)
-    title_lc = models.JSONField(default=dict)
+    title_lc = models.JSONField(blank=True, default=dict)
     description = models.TextField(null=True, blank=True)
-    description_lc = models.JSONField(default=dict)
+    description_lc = models.JSONField(blank=True, default=dict)
     esrb = models.CharField(max_length=4, default='NA', choices=ESRB_CHOICES)
-    pictures = models.JSONField(default=list)
-    links = models.JSONField(default=dict)
+    pictures = models.JSONField(blank=True, default=list)
+    links = models.JSONField(blank=True, default=dict)
     active = models.BooleanField(default=False)
     developers = models.ManyToManyField(
                     Developer,
@@ -317,6 +344,16 @@ class Game(models.Model):
 
     def __str__(self):
         return self.title
+
+    def clean(self, *args, **kwargs):
+        if self.title_lc is None:
+            self.title_lc = {}
+        if self.description_lc is None:
+            self.description_lc = {}
+        if self.pictures is None:
+            self.pictures = []
+        if self.links is None:
+            self.links = {}
 
     def save(self, force_insert=False, force_update=False, using=None,
             update_fields=None):
