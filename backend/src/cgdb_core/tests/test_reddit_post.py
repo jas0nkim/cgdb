@@ -4,8 +4,9 @@ import json
 import logging
 from pathlib import Path
 from django.urls import include, path, reverse
+from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.test import APITestCase, URLPatternsTestCase
+from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
 from cgdb_core.models import Developer, Game, GameFreeOnSubscription, Genre, Mode, Publisher
 
 logger = logging.getLogger(__name__)
@@ -24,9 +25,27 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
         cls._data_developers = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_developers_data.json').read_text())
         cls._data_publishers = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_publishers_data.json').read_text())
         cls._data_modes = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_modes_data.json').read_text())
+        cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def test_auth(self):
+        """
+        Test without auth
+        """
+        url = reverse('bot-stadia-game-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-stadia-game-pro-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-stadia-game-stats-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def _post_stadia_games(self, resp_status=0):
         url = reverse('bot-stadia-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_games:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:
@@ -36,6 +55,9 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
 
     def _post_stadia_pro_games(self, resp_status=0):
         url = reverse('bot-stadia-game-pro-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_pro_games:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:
@@ -45,6 +67,9 @@ class RedditPostTests(APITestCase, URLPatternsTestCase):
 
     def _post_stadia_game_stats(self, resp_status=0):
         url = reverse('bot-stadia-game-stats-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_ratings:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:

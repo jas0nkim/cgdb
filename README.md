@@ -58,7 +58,7 @@ $ docker-compose exec backend python manage.py collectstatic
 ```
 $ docker-compose exec backend python manage.py createsuperuser
 ```
-6. Generate auth tokens
+6. Generate auth tokens (i.e. from admin site)
 
 ## Backup/restore data
 - Backup

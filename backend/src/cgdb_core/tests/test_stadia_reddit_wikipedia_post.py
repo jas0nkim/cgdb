@@ -3,8 +3,9 @@ import os
 import json
 from pathlib import Path
 from django.urls import include, path, reverse
+from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.test import APITestCase, URLPatternsTestCase
+from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
 from cgdb_core.models import Developer, Game, GameFreeOnSubscription, Genre, Mode, Publisher
 
 class WikipediaPostTests(APITestCase, URLPatternsTestCase):
@@ -20,9 +21,30 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         cls._data_reddit_games_pro = _json.get('reddit_games_pro')
         cls._data_reddit_game_stats = _json.get('reddit_game_stats')
         cls._data_wikipedia_games = _json.get('wikipedia_games')
+        cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def test_auth(self):
+        """
+        Test without auth
+        """
+        url = reverse('bot-stadia-game-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-stadia-game-pro-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-stadia-game-stats-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-game-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def _post_stadia_games(self, resp_status=0):
         url = reverse('bot-stadia-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_reddit_games:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:
@@ -32,6 +54,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
 
     def _post_stadia_pro_games(self, resp_status=0):
         url = reverse('bot-stadia-game-pro-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_reddit_games_pro:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:
@@ -41,6 +66,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
 
     def _post_stadia_game_stats(self, resp_status=0):
         url = reverse('bot-stadia-game-stats-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_reddit_game_stats:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:
@@ -50,6 +78,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
 
     def _post_wikipedia_game(self, resp_status=0):
         url = reverse('bot-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         for data in self._data_wikipedia_games:
             response = self.client.post(url, data, format='json')
             if response.status_code != resp_status:

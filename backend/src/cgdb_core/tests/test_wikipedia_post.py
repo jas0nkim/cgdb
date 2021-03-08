@@ -2,8 +2,9 @@ import os
 import json
 from pathlib import Path
 from django.urls import include, path, reverse
+from django.contrib.auth import get_user_model
 from rest_framework import status
-from rest_framework.test import APITestCase, URLPatternsTestCase
+from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
 from cgdb_core.models import Game
 
 class WikipediaPostTests(APITestCase, URLPatternsTestCase):
@@ -11,19 +12,32 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         path('api/', include('cgdb_core.urls')),
     ]
 
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         content = Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_data.json').read_text()
         _json = json.loads(content)
-        self.test_data_1 = _json.get('data_1')
-        self.test_data_2 = _json.get('data_2')
-        self.test_data_3 = _json.get('data_3')
-        self.test_data_4 = _json.get('data_4')
+        cls.test_data_1 = _json.get('data_1')
+        cls.test_data_2 = _json.get('data_2')
+        cls.test_data_3 = _json.get('data_3')
+        cls.test_data_4 = _json.get('data_4')
+        cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def test_auth(self):
+        """
+        Test without auth
+        """
+        url = reverse('bot-game-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_single_post_create(self):
         """
         Single wiki game artlcle post, and create in db
         """
         url = reverse('bot-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         response = self.client.post(url, self.test_data_1, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Game.objects.count(), 1)
@@ -59,6 +73,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         Single wiki game artlcle post, and update in db
         """
         url = reverse('bot-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         response_create = self.client.post(url, self.test_data_1, format='json')
         self.assertEqual(response_create.status_code, status.HTTP_201_CREATED)
         response_update = self.client.post(url, self.test_data_1, format='json')
@@ -93,6 +110,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         
     def test_multiple_posts(self):
         url = reverse('bot-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
         resp = self.client.post(url, self.test_data_1, format='json')
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         resp = self.client.post(url, self.test_data_2, format='json')
