@@ -4,6 +4,7 @@ from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.spidermiddlewares.httperror import HttpError
 from .wikipedia import WikipediaParser, WikipediaStadiaGamesParser
 from .reddit import RedditStadiaWikiParser
+from .steampowered import SteampoweredParser
 
 def general_resp_error_handler(failure):
     """
@@ -78,3 +79,17 @@ def parse_reddit_game_stat_detail(response, stat_type, stat_detail):
     parser = RedditStadiaWikiParser()
     return parser.parse_game_stats_detail_page(response,
                                             stat_type, stat_detail)
+
+def parse_steamstore_searchresults(response, title):
+    """
+    parse stormpowered store search result page
+    """
+    logger = logging.getLogger(__name__)
+    return SteampoweredParser().parse_search_results_page(response, title)
+
+def parse_steamstore_game_detail(response, title=None):
+    """
+    parse stormpowered store game detail page
+    """
+    logger = logging.getLogger(__name__)
+    return SteampoweredParser().parse_game_detail_page(response, title)

@@ -20,7 +20,7 @@ class WikipediaParser:
         """
         if response.status != 200:
             # broken link or inactive
-            self.logger.error("Link not working: HTTP status code - %s", response.status)
+            self.logger.error("Link not working: HTTP status code - %s - %s", response.status, response.url)
             yield WikipediaGameItem(english_title=english_title,
                                     link=response.url)
 

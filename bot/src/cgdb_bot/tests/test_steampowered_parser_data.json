@@ -1,0 +1,58 @@
+[
+    {
+        "url": "https://store.steampowered.com/app/342620/It_came_from_space_and_ate_our_brains/",
+        "expected": {
+            "title": "It came from space and ate our brains",
+            "description": "It came from space and ate our brains is a unique Arcade top-down shooter. Looking for addicting gameplay, four-player co-op mode, and tons of aliens to send into oblivion? You’ve come to the right place!",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/342620/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/342620/capsule_616x353.jpg"],
+            "developers": ["Triangle Studios"],
+            "publishers": [],
+            "franchise": null,
+            "genres": ["action", "casual", "indie"],
+            "release_date": "19 Mar, 2015",
+            "link": "https://store.steampowered.com/app/342620/It_came_from_space_and_ate_our_brains/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/1064310/A_Place_for_the_Unwilling/",
+        "expected": {
+            "title": "A Place for the Unwilling",
+            "description": "You only have 21 days until this living city dies. The clock is ticking. You can’t be everywhere at once. Decide what to explore, who to meet and see every decision shape the curious stories and terrible secrets of this branching narrative game.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/1064310/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/1064310/capsule_616x353.jpg"],
+            "developers": ["ALPixel Games"],
+            "publishers": ["ALPixel Games"],
+            "franchise": null,
+            "genres": ["adventure", "indie"],
+            "release_date": "25 Jul, 2019",
+            "link": "https://store.steampowered.com/app/1064310/A_Place_for_the_Unwilling/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/971690/Cake_Bash/",
+        "expected": {
+            "title": "Cake Bash",
+            "description": "Fight to be the tastiest cake in Cake Bash! A frantic four player party game where adorable drawn-to-life cakes beat the crumbs out of each other.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/971690/capsule_616x353.jpg"],
+            "developers": ["High Tea Frog"],
+            "publishers": ["Coatsink"],
+            "franchise": null,
+            "genres": ["action", "casual", "indie"],
+            "release_date": "14 Oct, 2020",
+            "link": "https://store.steampowered.com/app/971690/Cake_Bash/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/1057540/Cthulhu_Saves_Christmas/",
+        "expected": {
+            "title": "Cthulhu Saves Christmas",
+            "description": "Eldritch horror saves Christmas for fun & profit in this fast-paced turn-based JRPG comedy.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/1057540/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/1057540/capsule_616x353.jpg"],
+            "developers": ["Zeboyd Digital Entertainment LLC"],
+            "publishers": ["Zeboyd Digital Entertainment LLC"],
+            "franchise": null,
+            "genres": ["indie", "rpg"],
+            "release_date": "23 Dec, 2019",
+            "link": "https://store.steampowered.com/app/1057540/Cthulhu_Saves_Christmas/"
+        }
+    }
+]

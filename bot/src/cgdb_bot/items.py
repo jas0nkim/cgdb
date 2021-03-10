@@ -65,3 +65,23 @@ class RedditStadiaStatDetail:
 
     def asjson(self):
         return json.dumps(asdict(self))
+
+@dataclass
+class SteampoweredGameItem:
+    """
+    Scraped data from Steampowered Game page
+    """
+    title: str = None
+    description: str = None
+    pictures: List[str] = field(default_factory=list, metadata={'values':'picture_links'})
+    developers: List[str] = field(default_factory=list)
+    publishers: List[str] = field(default_factory=list)
+    franchise: str = None
+    genres: List[str] = field(default_factory=list)
+    release_date: str = None
+    link: str = None
+    platform: str = None
+    _err: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))
