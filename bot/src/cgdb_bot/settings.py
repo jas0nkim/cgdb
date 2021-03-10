@@ -127,6 +127,8 @@ WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR = '–'
 WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES = ['en-simple',]
 
 REDDIT_DOMAIN = 'https://www.reddit.com'
-
 REDDIT_STADIA_POST_DELAY = 1
+
+STEAMPOWERED_SEARCH_RESULT_URL_FORMAT = 'https://store.steampowered.com/search/?term={title}'
+
 AUTH_TOKEN = os.getenv('AUTH_TOKEN')

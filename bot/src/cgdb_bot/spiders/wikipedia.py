@@ -7,8 +7,7 @@ from scrapy.spidermiddlewares.httperror import HttpError
 from scrapy import Spider, Request, signals
 from scrapy.exceptions import DropItem
 import treq
-from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
-                            AUTH_TOKEN,
+from cgdb_bot.settings import (AUTH_TOKEN,
                             API_SERVER_HOST,
                             CRAWL_ARG_DELIMITER,
                             DATA_ROOT,
@@ -17,7 +16,7 @@ from cgdb_bot.parsers import (general_resp_error_handler,
                             parse_wikipedia_game_article,
                             parse_wikipedia_stadia_games,)
 from cgdb_bot.items import WikipediaGameItem
-from cgdb_bot.utils import to_bool
+from cgdb_bot.utils import to_bool, get_wikipedia_article_url
 
 class BaseWikipediaGameSpider(Spider):
     allowed_domains = ('wikipedia.org',)
@@ -136,7 +135,7 @@ class WikipediaGameSpider(BaseWikipediaGameSpider):
     def start_requests(self):
         for title in self._titles:
             yield Request(
-                    WIKIPEDIA_ARTICLE_URL_FORMAT.format(underscored_title=title.strip().replace(' ', '_')),
+                    get_wikipedia_article_url(title),
                     callback=parse_wikipedia_game_article,
                     errback=self.resp_error_handler)
         for url in self._urls:

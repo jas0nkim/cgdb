@@ -1,0 +1,114 @@
+[
+    {
+        "url": "https://store.steampowered.com/app/342620/It_came_from_space_and_ate_our_brains/",
+        "expected": {
+            "title": "It came from space and ate our brains",
+            "description": "It came from space and ate our brains is a unique Arcade top-down shooter. Looking for addicting gameplay, four-player co-op mode, and tons of aliens to send into oblivion? You’ve come to the right place!",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/342620/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/342620/capsule_616x353.jpg"],
+            "developers": ["Triangle Studios"],
+            "publishers": [],
+            "franchise": null,
+            "genres": ["action", "casual", "indie"],
+            "release_date": "19 Mar, 2015",
+            "link": "https://store.steampowered.com/app/342620/It_came_from_space_and_ate_our_brains/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/1064310/A_Place_for_the_Unwilling/",
+        "expected": {
+            "title": "A Place for the Unwilling",
+            "description": "You only have 21 days until this living city dies. The clock is ticking. You can’t be everywhere at once. Decide what to explore, who to meet and see every decision shape the curious stories and terrible secrets of this branching narrative game.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/1064310/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/1064310/capsule_616x353.jpg"],
+            "developers": ["ALPixel Games"],
+            "publishers": ["ALPixel Games"],
+            "franchise": null,
+            "genres": ["adventure", "indie"],
+            "release_date": "25 Jul, 2019",
+            "link": "https://store.steampowered.com/app/1064310/A_Place_for_the_Unwilling/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/971690/Cake_Bash/",
+        "expected": {
+            "title": "Cake Bash",
+            "description": "Fight to be the tastiest cake in Cake Bash! A frantic four player party game where adorable drawn-to-life cakes beat the crumbs out of each other.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/971690/capsule_616x353.jpg"],
+            "developers": ["High Tea Frog"],
+            "publishers": ["Coatsink"],
+            "franchise": null,
+            "genres": ["action", "casual", "indie"],
+            "release_date": "14 Oct, 2020",
+            "link": "https://store.steampowered.com/app/971690/Cake_Bash/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/1057540/Cthulhu_Saves_Christmas/",
+        "expected": {
+            "title": "Cthulhu Saves Christmas",
+            "description": "Eldritch horror saves Christmas for fun & profit in this fast-paced turn-based JRPG comedy.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/1057540/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/1057540/capsule_616x353.jpg"],
+            "developers": ["Zeboyd Digital Entertainment LLC"],
+            "publishers": ["Zeboyd Digital Entertainment LLC"],
+            "franchise": null,
+            "genres": ["indie", "rpg"],
+            "release_date": "23 Dec, 2019",
+            "link": "https://store.steampowered.com/app/1057540/Cthulhu_Saves_Christmas/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/853050/El_Hijo__A_Wild_West_Tale/",
+        "expected": {
+            "title": "El Hijo - A Wild West Tale",
+            "description": "El Hijo is an exciting spaghetti-western stealth game, in which you guide a 6-year-old boy on his quest to find his mother.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/853050/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/853050/capsule_616x353.jpg"],
+            "developers": ["Honig Studios", "Quantumfrog"],
+            "publishers": ["HandyGames"],
+            "franchise": null,
+            "genres": ["adventure", "indie", "strategy"],
+            "release_date": "3 Dec, 2020",
+            "link": "https://store.steampowered.com/app/853050/El_Hijo__A_Wild_West_Tale/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/1062830/Embr/",
+        "expected": {
+            "title": "Embr",
+            "description": "Embr is a frantic firefighting game set in a hyper-capitalist reality where traditional emergency services are a thing of the past. Scale buildings, smash windows, fight fires and save lives either solo or co-op in up to teams of four. Embr is the last stand in a world ablaze.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/1062830/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/1062830/capsule_616x353.jpg"],
+            "developers": ["Muse Games"],
+            "publishers": ["Curve Digital"],
+            "franchise": "Curve Digital",
+            "genres": ["action", "casual", "indie", "simulation", "strategy", "early access"],
+            "release_date": "21 May, 2020",
+            "link": "https://store.steampowered.com/app/1062830/Embr/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/311690/Enter_the_Gungeon/",
+        "expected": {
+            "title": "Enter the Gungeon",
+            "description": "Enter the Gungeon is a bullet hell dungeon crawler following a band of misfits seeking to shoot, loot, dodge roll and table-flip their way to personal absolution by reaching the legendary Gungeon’s ultimate treasure: the gun that can kill the past.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/311690/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/311690/capsule_616x353.jpg"],
+            "developers": ["Dodge Roll"],
+            "publishers": ["Devolver Digital"],
+            "franchise": "Gungeon",
+            "genres": ["action", "adventure", "indie"],
+            "release_date": "5 Apr, 2016",
+            "link": "https://store.steampowered.com/app/311690/Enter_the_Gungeon/"
+        }
+    },
+    {
+        "url": "https://store.steampowered.com/app/493540/Figment/",
+        "expected": {
+            "title": "Figment",
+            "description": "Figment is an action-adventure game that invites you to explore a unique surreal universe filled with music, humor and multi layered narrative. Join Dusty and his ever-optimistic friend, Piper, on an adventure through the different sides of the mind seeking to restore the courage that's been lost.",
+            "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/493540/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/493540/capsule_616x353.jpg"],
+            "developers": ["Bedtime Digital Games"],
+            "publishers": ["Bedtime Digital Games"],
+            "franchise": "Figment",
+            "genres": ["action", "adventure", "casual", "indie"],
+            "release_date": "22 Sep, 2017",
+            "link": "https://store.steampowered.com/app/493540/Figment/"
+        }
+    }
+]

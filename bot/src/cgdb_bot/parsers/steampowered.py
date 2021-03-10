@@ -1,7 +1,7 @@
 import logging
-from urllib.parse import urljoin, urlparse
 from scrapy import Request
 from cgdb_bot.items import SteampoweredGameItem
+from cgdb_bot.utils import clean_url
 
 class SteampoweredParser:
     """
@@ -22,30 +22,32 @@ class SteampoweredParser:
             yield SteampoweredGameItem(title=title,
                                     link=response.url,
                                     _err=error_msg)
-        if title != self._extract_title_from_search():
+        elif title != self._extract_title_from_search_page(response):
             error_msg = f"Unable to find - {title} - from search screen - {response.url}"
             self.logger.error(error_msg)
             yield SteampoweredGameItem(title=title,
                                     link=response.url,
                                     _err=error_msg)        
-        url = self._extract_detail_link_from_search_page()
-        if not url:
-            error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
-            self.logger.error(error_msg)
-            yield SteampoweredGameItem(title=title,
-                                    link=response.url,
-                                    _err=error_msg)
-        yield Request(url,
-                callback=self.parse_game_detail_page,
-                cb_kwargs={'title': title})
+        else:
+            url = self._extract_detail_link_from_search_page(response)
+            if not url:
+                error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
+                self.logger.error(error_msg)
+                yield SteampoweredGameItem(title=title,
+                                        link=response.url,
+                                        _err=error_msg)
+            else:
+                yield Request(url,
+                    callback=self.parse_game_detail_page,
+                    cb_kwargs={'title': title})
 
-    def _extract_title_from_search_page(response):
+    def _extract_title_from_search_page(self, response):
         return response.xpath("""//*[@id="search_resultsRows"]
                                 //a[1]
                                 //div[contains(@class, "search_name")]
                                 /span[contains(@class, "title")]/text()"""
                             ).get()
-    def _extract_detail_link_from_search_page(response):
+    def _extract_detail_link_from_search_page(self, response):
         return response.xpath("""//*[@id="search_resultsRows"]
                                 //a[1]/@href""").get()
 
@@ -95,7 +97,7 @@ class SteampoweredParser:
         image_url = response.xpath('//meta[@property="og:image"]/@content').get()
         if image_url:
             # remove query string from the url
-            pictures.append(urljoin(image_url, urlparse(image_url).path))
+            pictures.append(clean_url(image_url))
             return pictures
         else:
             self.logger.warning('No Pictures found - %s', response.url)

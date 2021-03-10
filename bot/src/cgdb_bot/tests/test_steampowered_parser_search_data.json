@@ -1,0 +1,24 @@
+[
+    {
+        "title": "Cake Bash",
+        "expected": {
+            "title": "Cake Bash",
+            "link": "https://store.steampowered.com/app/971690/Cake_Bash/"
+        }
+    },
+    {
+        "title": "Crayta",
+        "expected": {
+            "title": "Crayta",
+            "link": "https://store.steampowered.com/search/?term=Crayta",
+            "_err": "Unable to find - Crayta - from search screen - https://store.steampowered.com/search/?term=Crayta"
+        }
+    },
+    {
+        "title": "El Hijo - A Wild West Tale",
+        "expected": {
+            "title": "El Hijo - A Wild West Tale",
+            "link": "https://store.steampowered.com/app/853050/El_Hijo__A_Wild_West_Tale/"
+        }
+    }
+]
