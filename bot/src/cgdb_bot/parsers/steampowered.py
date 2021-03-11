@@ -22,24 +22,25 @@ class SteampoweredParser:
             yield ErrorItem(title=title,
                             link=response.url,
                             message=error_msg)
-        elif title != self._extract_title_from_search_page(response):
-            error_msg = f"Unable to find - {title} - from search screen - {response.url}"
-            self.logger.error(error_msg)
-            yield ErrorItem(title=title,
-                            link=response.url,
-                            message=error_msg)
         else:
-            url = self._extract_detail_link_from_search_page(response)
-            if not url:
+            extracted_title = self._extract_title_from_search_page(response)
+            extracted_url = self._extract_detail_link_from_search_page(response)
+            if not extracted_title or title.lower() != extracted_title.lower():
+                error_msg = f"Unable to find - {title} - from search screen - {response.url}"
+                self.logger.error(error_msg)
+                yield ErrorItem(title=title,
+                                link=response.url,
+                                message=error_msg)
+            elif not extracted_url:
                 error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
                 self.logger.error(error_msg)
                 yield ErrorItem(title=title,
                                 link=response.url,
                                 message=error_msg)
             else:
-                yield Request(url,
+                yield Request(extracted_url,
                             callback=self.parse_game_detail_page,
-                            cb_kwargs={'title': title})
+                            cb_kwargs={'title': extracted_title})
 
     def _extract_title_from_search_page(self, response):
         return response.xpath("""//*[@id="search_resultsRows"]
@@ -72,7 +73,7 @@ class SteampoweredParser:
                         franchise=self._extract_franchise(response),
                         genres=self._extract_genres(response),
                         release_date=self._extract_release_date(response),
-                        link=response.url,
+                        link=clean_url(response.url),
                     )
 
     def _extract_title(self, response):

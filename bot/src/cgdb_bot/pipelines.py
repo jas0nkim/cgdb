@@ -43,6 +43,8 @@ class ItemFilterPipeline:
         elif isinstance(item, items.SteampoweredGameItem):
             if not item.title:
                 raise DropItem("Missing title")
+            # set platform
+            item.platform = spider._platform
             pass
         return item
 

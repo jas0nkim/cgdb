@@ -16,6 +16,7 @@ class SteampoweredSpider(BaseCgdbSpider):
         super().__init__(*a, **kw)
         self._titles = kw['titles'].split(CRAWL_ARG_DELIMITER) if 'titles' in kw else []
         self._urls = kw['urls'].split(CRAWL_ARG_DELIMITER) if 'urls' in kw else []
+        self._platform = kw['platform'] if 'platform' in kw else None
         self._postdata = to_bool(kw['postdata']) if 'postdata' in kw else False
 
     def start_requests(self):

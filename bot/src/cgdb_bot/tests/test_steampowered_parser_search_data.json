@@ -20,5 +20,12 @@
             "title": "El Hijo - A Wild West Tale",
             "link": "https://store.steampowered.com/app/853050/El_Hijo__A_Wild_West_Tale/"
         }
+    },
+    {
+        "title": "Dirt 5",
+        "expected": {
+            "title": "DIRT 5",
+            "link": "https://store.steampowered.com/app/1038250/DIRT_5/"
+        }
     }
 ]

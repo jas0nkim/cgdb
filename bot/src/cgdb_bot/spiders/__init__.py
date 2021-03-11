@@ -43,6 +43,12 @@ class BaseCgdbSpider(Spider):
                             resp.request.absoluteURI,
                             item.asjson(),
                             str(content)[0:2000])
+            else:
+                _logger.info("API post response [HTTP:%d] %s %s %s",
+                            resp.code,
+                            resp.request.absoluteURI,
+                            item.asjson(),
+                            str(content)[0:2000])
 
         d = treq.post(f'{settings.API_SERVER_HOST}{api_endpoint}',
                     item.asjson().encode('ascii'),
