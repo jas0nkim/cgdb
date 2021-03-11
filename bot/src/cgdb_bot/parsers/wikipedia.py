@@ -1,7 +1,7 @@
 import re
 import logging
 from scrapy import Request
-from cgdb_bot.items import WikipediaGameItem
+from cgdb_bot.items import WikipediaGameItem, ErrorItem
 from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.settings import (WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR,
             WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES as NOT_SUPPORTED_ISOS,
@@ -20,15 +20,17 @@ class WikipediaParser:
         """
         if response.status != 200:
             # broken link or inactive
-            self.logger.error("Link not working: HTTP status code - %s - %s", response.status, response.url)
-            yield WikipediaGameItem(english_title=english_title,
-                                    link=response.url)
+            error_msg = f"Wikipedia link not working: HTTP status code - {response.status} - {response.url}"
+            self.logger.error(error_msg)
+            yield ErrorItem(title=english_title,
+                            link=response.url,
+                            message=error_msg)
 
-        """
-        TODO: if this page is an 'English' Wikipedia site, get links of other languages, and request those links
-        """
-
-        yield self._parse_game_article_en_template(response, english_title)
+        else:
+            """
+            TODO: if this page is an 'English' Wikipedia site, get links of other languages, and request those links
+            """
+            yield self._parse_game_article_en_template(response, english_title)
 
     def _parse_game_article_en_template(self, response, english_title=None):
         return WikipediaGameItem(
@@ -207,12 +209,15 @@ class WikipediaStadiaGamesParser:
         """
         if response.status != 200:
             # broken link or inactive
-            self.logger.error("List of Stadia games link not working: HTTP status code - %s", response.status)
-            yield None
-        for link in self._extract_game_links(response):
-            yield Request(
-                    f"{WIKIPEDIA_ENGLISH_DOMAIN}{link}",
-                    callback=WikipediaParser().parse_game_article)
+            error_msg = f"Wikipedia list of Stadia games link not working: HTTP status code - {response.status} - {response.url}"
+            self.logger.error(error_msg)
+            yield ErrorItem(link=response.url,
+                            message=error_msg)
+        else:
+            for link in self._extract_game_links(response):
+                yield Request(
+                        f"{WIKIPEDIA_ENGLISH_DOMAIN}{link}",
+                        callback=WikipediaParser().parse_game_article)
 
     def _extract_game_links(self, response):
         return response.xpath('//table[@id="softwarelist"]/tbody/tr[position()>1]/th//a/@href').getall()

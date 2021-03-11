@@ -40,10 +40,3 @@ class RedditStadiaSpider(BaseCgdbSpider):
                 callback=parse_reddit_stadia_wiki,
                 errback=self.resp_error_handler,
                 cb_kwargs={'wiki_type': self._type})
-
-    @classmethod
-    def from_crawler(cls, crawler, *args, **kwargs):
-        spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(spider.item_scraped,
-                                signal=signals.item_scraped)
-        return spider

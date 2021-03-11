@@ -11,7 +11,7 @@
         "expected": {
             "title": "Crayta",
             "link": "https://store.steampowered.com/search/?term=Crayta",
-            "_err": "Unable to find - Crayta - from search screen - https://store.steampowered.com/search/?term=Crayta"
+            "message": "Unable to find - Crayta - from search screen - https://store.steampowered.com/search/?term=Crayta"
         }
     },
     {

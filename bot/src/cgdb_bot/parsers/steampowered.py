@@ -1,6 +1,6 @@
 import logging
 from scrapy import Request
-from cgdb_bot.items import SteampoweredGameItem
+from cgdb_bot.items import SteampoweredGameItem, ErrorItem
 from cgdb_bot.utils import clean_url
 
 class SteampoweredParser:
@@ -19,27 +19,27 @@ class SteampoweredParser:
             # broken link or inactive
             error_msg = f"Search result page not working: HTTP status code - {response.status} - {response.url}"
             self.logger.error(error_msg)
-            yield SteampoweredGameItem(title=title,
-                                    link=response.url,
-                                    _err=error_msg)
+            yield ErrorItem(title=title,
+                            link=response.url,
+                            message=error_msg)
         elif title != self._extract_title_from_search_page(response):
             error_msg = f"Unable to find - {title} - from search screen - {response.url}"
             self.logger.error(error_msg)
-            yield SteampoweredGameItem(title=title,
-                                    link=response.url,
-                                    _err=error_msg)        
+            yield ErrorItem(title=title,
+                            link=response.url,
+                            message=error_msg)
         else:
             url = self._extract_detail_link_from_search_page(response)
             if not url:
                 error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
                 self.logger.error(error_msg)
-                yield SteampoweredGameItem(title=title,
-                                        link=response.url,
-                                        _err=error_msg)
+                yield ErrorItem(title=title,
+                                link=response.url,
+                                message=error_msg)
             else:
                 yield Request(url,
-                    callback=self.parse_game_detail_page,
-                    cb_kwargs={'title': title})
+                            callback=self.parse_game_detail_page,
+                            cb_kwargs={'title': title})
 
     def _extract_title_from_search_page(self, response):
         return response.xpath("""//*[@id="search_resultsRows"]
@@ -59,21 +59,21 @@ class SteampoweredParser:
             # broken link or inactive
             error_msg = f"Link not working: HTTP status code - {response.status} - {response.url}"
             self.logger.error(error_msg)
-            yield SteampoweredGameItem(title=title,
-                                    link=response.url,
-                                    _err=error_msg)
-
-        yield SteampoweredGameItem(
-                    title=self._extract_title(response),
-                    description=self._extract_description(response),
-                    pictures=self._extract_pictures(response),
-                    developers=self._extract_developers(response),
-                    publishers=self._extract_publishers(response),
-                    franchise=self._extract_franchise(response),
-                    genres=self._extract_genres(response),
-                    release_date=self._extract_release_date(response),
-                    link=response.url,
-                )
+            yield ErrorItem(title=title,
+                            link=response.url,
+                            message=error_msg)
+        else:
+            yield SteampoweredGameItem(
+                        title=self._extract_title(response),
+                        description=self._extract_description(response),
+                        pictures=self._extract_pictures(response),
+                        developers=self._extract_developers(response),
+                        publishers=self._extract_publishers(response),
+                        franchise=self._extract_franchise(response),
+                        genres=self._extract_genres(response),
+                        release_date=self._extract_release_date(response),
+                        link=response.url,
+                    )
 
     def _extract_title(self, response):
         if not self.meta_data:

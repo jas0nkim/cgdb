@@ -1,3 +1,4 @@
+import io
 import csv
 from datetime import datetime
 import treq
@@ -5,10 +6,21 @@ from twisted.internet.defer import inlineCallbacks
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.spidermiddlewares.httperror import HttpError
-from scrapy import Spider
+from scrapy import Spider, signals
 from cgdb_bot import items, settings
 
 class BaseCgdbSpider(Spider):
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super().from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.item_scraped,
+                                signal=signals.item_scraped)
+        crawler.signals.connect(spider.item_dropped,
+                                signal=signals.item_dropped)
+        crawler.signals.connect(spider.spider_closed,
+                                signal=signals.spider_closed)
+        return spider
 
     def item_scraped(self, item, response, spider):
         """
@@ -49,22 +61,31 @@ class BaseCgdbSpider(Spider):
         # deferred (d) is fired
         return d
 
-    def spider_opened(self, spider):
-        dropped_items_file = f'{settings.DATA_ROOT}/dropped_items/{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
-        spider._dropped_items_file = open(dropped_items_file, 'a')
-
     def spider_closed(self, spider, reason):
-        spider._dropped_items_file.close()
+        # close dropped items file if exists
+        if hasattr(spider, '_dropped_items_file') and isinstance(spider._dropped_items_file, io.TextIOBase):
+            spider._dropped_items_file.close()
+
+    def _create_dropped_items_file(self):
+        dropped_items_file = f'{settings.DATA_ROOT}/dropped_items/{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
+        return open(dropped_items_file, 'a')
 
     def item_dropped(self, item, response, exception, spider):
         """
         Record dropped items/links
         """
-        dropped_item_writer = csv.writer(spider._dropped_items_file,
+        if not hasattr(spider, '_dropped_items_file') or not isinstance(spider._dropped_items_file, io.TextIOBase):
+            spider._dropped_items_file = self._create_dropped_items_file()
+
+        ditem_writer = csv.writer(spider._dropped_items_file,
                             delimiter='|',
                             quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
-        dropped_item_writer.writerow([response.url, spider._platform, str(exception)])
+        ditem_writer.writerow([spider.name,
+                            response.url,
+                            str(exception),
+                            datetime.now().isoformat(timespec='seconds'),
+                        ])
 
     def resp_error_handler(self, failure):
         """

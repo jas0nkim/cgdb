@@ -6,28 +6,12 @@ from cgdb_bot.parsers import (parse_wikipedia_game_article,
 from cgdb_bot.utils import to_bool, get_wikipedia_article_url
 from . import BaseCgdbSpider
 
-class BaseWikipediaGameSpider(BaseCgdbSpider):
-    allowed_domains = ('wikipedia.org',)
-
-    @classmethod
-    def from_crawler(cls, crawler, *args, **kwargs):
-        spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(spider.item_scraped,
-                                signal=signals.item_scraped)
-        crawler.signals.connect(spider.item_dropped,
-                                signal=signals.item_dropped)
-        crawler.signals.connect(spider.spider_opened,
-                                signal=signals.spider_opened)
-        crawler.signals.connect(spider.spider_closed,
-                                signal=signals.spider_closed)
-        return spider
-
-
-class WikipediaGameSpider(BaseWikipediaGameSpider):
+class WikipediaGameSpider(BaseCgdbSpider):
     """
     crawl wikipedia game pages (multi-language)
     """
     name = 'WikipediaGameSpider'
+    allowed_domains = ('wikipedia.org',)
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
@@ -49,12 +33,12 @@ class WikipediaGameSpider(BaseWikipediaGameSpider):
                     errback=self.resp_error_handler)
 
 
-class WikipediaStadiaSpider(BaseWikipediaGameSpider):
+class WikipediaStadiaSpider(BaseCgdbSpider):
     """
     Crawl List of Stadia games wikipedia page, and crawl related game title wikipedia links
     """
-
     name = 'WikipediaStadiaSpider'
+    allowed_domains = ('wikipedia.org',)
 
     _platform = 'Stadia'
 

@@ -3,7 +3,7 @@ import json
 import unittest
 from pathlib import Path
 from scrapy import Request
-from cgdb_bot.items import SteampoweredGameItem
+from cgdb_bot.items import ErrorItem
 from cgdb_bot.parsers import (parse_steamstore_searchresults,
                             parse_steamstore_game_detail)
 from cgdb_bot.utils import get_steampowered_search_result_url, clean_url
@@ -48,13 +48,13 @@ class TestSteampoweredParser(unittest.TestCase):
                                         data['expected']['link'])
                         self.assertEqual(i.cb_kwargs['title'],
                                         data['expected']['title'])
-                    elif isinstance(i, SteampoweredGameItem):
+                    elif isinstance(i, ErrorItem):
                         self.assertEqual(i.title,
                                         data['expected']['title'])
                         self.assertEqual(i.link,
                                         data['expected']['link'])
-                        self.assertEqual(i._err,
-                                        data['expected']['_err'])
+                        self.assertEqual(i.message,
+                                        data['expected']['message'])
 
     def test_game_detail(self):
         """

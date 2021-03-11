@@ -4,11 +4,13 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 from scrapy.exceptions import DropItem
-from cgdb_bot.items import WikipediaGameItem
+from cgdb_bot import items
 
-class WikipediaGamePipeline:
+class ItemFilterPipeline:
     def process_item(self, item, spider):
-        if isinstance(item, WikipediaGameItem):
+        if isinstance(item, items.ErrorItem):
+            raise DropItem(item.message)
+        elif isinstance(item, items.WikipediaGameItem):
             if not item.english_title:
                 raise DropItem("Missing English title")
             missing_components = []
@@ -38,6 +40,10 @@ class WikipediaGamePipeline:
                 raise DropItem(f"""Too many missing components: {', '.join(missing_components)}""")
             # set platform
             item.platform = spider._platform
+        elif isinstance(item, items.SteampoweredGameItem):
+            if not item.title:
+                raise DropItem("Missing title")
+            pass
         return item
 
 # class WriteScrapedItemsPipeline:

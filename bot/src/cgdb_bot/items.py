@@ -81,7 +81,18 @@ class SteampoweredGameItem:
     release_date: str = None
     link: str = None
     platform: str = None
-    _err: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))
+
+@dataclass
+class ErrorItem:
+    """
+    Any error on parsing
+    """
+    title: str = None
+    link: str = None
+    message: str = None
 
     def asjson(self):
         return json.dumps(asdict(self))
