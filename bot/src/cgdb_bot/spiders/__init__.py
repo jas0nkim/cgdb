@@ -7,7 +7,7 @@ from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.spidermiddlewares.httperror import HttpError
 from scrapy import Spider, signals
-from cgdb_bot import items, settings
+from cgdb_bot import items, settings, utils
 
 class BaseCgdbSpider(Spider):
 
@@ -28,16 +28,10 @@ class BaseCgdbSpider(Spider):
         """
         if not spider._postdata:
             return None
-        if isinstance(item, items.RedditStadiaWikiGame):
-            api_endpoint = '/api/bot/reddit/stadia/game/'
-        elif isinstance(item, items.RedditStadiaWikiGamePro):
-            api_endpoint = '/api/bot/reddit/stadia/gamepro/'
-        elif isinstance(item, items.RedditStadiaStatDetail):
-            api_endpoint = '/api/bot/reddit/stadia/gamestats/'
-        elif isinstance(item, items.WikipediaGameItem):
-            api_endpoint = '/api/bot/game/'
-        else:
+        api_endpoint = utils.api_endpoint.get(type(item).__name__)
+        if not api_endpoint:
             spider.logger.error(f"Invalid item passed to item_scraped (Scrapy Signal) - {type(item).__name__}")
+            return None
 
         _logger = spider.logger
         @inlineCallbacks

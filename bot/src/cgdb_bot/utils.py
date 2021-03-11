@@ -2,6 +2,14 @@ from urllib.parse import urljoin, urlparse
 from cgdb_bot.settings import (WIKIPEDIA_ARTICLE_URL_FORMAT,
                             STEAMPOWERED_SEARCH_RESULT_URL_FORMAT)
 
+api_endpoint = {
+    'RedditStadiaWikiGame': '/api/bot/reddit/stadia/game/',
+    'RedditStadiaWikiGamePro': '/api/bot/reddit/stadia/gamepro/',
+    'RedditStadiaStatDetail': '/api/bot/reddit/stadia/gamestats/',
+    'WikipediaGameItem': '/api/bot/game/',
+    'SteampoweredGameItem': '/api/bot/steampowered/game/',
+}
+
 def to_bool(string):
     return string.lower() in ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
 

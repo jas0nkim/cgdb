@@ -1,4 +1,4 @@
-from scrapy import Request, signals
+from scrapy import Request
 from cgdb_bot.parsers import parse_reddit_stadia_wiki
 from cgdb_bot.utils import to_bool
 from . import BaseCgdbSpider
