@@ -1,5 +1,8 @@
+import json
 import logging
 from scrapy import Request
+from scrapy.selector import Selector
+from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.items import (RedditStadiaWikiGame,
                             RedditStadiaWikiGamePro,
                             RedditStadiaStatDetail,
@@ -13,6 +16,31 @@ class RedditStadiaWikiParser:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
+    def _get_selector_from_js(self, response, wiki_type):
+        _page = {
+            'games': '[stadia]--[gamestatistics/gameslist]',
+            'pro_games': '[stadia]--[gamestatistics/progameslist]',
+            'ratings': '[stadia]--[gamestatistics/gameratings]',
+            'genres': '[stadia]--[gamestatistics/gamegenres]',
+            'developers': '[stadia]--[gamestatistics/gamedevelopers]',
+            'publishers': '[stadia]--[gamestatistics/gamepublishers]',
+            'modes': '[stadia]--[gamestatistics/gamemodes]',
+        }
+        html = None
+        _d = response.xpath('//script[@id="data"]/text()').get()
+        if not _d:
+            raise NoHtmlElementFound('_get_selector_from_js: Unable to find script @id=data')
+        _d = _d.lstrip('window.___r = ').rstrip(';')
+        try:
+            json_data = json.loads(_d)
+        except json.JSONDecodeError as err:
+            raise NoHtmlElementFound(f'_get_selector_from_js: JSONDecodeError - {str(err)}')
+        try:
+            html = json_data['pages']['subredditWiki']['pages'][_page[wiki_type]]['content']['html']
+        except KeyError as err:
+            raise NoHtmlElementFound(f'_get_selector_from_js: KeyError - {str(err)}')
+        return Selector(text=html)
+
     def parse_games_page(self, response, wiki_type):
         if response.status != 200:
             # broken link or inactive
@@ -21,7 +49,17 @@ class RedditStadiaWikiParser:
             yield ErrorItem(link=response.url,
                             message=error_msg)
         else:
-            games = response.xpath('//div[contains(@class, "wiki")]/table/tbody/tr')
+            wiki_table_query = '//div[contains(@class, "wiki")]/table/tbody/tr'
+            games = response.xpath(wiki_table_query)
+            if not games:
+                try:
+                    selector = self._get_selector_from_js(response, wiki_type)
+                except NoHtmlElementFound as err:
+                    self.logger.error(str(err))
+                    yield ErrorItem(link=response.url,
+                                    message=str(err))
+                else:
+                    games = selector.xpath(wiki_table_query)
             for game in games:
                 title = game.xpath('./td[4]/a/text()').get()
                 stadia_link = game.xpath('./td[4]/a/@href').get()
@@ -50,7 +88,17 @@ class RedditStadiaWikiParser:
             yield ErrorItem(link=response.url,
                             message=error_msg)
         else:
-            pro_games = response.xpath('//div[contains(@class, "wiki")]/table/tbody/tr')
+            wiki_table_query = '//div[contains(@class, "wiki")]/table/tbody/tr'
+            pro_games = response.xpath(wiki_table_query)
+            if not pro_games:
+                try:
+                    selector = self._get_selector_from_js(response, wiki_type)
+                except NoHtmlElementFound as err:
+                    self.logger.error(str(err))
+                    yield ErrorItem(link=response.url,
+                                    message=str(err))
+                else:
+                    pro_games = selector.xpath(wiki_table_query)
             pro_games.reverse()
             current_entered_titles = []
             current_left_titles = []
@@ -82,8 +130,17 @@ class RedditStadiaWikiParser:
             yield ErrorItem(link=response.url,
                             message=error_msg)
         else:
-            stats = response.xpath("""//div[contains(@class, "wiki")]
-                                    /table[1]/tbody/tr""")
+            wiki_table_query = '//div[contains(@class, "wiki")]/table[1]/tbody/tr'
+            stats = response.xpath(wiki_table_query)
+            if not stats:
+                try:
+                    selector = self._get_selector_from_js(response, wiki_type)
+                except NoHtmlElementFound as err:
+                    self.logger.error(str(err))
+                    yield ErrorItem(link=response.url,
+                                    message=str(err))
+                else:
+                    stats = selector.xpath(wiki_table_query)
             for stat in stats:
                 if wiki_type in ['ratings', 'genres', 'modes']:
                     stat_detail_text = stat.xpath('./td[1]/a/text()').get()
