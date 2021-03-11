@@ -17,7 +17,8 @@ from .serializers import (GenreSerializer,
                         RedditStadiaGameSerializer,
                         GameSearchSerializer,
                         RedditStadiaGameProSerializer,
-                        RedditStadiaGameStatSerializer,)
+                        RedditStadiaGameStatSerializer,
+                        SteampoweredGameSerializer,)
 from . import utils
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
@@ -216,3 +217,40 @@ class RedditStadiaGameStatsBot(APIView):
             return Response(err,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class SteampoweredGameStatsBot(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.logger = logging.getLogger(__name__)
+
+    def post(self, request):
+        """
+        HTTP POST request
+        create/update game, platform, developer, genre, publisher, series, tags
+        """
+        # since request object in DRF is immutable
+        _request_data = request.data.copy()
+        title = _request_data['title']
+        if not title:
+            return Response({"error": "Title not found"},
+                        status=status.HTTP_406_NOT_ACCEPTABLE)
+        serializer = None
+        ok_status = status.HTTP_200_OK
+        try:
+            game = Game.objects.get(slug=slugify(title))
+            serializer = SteampoweredGameSerializer(game,
+                                                    data=_request_data)
+        except Game.DoesNotExist:
+            serializer = SteampoweredGameSerializer(data=_request_data)
+            ok_status = status.HTTP_201_CREATED
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            serializer.save()
+        except DataError as err:
+            self.logger.error('%s - %s', _request_data.get('link'), str(err))
+            return Response(err,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.data, status=ok_status)

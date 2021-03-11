@@ -609,3 +609,30 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         return super().update(instance, validated_data)
+
+class SteampoweredGameSerializer(GameSerializer):
+    """
+    Game django model serializer (POST from steampowered bot)
+    """
+    def _convert_str_to_dict(self, value):
+        """
+        string to dict { 'name': string value }
+        """
+        return { 'name': value }
+
+    def _handle_post_data(self, data):
+        """
+        set links, developers, publishers, series, genres, series
+        """
+        data['links'] = {'steampowered': data.get('link')}
+        data['developers'] = [self._convert_str_to_dict(v) for v in data['developers']]
+        data['publishers'] = [self._convert_str_to_dict(v) for v in data['publishers']]
+        data['genres'] = [self._convert_str_to_dict(v) for v in data['genres']]
+        if data['franchise']:
+            data['series'] = [self._convert_str_to_dict(data['franchise'])]
+        if data['platform']:
+            data['platforms'] = [self._convert_str_to_dict(data['platform'])]
+        return data
+
+    def to_internal_value(self, data):
+        return super().to_internal_value(self._handle_post_data(data))

@@ -33,4 +33,7 @@ urlpatterns = [
     path('bot/reddit/stadia/gamestats/',
         views.RedditStadiaGameStatsBot.as_view(),
         name='bot-stadia-game-stats-post'),
+    path('bot/steampowered/game/',
+        views.SteampoweredGameStatsBot.as_view(),
+        name='bot-steampowered-game-post'),
 ]

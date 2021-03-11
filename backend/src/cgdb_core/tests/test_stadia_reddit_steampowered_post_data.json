@@ -1,0 +1,210 @@
+{
+    "reddit_games": [
+        {
+            "title": "Cake Bash",
+            "stadia_link": "https://stadia.google.com/store/details/19efd5fa36794d7b8bc87de68124e705rcp1/sku/a7f0a6098ae747788a6f75d0d1e1d8f2p",
+            "release_date": "2020 Oct 15"
+        }    
+    ],
+    "reddit_games_pro": [
+    ],
+    "reddit_game_stats": [
+        {
+            "title": "Cake Bash",
+            "stat_type": "developers",
+            "stat_detail": "High Tea Frog"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "genres",
+            "stat_detail": "party"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "genres",
+            "stat_detail": "kids & family"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "genres",
+            "stat_detail": "indie"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "modes",
+            "stat_detail": "cross platform multiplayer"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "modes",
+            "stat_detail": "competitive"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "modes",
+            "stat_detail": "online multiplayer"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "modes",
+            "stat_detail": "single player"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "modes",
+            "stat_detail": "local multiplayer"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "publishers",
+            "stat_detail": "Coatsink"
+        },
+        {
+            "title": "Cake Bash",
+            "stat_type": "ratings",
+            "stat_detail": "E"
+        }                                        
+    ],
+    "wikipedia_games": [
+        {
+            "english_title": "Dirt 5",
+            "language": "en",
+            "title_lc": "Dirt 5",
+            "description_lc": "Dirt 5 (stylised as DIRT5) is a racing video game developed and published by Codemasters. It is the fourteenth game in the Colin McRae Rally series and the eighth game to carry the Dirt title. The game was released for Microsoft Windows, PlayStation 4 and Xbox One on 6 November 2020, for Xbox Series X/S on 10 November, and for PlayStation 5 on 12 November (for North America, Oceania, Japan, and South Korea) and 19 November (for most other regions), and for Stadia in 2021. It is the last video game by Codemasters as an independent company before acquired by former rival Electronic Arts on 18 February 2021.",
+            "pictures": [
+                "https://upload.wikimedia.org/wikipedia/en/2/2d/Dirt_5_cover_art.jpg"
+            ],
+            "developers": [
+                "Codemasters Cheshire"
+            ],
+            "publishers": [
+                "Codemasters"
+            ],
+            "series": [
+                "Dirt"
+            ],
+            "genres": [
+                "racing"
+            ],
+            "modes": [
+                "single-player",
+                "multiplayer"
+            ],
+            "link": "https://en.wikipedia.org/wiki/Dirt_5",
+            "inter_languages": [
+                {
+                    "iso": "ar",
+                    "url": "https://ar.wikipedia.org/wiki/%D8%AF%D9%8A%D8%B1%D8%AA_5",
+                    "lang": "Arabic",
+                    "lang_lc": "العربية",
+                    "title_lc": "ديرت 5"
+                },
+                {
+                    "iso": "de",
+                    "url": "https://de.wikipedia.org/wiki/Dirt_5",
+                    "lang": "German",
+                    "lang_lc": "Deutsch",
+                    "title_lc": "Dirt 5"
+                },
+                {
+                    "iso": "es",
+                    "url": "https://es.wikipedia.org/wiki/DiRT_5",
+                    "lang": "Spanish",
+                    "lang_lc": "Español",
+                    "title_lc": "DiRT 5"
+                },
+                {
+                    "iso": "fa",
+                    "url": "https://fa.wikipedia.org/wiki/%D8%AF%DB%8C%D8%B1%D8%AA_%DB%B5",
+                    "lang": "Persian",
+                    "lang_lc": "فارسی",
+                    "title_lc": "دیرت ۵"
+                },
+                {
+                    "iso": "fr",
+                    "url": "https://fr.wikipedia.org/wiki/DiRT_5",
+                    "lang": "French",
+                    "lang_lc": "Français",
+                    "title_lc": "DiRT 5"
+                },
+                {
+                    "iso": "arz",
+                    "url": "https://arz.wikipedia.org/wiki/%D8%AF%D9%8A%D8%B1%D8%AA_5",
+                    "lang": "Egyptian Arabic",
+                    "lang_lc": "مصرى",
+                    "title_lc": "ديرت 5"
+                },
+                {
+                    "iso": "nl",
+                    "url": "https://nl.wikipedia.org/wiki/Dirt_5",
+                    "lang": "Dutch",
+                    "lang_lc": "Nederlands",
+                    "title_lc": "Dirt 5"
+                },
+                {
+                    "iso": "ru",
+                    "url": "https://ru.wikipedia.org/wiki/Dirt_5",
+                    "lang": "Russian",
+                    "lang_lc": "Русский",
+                    "title_lc": "Dirt 5"
+                },
+                {
+                    "iso": "fi",
+                    "url": "https://fi.wikipedia.org/wiki/Dirt_5",
+                    "lang": "Finnish",
+                    "lang_lc": "Suomi",
+                    "title_lc": "Dirt 5"
+                }
+            ],
+            "platform": "Stadia"
+        }
+    ],
+    "steampowered_games": [
+        {
+            "title": "Cake Bash",
+            "description": "Fight to be the tastiest cake in Cake Bash! A frantic four player party game where adorable drawn-to-life cakes beat the crumbs out of each other.",
+            "pictures": [
+                "https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg"
+            ],
+            "developers": [
+                "High Tea Frog"
+            ],
+            "publishers": [
+                "Coatsink"
+            ],
+            "franchise": null,
+            "genres": [
+                "action",
+                "casual",
+                "indie"
+            ],
+            "release_date": "14 Oct, 2020",
+            "link": "https://store.steampowered.com/app/971690/Cake_Bash/",
+            "platform": "Stadia"
+        },
+        {
+            "title": "DIRT 5",
+            "description": "DIRT 5 is a fun, amplified, off-road arcade racing experience created by Codemasters. Blaze a trail on routes across the world, covering gravel, ice, snow and sand, with a roster of cars ranging from rally icons to trucks, to GT heroes.",
+            "pictures": [
+                "https://cdn.cloudflare.steamstatic.com/steam/apps/1038250/capsule_616x353.jpg"
+            ],
+            "developers": [
+                "Codemasters"
+            ],
+            "publishers": [
+                "Codemasters"
+            ],
+            "franchise": "Codemasters",
+            "genres": [
+                "action",
+                "adventure",
+                "casual",
+                "racing",
+                "sports"
+            ],
+            "release_date": "5 Nov, 2020",
+            "link": "https://store.steampowered.com/app/1038250/DIRT_5/",
+            "platform": "Stadia"
+        }        
+    ]
+}

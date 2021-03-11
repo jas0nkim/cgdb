@@ -1,4 +1,3 @@
-import datetime
 import os
 import json
 from pathlib import Path
@@ -6,9 +5,9 @@ from django.urls import include, path, reverse
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
-from cgdb_core.models import Game, GameFreeOnSubscription
+from cgdb_core.models import Game
 
-class WikipediaPostTests(APITestCase, URLPatternsTestCase):
+class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
         path('api/', include('cgdb_core.urls')),
     ]
@@ -21,6 +20,7 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         cls._data_reddit_games_pro = _json.get('reddit_games_pro')
         cls._data_reddit_game_stats = _json.get('reddit_game_stats')
         cls._data_wikipedia_games = _json.get('wikipedia_games')
+        cls._data_steampowered_games = _json.get('steampowered_games')
         cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
 
     def test_auth(self):
@@ -37,6 +37,9 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         response = self.client.post(url, data={}, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         url = reverse('bot-game-post')
+        response = self.client.post(url, data={}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        url = reverse('bot-steampowered-game-post')
         response = self.client.post(url, data={}, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -84,65 +87,57 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
                 print(response.content)
             self.assertEqual(response.status_code, resp_status)
 
-    def test_post_reddit_data(self):
-        """
-        Check stadia games after processing reddit data
-        """
-        self._post_stadia_games(status.HTTP_201_CREATED)
-        self._post_stadia_pro_games(status.HTTP_200_OK)
-        self._post_stadia_game_stats(status.HTTP_200_OK)
-        game = Game.objects.get(title='Destiny 2')
-        for game_release in game.game_release_dates.all():
-            self.assertEqual(game_release.release_date, datetime.datetime.strptime('2019 Nov 19', '%Y %b %d').date())
-        self.assertEqual(game.esrb, 'T')
-        self.assertEqual(game.genres.all().count(), 3)
-        self.assertTrue(game.genres.all().filter(name='Action').exists())
-        self.assertTrue(game.genres.all().filter(name='Adventure').exists())
-        self.assertTrue(game.genres.all().filter(name='Shooter').exists())
-        self.assertEqual(game.modes.all().count(), 4)
-        self.assertTrue(game.modes.all().filter(name='Competitive').exists())
-        self.assertTrue(game.modes.all().filter(name='Online multiplayer').exists())
-        self.assertTrue(game.modes.all().filter(name='Single player').exists())
-        self.assertTrue(game.modes.all().filter(name='Online co-op').exists())
-        self.assertEqual(game.developers.all().count(), 1)
-        self.assertTrue(game.developers.all().filter(name='Bungie').exists())
-        self.assertEqual(game.publishers.all().count(), 1)
-        self.assertTrue(game.publishers.all().filter(name='Bungie').exists())
-        self.assertEqual(game.platforms.all().count(), 1)
-        self.assertTrue(game.platforms.all().filter(name='Stadia').exists())
+    def _post_steampowered_game(self, resp_status=0):
+        url = reverse('bot-steampowered-game-post')
+        # force authenticate
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.testuser)
+        for data in self._data_steampowered_games:
+            response = self.client.post(url, data, format='json')
+            if response.status_code != resp_status:
+                print(response.content)
+            self.assertEqual(response.status_code, resp_status)
 
-    def test_post_reddit_data_wikipedia_data(self):
-        """
-        Check stadia games after processing reddit data
-        """
+    def test_post_reddit_data_steampowered_data(self):
         self._post_stadia_games(status.HTTP_201_CREATED)
         self._post_stadia_pro_games(status.HTTP_200_OK)
         self._post_stadia_game_stats(status.HTTP_200_OK)
-        self._post_wikipedia_game(status.HTTP_200_OK)
-        game = Game.objects.get(title='Destiny 2')
-        for game_release in game.game_release_dates.all():
-            self.assertEqual(game_release.release_date, datetime.datetime.strptime('2019 Nov 19', '%Y %b %d').date())
-        self.assertEqual(game.esrb, 'T')
-        self.assertEqual(game.genres.all().count(), 4)
-        self.assertTrue(game.genres.all().filter(name='Action').exists())
-        self.assertTrue(game.genres.all().filter(name='Adventure').exists())
-        self.assertTrue(game.genres.all().filter(name='Shooter').exists())
-        self.assertTrue(game.genres.all().filter(name='first-person shooter').exists())
-        self.assertEqual(game.modes.all().count(), 5)
-        self.assertTrue(game.modes.all().filter(name='Competitive').exists())
-        self.assertTrue(game.modes.all().filter(name='Online multiplayer').exists())
-        self.assertTrue(game.modes.all().filter(name='Single player').exists())
-        self.assertTrue(game.modes.all().filter(name='Online co-op').exists())
-        self.assertTrue(game.modes.all().filter(name='multiplayer').exists())
+        self._post_wikipedia_game(status.HTTP_201_CREATED)
+        self._post_steampowered_game(status.HTTP_200_OK)
+        game = Game.objects.get(title='Cake Bash')
+        self.assertEqual(game.genres.all().count(), 5)
+        self.assertTrue(game.genres.all().filter(name='party').exists())
+        self.assertTrue(game.genres.all().filter(name='kids & family').exists())
+        self.assertTrue(game.genres.all().filter(name='indie').exists())
+        self.assertTrue(game.genres.all().filter(name='action').exists())
+        self.assertTrue(game.genres.all().filter(name='casual').exists())
         self.assertEqual(game.developers.all().count(), 1)
-        self.assertTrue(game.developers.all().filter(name='Bungie').exists())
-        self.assertEqual(game.publishers.all().count(), 2)
-        self.assertTrue(game.publishers.all().filter(name='Bungie').exists())
-        self.assertTrue(game.publishers.all().filter(name='Activision').exists())
-        self.assertEqual(game.platforms.all().count(), 1)
-        self.assertTrue(game.platforms.all().filter(name='Stadia').exists())
+        self.assertTrue(game.developers.all().filter(name='High Tea Frog').exists())
+        self.assertEqual(game.publishers.all().count(), 1)
+        self.assertTrue(game.publishers.all().filter(name='Coatsink').exists())
+        self.assertEqual(game.series.all().count(), 0)
+        self.assertEqual(game.modes.all().count(), 5)
+        self.assertTrue(game.modes.all().filter(name='cross platform multiplayer').exists())
         self.assertEqual(len(game.pictures), 1)
-        self.assertIn('https://upload.wikimedia.org/wikipedia/en/0/05/Destiny_2_%28artwork%29.jpg', game.pictures)
-        self.assertEqual(len(game.links), 19)
-        self.assertIn('wikipedia_en', game.links)
+        self.assertIn('https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg', game.pictures)
+        self.assertEqual(len(game.links), 2)
         self.assertIn('stadia', game.links)
+        self.assertIn('steampowered', game.links)
+        self.assertEqual(game.description, "Fight to be the tastiest cake in Cake Bash! A frantic four player party game where adorable drawn-to-life cakes beat the crumbs out of each other.")
+        # Dirt 5 titls changed to DIRT 5 after updated 
+        # with steampowered data
+        with self.assertRaises(Game.DoesNotExist) as context:
+            Game.objects.get(title='Dirt 5')
+        game = Game.objects.get(title='DIRT 5')
+        self.assertEqual(game.description, "DIRT 5 is a fun, amplified, off-road arcade racing experience created by Codemasters. Blaze a trail on routes across the world, covering gravel, ice, snow and sand, with a roster of cars ranging from rally icons to trucks, to GT heroes.")
+        self.assertEqual(len(game.pictures), 2)
+        self.assertIn('https://upload.wikimedia.org/wikipedia/en/2/2d/Dirt_5_cover_art.jpg', game.pictures)
+        self.assertIn('https://cdn.cloudflare.steamstatic.com/steam/apps/1038250/capsule_616x353.jpg', game.pictures)
+        self.assertEqual(len(game.links), 11)
+        self.assertIn('wikipedia_en', game.links)
+        self.assertIn('steampowered', game.links)
+        self.assertEqual(game.developers.all().count(), 2)
+        self.assertTrue(game.developers.all().filter(name='Codemasters Cheshire').exists())
+        self.assertTrue(game.developers.all().filter(name='Codemasters').exists())
+        self.assertEqual(game.publishers.all().count(), 1)
+        self.assertTrue(game.publishers.all().filter(name='Codemasters').exists())
