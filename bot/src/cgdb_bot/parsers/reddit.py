@@ -1,6 +1,5 @@
 import json
 import logging
-from scrapy import Request
 from scrapy.selector import Selector
 from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.items import (RedditStadiaWikiGame,
@@ -151,7 +150,7 @@ class RedditStadiaWikiParser:
                 if stat_detail_link and stat_detail_text:
                     if wiki_type in ['genres', 'modes']:
                         stat_detail_text = stat_detail_text.lower()
-                    yield Request(
+                    yield response.follow(
                             REDDIT_DOMAIN + stat_detail_link,
                             callback=self.parse_game_stats_detail_page,
                             cb_kwargs={

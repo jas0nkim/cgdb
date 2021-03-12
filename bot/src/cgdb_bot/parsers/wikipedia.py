@@ -1,6 +1,5 @@
 import re
 import logging
-from scrapy import Request
 from cgdb_bot.items import WikipediaGameItem, ErrorItem
 from cgdb_bot.exceptions import NoHtmlElementFound
 from cgdb_bot.settings import (WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR as SPLIT_CHAR,
@@ -215,7 +214,7 @@ class WikipediaStadiaGamesParser:
                             message=error_msg)
         else:
             for link in self._extract_game_links(response):
-                yield Request(
+                yield response.follow(
                         f"{WIKIPEDIA_ENGLISH_DOMAIN}{link}",
                         callback=WikipediaParser().parse_game_article)
 

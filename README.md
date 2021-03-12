@@ -113,6 +113,7 @@ $ docker-compose run --rm bot python -m unittest
 ```
 
 ## References / Game list
+- [Steam](https://store.steampowered.com/)
 - [Stadia - Reddit](https://www.reddit.com/r/Stadia/wiki/index)
 - [Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
 - [xCloud - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)

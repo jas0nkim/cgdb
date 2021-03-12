@@ -24,8 +24,37 @@
     {
         "title": "Dirt 5",
         "expected": {
-            "title": "DIRT 5",
+            "title": "Dirt 5",
             "link": "https://store.steampowered.com/app/1038250/DIRT_5/"
+        }
+    },
+    {
+        "title": "Assassin's Creed Odyssey",
+        "expected": {
+            "title": "Assassin's Creed Odyssey",
+            "link": "https://store.steampowered.com/app/812140/Assassins_Creed_Odyssey/"
+        }
+    },
+    {
+        "title": "Doom",
+        "expected": {
+            "title": "Doom",
+            "link": "https://store.steampowered.com/app/379720/DOOM/"
+        }
+    },
+    {
+        "title": "Attack on Titan 2: Final Battle",
+        "expected": {
+            "title": "Attack on Titan 2: Final Battle",
+            "link": "https://store.steampowered.com/search/?term=Attack+on+Titan+2:+Final+Battle",
+            "message": "Unable to find - Attack on Titan 2: Final Battle - from search screen - https://store.steampowered.com/search/?term=Attack+on+Titan+2:+Final+Battle"
+        }
+    },
+    {
+        "title": "Grid",
+        "expected": {
+            "title": "Grid",
+            "link": "https://store.steampowered.com/app/703860/GRID/"
         }
     }
 ]

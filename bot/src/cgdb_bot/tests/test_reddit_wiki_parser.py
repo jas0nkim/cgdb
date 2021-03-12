@@ -3,7 +3,6 @@ import json
 import datetime
 import unittest
 from pathlib import Path
-import requests
 from scrapy.http.request import Request
 from cgdb_bot.parsers import (parse_reddit_stadia_wiki,
                             parse_reddit_game_stat_detail)

@@ -2,7 +2,8 @@ from scrapy import Request
 from cgdb_bot.parsers import (parse_steamstore_searchresults,
                             parse_steamstore_game_detail)
 from cgdb_bot.utils import to_bool, get_steampowered_search_result_url
-from cgdb_bot.settings import CRAWL_ARG_DELIMITER
+from cgdb_bot.settings import (CRAWL_ARG_DELIMITER,
+                            STEAMPOWERED_PRESET_COOKIES)
 from . import BaseCgdbSpider
 
 class SteampoweredSpider(BaseCgdbSpider):
@@ -25,9 +26,11 @@ class SteampoweredSpider(BaseCgdbSpider):
                     get_steampowered_search_result_url(title),
                     callback=parse_steamstore_searchresults,
                     errback=self.resp_error_handler,
+                    cookies=STEAMPOWERED_PRESET_COOKIES,
                     cb_kwargs={'title': title})
         for url in self._urls:
             yield Request(
                     url,
                     callback=parse_steamstore_game_detail,
-                    errback=self.resp_error_handler)
+                    errback=self.resp_error_handler,
+                    cookies=STEAMPOWERED_PRESET_COOKIES)

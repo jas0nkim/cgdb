@@ -130,5 +130,7 @@ REDDIT_DOMAIN = 'https://www.reddit.com'
 REDDIT_STADIA_POST_DELAY = 1
 
 STEAMPOWERED_SEARCH_RESULT_URL_FORMAT = 'https://store.steampowered.com/search/?term={title}'
+STEAMPOWERED_PRESET_COOKIES = {'birthtime': '-1500000000'}
+STEAMPOWERED_TITLE_REMOVE_CHARS = ['®', '™',]
 
 AUTH_TOKEN = os.getenv('AUTH_TOKEN')

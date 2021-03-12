@@ -1,6 +1,7 @@
 import logging
-from scrapy import Request
 from cgdb_bot.items import SteampoweredGameItem, ErrorItem
+from cgdb_bot.settings import (STEAMPOWERED_PRESET_COOKIES,
+                            STEAMPOWERED_TITLE_REMOVE_CHARS)
 from cgdb_bot.utils import clean_url
 
 class SteampoweredParser:
@@ -10,6 +11,28 @@ class SteampoweredParser:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.meta_data = {}
+
+    def _clean_title(self, title):
+        if isinstance(title, str):
+            title = ''.join(t for t in title
+                            if t not in STEAMPOWERED_TITLE_REMOVE_CHARS)
+        return title
+
+    def _lookup_title(self, response, given_title):
+        found = False
+        no_row = 1
+        max_title_lookup = 3
+        while no_row <= max_title_lookup:
+            extracted_title = self._clean_title(
+                                self._extract_title_from_search_page(
+                                                            response,
+                                                            no_row))
+            if not extracted_title or given_title.lower() != extracted_title.lower():
+                no_row += 1
+            else:
+                found = True
+                break
+        return (found, no_row)
 
     def parse_search_results_page(self, response, title):
         """
@@ -23,34 +46,40 @@ class SteampoweredParser:
                             link=response.url,
                             message=error_msg)
         else:
-            extracted_title = self._extract_title_from_search_page(response)
-            extracted_url = self._extract_detail_link_from_search_page(response)
-            if not extracted_title or title.lower() != extracted_title.lower():
+            title_found, no_row = self._lookup_title(response, title)
+            if not title_found:
                 error_msg = f"Unable to find - {title} - from search screen - {response.url}"
                 self.logger.error(error_msg)
                 yield ErrorItem(title=title,
                                 link=response.url,
                                 message=error_msg)
-            elif not extracted_url:
-                error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
-                self.logger.error(error_msg)
-                yield ErrorItem(title=title,
-                                link=response.url,
-                                message=error_msg)
             else:
-                yield Request(extracted_url,
-                            callback=self.parse_game_detail_page,
-                            cb_kwargs={'title': extracted_title})
+                extracted_url = self._extract_detail_link_from_search_page(
+                                                                response,
+                                                                no_row)
 
-    def _extract_title_from_search_page(self, response):
-        return response.xpath("""//*[@id="search_resultsRows"]
-                                //a[1]
+                if not extracted_url:
+                    error_msg = f"Unable to find detail page link - {title} - from search screen - {response.url}"
+                    self.logger.error(error_msg)
+                    yield ErrorItem(title=title,
+                                    link=response.url,
+                                    message=error_msg)
+                else:
+                    yield response.follow(extracted_url,
+                                callback=self.parse_game_detail_page,
+                                cb_kwargs={'title': title},
+                                cookies=STEAMPOWERED_PRESET_COOKIES)
+
+    def _extract_title_from_search_page(self, response, no_row=1):
+        return response.xpath(f"""//*[@id="search_resultsRows"]
+                                //a[{no_row}]
                                 //div[contains(@class, "search_name")]
                                 /span[contains(@class, "title")]/text()"""
                             ).get()
-    def _extract_detail_link_from_search_page(self, response):
-        return response.xpath("""//*[@id="search_resultsRows"]
-                                //a[1]/@href""").get()
+
+    def _extract_detail_link_from_search_page(self, response, no_row=1):
+        return response.xpath(f"""//*[@id="search_resultsRows"]
+                                //a[{no_row}]/@href""").get()
 
     def parse_game_detail_page(self, response, title=None):
         """
@@ -65,7 +94,8 @@ class SteampoweredParser:
                             message=error_msg)
         else:
             yield SteampoweredGameItem(
-                        title=self._extract_title(response),
+                        title=self._clean_title(
+                                    self._extract_title(response)),
                         description=self._extract_description(response),
                         pictures=self._extract_pictures(response),
                         developers=self._extract_developers(response),
