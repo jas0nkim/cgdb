@@ -304,22 +304,6 @@
         }
     },
     {
-        "url": "https://en.wikipedia.org/wiki/Little_Nightmares",
-        "expected": {
-            "english_title": "Little Nightmares",
-            "language": "en",
-            "title_lc": "Little Nightmares",
-            "description_lc": "Little Nightmares is a puzzle-platform horror adventure game developed by Tarsier Studios and published by Bandai Namco Entertainment for Microsoft Windows, PlayStation 4, Nintendo Switch, Xbox One, and Stadia. The game received positive reviews upon release with critics praising its atmosphere, graphics, and sound, while criticizing its checkpoint system and short length. A sequel, Little Nightmares II, was released in February 2021.",
-            "pictures": ["https://upload.wikimedia.org/wikipedia/en/d/d8/Little_Nightmares_Box_Art.png"],
-            "developers": ["Tarsier Studios"],
-            "publishers": ["Bandai Namco Entertainment"],
-            "series": [],
-            "genres": ["puzzle-platform", "survival horror"],
-            "modes": ["single-player"],
-            "link": "https://en.wikipedia.org/wiki/Little_Nightmares"
-        }
-    },
-    {
         "url": "https://en.wikipedia.org/wiki/Far_Cry_5",
         "expected": {
             "english_title": "Far Cry 5",
