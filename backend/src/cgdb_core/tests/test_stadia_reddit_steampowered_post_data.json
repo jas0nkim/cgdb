@@ -4,7 +4,12 @@
             "title": "Cake Bash",
             "stadia_link": "https://stadia.google.com/store/details/19efd5fa36794d7b8bc87de68124e705rcp1/sku/a7f0a6098ae747788a6f75d0d1e1d8f2p",
             "release_date": "2020 Oct 15"
-        }    
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stadia_link": "https://stadia.google.com/store/details/88a2945345f744519c5148ddd54f26d1rcp1/sku/8aa42ef528804d0ba75608240a6c0289p",
+            "release_date": "2020 Dec 15"
+        }
     ],
     "reddit_games_pro": [
     ],
@@ -63,7 +68,37 @@
             "title": "Cake Bash",
             "stat_type": "ratings",
             "stat_detail": "E"
-        }                                        
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "ratings",
+            "stat_detail": "M17+"
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "publishers",
+            "stat_detail": "Ubisoft"
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "modes",
+            "stat_detail": "single player"
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "genres",
+            "stat_detail": "action"
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "genres",
+            "stat_detail": "adventure"
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "stat_type": "developers",
+            "stat_detail": "Ubisoft"
+        }
     ],
     "wikipedia_games": [
         {
@@ -205,6 +240,27 @@
             "release_date": "5 Nov, 2020",
             "link": "https://store.steampowered.com/app/1038250/DIRT_5/",
             "platform": "Stadia"
-        }        
+        },
+        {
+            "title": "Assassin's Creed Syndicate",
+            "description": "London, 1868. In the heart of the Industrial Revolution, lead your underworld organization and grow your influence to fight those who exploit the less privileged in the name of...",
+            "pictures": [
+                "https://cdn.akamai.steamstatic.com/steam/apps/368500/capsule_616x353.jpg"
+            ],
+            "developers": [
+                "Ubisoft Quebec"
+            ],
+            "publishers": [
+                "Ubisoft"
+            ],
+            "franchise": "Assassin's Creed",
+            "genres": [
+                "action",
+                "adventure"
+            ],
+            "release_date": "18 Nov, 2015",
+            "link": "https://store.steampowered.com/app/368500/Assassins_Creed_Syndicate/",
+            "platform": "Stadia"
+        }
     ]
 }

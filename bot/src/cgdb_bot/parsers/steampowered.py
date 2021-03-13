@@ -135,6 +135,10 @@ class SteampoweredParser:
             return []
 
     def _extract_developers(self, response):
+        # TODO: need to find better solution
+        # exception: its too long (longer than 100 chars)...
+        if clean_url(response.url) == 'https://store.steampowered.com/app/368500/Assassins_Creed_Syndicate/':
+            return ['Ubisoft Quebec',]
         if not self.meta_data:
             self.meta_data = self._extract_meta_data(response)
         if 'developers' in self.meta_data and len(self.meta_data['developers']) > 0:
@@ -165,6 +169,10 @@ class SteampoweredParser:
         if not self.meta_data:
             self.meta_data = self._extract_meta_data(response)
         if 'genres' in self.meta_data and len(self.meta_data['genres']) > 0:
+            # remove Free to Play
+            # i.e. https://store.steampowered.com/app/1085660/Destiny_2/
+            if 'free to play' in self.meta_data['genres']:
+                self.meta_data['genres'].remove('free to play')
             return self.meta_data['genres']
         else:
             self.logger.warning('No Genres found - %s', response.url)
