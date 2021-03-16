@@ -26,7 +26,7 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         """
         Test without auth
         """
-        url = reverse('bot-game-post')
+        url = reverse('bot-wikipedia-game-post')
         response = self.client.post(url, data={}, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -34,7 +34,7 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         """
         Single wiki game artlcle post, and create in db
         """
-        url = reverse('bot-game-post')
+        url = reverse('bot-wikipedia-game-post')
         # force authenticate
         self.client = APIClient()
         self.client.force_authenticate(user=self.testuser)
@@ -72,7 +72,7 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         """
         Single wiki game artlcle post, and update in db
         """
-        url = reverse('bot-game-post')
+        url = reverse('bot-wikipedia-game-post')
         # force authenticate
         self.client = APIClient()
         self.client.force_authenticate(user=self.testuser)
@@ -109,7 +109,7 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(game.tags.count(), 9)
         
     def test_multiple_posts(self):
-        url = reverse('bot-game-post')
+        url = reverse('bot-wikipedia-game-post')
         # force authenticate
         self.client = APIClient()
         self.client.force_authenticate(user=self.testuser)

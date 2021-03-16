@@ -370,6 +370,37 @@ class WikipediaGameSerializer(GameSerializer):
     def to_internal_value(self, data):
         return super().to_internal_value(self._handle_post_data(data))
 
+class WikipediaStadiaGameSerializer(WikipediaGameSerializer):
+    """
+    additional data (pictures, title_lc, link, series) for Stadia (reddit) games
+    """
+    def _handle_post_data(self, data):
+        """
+        set pictures, title_lc, link, series
+        """
+        title_lc = {}
+        links = {}
+        if data.get('language'):
+            title_lc[data.get('language')] = data.get('title_lc')
+            links[f"wikipedia_{data.get('language')}"] = data.get('link')
+        for interlang in data.get('inter_languages'):
+            title_lc[interlang.get('iso')] = interlang.get('title_lc')
+            links[f"wikipedia_{interlang.get('iso')}"] = interlang.get('url')
+            self._create_language_code(interlang)
+
+        out = {}
+        out['title'] = data.get('english_title')
+        out['pictures'] = data.get('pictures')
+        out['links'] = links
+        out['series'] = [self._convert_str_to_dict(v) for v in data['series']]
+        out['platforms'] = [self._convert_str_to_dict(data['platform'])]
+        return out
+
+    def update(self, instance, validated_data):
+        # do not update title.
+        validated_data['title'] = instance.title
+        return super().update(instance, validated_data)
+
 class RedditStadiaGameSerializer(GameSerializer):
     """
     Game django model serializer (POST from reddit bot)
@@ -636,3 +667,24 @@ class SteampoweredGameSerializer(GameSerializer):
 
     def to_internal_value(self, data):
         return super().to_internal_value(self._handle_post_data(data))
+
+class SteampoweredStadiaGameSerializer(SteampoweredGameSerializer):
+    """
+    additional data (pictures, description, link) for Stadia (reddit) games
+    """
+    def _handle_post_data(self, data):
+        """
+        set pictures, description, link
+        """
+        out = {}
+        out['title'] = data.get('title')
+        out['pictures'] = data.get('pictures')
+        out['description'] = data.get('description')
+        out['links'] = {'steampowered': data.get('link')}
+        out['platforms'] = [self._convert_str_to_dict(data['platform'])]
+        return out
+
+    def update(self, instance, validated_data):
+        # do not update title.
+        validated_data['title'] = instance.title
+        return super().update(instance, validated_data)

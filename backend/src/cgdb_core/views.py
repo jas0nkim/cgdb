@@ -10,29 +10,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from .models import Genre, Platform, Game
-from .serializers import (GenreSerializer,
-                        PlatformSerializer,
-                        GameSerializer,
-                        WikipediaGameSerializer,
-                        RedditStadiaGameSerializer,
-                        GameSearchSerializer,
-                        RedditStadiaGameProSerializer,
-                        RedditStadiaGameStatSerializer,
-                        SteampoweredGameSerializer,)
+from . import serializers
 from . import utils
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
-    serializer_class = PlatformSerializer
+    serializer_class = serializers.PlatformSerializer
     lookup_field = 'slug'
 
 class GamePublicViewSet(ReadOnlyModelViewSet):
     queryset = Game.objects.all()
-    serializer_class = GameSerializer
+    serializer_class = serializers.GameSerializer
     lookup_field = 'slug'
 
 class GameSearchViewSet(ReadOnlyModelViewSet):
-    serializer_class = GameSearchSerializer
+    serializer_class = serializers.GameSearchSerializer
 
     def get_queryset(self):
         search_term = self.kwargs['term']
@@ -44,7 +36,7 @@ class GameSearchViewSet(ReadOnlyModelViewSet):
         ).distinct('title')
 
 class FilteredGamesViewSet(ReadOnlyModelViewSet):
-    serializer_class = GameSearchSerializer
+    serializer_class = serializers.GameSearchSerializer
 
     def get_queryset(self):
         querydict = self.request.query_params
@@ -72,13 +64,14 @@ class FilteredGamesViewSet(ReadOnlyModelViewSet):
         return qs.order_by('title')
 
 class GameGenresViewSet(ReadOnlyModelViewSet):
-    serializer_class = GenreSerializer
+    serializer_class = serializers.GenreSerializer
 
     def get_queryset(self):
         return Genre.objects.all().order_by('name')
 
 class WikipediaGameBot(APIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.WikipediaGameSerializer
     _title_map = utils.stadia_game_title_map_from_wikipedia_to_reddit
 
     def __init__(self, **kwargs):
@@ -106,9 +99,9 @@ class WikipediaGameBot(APIView):
         ok_status = status.HTTP_200_OK
         try:
             game = Game.objects.get(slug=slugify(title))
-            serializer = WikipediaGameSerializer(game, data=_request_data)
+            serializer = self.serializer_class(game, data=_request_data)
         except Game.DoesNotExist:
-            serializer = WikipediaGameSerializer(data=_request_data)
+            serializer = self.serializer_class(data=_request_data)
             ok_status = status.HTTP_201_CREATED
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -120,8 +113,12 @@ class WikipediaGameBot(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
 
+class WikipediaStadiaGameBot(WikipediaGameBot):
+    serializer_class = serializers.WikipediaStadiaGameSerializer
+
 class RedditStadiaGameBot(APIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.RedditStadiaGameSerializer
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -142,9 +139,9 @@ class RedditStadiaGameBot(APIView):
         ok_status = status.HTTP_200_OK
         try:
             game = Game.objects.get(slug=slugify(title))
-            serializer = RedditStadiaGameSerializer(game, data=_request_data)
+            serializer = self.serializer_class(game, data=_request_data)
         except Game.DoesNotExist:
-            serializer = RedditStadiaGameSerializer(data=_request_data)
+            serializer = self.serializer_class(data=_request_data)
             ok_status = status.HTTP_201_CREATED
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -158,6 +155,7 @@ class RedditStadiaGameBot(APIView):
 
 class RedditStadiaGameProBot(APIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.RedditStadiaGameProSerializer
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -174,7 +172,7 @@ class RedditStadiaGameProBot(APIView):
         if not event_date:
             return Response({"error": "Event date not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
-        serializer = RedditStadiaGameProSerializer(data=_request_data)
+        serializer = self.serializer_class(data=_request_data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
         try:
@@ -187,6 +185,7 @@ class RedditStadiaGameProBot(APIView):
 
 class RedditStadiaGameStatsBot(APIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.RedditStadiaGameStatSerializer
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -207,7 +206,7 @@ class RedditStadiaGameStatsBot(APIView):
         if not stat_type:
             return Response({"error": "Game stats type not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
-        serializer = RedditStadiaGameStatSerializer(data=_request_data)
+        serializer = self.serializer_class(data=_request_data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
         try:
@@ -218,8 +217,9 @@ class RedditStadiaGameStatsBot(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class SteampoweredGameStatsBot(APIView):
+class SteampoweredGameBot(APIView):
     permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.SteampoweredGameSerializer
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -240,10 +240,9 @@ class SteampoweredGameStatsBot(APIView):
         ok_status = status.HTTP_200_OK
         try:
             game = Game.objects.get(slug=slugify(title))
-            serializer = SteampoweredGameSerializer(game,
-                                                    data=_request_data)
+            serializer = self.serializer_class(game, data=_request_data)
         except Game.DoesNotExist:
-            serializer = SteampoweredGameSerializer(data=_request_data)
+            serializer = self.serializer_class(data=_request_data)
             ok_status = status.HTTP_201_CREATED
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -254,3 +253,6 @@ class SteampoweredGameStatsBot(APIView):
             return Response(err,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
+
+class SteampoweredStadiaGameBot(SteampoweredGameBot):
+    serializer_class = serializers.SteampoweredStadiaGameSerializer
