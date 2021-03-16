@@ -5,22 +5,14 @@ from django.utils.text import slugify
 from django.db.utils import IntegrityError
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import (GameFreeOnSubscription, GameReleaseDate,
-                    LanguageCode,
-                    Mode,
-                    Genre,
-                    Series,
-                    Publisher,
-                    Developer,
-                    Platform,
-                    Game)
+from . import models
 
 class ModeSerializer(serializers.ModelSerializer):
     """
     Mode django model serializer
     """
     class Meta:
-        model = Mode
+        model = models.Mode
         fields = ('name',)
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -28,7 +20,7 @@ class GenreSerializer(serializers.ModelSerializer):
     Genre django model serializer
     """
     class Meta:
-        model = Genre
+        model = models.Genre
         fields = ('name',)
 
     def to_representation(self, instance):
@@ -42,7 +34,7 @@ class SeriesSerializer(serializers.ModelSerializer):
     Series django model serializer
     """
     class Meta:
-        model = Series
+        model = models.Series
         fields = ('name',)
 
 class PublisherSerializer(serializers.ModelSerializer):
@@ -50,7 +42,7 @@ class PublisherSerializer(serializers.ModelSerializer):
     Publisher django model serializer
     """
     class Meta:
-        model = Publisher
+        model = models.Publisher
         fields = ('name',)
 
 class DeveloperSerializer(serializers.ModelSerializer):
@@ -58,12 +50,12 @@ class DeveloperSerializer(serializers.ModelSerializer):
     Developer django model serializer
     """
     class Meta:
-        model = Developer
+        model = models.Developer
         fields = ('name',)
 
 class LanguageCodeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = LanguageCode
+        model = models.LanguageCode
         fields = ('iso',
                 'language',
                 'language_eng',)
@@ -74,7 +66,7 @@ class SimplePlatformSerializer(serializers.ModelSerializer):
     """
     slug = serializers.CharField(required=False)
     class Meta:
-        model = Platform
+        model = models.Platform
         fields = ('name',
                 'pictures',
                 'slug',)
@@ -84,7 +76,7 @@ class SimpleGameSerializer(serializers.ModelSerializer):
     Game model serializer for simply display-only purpose
     """
     class Meta:
-        model = Game
+        model = models.Game
         fields = ('title',
                 'pictures',
                 'slug',)
@@ -94,7 +86,7 @@ class PlatformSerializer(serializers.ModelSerializer):
     Platform django model serializer
     """
     class Meta:
-        model = Platform
+        model = models.Platform
         fields = ('name',
                 'description',
                 'verdict',
@@ -111,7 +103,7 @@ class GameReleaseDateSerializer(serializers.ModelSerializer):
     release_date = serializers.DateField(input_formats=['%Y %b %d',])
 
     class Meta:
-        model = GameReleaseDate
+        model = models.GameReleaseDate
         fields = ('game', 'platform', 'release_date',)
 
 class GameSearchSerializer(serializers.ModelSerializer):
@@ -121,7 +113,7 @@ class GameSearchSerializer(serializers.ModelSerializer):
     platforms = SimplePlatformSerializer(many=True)
 
     class Meta:
-        model = Game
+        model = models.Game
         fields = ('title',
                 'title_lc',
                 'slug',
@@ -142,7 +134,7 @@ class GameSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(required=False)
 
     class Meta:
-        model = Game
+        model = models.Game
         fields = ('title',
                 'title_lc',
                 'description',
@@ -179,41 +171,41 @@ class GameSerializer(serializers.ModelSerializer):
         genres_data = validated_data.pop('genres', [])
         modes_data = validated_data.pop('modes', [])
 
-        instance = Game.objects.create(**validated_data)
+        instance = models.Game.objects.create(**validated_data)
 
         for platform_data in platforms_data:
             obj = self._get_or_create_game_stat_instance(
-                            Platform,
+                            models.Platform,
                             stat_name=platform_data.pop('name'),
                             stat_data=platform_data)
             instance.platforms.add(obj)
         for developer_data in developers_data:
             obj = self._get_or_create_game_stat_instance(
-                            Developer,
+                            models.Developer,
                             stat_name=developer_data.pop('name'),
                             stat_data=developer_data)
             instance.developers.add(obj)
         for publisher_data in publishers_data:
             obj = self._get_or_create_game_stat_instance(
-                            Publisher,
+                            models.Publisher,
                             stat_name=publisher_data.pop('name'),
                             stat_data=publisher_data)
             instance.publishers.add(obj)
         for single_series_data in series_data:
             obj = self._get_or_create_game_stat_instance(
-                            Series,
+                            models.Series,
                             stat_name=single_series_data.pop('name'),
                             stat_data=single_series_data)
             instance.series.add(obj)
         for genre_data in genres_data:
             obj = self._get_or_create_game_stat_instance(
-                            Genre,
+                            models.Genre,
                             stat_name=genre_data.pop('name'),
                             stat_data=genre_data)
             instance.genres.add(obj)
         for mode_data in modes_data:
             obj = self._get_or_create_game_stat_instance(
-                            Mode,
+                            models.Mode,
                             stat_name=mode_data.pop('name'),
                             stat_data=mode_data)
             instance.modes.add(obj)
@@ -261,7 +253,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.platforms.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Platform,
+                                models.Platform,
                                 stat_name=name,
                                 stat_data=platform_data)
                 instance.platforms.add(obj)
@@ -270,7 +262,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.developers.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Developer,
+                                models.Developer,
                                 stat_name=name,
                                 stat_data=developer_data)
                 instance.developers.add(obj)
@@ -279,7 +271,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.publishers.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Publisher,
+                                models.Publisher,
                                 stat_name=name,
                                 stat_data=publisher_data)
                 instance.publishers.add(obj)
@@ -288,7 +280,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.series.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Series,
+                                models.Series,
                                 stat_name=name,
                                 stat_data=single_series_data)
                 instance.series.add(obj)
@@ -297,7 +289,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.genres.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Genre,
+                                models.Genre,
                                 stat_name=name,
                                 stat_data=genre_data)
                 instance.genres.add(obj)
@@ -306,7 +298,7 @@ class GameSerializer(serializers.ModelSerializer):
             if not instance.modes.all().filter(
                                             slug=slugify(name)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                Mode,
+                                models.Mode,
                                 stat_name=name,
                                 stat_data=mode_data)
                 instance.modes.add(obj)
@@ -320,10 +312,10 @@ class WikipediaGameSerializer(GameSerializer):
         """
         insert language code into db
         """
-        if not LanguageCode.objects.filter(
+        if not models.LanguageCode.objects.filter(
                                         iso=interlang_data.get('iso')
                                     ).exists():
-            LanguageCode.objects.create(iso=interlang_data.get('iso'),
+            models.LanguageCode.objects.create(iso=interlang_data.get('iso'),
                                 language=interlang_data.get('lang_lc'),
                                 language_eng=interlang_data.get('lang'))
 
@@ -430,8 +422,8 @@ class RedditStadiaGameSerializer(GameSerializer):
 
         # insert or update game release date info
         try:
-            platform = Platform.objects.get(slug=slugify(self._platform))
-        except Platform.DoesNotExist:
+            platform = models.Platform.objects.get(slug=slugify(self._platform))
+        except models.Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
@@ -454,8 +446,8 @@ class RedditStadiaGameSerializer(GameSerializer):
 
         # insert or update game release date info
         try:
-            platform = Platform.objects.get(slug=slugify(self._platform))
-        except Platform.DoesNotExist:
+            platform = models.Platform.objects.get(slug=slugify(self._platform))
+        except models.Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
@@ -502,8 +494,8 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         try:
-            platform = Platform.objects.get(slug=slugify(self._platform))
-        except Platform.DoesNotExist:
+            platform = models.Platform.objects.get(slug=slugify(self._platform))
+        except models.Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
 
         # insert entered games in 'game_free_on_subscriptions'
@@ -512,17 +504,17 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
                 entered_title = self._game_title_map[entered_title]
             game = None
             try:
-                game = Game.objects.get(slug=slugify(entered_title))
-            except Game.DoesNotExist:
+                game = models.Game.objects.get(slug=slugify(entered_title))
+            except models.Game.DoesNotExist:
                 raise ValidationError(f"Entering Stadia pro game title, {entered_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
             try:
-                _inst = GameFreeOnSubscription.objects.get(
+                _inst = models.GameFreeOnSubscription.objects.get(
                                 game=game,
                                 platform=platform,
                                 entered=validated_data.get('event_date'))
-            except GameFreeOnSubscription.DoesNotExist:
-                _inst = GameFreeOnSubscription.objects.create(
+            except models.GameFreeOnSubscription.DoesNotExist:
+                _inst = models.GameFreeOnSubscription.objects.create(
                                 game=game,
                                 platform=platform,
                                 entered=validated_data.get('event_date'))
@@ -532,18 +524,18 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
                 left_title = self._game_title_map[left_title]
             game = None
             try:
-                game = Game.objects.get(slug=slugify(left_title))
-            except Game.DoesNotExist:
+                game = models.Game.objects.get(slug=slugify(left_title))
+            except models.Game.DoesNotExist:
                 raise ValidationError(f"Leaving Stadia pro game title, {left_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
             gfos = None
             try:
-                gfos = GameFreeOnSubscription.objects.get(
+                gfos = models.GameFreeOnSubscription.objects.get(
                                 game=game,
                                 platform=platform,
                                 entered__lt=validated_data.get('event_date'),
                                 left__isnull=True,)
-            except GameFreeOnSubscription.DoesNotExist:
+            except models.GameFreeOnSubscription.DoesNotExist:
                 pass
             else:
                 gfos.left = validated_data.get('event_date')
@@ -589,8 +581,8 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         try:
-            platform = Platform.objects.get(name=self._platform)
-        except Platform.DoesNotExist:
+            platform = models.Platform.objects.get(name=self._platform)
+        except models.Platform.DoesNotExist:
             raise ValidationError("Platform, Stadia, not exists in DB")
 
         title = validated_data.get('title')
@@ -601,8 +593,8 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
 
         game = None
         try:
-            game = Game.objects.get(slug=slugify(title), platforms__name=self._platform)
-        except Game.DoesNotExist:
+            game = models.Game.objects.get(slug=slugify(title), platforms__name=self._platform)
+        except models.Game.DoesNotExist:
             raise ValidationError(f"Stadia game title, {title} - {stat_type}, not exists in DB (table: games)")
 
         # store stats into game
@@ -612,25 +604,25 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
         elif stat_type == 'genres':
             if not game.genres.all().filter(slug=slugify(stat_detail)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                                Genre,
+                                                models.Genre,
                                                 stat_name=stat_detail)
                 game.genres.add(obj)
         elif stat_type == 'developers':
             if not game.developers.all().filter(slug=slugify(stat_detail)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                                Developer,
+                                                models.Developer,
                                                 stat_name=stat_detail)
                 game.developers.add(obj)
         elif stat_type == 'publishers':
             if not game.publishers.all().filter(slug=slugify(stat_detail)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                                Publisher,
+                                                models.Publisher,
                                                 stat_name=stat_detail)
                 game.publishers.add(obj)
         elif stat_type == 'modes':
             if not game.modes.all().filter(slug=slugify(stat_detail)).exists():
                 obj = self._get_or_create_game_stat_instance(
-                                                Mode,
+                                                models.Mode,
                                                 stat_name=stat_detail)
                 game.modes.add(obj)
         else:
