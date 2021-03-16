@@ -7,7 +7,7 @@ stadia_game_title_map_from_wikipedia_to_reddit = {
     "Cyberpunk 2077": "Cyberpunk",
     "Jotun": "Jotun: Valhalla Edition",
     "Metro 2033": "Metro 2033 Redux",
-    "Metro: Last Light": "Metro: Last Light",
+    "Metro: Last Light": "Metro: Last Light Redux",
     "Monster Energy Supercross: The Official Videogame": "Monster Energy Supercross 3",
     "List of Monster Jam video games": "Monster Jam Steel Titans",
     "MotoGP 20": "MotoGP20",
@@ -23,4 +23,9 @@ stadia_game_title_map_from_wikipedia_to_reddit = {
     "Super Bomberman R": "SUPER BOMBERMAN R ONLINE",
     "Tomb Raider": "Tomb Raider: Definitive Edition",
     "Farming Simulator": "Farming Simulator 19",
+    "Tom Clancy's The Division 2": "The Division 2",
+    "Tom Clancy's Ghost Recon Wildlands": "Ghost Recon Wildlands",
+    "Tom Clancy's Ghost Recon Breakpoint": "Ghost Recon Breakpoint",
+    "Pac-Man": "PAC-MAN Mega Tunnel Battle",
+    "Saints Row: The Third": "Saints Row: The Third - Remastered",
 }
