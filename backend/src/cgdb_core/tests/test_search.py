@@ -53,7 +53,7 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(response.data), 2)
         self.assertEqual(response.data[0].get('title'), 'Ark: Survival Evolved')
         self.assertEqual(len(response.data[0].get('platforms')), 1)
-        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
+        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'Xbox Game Pass')
 
     def test_search_game_by_korean_title(self):
         # set all games active
@@ -64,7 +64,7 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0].get('title'), 'Astroneer')
         self.assertEqual(len(response.data[0].get('platforms')), 1)
-        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
+        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'Xbox Game Pass')
 
     def test_search_game_by_english_title_with_wrong_order_like_google_search(self):
         # set all games active
@@ -75,4 +75,4 @@ class SearchTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0].get('title'), 'Blair Witch')
         self.assertEqual(len(response.data[0].get('platforms')), 1)
-        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'xCloud')
+        self.assertEqual(response.data[0].get('platforms')[0].get('name'), 'Xbox Game Pass')

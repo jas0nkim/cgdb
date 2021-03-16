@@ -230,7 +230,7 @@ class Platform(models.Model):
     stores = models.ManyToManyField(
                     Store,
                     related_name="platforms",
-                    related_query_name="platform")
+                    related_query_name="platform", blank=True)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

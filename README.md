@@ -1,6 +1,6 @@
 # Cloud Game Database
 
-Provides easily searchable game titles by cloud gaming platforms, such as microsoft xcloud, nvidia geforce now, google stadia, and so on. Multi-language support. Inspired by [tvdb](http://thetvdb.com).
+Provides easily searchable game titles by cloud gaming platforms, such as Google Stadia, Microsoft Xbox Game Pass, Nvidia Geforce Now, and so on. Multi-language support. Inspired by [tvdb](http://thetvdb.com).
 
 - Search / display information oriented site
 - Search by game / platform / country
@@ -90,7 +90,7 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ```
 
 ## Run crawlers
-- Reddit (Stadia)
+- Stadia games
 ```
 $ docker-compose run --rm bot python run.py -p Stadia -s Reddit
 # set active all Stadia games before run Stadia Steam
@@ -99,7 +99,7 @@ $ docker-compose run --rm bot python run.py -p Stadia -s Wikipedia
 ```
 - Wikipedia
 ```
-$ docker-compose run --rm bot scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="xCloud"
+$ docker-compose run --rm bot scrapy crawl WikipediaGameSpider -a titles="Absolver||...||..." -a urls="...||..." -a platform="Xbox Game Pass"
 ```
 
 ## Bulk Game status updates
@@ -125,7 +125,9 @@ $ docker-compose run --rm bot python -m unittest
 - [Steam](https://store.steampowered.com/)
 - [Stadia - Reddit](https://www.reddit.com/r/Stadia/wiki/index)
 - [Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
-- [xCloud - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
+- [Xbox Game Pass - Xbox](https://www.xbox.com/en-US/xbox-game-pass/games)
+- [Xbox Game Pass - Xbox News](https://news.xbox.com/en-us/)
+- [Xbox Game Pass - Windows Central](https://www.windowscentral.com/xbox-project-xcloud-games-list)
 - [Luna - Android authority](https://www.androidauthority.com/amazon-luna-1170676/)
 - [GeForce Now - Reddit 1](http://gfngames.tk/)
 - [GeForce Now - Reddit 2](https://geforcenow-games.com/)

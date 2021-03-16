@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 const links = [
   {
-    name: 'xCloud',
-    url: '/platform/xcloud',
+    name: 'Xbox Game Pass',
+    url: '/platform/xbox-game-pass',
   },
   {
     name: 'Stadia',

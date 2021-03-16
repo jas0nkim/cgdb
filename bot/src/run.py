@@ -13,7 +13,7 @@ from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.spiders.steampowered import SteampoweredSpider
 from cgdb_bot.settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 
-ALLOWED_PLATFORMS = ('xCloud', 'Stadia', 'Luna',)
+ALLOWED_PLATFORMS = ('Xbox Game Pass', 'Stadia', 'Luna',)
 ALLOWED_SOURCES = ('Steam', 'Wikipedia', 'Reddit',)
 
 def run(file, platform):
@@ -140,7 +140,7 @@ Options:
                                     ({', '.join(ALLOWED_SOURCES)})
     -f, --file FILE                 CSV file has list of game titles to
                                     crawl
-                                    (Required for platforms: xCloud, Luna)
+                                    (Required for platforms: Xbox Game Pass, Luna)
 """)
 
 if __name__ == "__main__":
