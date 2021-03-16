@@ -1,7 +1,8 @@
 import logging
 from cgdb_bot.items import SteampoweredGameItem, ErrorItem
 from cgdb_bot.settings import (STEAMPOWERED_PRESET_COOKIES,
-                            STEAMPOWERED_TITLE_REMOVE_CHARS)
+                            STEAMPOWERED_TITLE_REMOVE_CHARS,
+                            STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP)
 from cgdb_bot.utils import clean_url
 
 class SteampoweredParser:
@@ -21,8 +22,7 @@ class SteampoweredParser:
     def _lookup_title(self, response, given_title):
         found = False
         no_row = 1
-        max_title_lookup = 3
-        while no_row <= max_title_lookup:
+        while no_row <= STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP:
             extracted_title = self._clean_title(
                                 self._extract_title_from_search_page(
                                                             response,

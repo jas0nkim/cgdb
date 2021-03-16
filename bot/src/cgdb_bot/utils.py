@@ -6,8 +6,8 @@ api_endpoint = {
     'RedditStadiaWikiGame': '/api/bot/reddit/stadia/game/',
     'RedditStadiaWikiGamePro': '/api/bot/reddit/stadia/gamepro/',
     'RedditStadiaStatDetail': '/api/bot/reddit/stadia/gamestats/',
-    'WikipediaGameItem': '/api/bot/game/',
-    'SteampoweredGameItem': '/api/bot/steampowered/game/',
+    'WikipediaGameItem': '/api/bot/wikipedia/stadia/game/',
+    'SteampoweredGameItem': '/api/bot/steampowered/stadia/game/',
 }
 
 def to_bool(string):
