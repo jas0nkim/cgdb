@@ -59,6 +59,12 @@ $ docker-compose exec backend python manage.py collectstatic
 $ docker-compose exec backend python manage.py createsuperuser
 ```
 6. Generate auth tokens (i.e. from admin site)
+7. Restore platforms data
+```
+$ docker-compose exec postgres bash
+# cd /etc
+# psql -U cgdb cgdb < .sql/cgdb-platforms-backup-xxxx.sql
+```
 
 ## Backup/restore data
 - Backup
@@ -86,7 +92,10 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ## Run crawlers
 - Reddit (Stadia)
 ```
-$ docker-compose run --rm bot python run.py -p Stadia
+$ docker-compose run --rm bot python run.py -p Stadia -s Reddit
+# set active all Stadia games before run Stadia Steam
+$ docker-compose run --rm bot python run.py -p Stadia -s Steam
+$ docker-compose run --rm bot python run.py -p Stadia -s Wikipedia
 ```
 - Wikipedia
 ```

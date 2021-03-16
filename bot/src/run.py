@@ -2,6 +2,7 @@ import sys
 import getopt
 from os import path
 import csv
+import requests
 from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy.utils.project import get_project_settings
@@ -9,9 +10,11 @@ from scrapy.utils.log import configure_logging
 from cgdb_bot.spiders.wikipedia import (WikipediaGameSpider,
                                         WikipediaStadiaSpider)
 from cgdb_bot.spiders.reddit import RedditStadiaSpider
-from cgdb_bot.settings import CRAWL_ARG_DELIMITER
+from cgdb_bot.spiders.steampowered import SteampoweredSpider
+from cgdb_bot.settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 
 ALLOWED_PLATFORMS = ('xCloud', 'Stadia', 'Luna',)
+ALLOWED_SOURCES = ('Steam', 'Wikipedia', 'Reddit',)
 
 def run(file, platform):
     titles = []
@@ -43,7 +46,7 @@ def run(file, platform):
                 postdata='True')
     process.start()
 
-def run_stadia():
+def run_stadia_reddit():
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
 
@@ -55,21 +58,39 @@ def run_stadia():
                             type='pro_games', postdata='True')
         yield runner.crawl(RedditStadiaSpider,
                             type='allstats', postdata='True')
-        yield runner.crawl(WikipediaStadiaSpider, postdata='True')
         reactor.stop()
 
     crawl()
     reactor.run() # the script will block here until the last crawl call is finished
 
+def run_stadia_wikipedia():
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
+    process.start()
+
+def run_stadia_steam():
+    resp = requests.get(f"{API_SERVER_HOST}/api/games/?platform=3")
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(SteampoweredSpider,
+                titles=CRAWL_ARG_DELIMITER.join(
+                            game.get('title') for game in resp.json()
+                        ),
+                platform='Stadia',
+                postdata='True')
+    process.start()
+
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, 'hf:p:', ['file=', 'platform=', 'help'])
+        opts, args = getopt.getopt(argv,
+                        'hf:p:s:',
+                        ['file=', 'platform=', 'source=', 'help'])
     except getopt.GetoptError as err:
         print(err)
         usage()
         sys.exit(2)
     file = None
     platform = None
+    source = None
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             usage()
@@ -78,6 +99,8 @@ def main(argv):
             file = str(arg)
         elif opt in ('-p', '--platform'):
             platform = str(arg)
+        elif opt in ('-s', '--source'):
+            source = str(arg)
     if not platform:
         print("Please enter -p or --platform")
         usage()
@@ -87,7 +110,12 @@ def main(argv):
         usage()
         sys.exit(2)
     if platform == 'Stadia':
-        run_stadia()
+        if source == 'Wikipedia':
+            run_stadia_wikipedia()
+        elif source == 'Steam':
+            run_stadia_steam()
+        else:
+            run_stadia_reddit()
     else:
         if not file:
             print("Please enter -f or --file")
@@ -108,6 +136,8 @@ Usage:
 Options:
     -p, --platform PLATFORM         Give a platform where games belong to 
                                     ({', '.join(ALLOWED_PLATFORMS)})
+    -s, --source SOURCE             Sourcing the game information from
+                                    ({', '.join(ALLOWED_SOURCES)})
     -f, --file FILE                 CSV file has list of game titles to
                                     crawl
                                     (Required for platforms: xCloud, Luna)
