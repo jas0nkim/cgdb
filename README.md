@@ -7,14 +7,19 @@ Provides easily searchable game titles by cloud gaming platforms, such as Google
 - Multi-language support
 
 ## Installation
-1. Create environment files
+1. Create environment/config files
 ```
+# environment files
 $ mkdir .env
 $ touch .env/backend.env
 $ touch .env/bot.env
 $ touch .env/postgres.env
+# aws config files
+$ mkdir backend/.aws
+$ touch backend/.aws/credentials
+$ touch backend/.aws/config
 ```
-copy and paste following lines into `backend.env` file
+copy and paste following lines into `.env/backend.env` file
 ```
 DJANGO_SECRET_KEY='YOUR-DJANGO-SECRET-KEY'
 DEBUG=True or False
@@ -26,17 +31,28 @@ DATABASE_PASS=YOUR-DB-PASSWORD
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
 ```
-copy and paste following lines into `bot.env` file
+copy and paste following lines into `.env/bot.env` file
 ```
 AUTH_TOKEN=YOUR-AUTH-TOKEN
 API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
 ```
-copy and paste following lines into `postgres.env` file
+copy and paste following lines into `.env/postgres.env` file
 ```
 POSTGRES_USER=YOUR-DB-USER
 POSTGRES_PASSWORD=YOUR-DB-PASSWORD
 POSTGRES_DB=YOUR-DB-NAME
 PGDATA=/data/postgres
+```
+copy and paste following lines into `backend/.aws/credentials` file
+```
+[default]
+aws_access_key_id = YOUR_ACCESS_KEY
+aws_secret_access_key = YOUR_SECRET_KEY
+```
+copy and paste following lines into `backend/.aws/config` file
+```
+[default]
+region=us-east-1
 ```
 2. Build containers
 ```

@@ -24,17 +24,18 @@ ENV PATH=/home/appuser/.local/bin:$PATH
 ENV DJANGO_SETTINGS_MODULE=cgdb.settings
 ENV PYTHONUNBUFFERED=1
 
-# Create working directory
-RUN mkdir /home/appuser/app
-WORKDIR /home/appuser/app
-
 # Copy requirements.txt and install dependencies before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY --chown=appuser:appuser ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
-# Copy all source files
-COPY --chown=appuser:appuser ./src ./
+# Copy aws config files
+COPY --chown=appuser:appuser ./.aws /home/appuser/.aws
+
+# Copy all source files, and set working directory
+RUN mkdir /home/appuser/app
+COPY --chown=appuser:appuser ./src /home/appuser/app
+WORKDIR /home/appuser/app
 
 # Expose app port
 EXPOSE 8000

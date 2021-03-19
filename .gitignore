@@ -133,5 +133,8 @@ dmypy.json
 # database
 /db
 
+# aws
+.aws/
+
 # local docker compose
 # docker-compose.local.yml
