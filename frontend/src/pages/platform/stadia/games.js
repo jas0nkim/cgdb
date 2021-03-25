@@ -112,7 +112,7 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
                             <Link href={'/game/' + game.slug} passHref>
                                 <CardMedia
                                     className={classes.media}
-                                    image={ game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
+                                    image={ game.images.length > 0 ? game.images[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
                                     title={game.slug}
                                 />
                             </Link>

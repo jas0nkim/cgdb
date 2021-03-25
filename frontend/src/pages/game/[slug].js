@@ -81,11 +81,11 @@ const GamePage = ({ game }) => {
                 <meta property="og:title" content={`${process.env.NEXT_PUBLIC_SITE_NAME} - ${game.title}`} key="og-title" />
                 <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_HOST}/game/${game.slug}`} key="og-url" />
                 <meta property="og:description" content={game.description} key="og-description" />
-                <meta property="og:image" content={game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG} key="og-image" />
+                <meta property="og:image" content={game.images.length > 0 ? game.images[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG} key="og-image" />
             </Head>
             <CardMedia
                 className={classes.media}
-                image={ game.pictures.length > 0 ? game.pictures[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
+                image={ game.images.length > 0 ? game.images[0] : process.env.NEXT_PUBLIC_PLACEHOLDER_IMG }
                 title={ game.slug }
             />
             <Paper elevation={0}>
