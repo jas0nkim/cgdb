@@ -13,9 +13,7 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ('source_url', 's3_url',)
 
     def to_representation(self, instance):
-        return {
-            'image': instance.s3_url if instance.s3_url else instance.source_url
-        }
+        return instance.s3_url if instance.s3_url else instance.source_url
 
 class ModeSerializer(serializers.ModelSerializer):
     """
@@ -81,15 +79,18 @@ class SimplePlatformSerializer(serializers.ModelSerializer):
                 'pictures',
                 'slug',)
 
-class SimpleGameSerializer(serializers.ModelSerializer):
-    """
-    Game model serializer for simply display-only purpose
-    """
-    class Meta:
-        model = models.Game
-        fields = ('title',
-                'pictures',
-                'slug',)
+##################
+# Deprecated
+#
+# class SimpleGameSerializer(serializers.ModelSerializer):
+#     """
+#     Game model serializer for simply display-only purpose
+#     """
+#     class Meta:
+#         model = models.Game
+#         fields = ('title',
+#                 'pictures',
+#                 'slug',)
 
 class PlatformSerializer(serializers.ModelSerializer):
     """
@@ -121,6 +122,7 @@ class GameSearchSerializer(serializers.ModelSerializer):
     Game django model serializer for Game Search
     """
     platforms = SimplePlatformSerializer(many=True)
+    images = ImageSerializer(many=True)
 
     class Meta:
         model = models.Game
@@ -128,6 +130,7 @@ class GameSearchSerializer(serializers.ModelSerializer):
                 'title_lc',
                 'slug',
                 'pictures',
+                'images',
                 'platforms')
 
 class GameSerializer(serializers.ModelSerializer):

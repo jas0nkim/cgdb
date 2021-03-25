@@ -21,6 +21,9 @@ class GameSeriesInline(admin.TabularInline):
 class GameModeInline(admin.TabularInline):
     model = models.Game.modes.through
 
+class GameTagInline(admin.TabularInline):
+    model = models.Game.tags.through
+
 class GameImageInline(admin.TabularInline):
     model = models.Game.images.through
 
@@ -33,6 +36,7 @@ class GameAdmin(admin.ModelAdmin):
         GamePublisherInline,
         GameSeriesInline,
         GameModeInline,
+        GameTagInline,
     ]
 
     prepopulated_fields = {"slug": ("title",)}
@@ -44,6 +48,7 @@ class GameAdmin(admin.ModelAdmin):
         'publishers',
         'series',
         'modes',
+        'tags',
         'images',
     )
     list_display = ['title', 'active', 'created_at',]
