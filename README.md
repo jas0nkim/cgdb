@@ -30,6 +30,7 @@ DATABASE_USER=YOUR-DB-USER
 DATABASE_PASS=YOUR-DB-PASSWORD
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
+S3_IMAGES_BUCKET=YOUR-S3-BUCKET-NAME
 ```
 copy and paste following lines into `.env/bot.env` file
 ```

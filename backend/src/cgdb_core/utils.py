@@ -1,3 +1,4 @@
+import os
 import re
 import uuid
 import boto3
@@ -40,8 +41,8 @@ STADIA_GAME_TITLE_MAP_FROM_WIKIPEDIA_TO_REDDIT = {
     "Saints Row: The Third": "Saints Row: The Third - Remastered",
 }
 
-S3_IMAGES_BUCKET = 'cgdb-image'
-S3_IMAGES_HOST = 'https://cgdb-image.s3.amazonaws.com/'
+S3_IMAGES_BUCKET = os.getenv('S3_IMAGES_BUCKET', 'cgdb-image')
+S3_IMAGES_HOST = f'https://{S3_IMAGES_BUCKET}.s3.amazonaws.com/'
 S3_UPLOAD_EXTRA_ARGS = {
     'ACL': 'public-read',
     'ContentType': 'image/jpeg'
