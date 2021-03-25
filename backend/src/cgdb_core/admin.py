@@ -1,31 +1,33 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from . import models
 
-from cgdb_core.serializers import GameSerializer
-from .models import *
-
-@admin.register(User)
+@admin.register(models.User)
 class CgdbUserAdmin(UserAdmin):
     pass
 
 class GameGenreInline(admin.TabularInline):
-    model = Game.genres.through
+    model = models.Game.genres.through
 
 class GameDeveloperInline(admin.TabularInline):
-    model = Game.developers.through
+    model = models.Game.developers.through
 
 class GamePublisherInline(admin.TabularInline):
-    model = Game.publishers.through
+    model = models.Game.publishers.through
 
 class GameSeriesInline(admin.TabularInline):
-    model = Game.series.through
+    model = models.Game.series.through
 
 class GameModeInline(admin.TabularInline):
-    model = Game.modes.through
+    model = models.Game.modes.through
 
-@admin.register(Game)
+class GameImageInline(admin.TabularInline):
+    model = models.Game.images.through
+
+@admin.register(models.Game)
 class GameAdmin(admin.ModelAdmin):
     inlines = [
+        GameImageInline,
         GameGenreInline,
         GameDeveloperInline,
         GamePublisherInline,
@@ -36,14 +38,21 @@ class GameAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ['title__icontains',]
     list_filter = ('platforms', 'active',)
-    exclude = ('genres', 'developers', 'publishers', 'series', 'modes',)
+    exclude = (
+        'genres',
+        'developers',
+        'publishers',
+        'series',
+        'modes',
+        'images',
+    )
     list_display = ['title', 'active', 'created_at',]
 
-@admin.register(Platform)
+@admin.register(models.Platform)
 class PlatformAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
-@admin.register(Developer)
+@admin.register(models.Developer)
 class DeveloperAdmin(admin.ModelAdmin):
     inlines = [
         GameDeveloperInline,
@@ -52,7 +61,7 @@ class DeveloperAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name__icontains',]
 
-@admin.register(Publisher)
+@admin.register(models.Publisher)
 class PublisherAdmin(admin.ModelAdmin):
     inlines = [
         GamePublisherInline,
@@ -61,7 +70,7 @@ class PublisherAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name__icontains',]
 
-@admin.register(Series)
+@admin.register(models.Series)
 class SeriesAdmin(admin.ModelAdmin):
     inlines = [
         GameSeriesInline,
@@ -70,7 +79,7 @@ class SeriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name__icontains',]
 
-@admin.register(Genre)
+@admin.register(models.Genre)
 class GenreAdmin(admin.ModelAdmin):
     inlines = [
         GameGenreInline,
@@ -79,7 +88,7 @@ class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name__icontains',]
 
-@admin.register(Mode)
+@admin.register(models.Mode)
 class ModeAdmin(admin.ModelAdmin):
     inlines = [
         GameModeInline,
@@ -88,28 +97,32 @@ class ModeAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ['name__icontains',]
 
-@admin.register(Store)
+@admin.register(models.Store)
 class StoreAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
-@admin.register(GamePrice)
+@admin.register(models.GamePrice)
 class GamePriceAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(GameReleaseDate)
+@admin.register(models.GameReleaseDate)
 class GameReleaseDateAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(GameFreeOnSubscription)
+@admin.register(models.GameFreeOnSubscription)
 class GameFreeOnSubscriptionAdmin(admin.ModelAdmin):
     search_fields = ['game__title__icontains',]
     list_display = ['game', 'platform', 'entered', 'left']
 
-@admin.register(Tag)
+@admin.register(models.Tag)
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("tag",)}
     search_fields = ['tag__icontains',]
 
-@admin.register(LanguageCode)
+@admin.register(models.LanguageCode)
 class LanguageCodeAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(models.Image)
+class ImageAdmin(admin.ModelAdmin):
     pass

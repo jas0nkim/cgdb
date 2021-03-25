@@ -1,11 +1,21 @@
-import datetime
-from os import stat
-from django.db.models.enums import IntegerChoices
 from django.utils.text import slugify
 from django.db.utils import IntegrityError
 from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
 from . import models
+from . import utils
+
+class ImageSerializer(serializers.ModelSerializer):
+    """
+    Image django model serializer
+    """
+    class Meta:
+        model = models.Image
+        fields = ('source_url', 's3_url',)
+
+    def to_representation(self, instance):
+        return {
+            'image': instance.s3_url if instance.s3_url else instance.source_url
+        }
 
 class ModeSerializer(serializers.ModelSerializer):
     """
@@ -130,6 +140,7 @@ class GameSerializer(serializers.ModelSerializer):
     series = SeriesSerializer(many=True, required=False)
     genres = GenreSerializer(many=True, required=False)
     modes = ModeSerializer(many=True, required=False)
+    images = ImageSerializer(many=True, required=False)
     # game_release_dates = GameReleaseDateSerializer(many=True, required=False)
     slug = serializers.CharField(required=False)
 
@@ -142,6 +153,7 @@ class GameSerializer(serializers.ModelSerializer):
                 'esrb',
                 'pictures',
                 'links',
+                'images',
                 'developers',
                 'publishers',
                 'series',
@@ -163,6 +175,19 @@ class GameSerializer(serializers.ModelSerializer):
         except IntegrityError:
             return game_stat_cls.objects.get(slug=slugify(stat_name))
 
+    def _create_image_instance(self, source_url, game_title):
+        s3_url = utils.upload_to_s3(
+                    source_url=source_url,
+                    s3_filename=utils.generate_s3_filename(
+                        prefix='games/',
+                        name=slugify(game_title)
+                    ),
+                    s3_bucket=None
+                )
+        return models.Image.objects.create(
+                    source_url=source_url,
+                    s3_url=s3_url)
+
     def create(self, validated_data):
         platforms_data = validated_data.pop('platforms', [])
         developers_data = validated_data.pop('developers', [])
@@ -170,6 +195,7 @@ class GameSerializer(serializers.ModelSerializer):
         series_data = validated_data.pop('series', [])
         genres_data = validated_data.pop('genres', [])
         modes_data = validated_data.pop('modes', [])
+        pictures = validated_data.get('pictures', [])
 
         instance = models.Game.objects.create(**validated_data)
 
@@ -209,6 +235,10 @@ class GameSerializer(serializers.ModelSerializer):
                             stat_name=mode_data.pop('name'),
                             stat_data=mode_data)
             instance.modes.add(obj)
+        for picture in pictures:
+            instance.images.add(self._create_image_instance(
+                        source_url=picture,
+                        game_title=validated_data.get('title')))
         return instance
 
     def _updated_title_lc(self, instance, validated_data):
@@ -233,6 +263,7 @@ class GameSerializer(serializers.ModelSerializer):
         series_data = validated_data.pop('series', [])
         genres_data = validated_data.pop('genres', [])
         modes_data = validated_data.pop('modes', [])
+        pictures = validated_data.get('pictures', [])
 
         validated_data['title_lc'] = self._updated_title_lc(
                                                 instance,
@@ -302,6 +333,11 @@ class GameSerializer(serializers.ModelSerializer):
                                 stat_name=name,
                                 stat_data=mode_data)
                 instance.modes.add(obj)
+        for picture in pictures:
+            if not instance.images.all().filter(source_url=picture).exists():
+                instance.images.add(self._create_image_instance(
+                            source_url=picture,
+                            game_title=validated_data.get('title')))
         return instance
 
 class WikipediaGameSerializer(GameSerializer):
@@ -424,14 +460,14 @@ class RedditStadiaGameSerializer(GameSerializer):
         try:
             platform = models.Platform.objects.get(slug=slugify(self._platform))
         except models.Platform.DoesNotExist:
-            raise ValidationError("Platform, Stadia, not exists in DB")
+            raise serializers.ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
             'platform': platform.pk,
             'release_date': self._release_date,
         })
         if not grds.is_valid():
-            raise ValidationError(grds.errors)
+            raise serializers.ValidationError(grds.errors)
         else:
             grds.save()
 
@@ -448,14 +484,14 @@ class RedditStadiaGameSerializer(GameSerializer):
         try:
             platform = models.Platform.objects.get(slug=slugify(self._platform))
         except models.Platform.DoesNotExist:
-            raise ValidationError("Platform, Stadia, not exists in DB")
+            raise serializers.ValidationError("Platform, Stadia, not exists in DB")
         grds = GameReleaseDateSerializer(data={
             'game': instance.pk,
             'platform': platform.pk,
             'release_date': self._release_date,
         })
         if not grds.is_valid():
-            raise ValidationError(grds.errors)
+            raise serializers.ValidationError(grds.errors)
         else:
             grds.save()
 
@@ -496,7 +532,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
         try:
             platform = models.Platform.objects.get(slug=slugify(self._platform))
         except models.Platform.DoesNotExist:
-            raise ValidationError("Platform, Stadia, not exists in DB")
+            raise serializers.ValidationError("Platform, Stadia, not exists in DB")
 
         # insert entered games in 'game_free_on_subscriptions'
         for entered_title in validated_data.get('entered_titles'):
@@ -506,7 +542,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
             try:
                 game = models.Game.objects.get(slug=slugify(entered_title))
             except models.Game.DoesNotExist:
-                raise ValidationError(f"Entering Stadia pro game title, {entered_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
+                raise serializers.ValidationError(f"Entering Stadia pro game title, {entered_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
             try:
                 _inst = models.GameFreeOnSubscription.objects.get(
@@ -526,7 +562,7 @@ class RedditStadiaGameProSerializer(serializers.Serializer):
             try:
                 game = models.Game.objects.get(slug=slugify(left_title))
             except models.Game.DoesNotExist:
-                raise ValidationError(f"Leaving Stadia pro game title, {left_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
+                raise serializers.ValidationError(f"Leaving Stadia pro game title, {left_title} - {validated_data.get('event_date')}, not exists in DB (table: games)")
 
             gfos = None
             try:
@@ -583,7 +619,7 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
         try:
             platform = models.Platform.objects.get(name=self._platform)
         except models.Platform.DoesNotExist:
-            raise ValidationError("Platform, Stadia, not exists in DB")
+            raise serializers.ValidationError("Platform, Stadia, not exists in DB")
 
         title = validated_data.get('title')
         if title in self._game_title_map:
@@ -595,7 +631,7 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
         try:
             game = models.Game.objects.get(slug=slugify(title), platforms__name=self._platform)
         except models.Game.DoesNotExist:
-            raise ValidationError(f"Stadia game title, {title} - {stat_type}, not exists in DB (table: games)")
+            raise serializers.ValidationError(f"Stadia game title, {title} - {stat_type}, not exists in DB (table: games)")
 
         # store stats into game
         if stat_type == 'ratings':
@@ -626,7 +662,7 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
                                                 stat_name=stat_detail)
                 game.modes.add(obj)
         else:
-            raise ValidationError(f"Invalid Stats type passed: {stat_type}")
+            raise serializers.ValidationError(f"Invalid Stats type passed: {stat_type}")
 
         return validated_data
 

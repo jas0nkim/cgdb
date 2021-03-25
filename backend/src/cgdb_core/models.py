@@ -1,7 +1,6 @@
 import logging
 from django.db import models
 from django.db.utils import IntegrityError
-from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 
@@ -18,6 +17,16 @@ class User(AbstractUser):
     """ extend django user
     """
     pass
+
+class Image(models.Model):
+    source_url = models.CharField(max_length=255)
+    s3_url = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        db_table = 'images'
+
+    def __str__(self):
+        return self.s3_url
 
 class Mode(models.Model):
     """ mode model
@@ -39,7 +48,6 @@ class Mode(models.Model):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
 
-
 class Genre(models.Model):
     """ genre model
         db table name: genres
@@ -59,7 +67,6 @@ class Genre(models.Model):
             update_fields=None):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
-
 
 class Series(models.Model):
     """ series model
@@ -81,7 +88,6 @@ class Series(models.Model):
             update_fields=None):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
-
 
 class Publisher(models.Model):
     """ publisher model
@@ -116,7 +122,6 @@ class Publisher(models.Model):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
 
-
 class Developer(models.Model):
     """ developer model
         db table name: developers
@@ -131,6 +136,10 @@ class Developer(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     pictures = models.JSONField(blank=True, default=list)
+    images = models.ManyToManyField(
+                    Image,
+                    related_name="developers",
+                    related_query_name="developer", blank=True)
     slug = models.SlugField(max_length = 100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -149,7 +158,6 @@ class Developer(models.Model):
             update_fields=None):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
-
 
 class Store(models.Model):
     """ store model
@@ -171,7 +179,6 @@ class Store(models.Model):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
 
-
 class Tag(models.Model):
     tag = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -187,7 +194,6 @@ class Tag(models.Model):
             update_fields=None):
         self.slug = slugify(self.tag, allow_unicode=True)
         super().save(force_insert, force_update, using, update_fields)
-
 
 class Platform(models.Model):
     """ plateform model
@@ -227,6 +233,10 @@ class Platform(models.Model):
     internet_requirements = models.TextField(null=True, blank=True)
     supported_devices = models.JSONField(blank=True, default=list)
     pictures = models.JSONField(blank=True, default=list)
+    images = models.ManyToManyField(
+                    Image,
+                    related_name="platforms",
+                    related_query_name="platform", blank=True)
     stores = models.ManyToManyField(
                     Store,
                     related_name="platforms",
@@ -255,7 +265,6 @@ class Platform(models.Model):
             update_fields=None):
         self.slug = slugify(self.name)
         super().save(force_insert, force_update, using, update_fields)
-
 
 class Game(models.Model):
     """ game model
@@ -303,6 +312,10 @@ class Game(models.Model):
     pictures = models.JSONField(blank=True, default=list)
     links = models.JSONField(blank=True, default=dict)
     active = models.BooleanField(default=False)
+    images = models.ManyToManyField(
+                    Image,
+                    related_name="games",
+                    related_query_name="game", blank=True)
     developers = models.ManyToManyField(
                     Developer,
                     related_name="games",
@@ -384,7 +397,6 @@ class Game(models.Model):
             if not self.tags.filter(tag=self.title_lc.get(iso)).exists():
                 self.tags.add(tag)
 
-
 class GamePrice(models.Model):
     """ game price model
         db table name: game_prices
@@ -410,7 +422,6 @@ class GamePrice(models.Model):
 
     def __str__(self):
         return f"{self.game} price @{self.store}"
-
 
 class GameReleaseDate(models.Model):
     """ game release model
@@ -452,7 +463,6 @@ class GameFreeOnSubscription(models.Model):
 
     def __str__(self):
         return f"{self.game} w/ {self.platform} subscription"
-
 
 class LanguageCode(models.Model):
     iso = models.CharField(max_length=10, unique=True)

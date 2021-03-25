@@ -6,7 +6,8 @@ from django.urls import include, path, reverse
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
-from cgdb_core.models import Game, GameFreeOnSubscription
+from cgdb_core.models import Game, Image
+from cgdb_core import utils
 
 class WikipediaPostTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
@@ -22,6 +23,13 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         cls._data_reddit_game_stats = _json.get('reddit_game_stats')
         cls._data_wikipedia_games = _json.get('wikipedia_games')
         cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def tearDown(self):
+        """
+        Delete all images uploaded to s3 during this test
+        """
+        for image in Image.objects.all():
+            utils.delete_from_s3(image.s3_url)
 
     def test_auth(self):
         """
@@ -143,6 +151,8 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         self.assertTrue(game.platforms.all().filter(name='Stadia').exists())
         self.assertEqual(len(game.pictures), 1)
         self.assertIn('https://upload.wikimedia.org/wikipedia/en/0/05/Destiny_2_%28artwork%29.jpg', game.pictures)
+        self.assertEqual(game.images.all().count(), 1)
+        self.assertTrue(game.images.all().filter(source_url='https://upload.wikimedia.org/wikipedia/en/0/05/Destiny_2_%28artwork%29.jpg').exists())
         self.assertEqual(len(game.links), 19)
         self.assertIn('wikipedia_en', game.links)
         self.assertIn('stadia', game.links)

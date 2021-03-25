@@ -1,24 +1,19 @@
 import unittest
-import boto3
-from urllib.request import urlopen
+from cgdb_core import utils
 
 class PictureUploadToS3Tests(unittest.TestCase):
+
+    s3_filename = '_test-image.jpg'
     
-    def setUp(self):
-        self.s3 = boto3.resource('s3')
-    
-    def test_connection(self):
-        self.assertIn('cgdb-image', [b.name for b in self.s3.buckets.all()])
+    def tearDown(self):
+        """
+        Delete all images uploaded to s3 during this test
+        """
+        utils.delete_from_s3(self.s3_filename)
 
     def test_upload_images(self):
         image_url = 'https://cdn.akamai.steamstatic.com/steam/apps/289650/capsule_616x353.jpg'
-        with urlopen(image_url) as imageobj:
-            self.assertIsNone(self.s3.meta.client.upload_fileobj(
-                                imageobj,
-                                'cgdb-image',
-                                '_test-image.jpg',
-                                ExtraArgs={
-                                    'ACL': 'public-read',
-                                    'ContentType': 'image/jpeg'
-                                }
-                            ))
+        self.assertEqual(utils.upload_to_s3(
+                            source_url=image_url,
+                            s3_filename=self.s3_filename),
+                        f"{utils.S3_IMAGES_HOST}{self.s3_filename}")

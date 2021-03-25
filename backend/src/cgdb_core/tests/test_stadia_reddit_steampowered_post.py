@@ -5,7 +5,8 @@ from django.urls import include, path, reverse
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
-from cgdb_core.models import Game
+from cgdb_core.models import Game, Image
+from cgdb_core import utils
 
 class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
@@ -22,6 +23,13 @@ class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
         cls._data_wikipedia_games = _json.get('wikipedia_games')
         cls._data_steampowered_games = _json.get('steampowered_games')
         cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def tearDown(self):
+        """
+        Delete all images uploaded to s3 during this test
+        """
+        for image in Image.objects.all():
+            utils.delete_from_s3(image.s3_url)
 
     def test_auth(self):
         """
@@ -122,6 +130,8 @@ class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
         self.assertTrue(game.modes.all().filter(name='cross platform multiplayer').exists())
         self.assertEqual(len(game.pictures), 1)
         self.assertIn('https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg', game.pictures)
+        self.assertEqual(game.images.all().count(), 1)
+        self.assertTrue(game.images.all().filter(source_url='https://cdn.cloudflare.steamstatic.com/steam/apps/971690/capsule_616x353.jpg').exists())
         self.assertEqual(len(game.links), 2)
         self.assertIn('stadia', game.links)
         self.assertIn('steampowered', game.links)
@@ -130,6 +140,8 @@ class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
         # Assassin's Creed Syndicate
         game = Game.objects.get(title="Assassin's Creed Syndicate")
         self.assertEqual(len(game.pictures), 1)
+        self.assertEqual(game.images.all().count(), 1)
+        self.assertTrue(game.images.all().filter(source_url='https://cdn.akamai.steamstatic.com/steam/apps/368500/capsule_616x353.jpg').exists())
         self.assertEqual(game.description, "London, 1868. In the heart of the Industrial Revolution, lead your underworld organization and grow your influence to fight those who exploit the less privileged in the name of...")
         self.assertEqual(game.genres.all().count(), 2)
         self.assertTrue(game.genres.all().filter(name='action').exists())
@@ -155,6 +167,9 @@ class SteampoweredPostTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(game.pictures), 2)
         self.assertIn('https://upload.wikimedia.org/wikipedia/en/2/2d/Dirt_5_cover_art.jpg', game.pictures)
         self.assertIn('https://cdn.cloudflare.steamstatic.com/steam/apps/1038250/capsule_616x353.jpg', game.pictures)
+        self.assertEqual(game.images.all().count(), 2)
+        self.assertTrue(game.images.all().filter(source_url='https://upload.wikimedia.org/wikipedia/en/2/2d/Dirt_5_cover_art.jpg').exists())
+        self.assertTrue(game.images.all().filter(source_url='https://cdn.cloudflare.steamstatic.com/steam/apps/1038250/capsule_616x353.jpg').exists())
         self.assertEqual(len(game.links), 11)
         self.assertIn('wikipedia_en', game.links)
         self.assertIn('steampowered', game.links)

@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
 from cgdb_core.models import (Mode,
                     Genre,
-                    Series,
                     Publisher,
                     Developer,
                     Platform,

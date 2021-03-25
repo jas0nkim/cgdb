@@ -5,7 +5,8 @@ from django.urls import include, path, reverse
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
-from cgdb_core.models import Game
+from cgdb_core.models import Game, Image
+from cgdb_core import utils
 
 class WikipediaPostTests(APITestCase, URLPatternsTestCase):
     urlpatterns = [
@@ -21,6 +22,13 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         cls.test_data_3 = _json.get('data_3')
         cls.test_data_4 = _json.get('data_4')
         cls.testuser = get_user_model().objects.create_user(username='testuser', password='12345')
+
+    def tearDown(self):
+        """
+        Delete all images uploaded to s3 during this test
+        """
+        for image in Image.objects.all():
+            utils.delete_from_s3(image.s3_url)
 
     def test_auth(self):
         """
@@ -50,6 +58,8 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(game.pictures), 1)
         self.assertEqual(game.pictures[0],
                         "https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg")
+        self.assertEqual(game.images.count(), 1)
+        self.assertEqual(game.images.filter(source_url='https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg').exists(), True)
         self.assertEqual(len(game.links), 18)
         self.assertEqual(game.links.get('wikipedia_en'),
                         'https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence')
@@ -90,6 +100,8 @@ class WikipediaPostTests(APITestCase, URLPatternsTestCase):
         self.assertEqual(len(game.pictures), 1)
         self.assertEqual(game.pictures[0],
                         "https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg")
+        self.assertEqual(game.images.count(), 1)
+        self.assertEqual(game.images.filter(source_url='https://upload.wikimedia.org/wikipedia/en/1/1d/A_Plague_Tale_cover_art.jpg').exists(), True)
         self.assertEqual(len(game.links), 18)
         self.assertEqual(game.links.get('wikipedia_en'),
                         'https://en.wikipedia.org/wiki/A_Plague_Tale:_Innocence')

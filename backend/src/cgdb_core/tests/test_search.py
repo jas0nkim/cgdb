@@ -5,8 +5,9 @@ from pathlib import Path
 from django.urls import include, path, reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, URLPatternsTestCase
-from cgdb_core.models import Game, Tag
+from cgdb_core.models import Game, Tag, Image
 from cgdb_core.serializers import WikipediaGameSerializer
+from cgdb_core import utils
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,13 @@ class SearchTests(APITestCase, URLPatternsTestCase):
     def setUp(self):
         # reset all games inactive
         Game.objects.all().update(active=False)
+
+    def tearDown(self):
+        """
+        Delete all images uploaded to s3 during this test
+        """
+        for image in Image.objects.all():
+            utils.delete_from_s3(image.s3_url)
 
     def test_initial_data(self):
         """

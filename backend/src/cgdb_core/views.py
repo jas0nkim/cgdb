@@ -72,7 +72,7 @@ class GameGenresViewSet(ReadOnlyModelViewSet):
 class WikipediaGameBot(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.WikipediaGameSerializer
-    _title_map = utils.stadia_game_title_map_from_wikipedia_to_reddit
+    _title_map = utils.STADIA_GAME_TITLE_MAP_FROM_WIKIPEDIA_TO_REDDIT
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
