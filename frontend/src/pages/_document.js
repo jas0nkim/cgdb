@@ -4,11 +4,31 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../theme';
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
+          {/* enable Global site tag (gtag.js) - Google Analytics only for production */}
+          {isProduction && (
+            <>
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}></script>
+              <script
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '${process.env.GA_TRACKING_ID}');
+                `
+                }}
+              />
+            </>
+          )}
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link

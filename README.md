@@ -18,6 +18,8 @@ $ touch .env/postgres.env
 $ mkdir backend/.aws
 $ touch backend/.aws/credentials
 $ touch backend/.aws/config
+# frontend local
+$ touch frontend/.env.local
 ```
 copy and paste following lines into `.env/backend.env` file
 ```
@@ -54,6 +56,16 @@ copy and paste following lines into `backend/.aws/config` file
 ```
 [default]
 region=us-east-1
+```
+copy and paste following lines into `frontend/.env.production` and `frontend/.env.local` files
+```
+NODE_ENV=production or local
+NEXT_PUBLIC_SITE_NAME=YOUR-WEBSITE-NAME
+NEXT_PUBLIC_SITE_HOST=YOUR-WEBSITE-HOST
+NEXT_PUBLIC_API_SERVER_URL=YOUR-API-SERVER-URL
+NEXT_PUBLIC_MAX_SUGGESTIONS=5
+NEXT_PUBLIC_PLACEHOLDER_IMG=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zm2HEMg-i1OfKqgFRy4bV3joE5jzFTv8aA&usqp=CAU
+GA_TRACKING_ID=YOUR-GOOGLE-ANALYTICS-TRACKING-ID
 ```
 2. Build containers
 ```
