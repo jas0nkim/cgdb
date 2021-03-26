@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const GameFilterDrawer = (props) => {
     const classes = useStyles();
-    const { window, defaultFilters } = props;
+    const { window, defaultFilters, prevQueryString } = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [filters, setFilters] = useState(defaultFilters);
 
@@ -33,7 +33,7 @@ const GameFilterDrawer = (props) => {
     };
 
     const handleClearFilters = (event) => {
-        setFilters(defaultFilters)
+        setFilters(defaultFilters);
     }
 
     const handleChangeFilter = (event) => {
@@ -86,6 +86,7 @@ const GameFilterDrawer = (props) => {
                         <FormControlLabel
                             key={`${filter.value}-${gItem.value}`}
                             control={<Checkbox
+                                        disabled={props.loadingGames}
                                         onChange={handleChangeFilter}
                                         name={filter.value}
                                         value={gItem.value.toString()}
@@ -117,7 +118,12 @@ const GameFilterDrawer = (props) => {
     const drawer = (
         <div>
             <div className={classes.toolbar}>
-                <Button onClick={handleClearFilters}>Clear</Button>
+                <Button
+                    disabled={props.loadingGames}
+                    onClick={handleClearFilters}
+                >
+                    Clear
+                </Button>
             </div>
             <Divider />
             <FormControl component="fieldset" className={classes.formControl}>
@@ -139,9 +145,11 @@ const GameFilterDrawer = (props) => {
         return qs.join('&');
     }
 
+    let currQueryString = ''
     useEffect(() => {
-        if (props.onChange) {
-            props.onChange(filtersToQueryString())
+        currQueryString = filtersToQueryString()
+        if (props.onChange && currQueryString != prevQueryString) {
+            props.onChange(currQueryString)
         }
     }, [filters]);
   
@@ -150,17 +158,17 @@ const GameFilterDrawer = (props) => {
             <Button onClick={handleDrawerToggle}>Filter</Button>
             <nav className={classes.drawer} aria-label="manu drawer">
                 <Drawer
-                container={container}
-                variant="temporary"
-                anchor="right"
-                open={drawerOpen}
-                onClose={handleDrawerToggle}
-                classes={{
-                    paper: classes.drawerPaper
-                }}
-                ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                }}
+                    container={container}
+                    variant="temporary"
+                    anchor="right"
+                    open={drawerOpen}
+                    onClose={handleDrawerToggle}
+                    classes={{
+                        paper: classes.drawerPaper
+                    }}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
                 >
                     {drawer}
                 </Drawer>

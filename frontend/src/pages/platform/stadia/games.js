@@ -22,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const defaultQueryString = "platform=3"
 
-const StadiaGamesPage = ({ allGames, gameGenres }) => {
+const StadiaGamesPage = ({ allGames, gameGenres, loading }) => {
     const classes = useStyles();
     const [games, setGames] = useState(allGames);
+    const [loadingGames, setLoadingGames] = useState(loading);
+    const [filterQueryString, setFilterQueryString] = useState('');
     const defaultFilters = [
         {
             value: 'subscription',
@@ -85,12 +87,15 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
     ]
 
     const handleFilterChanged = (querystring) => {
-        querystring = defaultQueryString + '&' + querystring
+        setFilterQueryString(querystring);
+        querystring = defaultQueryString + '&' + querystring;
+        setLoadingGames(true);
         fetch(
             `${process.env.NEXT_PUBLIC_API_SERVER_URL}games/?${querystring}`
         ).then(async (resp) => {
             const filteredGames = await resp.json()
             setGames(filteredGames)
+            setLoadingGames(false);
         })
     };
 
@@ -104,7 +109,12 @@ const StadiaGamesPage = ({ allGames, gameGenres }) => {
             <Typography gutterBottom variant="h5" component="h5">
                 Stadia Games
             </Typography>
-            <GameFilterDrawer defaultFilters={defaultFilters} onChange={ handleFilterChanged } />
+            <GameFilterDrawer
+                defaultFilters={defaultFilters}
+                prevQueryString={filterQueryString}
+                loadingGames={loadingGames}
+                onChange={handleFilterChanged}
+            />
             <Grid container className={classes.root} spacing={2}>
                 {games.map((game) => (
                     <Grid key={game.slug} item>
@@ -137,8 +147,9 @@ export async function getServerSideProps({ params }) {
     }
     resp = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}game-genres/`)
     const gameGenres = await resp.json()
+    const loading = false;
     return {
-        props: { allGames, gameGenres },
+        props: { allGames, gameGenres, loading },
     }
 }
 
