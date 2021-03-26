@@ -60,8 +60,7 @@ class FilteredGamesViewSet(ReadOnlyModelViewSet):
             qs = qs.filter(esrb__in=esrbs)
         if genres:
             qs = qs.filter(genres__in=genres)
-
-        return qs.order_by('title')
+        return qs.order_by('slug').distinct('slug')
 
 class GameGenresViewSet(ReadOnlyModelViewSet):
     serializer_class = serializers.GenreSerializer
