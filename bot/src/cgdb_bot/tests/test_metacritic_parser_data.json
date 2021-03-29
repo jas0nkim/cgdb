@@ -1,0 +1,28 @@
+[
+    {
+        "title": "Terraria",
+        "platform": "Stadia",
+        "expected": {
+            "title": "Terraria",
+            "description": "Terraria? What's that?\n\nTerraria is a land of adventure! A land of mystery! A land that's yours to shape, to defend and to enjoy. Your options in Terraria are limitless, are you an action gamer with an itchy trigger finger? A master builder? A collector? An explorer? There's something for everyone here.\n\nDig, fight, explore, build! Nothing is impossible in this action-packed adventure game. The world is your canvas and the ground itself is your paint.\n\nGrab your tools and go! Make weapons to fight off a variety of enemies in numerous biomes. Dig deep underground to find accessories, money, and other useful things. Gather resources to create everything you need to make the world your own. Build a house, a fort, or even a castle. People will move in to live there and perhaps even sell you different wares to assist you on your journey.\n\nBut beware, there are even more challenges awaiting you... Are you up to the task?\n\nKey features:\n\n- Sandbox Play\n\n- Randomly generated worlds\n\n- Free Content Updates",
+            "pictures": [],
+            "developers": ["DR Studios"],
+            "genres": ["action adventure", "sandbox"],
+            "rating": "T",
+            "link": "https://www.metacritic.com/game/stadia/terraria"
+        }
+    },
+    {
+        "title": "Monster Energy Supercross - The Official Videogame 4",
+        "platform": "Stadia",
+        "expected": {
+            "title": "Monster Energy Supercross - The Official Videogame 4",
+            "description": "Cross is Super Again! The official videogame of the Monster Energy AMA Supercross Championship is back with its fourth edition, the most extreme ever!",
+            "pictures": ["https://static.metacritic.com/images/products/games/3/0167cc872d79e5cec86063c5a8ae021a-98.jpg"],
+            "developers": ["Milestone S.r.l"],
+            "genres": ["racing", "arcade", "automobile"],
+            "rating": "T",
+            "link": "https://www.metacritic.com/game/stadia/monster-energy-supercross---the-official-videogame-4"
+        }
+    }
+]

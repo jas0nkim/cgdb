@@ -86,6 +86,23 @@ class SteampoweredGameItem:
         return json.dumps(asdict(self))
 
 @dataclass
+class MetacriticGameItem:
+    """
+    Scraped data from Metacritic Game page
+    """
+    title: str = None
+    description: str = None
+    pictures: List[str] = field(default_factory=list, metadata={'values':'picture_links'})
+    developers: List[str] = field(default_factory=list)
+    genres: List[str] = field(default_factory=list)
+    rating: str = None
+    link: str = None
+    platform: str = None
+
+    def asjson(self):
+        return json.dumps(asdict(self))
+
+@dataclass
 class ErrorItem:
     """
     Any error on parsing

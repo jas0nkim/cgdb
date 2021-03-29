@@ -5,22 +5,23 @@ from scrapy.spidermiddlewares.httperror import HttpError
 from .wikipedia import WikipediaParser, WikipediaStadiaGamesParser
 from .reddit import RedditStadiaWikiParser
 from .steampowered import SteampoweredParser
+from .metacritic import MetacriticParser
 
 def parse_wikipedia_game_article(response, english_title=None):
     """
     parse en.wikipedia.org article page
     """
     logger = logging.getLogger(__name__)
-    parser = WikipediaParser()
-    return parser.parse_game_article(response, english_title=english_title)
+    return WikipediaParser().parse_game_article(
+                                            response,
+                                            english_title=english_title)
 
 def parse_wikipedia_stadia_games(response):
     """
     parse list of stadia games page
     """
     logger = logging.getLogger(__name__)
-    parser = WikipediaStadiaGamesParser()
-    return parser.parse_stadia_games(response)
+    return WikipediaStadiaGamesParser().parse_stadia_games(response)
 
 def parse_reddit_stadia_wiki(response, wiki_type):
     """
@@ -43,8 +44,7 @@ def parse_reddit_game_stat_detail(response, stat_type, stat_detail):
     parse subreddit r/Stadia/wiki/gamestatistics/xxx/xxx pages
     """
     logger = logging.getLogger(__name__)
-    parser = RedditStadiaWikiParser()
-    return parser.parse_game_stats_detail_page(response,
+    return RedditStadiaWikiParser().parse_game_stats_detail_page(response,
                                             stat_type, stat_detail)
 
 def parse_steamstore_searchresults(response, title):
@@ -60,3 +60,10 @@ def parse_steamstore_game_detail(response, title=None):
     """
     logger = logging.getLogger(__name__)
     return SteampoweredParser().parse_game_detail_page(response, title)
+
+def parse_metacritic_game_detail(response, title=None):
+    """
+    parse metacritic game detail page
+    """
+    logger = logging.getLogger(__name__)
+    return MetacriticParser().parse_game_detail_page(response, title)

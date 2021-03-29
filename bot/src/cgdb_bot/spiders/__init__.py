@@ -7,7 +7,7 @@ from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError as TOError, TCPTimedOutError
 from scrapy.spidermiddlewares.httperror import HttpError
 from scrapy import Spider, signals
-from cgdb_bot import items, settings, utils
+from cgdb_bot import settings
 
 class BaseCgdbSpider(Spider):
 
@@ -28,7 +28,7 @@ class BaseCgdbSpider(Spider):
         """
         if not spider._postdata:
             return None
-        api_endpoint = utils.api_endpoint.get(type(item).__name__)
+        api_endpoint = settings.API_ENDPOINT.get(type(item).__name__)
         if not api_endpoint:
             spider.logger.error(f"Invalid item passed to item_scraped (Scrapy Signal) - {type(item).__name__}")
             return None

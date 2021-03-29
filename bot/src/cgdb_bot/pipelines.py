@@ -40,7 +40,7 @@ class ItemFilterPipeline:
                 raise DropItem(f"""Too many missing components: {', '.join(missing_components)}""")
             # set platform
             item.platform = spider._platform
-        elif isinstance(item, items.SteampoweredGameItem):
+        elif isinstance(item, items.SteampoweredGameItem) or isinstance(item, items.MetacriticGameItem):
             if not item.title:
                 raise DropItem("Missing title")
             # set platform

@@ -117,8 +117,17 @@ LOG_LEVEL = 'DEBUG'
 
 CRAWL_ARG_DELIMITER = '||'
 
+AUTH_TOKEN = os.getenv('AUTH_TOKEN')
 API_SERVER_HOST = os.getenv('API_SERVER_HOST', 'http://localhost')
+API_ENDPOINT = {
+    'RedditStadiaWikiGame': '/api/bot/reddit/stadia/game/',
+    'RedditStadiaWikiGamePro': '/api/bot/reddit/stadia/gamepro/',
+    'RedditStadiaStatDetail': '/api/bot/reddit/stadia/gamestats/',
+    'WikipediaGameItem': '/api/bot/wikipedia/stadia/game/',
+    'SteampoweredGameItem': '/api/bot/steampowered/stadia/game/',
+}
 
+# wikipedia settings
 WIKIPEDIA_SEARCH_URL_FORMAT = 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&search={urlencoded}&language=en&go=Go'
 WIKIPEDIA_ENGLISH_DOMAIN = 'https://en.wikipedia.org'
 WIKIPEDIA_STADIA_GAMES_URL = 'https://en.wikipedia.org/wiki/List_of_Stadia_games'
@@ -126,12 +135,21 @@ WIKIPEDIA_ARTICLE_URL_FORMAT = 'https://en.wikipedia.org/wiki/{underscored_title
 WIKIPEDIA_LOCAL_TITLE_SPLIT_CHAR = '–'
 WIKIPEDIA_NOT_SUPPORTED_LANGUAGE_CODES = ['en-simple',]
 
+# reddit settings
 REDDIT_DOMAIN = 'https://www.reddit.com'
 REDDIT_STADIA_POST_DELAY = 1
 
+# steampowered settings
 STEAMPOWERED_SEARCH_RESULT_URL_FORMAT = 'https://store.steampowered.com/search/?term={title}'
 STEAMPOWERED_PRESET_COOKIES = {'birthtime': '-1500000000'}
 STEAMPOWERED_TITLE_REMOVE_CHARS = ['®', '™',]
 STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP = 7
 
-AUTH_TOKEN = os.getenv('AUTH_TOKEN')
+# metacritic settings
+METACRITIC_GAME_URL_FORMAT = 'https://www.metacritic.com/game/{platform}/{title}'
+METACRITIC_SLUGIFY_REPLACEMENTS = [("'", ''),]
+METACRITIC_PLATFORM_MAP = {
+   'Stadia': 'stadia',
+   'Xbox Game Pass': 'xbox-one',
+   'Luna': 'pc',
+}

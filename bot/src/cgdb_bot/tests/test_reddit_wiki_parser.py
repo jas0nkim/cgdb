@@ -16,7 +16,6 @@ class TestRedditWikiParser(unittest.TestCase):
     def setUp(self):
         content = Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_data.json').read_text()
         _json = json.loads(content)
-        self.headers = _json.get('headers')
         self.urls = _json.get('urls')
         self.esrb_urls = _json.get('esrb_urls')
         self.genre_urls = _json.get('genre_urls')
@@ -31,7 +30,7 @@ class TestRedditWikiParser(unittest.TestCase):
         check all fields (game title, stadia link, release date) not null
         """
         wiki_type = 'games'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         item_count = 0
         for i in parse_reddit_stadia_wiki(resp, wiki_type):
@@ -46,8 +45,8 @@ class TestRedditWikiParser(unittest.TestCase):
             self.assertIsInstance(
                     datetime.datetime.strptime(i.release_date, '%Y %b %d'),
                     datetime.datetime)
-        # total 160 items (Mar 24 2021)
-        self.assertEqual(item_count, 160)
+        # total 161 items (Mar 29 2021)
+        self.assertEqual(item_count, 161)
 
     def test_game_pro_fields_valid_and_related(self):
         """
@@ -57,7 +56,7 @@ class TestRedditWikiParser(unittest.TestCase):
         same event_date cannot be appeared more than once in the items
         """
         wiki_type = 'pro_games'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         curr_item = None
         prev_item = None
@@ -97,7 +96,7 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gameratings
         """
         wiki_type = 'ratings'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
@@ -110,7 +109,7 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         wiki_type = 'ratings'
         for esrb, url in self.esrb_urls.items():
-            resp = build_response(url, headers=self.headers)
+            resp = build_response(url)
             self.assertEqual(resp.status, 200)
             for i in parse_reddit_game_stat_detail(resp, wiki_type, esrb):
                 # fields not null
@@ -128,7 +127,7 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamegenres
         """
         wiki_type = 'genres'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
@@ -141,7 +140,7 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         wiki_type = 'genres'
         for genre, url in self.genre_urls.items():
-            resp = build_response(url, headers=self.headers)
+            resp = build_response(url)
             self.assertEqual(resp.status, 200)
             for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
                 # fields not null
@@ -157,7 +156,7 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamedevelopers
         """
         wiki_type = 'developers'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
@@ -170,7 +169,7 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         wiki_type = 'developers'
         for genre, url in self.developer_urls.items():
-            resp = build_response(url, headers=self.headers)
+            resp = build_response(url)
             self.assertEqual(resp.status, 200)
             for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
                 # fields not null
@@ -190,7 +189,7 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamepublishers
         """
         wiki_type = 'publishers'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
@@ -203,7 +202,7 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         wiki_type = 'publishers'
         for genre, url in self.publisher_urls.items():
-            resp = build_response(url, headers=self.headers)
+            resp = build_response(url)
             self.assertEqual(resp.status, 200)
             for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
                 # fields not null
@@ -223,7 +222,7 @@ class TestRedditWikiParser(unittest.TestCase):
         https://www.reddit.com/r/Stadia/wiki/gamestatistics/gamemodes
         """
         wiki_type = 'modes'
-        resp = build_response(self.urls[wiki_type], headers=self.headers)
+        resp = build_response(self.urls[wiki_type])
         self.assertEqual(resp.status, 200)
         for request in parse_reddit_stadia_wiki(resp, wiki_type):
             self.assertIsInstance(request, Request)
@@ -236,7 +235,7 @@ class TestRedditWikiParser(unittest.TestCase):
         """
         wiki_type = 'modes'
         for genre, url in self.mode_urls.items():
-            resp = build_response(url, headers=self.headers)
+            resp = build_response(url)
             self.assertEqual(resp.status, 200)
             for i in parse_reddit_game_stat_detail(resp, wiki_type, genre):
                 # fields not null

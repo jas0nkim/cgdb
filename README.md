@@ -152,6 +152,7 @@ $ docker-compose run --rm bot python -m unittest
 
 ## References / Game list
 - [Steam](https://store.steampowered.com/)
+- [Metacritic](https://www.metacritic.com/)
 - [Stadia - Reddit](https://www.reddit.com/r/Stadia/wiki/index)
 - [Stadia - Wikipedia](https://en.wikipedia.org/wiki/List_of_Stadia_games)
 - [Xbox Game Pass - Xbox](https://www.xbox.com/en-US/xbox-game-pass/games)
