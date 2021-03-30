@@ -147,7 +147,6 @@ STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP = 7
 
 # metacritic settings
 METACRITIC_GAME_URL_FORMAT = 'https://www.metacritic.com/game/{platform}/{title}'
-METACRITIC_SLUGIFY_REPLACEMENTS = [("'", ''),]
 METACRITIC_PLATFORM_MAP = {
    'Stadia': 'stadia',
    'Xbox Game Pass': 'xbox-one',

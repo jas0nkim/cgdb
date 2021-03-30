@@ -2,7 +2,6 @@ import os
 import json
 import unittest
 from pathlib import Path
-from slugify import slugify
 from cgdb_bot.items import ErrorItem
 from cgdb_bot.parsers import parse_metacritic_game_detail
 from cgdb_bot import settings
@@ -21,13 +20,8 @@ class TestMetacriticParser(unittest.TestCase):
         test Steampowered game detail parser
         """
         for data in self.test_data:
-            item = parse_metacritic_game_detail(
-                build_response(
-                    settings.METACRITIC_GAME_URL_FORMAT.format(
-                        platform=settings.METACRITIC_PLATFORM_MAP[data['platform']],
-                        title=slugify(data['title'],
-                            replacements=settings.METACRITIC_SLUGIFY_REPLACEMENTS))))
-            with self.subTest(url=data['title']):
+            item = parse_metacritic_game_detail(build_response(data['url']))
+            with self.subTest(url=data['url']):
                 # num of item is 1, but it's still iterate since generation.
                 for i in item:
                     self.assertEqual(i.title,

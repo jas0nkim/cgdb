@@ -12,6 +12,28 @@ class MetacriticParser:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 
+    def parse_browse_page(self, response):
+        """
+        parse browse games page
+        """
+        if response.status != 200:
+            # broken link or inactive
+            error_msg = f"Link not working: HTTP status code - {response.status} - {response.url}"
+            self.logger.error(error_msg)
+            return None
+        else:
+            for game_link in response.xpath("""
+                            //table[contains(@class,"clamp-list")]
+                            //a[contains(@class,"title")]/@href""").getall():
+                yield response.follow(game_link,
+                                    callback=self.parse_game_detail_page)
+            next_page = response.xpath("""
+                            //div[contains(@class,"page_nav")]
+                            //a[contains(@rel,"next")]/@href""").get()
+            if next_page:
+                yield response.follow(next_page,
+                                    callback=self.parse_browse_page)
+
     def parse_game_detail_page(self, response, title=None):
         """
         parse game detail page
@@ -43,12 +65,17 @@ class MetacriticParser:
             return None
 
     def _extract_description(self, response):
-        description = response.xpath("""//div[contains(@class,"main_details")]
+        summary_element = response.xpath("""
+                                //div[contains(@class,"main_details")]
                                 /ul[contains(@class,"summary_details")]
                                 /li[contains(@class,"product_summary")]
-                                /span[contains(@class,"data")]
-                                //span[contains(@class,"blurb_expanded")]
+                                /span[contains(@class,"data")]""")
+        description = summary_element.xpath("""
+                                .//span[contains(@class,"blurb_expanded")]
                                 /text()[normalize-space(.)]""").getall()
+        if not description:
+            description = summary_element.xpath("""
+                                .//text()[normalize-space(.)]""").getall()
         if description:
             return '\n\n'.join([d.replace('\r','') for d in description ])
         else:

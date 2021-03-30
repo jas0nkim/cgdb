@@ -61,6 +61,13 @@ def parse_steamstore_game_detail(response, title=None):
     logger = logging.getLogger(__name__)
     return SteampoweredParser().parse_game_detail_page(response, title)
 
+def parse_metacritic_browse_games(response):
+    """
+    parse metacritic browse games page
+    """
+    logger = logging.getLogger(__name__)
+    return MetacriticParser().parse_browse_page(response)
+
 def parse_metacritic_game_detail(response, title=None):
     """
     parse metacritic game detail page
