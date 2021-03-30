@@ -45,8 +45,8 @@ class TestRedditWikiParser(unittest.TestCase):
             self.assertIsInstance(
                     datetime.datetime.strptime(i.release_date, '%Y %b %d'),
                     datetime.datetime)
-        # total 161 items (Mar 29 2021)
-        self.assertEqual(item_count, 161)
+        # total 163 items (Mar 30 2021)
+        self.assertEqual(item_count, 163)
 
     def test_game_pro_fields_valid_and_related(self):
         """

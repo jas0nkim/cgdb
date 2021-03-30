@@ -41,8 +41,13 @@ class TestWikipediaParser(unittest.TestCase):
                                     data['expected']['language'])
                     self.assertEqual(i.title_lc,
                                     data['expected']['title_lc'])
-                    self.assertEqual(i.description_lc,
-                                    data['expected']['description_lc'])
+                    #####################################
+                    # skip checking decription: since some contents in #
+                    # wikipedia is keep changing.
+                    #
+                    # self.assertEqual(i.description_lc,
+                    #                 data['expected']['description_lc'])
+                    #####################################
                     self.assertEqual(frozenset(i.pictures),
                                     frozenset(data['expected']['pictures']))
                     self.assertEqual(frozenset(i.developers),
