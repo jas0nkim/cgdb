@@ -146,6 +146,7 @@ STEAMPOWERED_TITLE_REMOVE_CHARS = ['®', '™',]
 STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP = 7
 
 # metacritic settings
+METACRITIC_START_URL = 'https://www.metacritic.com/browse/games/release-date/available/stadia/date?page=0'
 METACRITIC_GAME_URL_FORMAT = 'https://www.metacritic.com/game/{platform}/{title}'
 METACRITIC_PLATFORM_MAP = {
    'Stadia': 'stadia',

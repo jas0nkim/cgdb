@@ -1,7 +1,7 @@
 from scrapy import Request
 from scrapy.exceptions import CloseSpider
 from cgdb_bot.parsers import parse_metacritic_browse_games
-from cgdb_bot import utils
+from cgdb_bot import utils, settings
 from . import BaseCgdbSpider
 
 class MetacriticSpider(BaseCgdbSpider):
@@ -21,7 +21,7 @@ class MetacriticSpider(BaseCgdbSpider):
     def start_requests(self):
         if self._platform == 'Stadia':
             yield Request(
-                    url='https://www.metacritic.com/browse/games/release-date/available/stadia/date?page=0',
+                    url=settings.METACRITIC_START_URL,
                     callback=parse_metacritic_browse_games,
                     errback=self.resp_error_handler)
         else:

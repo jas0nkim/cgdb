@@ -3,7 +3,8 @@ import json
 import unittest
 from pathlib import Path
 from cgdb_bot.items import ErrorItem
-from cgdb_bot.parsers import parse_metacritic_game_detail
+from cgdb_bot.parsers import (parse_metacritic_browse_games,
+                            parse_metacritic_game_detail)
 from cgdb_bot import settings
 from .utils import build_response
 
@@ -15,9 +16,21 @@ class TestMetacriticParser(unittest.TestCase):
     def setUpClass(cls):
         cls.test_data = json.loads(Path(f'{os.path.splitext(os.path.abspath(__file__))[0]}_data.json').read_text())
 
-    def test_game_detail(self):
+    def test_browse_games_url_ok(self):
         """
-        test Steampowered game detail parser
+        test Metacritic browse games parser
+        """
+        resp = build_response(settings.METACRITIC_START_URL)
+        self.assertEqual(resp.status, 200)
+
+    def test_browse_games_correct_requests(self):
+        for req in parse_metacritic_browse_games(
+                            build_response(settings.METACRITIC_START_URL)):
+            self.assertTrue('https://www.metacritic.com/game/stadia/' in req.url or 'page=1' in req.url)
+
+    def test_game_detail_items(self):
+        """
+        test Metacritic game detail parser
         """
         for data in self.test_data:
             item = parse_metacritic_game_detail(build_response(data['url']))
