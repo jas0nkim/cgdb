@@ -39,6 +39,8 @@ STADIA_GAME_TITLE_MAP_FROM_WIKIPEDIA_TO_REDDIT = {
     "Tom Clancy's Ghost Recon Breakpoint": "Ghost Recon Breakpoint",
     "Pac-Man": "PAC-MAN Mega Tunnel Battle",
     "Saints Row: The Third": "Saints Row: The Third - Remastered",
+    "Dragon Quest XI": "DRAGON QUEST XI S",
+    "Trine 4: The Nightmare Prince": "Trine 4",
 }
 
 # some stadia titles in wikipedia are not matching with titles in reddit:
@@ -59,6 +61,9 @@ STADIA_GAME_TITLE_MAP_FROM_METACRITIC_TO_REDDIT = {
     "Monster Energy Supercross - The Official Videogame 3": "Monster Energy Supercross 3",
     "Monster Energy Supercross - The Official Videogame 4": "Monster Energy Supercross 4",
     "Hitman 3: Seven Deadly Sins - Greed": "HITMAN 3",
+    "Disco Elysium: The Final Cut": "Disco Elysium",
+    "Tom Clancy's The Division 2": "The Division 2",
+    "Tom Clancy's Ghost Recon: Breakpoint": "Ghost Recon Breakpoint",
 }
 
 S3_IMAGES_BUCKET = os.getenv('S3_IMAGES_BUCKET', 'cgdb-image')
