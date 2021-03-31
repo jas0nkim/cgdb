@@ -81,8 +81,13 @@ def run_stadia_steam():
     process.start()
 
 def run_stadia_metacritic():
+    # for missing Gunsport. manual url insert
+    _urls = ['https://www.metacritic.com/game/playstation-4/gunsport',]
     process = CrawlerProcess(get_project_settings())
-    process.crawl(MetacriticSpider, platform='Stadia', postdata='True')
+    process.crawl(MetacriticSpider,
+                urls=CRAWL_ARG_DELIMITER.join(_urls),
+                platform='Stadia',
+                postdata='True')
     process.start()
 
 def main(argv):

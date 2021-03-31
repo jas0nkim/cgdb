@@ -46,5 +46,17 @@
             "rating": null,
             "link": "https://www.metacritic.com/game/stadia/rock-of-ages-3-make-break"
         }
+    },
+    {
+        "url": "https://www.metacritic.com/game/playstation-4/gunsport",
+        "expected": {
+            "title": "Gunsport",
+            "description": "Gunsport is a 2-on-2 (or 1-on-1) competitive eSport for discerning individuals who like: cool times, hot times, rough times, and dangerous times. It’s a cyberpunk vision of the neo future, like volleyball or sepak takraw with a shotgun and a laserbeam (and a bunch of other weapons, of course). [Necrosoft Games]",
+            "pictures": ["https://static.metacritic.com/images/products/games/2/fefefd9a79ad6fc9ebed6bec226eb759-98.jpg"],
+            "developers": ["Necrosoft Games"],
+            "genres": ["sports", "team", "futuristic"],
+            "rating": null,
+            "link": "https://www.metacritic.com/game/playstation-4/gunsport"
+        }
     }
 ]
