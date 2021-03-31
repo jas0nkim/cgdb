@@ -124,6 +124,7 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 $ docker-compose run --rm bot python run.py -p Stadia -s Reddit
 # set active all Stadia games before run Stadia Steam
 $ docker-compose run --rm bot python run.py -p Stadia -s Steam
+$ docker-compose run --rm bot python run.py -p Stadia -s Metacritic
 $ docker-compose run --rm bot python run.py -p Stadia -s Wikipedia
 ```
 - Wikipedia
