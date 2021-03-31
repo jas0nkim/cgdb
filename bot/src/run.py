@@ -9,12 +9,13 @@ from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
 from cgdb_bot.spiders.wikipedia import (WikipediaGameSpider,
                                         WikipediaStadiaSpider)
+from cgdb_bot.spiders.metacritic import MetacriticSpider
 from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.spiders.steampowered import SteampoweredSpider
 from cgdb_bot.settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 
 ALLOWED_PLATFORMS = ('Xbox Game Pass', 'Stadia', 'Luna',)
-ALLOWED_SOURCES = ('Steam', 'Wikipedia', 'Reddit',)
+ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit',)
 
 def run(file, platform):
     titles = []
@@ -79,6 +80,11 @@ def run_stadia_steam():
                 postdata='True')
     process.start()
 
+def run_stadia_metacritic():
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(MetacriticSpider, platform='Stadia', postdata='True')
+    process.start()
+
 def main(argv):
     try:
         opts, args = getopt.getopt(argv,
@@ -114,6 +120,8 @@ def main(argv):
             run_stadia_wikipedia()
         elif source == 'Steam':
             run_stadia_steam()
+        elif source == 'Metacritic':
+            run_stadia_metacritic()
         else:
             run_stadia_reddit()
     else:

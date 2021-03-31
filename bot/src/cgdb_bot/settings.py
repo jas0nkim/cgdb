@@ -125,6 +125,7 @@ API_ENDPOINT = {
     'RedditStadiaStatDetail': '/api/bot/reddit/stadia/gamestats/',
     'WikipediaGameItem': '/api/bot/wikipedia/stadia/game/',
     'SteampoweredGameItem': '/api/bot/steampowered/stadia/game/',
+    'MetacriticGameItem': '/api/bot/metacritic/stadia/game/',
 }
 
 # wikipedia settings
