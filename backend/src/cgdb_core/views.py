@@ -216,13 +216,15 @@ class RedditStadiaGameStatsBot(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class SteampoweredGameBot(APIView):
+class GameBot(APIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = serializers.SteampoweredGameSerializer
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.logger = logging.getLogger(__name__)
+
+    def _get_title(self, data):
+        return data['title']
 
     def post(self, request):
         """
@@ -231,7 +233,7 @@ class SteampoweredGameBot(APIView):
         """
         # since request object in DRF is immutable
         _request_data = request.data.copy()
-        title = _request_data['title']
+        title = self._get_title(_request_data)
         if not title:
             return Response({"error": "Title not found"},
                         status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -253,5 +255,23 @@ class SteampoweredGameBot(APIView):
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.data, status=ok_status)
 
-class SteampoweredStadiaGameBot(SteampoweredGameBot):
+
+class SteampoweredGameBot(GameBot):
+    serializer_class = serializers.SteampoweredGameSerializer
+
+class SteampoweredStadiaGameBot(GameBot):
     serializer_class = serializers.SteampoweredStadiaGameSerializer
+
+class MetacriticGameBot(GameBot):
+    serializer_class = serializers.MetacriticGameSerializer
+
+class MetacriticStadiaGameBot(GameBot):
+    serializer_class = serializers.MetacriticStadiaGameSerializer
+    _title_map = utils.STADIA_GAME_TITLE_MAP_FROM_METACRITIC_TO_REDDIT
+
+    def _get_title(self, data):
+        _title = data.get('title')
+        if _title in self._title_map:
+            return self._title_map[_title]
+        else:
+            return _title

@@ -42,4 +42,7 @@ urlpatterns = [
     path('bot/steampowered/stadia/game/',
         views.SteampoweredStadiaGameBot.as_view(),
         name='bot-steampowered-stadia-game-post'),
+    path('bot/metacritic/stadia/game/',
+        views.MetacriticStadiaGameBot.as_view(),
+        name='bot-metacritic-stadia-game-post'),
 ]

@@ -41,6 +41,26 @@ STADIA_GAME_TITLE_MAP_FROM_WIKIPEDIA_TO_REDDIT = {
     "Saints Row: The Third": "Saints Row: The Third - Remastered",
 }
 
+# some stadia titles in wikipedia are not matching with titles in reddit:
+#   'title in metacritic': 'title in reddit', ...
+STADIA_GAME_TITLE_MAP_FROM_METACRITIC_TO_REDDIT = {
+    "Borderlands 3: Designer's Cut": "Borderlands 3",
+    "Destiny 2: The Collection": "Destiny 2",
+    "Mortal Kombat 11 Ultimate": "Mortal Kombat 11",
+    "Dead by Daylight: A Binding of Kin": "Dead by Daylight",
+    "MotoGP 20": "MotoGP20",
+    "Rise of the Tomb Raider": "Rise of the Tomb Raider: 20 Year Celebration",
+    "The Elder Scrolls Online: Greymoor": "The Elder Scrolls Online",
+    "DOOM Eternal: The Ancient Gods Part One": "DOOM Eternal",
+    "Valkyria Chronicles 4: Complete Edition": "Valkyria Chronicles 4",
+    "Cyberpunk 2077": "Cyberpunk",
+    "Immortals Fenyx Rising: A New God": "Immortals Fenyx Rising",
+    "Journey to the Savage Planet: Employee of the Month Edition": "Journey to the Savage Planet",
+    "Monster Energy Supercross - The Official Videogame 3": "Monster Energy Supercross 3",
+    "Monster Energy Supercross - The Official Videogame 4": "Monster Energy Supercross 4",
+    "Hitman 3: Seven Deadly Sins - Greed": "HITMAN 3",
+}
+
 S3_IMAGES_BUCKET = os.getenv('S3_IMAGES_BUCKET', 'cgdb-image')
 S3_IMAGES_HOST = f'https://{S3_IMAGES_BUCKET}.s3.amazonaws.com/'
 S3_UPLOAD_EXTRA_ARGS = {

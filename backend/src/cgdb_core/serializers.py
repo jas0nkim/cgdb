@@ -344,6 +344,8 @@ class GameSerializer(serializers.ModelSerializer):
         return instance
 
 class WikipediaGameSerializer(GameSerializer):
+    sourced_from = 'wikipedia'
+
     """
     Game django model serializer (POST from wikipedia bot)
     """
@@ -376,13 +378,13 @@ class WikipediaGameSerializer(GameSerializer):
         links = {}
         if data.get('language'):
             title_lc[data.get('language')] = data.get('title_lc')
-            links[f"wikipedia_{data.get('language')}"] = data.get('link')
+            links[f"{self.sourced_from}_{data.get('language')}"] = data.get('link')
             if data.get('language') == 'en':
                 description = data.get('description_lc')
             description_lc[data.get('language')] = data.get('description_lc')
         for interlang in data.get('inter_languages'):
             title_lc[interlang.get('iso')] = interlang.get('title_lc')
-            links[f"wikipedia_{interlang.get('iso')}"] = interlang.get('url')
+            links[f"{self.sourced_from}_{interlang.get('iso')}"] = interlang.get('url')
             self._create_language_code(interlang)
 
         data['title'] = title
@@ -413,10 +415,10 @@ class WikipediaStadiaGameSerializer(WikipediaGameSerializer):
         links = {}
         if data.get('language'):
             title_lc[data.get('language')] = data.get('title_lc')
-            links[f"wikipedia_{data.get('language')}"] = data.get('link')
+            links[f"{self.sourced_from}_{data.get('language')}"] = data.get('link')
         for interlang in data.get('inter_languages'):
             title_lc[interlang.get('iso')] = interlang.get('title_lc')
-            links[f"wikipedia_{interlang.get('iso')}"] = interlang.get('url')
+            links[f"{self.sourced_from}_{interlang.get('iso')}"] = interlang.get('url')
             self._create_language_code(interlang)
 
         out = {}
@@ -673,6 +675,8 @@ class RedditStadiaGameStatSerializer(serializers.Serializer):
         return super().update(instance, validated_data)
 
 class SteampoweredGameSerializer(GameSerializer):
+    sourced_from = 'steampowered'
+
     """
     Game django model serializer (POST from steampowered bot)
     """
@@ -686,7 +690,7 @@ class SteampoweredGameSerializer(GameSerializer):
         """
         set links, developers, publishers, series, genres, series
         """
-        data['links'] = {'steampowered': data.get('link')}
+        data['links'] = {self.sourced_from: data.get('link')}
         data['developers'] = [self._convert_str_to_dict(v) for v in data['developers']]
         data['publishers'] = [self._convert_str_to_dict(v) for v in data['publishers']]
         data['genres'] = [self._convert_str_to_dict(v) for v in data['genres']]
@@ -711,11 +715,44 @@ class SteampoweredStadiaGameSerializer(SteampoweredGameSerializer):
         out['title'] = data.get('title')
         out['pictures'] = data.get('pictures')
         out['description'] = data.get('description')
-        out['links'] = {'steampowered': data.get('link')}
+        out['links'] = {self.sourced_from: data.get('link')}
         out['platforms'] = [self._convert_str_to_dict(data['platform'])]
         return out
 
     def update(self, instance, validated_data):
         # do not update title.
         validated_data['title'] = instance.title
+        # do not update description if exists
+        if instance.description:
+            validated_data['description'] = instance.description
         return super().update(instance, validated_data)
+
+class MetacriticGameSerializer(GameSerializer):
+    sourced_from = 'metacritic'
+
+    """
+    Game django model serializer (POST from metacritic bot)
+    """
+    def _convert_str_to_dict(self, value):
+        """
+        string to dict { 'name': string value }
+        """
+        return { 'name': value }
+
+    def _handle_post_data(self, data):
+        """
+        set links, developers, genres, esrb
+        """
+        data['links'] = {self.sourced_from: data.get('link')}
+        data['developers'] = [self._convert_str_to_dict(v) for v in data['developers']]
+        data['genres'] = [self._convert_str_to_dict(v) for v in data['genres']]
+        data['esrb'] = data.get('rating', 'NA')
+        if data['platform']:
+            data['platforms'] = [self._convert_str_to_dict(data['platform'])]
+        return data
+
+    def to_internal_value(self, data):
+        return super().to_internal_value(self._handle_post_data(data))
+
+class MetacriticStadiaGameSerializer(SteampoweredStadiaGameSerializer):
+    sourced_from = 'metacritic'
