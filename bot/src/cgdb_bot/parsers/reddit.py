@@ -31,7 +31,7 @@ class RedditStadiaWikiParser:
         except KeyError as err:
             raise NoHtmlElementFound(f'_get_selector_from_js: KeyError - {str(err)}')
         except TypeError as err:
-            raise NoHtmlElementFound(f'_get_selector_from_js: TypeError - {str(err)}')
+            raise NoHtmlElementFound(f"_get_selector_from_js: TypeError - {str(err)} - {str(json_data['pages']['subredditWiki']['pages'])}")
         return Selector(text=html)
 
     def parse_games_page(self, response, wiki_type):

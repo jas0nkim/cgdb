@@ -143,7 +143,7 @@ REDDIT_STADIA_POST_DELAY = 1
 # steampowered settings
 STEAMPOWERED_SEARCH_RESULT_URL_FORMAT = 'https://store.steampowered.com/search/?term={title}'
 STEAMPOWERED_PRESET_COOKIES = {'birthtime': '-1500000000'}
-STEAMPOWERED_TITLE_REMOVE_CHARS = ['®', '™',]
+STEAMPOWERED_TITLE_REMOVE_CHARS = ['®', '™', '-', ':']
 STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP = 7
 
 # metacritic settings

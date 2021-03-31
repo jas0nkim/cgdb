@@ -1,8 +1,7 @@
+import re
 import logging
 from cgdb_bot.items import SteampoweredGameItem, ErrorItem
-from cgdb_bot.settings import (STEAMPOWERED_PRESET_COOKIES,
-                            STEAMPOWERED_TITLE_REMOVE_CHARS,
-                            STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP)
+from cgdb_bot import settings
 from cgdb_bot.utils import clean_url
 
 class SteampoweredParser:
@@ -15,24 +14,39 @@ class SteampoweredParser:
 
     def _clean_title(self, title):
         if isinstance(title, str):
-            title = ''.join(t for t in title
-                            if t not in STEAMPOWERED_TITLE_REMOVE_CHARS)
-        return title
+            for char in settings.STEAMPOWERED_TITLE_REMOVE_CHARS:
+                title = title.replace(char, ' ')
+            return re.sub('\s+', ' ', title)
+        return ''
 
     def _lookup_title(self, response, given_title):
         found = False
         no_row = 1
-        while no_row <= STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP:
+        similar_titles = []
+        # clean given titme
+        given_title = self._clean_title(given_title)
+        while no_row <= settings.STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP:
+            # clean extracted title
             extracted_title = self._clean_title(
                                 self._extract_title_from_search_page(
                                                             response,
                                                             no_row))
-            if not extracted_title or given_title.lower() != extracted_title.lower():
-                no_row += 1
-            else:
+            if not extracted_title or not given_title:
+                pass
+            elif given_title.lower() == extracted_title.lower():
                 found = True
                 break
-        return (found, no_row)
+            elif given_title.lower() in extracted_title.lower() or extracted_title.lower() in given_title.lower():
+                similar_titles.append(no_row)
+            else:
+                pass
+            no_row += 1
+        if found:
+            return (found, no_row)
+        elif len(similar_titles) > 0:
+            return (True, similar_titles[0])
+        else:
+            return (False, 0)
 
     def parse_search_results_page(self, response, title):
         """
@@ -68,7 +82,7 @@ class SteampoweredParser:
                     yield response.follow(extracted_url,
                                 callback=self.parse_game_detail_page,
                                 cb_kwargs={'title': title},
-                                cookies=STEAMPOWERED_PRESET_COOKIES)
+                                cookies=settings.STEAMPOWERED_PRESET_COOKIES)
 
     def _extract_title_from_search_page(self, response, no_row=1):
         return response.xpath(f"""//*[@id="search_resultsRows"]
@@ -94,7 +108,7 @@ class SteampoweredParser:
                             message=error_msg)
         else:
             yield SteampoweredGameItem(
-                        title=self._clean_title(
+                        title=title if title else self._clean_title(
                                     self._extract_title(response)),
                         description=self._extract_description(response),
                         pictures=self._extract_pictures(response),

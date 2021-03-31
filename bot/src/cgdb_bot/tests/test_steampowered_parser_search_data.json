@@ -46,8 +46,7 @@
         "title": "Attack on Titan 2: Final Battle",
         "expected": {
             "title": "Attack on Titan 2: Final Battle",
-            "link": "https://store.steampowered.com/search/?term=Attack+on+Titan+2:+Final+Battle",
-            "message": "Unable to find - Attack on Titan 2: Final Battle - from search screen - https://store.steampowered.com/search/?term=Attack+on+Titan+2:+Final+Battle"
+            "link": "https://store.steampowered.com/app/1001060/Attack_on_Titan_2_Final_Battle_Upgrade_Pack__AOT_2_Final_Battle_Upgrade_Pack___Final_Battle/"
         }
     },
     {
@@ -55,6 +54,27 @@
         "expected": {
             "title": "Grid",
             "link": "https://store.steampowered.com/app/703860/GRID/"
+        }
+    },
+    {
+        "title": "DRAGON QUEST XI S",
+        "expected": {
+            "title": "DRAGON QUEST XI S",
+            "link": "https://store.steampowered.com/app/1295510/DRAGON_QUEST_XI_S_Echoes_of_an_Elusive_Age__Definitive_Edition/"
+        }
+    },
+    {
+        "title": "Secret Neighbor",
+        "expected": {
+            "title": "Secret Neighbor",
+            "link": "https://store.steampowered.com/app/859570/Secret_Neighbor_Hello_Neighbor_Multiplayer/"
+        }
+    },
+    {
+        "title": "Trine 4",
+        "expected": {
+            "title": "Trine 4",
+            "link": "https://store.steampowered.com/app/690640/Trine_4_The_Nightmare_Prince/"
         }
     }
 ]

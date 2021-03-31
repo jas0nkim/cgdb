@@ -1,8 +1,9 @@
 [
     {
+        "title": "It Came From Space And Ate Our Brains",
         "url": "https://store.steampowered.com/app/342620/It_came_from_space_and_ate_our_brains/",
         "expected": {
-            "title": "It came from space and ate our brains",
+            "title": "It Came From Space And Ate Our Brains",
             "description": "It came from space and ate our brains is a unique Arcade top-down shooter. Looking for addicting gameplay, four-player co-op mode, and tons of aliens to send into oblivion? You’ve come to the right place!",
             "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/342620/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/342620/capsule_616x353.jpg"],
             "developers": ["Triangle Studios"],
@@ -14,6 +15,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/1064310/A_Place_for_the_Unwilling/",
         "expected": {
             "title": "A Place for the Unwilling",
@@ -28,6 +30,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/971690/Cake_Bash/",
         "expected": {
             "title": "Cake Bash",
@@ -42,6 +45,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/1057540/Cthulhu_Saves_Christmas/",
         "expected": {
             "title": "Cthulhu Saves Christmas",
@@ -56,9 +60,10 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/853050/El_Hijo__A_Wild_West_Tale/",
         "expected": {
-            "title": "El Hijo - A Wild West Tale",
+            "title": "El Hijo A Wild West Tale",
             "description": "El Hijo is an exciting spaghetti-western stealth game, in which you guide a 6-year-old boy on his quest to find his mother.",
             "pictures": ["https://cdn.cloudflare.steamstatic.com/steam/apps/853050/capsule_616x353.jpg", "https://cdn.akamai.steamstatic.com/steam/apps/853050/capsule_616x353.jpg"],
             "developers": ["Honig Studios", "Quantumfrog"],
@@ -70,6 +75,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/1062830/Embr/",
         "expected": {
             "title": "Embr",
@@ -84,6 +90,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/311690/Enter_the_Gungeon/",
         "expected": {
             "title": "Enter the Gungeon",
@@ -98,6 +105,7 @@
         }
     },
     {
+        "title": null,
         "url": "https://store.steampowered.com/app/493540/Figment/",
         "expected": {
             "title": "Figment",

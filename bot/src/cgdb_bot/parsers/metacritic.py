@@ -1,8 +1,5 @@
 import logging
 from cgdb_bot.items import MetacriticGameItem, ErrorItem
-from cgdb_bot.settings import (STEAMPOWERED_PRESET_COOKIES,
-                            STEAMPOWERED_TITLE_REMOVE_CHARS,
-                            STEAMPOWERED_TITLE_SEARCH_MAX_LOOKUP)
 from cgdb_bot.utils import clean_url
 
 class MetacriticParser:

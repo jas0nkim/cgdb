@@ -61,7 +61,8 @@ class TestSteampoweredParser(unittest.TestCase):
         test Steampowered game detail parser
         """
         for data in self.test_detail_data:
-            item = parse_steamstore_game_detail(build_response(data['url']))
+            item = parse_steamstore_game_detail(build_response(data['url']),
+                                                title=data['title'])
             with self.subTest(url=data['url']):
                 # num of item is 1, but it's still iterate since generation.
                 for i in item:
