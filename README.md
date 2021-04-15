@@ -6,6 +6,9 @@ Provides easily searchable game titles by cloud gaming platforms, such as Google
 - Search by game / platform / country
 - Multi-language support
 
+## Live Demo
+[Live demo](http://52.91.151.66/platform/stadia/games)
+
 ## Installation
 1. Create environment/config files
 ```
