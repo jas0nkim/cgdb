@@ -3,6 +3,7 @@ import getopt
 from os import path
 import csv
 import requests
+from requests.exceptions import ConnectionError
 from twisted.internet import reactor, defer
 from scrapy.crawler import CrawlerRunner, CrawlerProcess
 from scrapy.utils.project import get_project_settings
@@ -70,7 +71,11 @@ def run_stadia_wikipedia():
     process.start()
 
 def run_stadia_steam():
-    resp = requests.get(f"{API_SERVER_HOST}/api/games/?platform=3")
+    try:
+        resp = requests.get(f"{API_SERVER_HOST}/api/games/?platform=3")
+    except ConnectionError as err:
+        print(f"ConnectionError: {str(err)}")
+        sys.exit(2)
     process = CrawlerProcess(get_project_settings())
     process.crawl(SteampoweredSpider,
                 titles=CRAWL_ARG_DELIMITER.join(
