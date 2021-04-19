@@ -141,10 +141,10 @@ def main(argv):
         run(file=file, platform=platform)
 
 def usage():
-    print(f"""Run scrapy for crawling Wikipedia artlcles for games
+    print(f"""Run scrapy for crawling game information from Wikipedia, Steam, Metacritic, and so on.
 
 Usage:
-    run.py -p PLATFORM [-f FILE]
+    run.py -p PLATFORM -s SOURCE [-f FILE]
 
 Options:
     -p, --platform PLATFORM         Give a platform where games belong to 
