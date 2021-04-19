@@ -165,3 +165,6 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'cgdb_core.User'
+
+# New in Django 3.2 (https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys)
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
