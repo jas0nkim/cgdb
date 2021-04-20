@@ -3,8 +3,9 @@ FROM python:3.8
 
 # Run container as non-root (unprivileged) user
 # Create new user: appuser
-RUN groupadd -g 1001 appuser \
-    && useradd -r -m -d /home/appuser/ -u 1001 -g appuser appuser \
+ARG userid=1001
+RUN groupadd -g ${userid} appuser \
+    && useradd -r -m -d /home/appuser/ -u ${userid} -g appuser appuser \
     && chown -R appuser /home/appuser/
 
 # Create data folders
@@ -35,3 +36,5 @@ RUN pip install -r /tmp/requirements.txt
 
 # Copy all source files
 COPY --chown=appuser:appuser ./src ./
+
+CMD [ "celery", "-A", "bots", "worker", "--loglevel=INFO" ]

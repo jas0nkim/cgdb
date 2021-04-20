@@ -17,6 +17,7 @@ $ mkdir .env
 $ touch .env/backend.env
 $ touch .env/bot.env
 $ touch .env/postgres.env
+$ touch .env/rabbit.env
 # aws config files
 $ mkdir backend/.aws
 $ touch backend/.aws/credentials
@@ -36,11 +37,15 @@ DATABASE_PASS=YOUR-DB-PASSWORD
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
 S3_IMAGES_BUCKET=YOUR-S3-BUCKET-NAME
+RABBITMQ_USER=YOUR-RABBITMQ-USER-NAME
+RABBITMQ_PASS=YOUR-RABBITMQ-PASSWORD
 ```
 copy and paste following lines into `.env/bot.env` file
 ```
 AUTH_TOKEN=YOUR-AUTH-TOKEN
-API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://172.30.64.239:8765
+API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://backend:8765
+RABBITMQ_USER=YOUR-RABBITMQ-USER-NAME
+RABBITMQ_PASS=YOUR-RABBITMQ-PASSWORD
 ```
 copy and paste following lines into `.env/postgres.env` file
 ```
@@ -48,6 +53,11 @@ POSTGRES_USER=YOUR-DB-USER
 POSTGRES_PASSWORD=YOUR-DB-PASSWORD
 POSTGRES_DB=YOUR-DB-NAME
 PGDATA=/data/postgres
+```
+copy and paste following lines into `.env/rabbit.env` file
+```
+RABBITMQ_DEFAULT_USER=YOUR-RABBITMQ-USER-NAME
+RABBITMQ_DEFAULT_PASS=YOUR-RABBITMQ-PASSWORD
 ```
 copy and paste following lines into `backend/.aws/credentials` file
 ```
