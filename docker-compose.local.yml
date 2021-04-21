@@ -42,10 +42,10 @@ services:
         ####### production #######
         #
         # command: gunicorn cgdb.wsgi:application --bind 0.0.0.0:8000
-        # expose:
-        #     - 8000
         #
         # remove ports
+        # remove one of volumes:
+        # - ./backend/src:/home/appuser/app
         #
         ##########################
         command: python manage.py runserver 0.0.0.0:8000
@@ -86,6 +86,12 @@ services:
         volumes:
             - ./bot/.data:/etc/.data
             - ./bot/src:/home/appuser/app
+        ####### production #######
+        #
+        # remove one of volumes:
+        # - ./bot/src:/home/appuser/app
+        #
+        ##########################
         command: celery -A bots worker --loglevel=INFO
         depends_on:
             - rabbit
