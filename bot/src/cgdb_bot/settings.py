@@ -154,3 +154,9 @@ METACRITIC_PLATFORM_MAP = {
    'Xbox Game Pass': 'xbox-one',
    'Luna': 'pc',
 }
+
+# rabbitmq settings
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST")
+RABBITMQ_PORT = os.getenv("RABBITMQ_PORT")
+RABBITMQ_USER = os.getenv("RABBITMQ_USER")
+RABBITMQ_PASS = os.getenv("RABBITMQ_PASS")
