@@ -23,6 +23,7 @@ ENV PATH=/home/appuser/.local/bin:$PATH
 
 # Set environment variable for app
 ENV SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
+ENV PYTHONUNBUFFERED=1
 ENV DATA_ROOT=/etc/.data
 
 # Create working directory
