@@ -131,14 +131,14 @@ $ docker-compose exec backend python manage.py migrate
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ```
 
-## Run crawlers
+## Run crawlers with REST API
 - Stadia games
 ```
-$ docker-compose run --rm bot python run.py -p Stadia -s Reddit
+http://localhost:8765/api/producer/crawl/Stadia/Reddit
 # set active all Stadia games before run Stadia Steam
-$ docker-compose run --rm bot python run.py -p Stadia -s Steam
-$ docker-compose run --rm bot python run.py -p Stadia -s Metacritic
-$ docker-compose run --rm bot python run.py -p Stadia -s Wikipedia
+http://localhost:8765/api/producer/crawl/Stadia/Steam
+http://localhost:8765/api/producer/crawl/Stadia/Metacritic
+http://localhost:8765/api/producer/crawl/Stadia/Wikipedia
 ```
 - Wikipedia
 ```

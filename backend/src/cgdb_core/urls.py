@@ -20,6 +20,10 @@ urlpatterns = [
     path('search/<str:term>/',
         views.GameSearchViewSet.as_view({'get': 'list'}),
         name='search'),
+    # celery producer (client)
+    path('producer/crawl/<str:platform>/<str:source>',
+        views.crawl,
+        name='producer-crawl'),
     # POST from bot
     path('bot/wikipedia/game/',
         views.WikipediaGameBot.as_view(),

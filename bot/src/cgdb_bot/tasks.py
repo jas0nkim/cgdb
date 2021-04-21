@@ -13,7 +13,7 @@ from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.spiders.steampowered import SteampoweredSpider
 from .settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 
-ALLOWED_PLATFORMS = ('Xbox Game Pass', 'Stadia', 'Luna',)
+ALLOWED_PLATFORMS = ('XboxGamePass', 'Stadia', 'Luna',)
 ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit',)
 
 def crawl(platform, source, file):

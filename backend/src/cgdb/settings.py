@@ -168,3 +168,9 @@ AUTH_USER_MODEL = 'cgdb_core.User'
 
 # New in Django 3.2 (https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys)
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# rabbitmq settings
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST")
+RABBITMQ_PORT = os.getenv("RABBITMQ_PORT")
+RABBITMQ_USER = os.getenv("RABBITMQ_USER")
+RABBITMQ_PASS = os.getenv("RABBITMQ_PASS")

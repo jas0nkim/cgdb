@@ -8,10 +8,34 @@ from rest_framework import status
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import api_view, permission_classes
+from celery import Celery
+from kombu.exceptions import OperationalError
+from cgdb.settings import RABBITMQ_HOST, RABBITMQ_PORT, RABBITMQ_USER, RABBITMQ_PASS
 from .models import Genre, Platform, Game
 from . import serializers
 from . import utils
+
+celery_app = Celery('producer',
+                broker=f'amqp://{RABBITMQ_USER}:{RABBITMQ_PASS}@{RABBITMQ_HOST}:{RABBITMQ_PORT}',
+                backend='rpc://')
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def crawl(request, platform, source):
+    logger = logging.getLogger(__name__)
+    result = None
+    error_message = None
+    try:
+        result = celery_app.send_task('bots.crawl', kwargs={'platform': platform, 'source': source})
+    except OperationalError as err:
+        error_message = f'Sending task raised OperationalError: {str(err)}'
+        logger.error(error_message)
+    if not result:
+        return Response({"error": error_message},
+                status=status.HTTP_406_NOT_ACCEPTABLE)
+    return Response({"task_id": str(result)}, status=status.HTTP_200_OK)
 
 class PlatformPublicViewSet(ReadOnlyModelViewSet):
     queryset = Platform.objects.all()
