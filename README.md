@@ -43,7 +43,7 @@ RABBITMQ_PASS=YOUR-RABBITMQ-PASSWORD
 copy and paste following lines into `.env/bot.env` file
 ```
 AUTH_TOKEN=YOUR-AUTH-TOKEN
-API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://backend:8765
+API_SERVER_HOST=YOUR-BACKEND-SERVER i.g. http://backend:8000
 RABBITMQ_USER=YOUR-RABBITMQ-USER-NAME
 RABBITMQ_PASS=YOUR-RABBITMQ-PASSWORD
 ```
@@ -134,11 +134,11 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ## Run crawlers with REST API
 - Stadia games
 ```
-http://localhost:8765/api/producer/crawl/Stadia/Reddit
+http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Reddit
 # set active all Stadia games before run Stadia Steam
-http://localhost:8765/api/producer/crawl/Stadia/Steam
-http://localhost:8765/api/producer/crawl/Stadia/Metacritic
-http://localhost:8765/api/producer/crawl/Stadia/Wikipedia
+http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Steam
+http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Metacritic
+http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Wikipedia
 ```
 - Wikipedia
 ```
