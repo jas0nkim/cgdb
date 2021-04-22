@@ -17,6 +17,9 @@ from .settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 ALLOWED_PLATFORMS = ('XboxGamePass', 'Stadia', 'Luna',)
 ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit', 'SMW')
 
+# for missing Gunsport. manual url insert
+_metacritic_urls = ['https://www.metacritic.com/game/playstation-4/gunsport',]
+
 def crawl(platform, source, file):
     if not platform:
         print("Please enter -p or --platform")
@@ -34,7 +37,7 @@ def crawl(platform, source, file):
         elif source == 'Metacritic':
             return _crawl_stadia_metacritic()
         elif source == 'SMW':
-            return _crawl_stadia_steam() or _crawl_stadia_metacritic() or _crawl_stadia_wikipedia()
+            return _crawl_stadia_smw()
         else:
             return _crawl_stadia_reddit()
     else:
@@ -99,17 +102,20 @@ def _crawl_stadia_wikipedia():
     runner.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
     return True
 
-def _crawl_stadia_steam():
+def _fetch_all_stadia_games():
     try:
         resp = requests.get(f"{API_SERVER_HOST}/api/games/?platform=3")
     except ConnectionError as err:
         print(f"ConnectionError: {str(err)}")
-        return False
+        return []
+    return resp.json()
+
+def _crawl_stadia_steam():
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(SteampoweredSpider,
                 titles=CRAWL_ARG_DELIMITER.join(
-                            game.get('title') for game in resp.json()
+                            game.get('title') for game in _fetch_all_stadia_games()
                         ),
                 platform='Stadia',
                 postdata='True')
@@ -117,11 +123,29 @@ def _crawl_stadia_steam():
 
 def _crawl_stadia_metacritic():
     # for missing Gunsport. manual url insert
-    _urls = ['https://www.metacritic.com/game/playstation-4/gunsport',]
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(MetacriticSpider,
-                urls=CRAWL_ARG_DELIMITER.join(_urls),
+                urls=CRAWL_ARG_DELIMITER.join(_metacritic_urls),
                 platform='Stadia',
                 postdata='True')
+    return True
+
+def _crawl_stadia_smw():
+    """
+    crawl Stadia games from Steam, Metacritic, and Wikipedia all together
+    """
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+    runner.crawl(SteampoweredSpider,
+                titles=CRAWL_ARG_DELIMITER.join(
+                            game.get('title') for game in _fetch_all_stadia_games()
+                        ),
+                platform='Stadia',
+                postdata='True')
+    runner.crawl(MetacriticSpider,
+                        urls=CRAWL_ARG_DELIMITER.join(_metacritic_urls),
+                        platform='Stadia',
+                        postdata='True')
+    runner.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
     return True
