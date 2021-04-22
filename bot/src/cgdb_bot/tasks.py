@@ -17,8 +17,11 @@ from .settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 ALLOWED_PLATFORMS = ('XboxGamePass', 'Stadia', 'Luna',)
 ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit', 'SMW')
 
-# for missing Gunsport. manual url insert
-_metacritic_urls = ['https://www.metacritic.com/game/playstation-4/gunsport',]
+# for missing game pictures, manual metacritic url insert
+_metacritic_urls = [
+    'https://www.metacritic.com/game/playstation-4/gunsport',
+    'https://www.metacritic.com/game/switch/kemono-heroes',
+]
 
 def crawl(platform, source, file):
     if not platform:
