@@ -150,8 +150,8 @@ $ docker-compose run --rm bot scrapy crawl WikipediaGameSpider -a titles="Absolv
 ```
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ...
-cgdb=# select count(*) from games where links->'stadia' IS NOT NULL;
-cgdb=# update games set active = true where links->'stadia' IS NOT NULL;
+cgdb=# select count(*) from games where links->'stadia' IS NOT NULL and active = false;
+cgdb=# update games set active = true where links->'stadia' IS NOT NULL and active = false;
 ```
 
 ## Run tests
@@ -159,9 +159,9 @@ cgdb=# update games set active = true where links->'stadia' IS NOT NULL;
 ```
 $ docker-compose exec backend python manage.py test
 ```
-- bot
+- worker
 ```
-$ docker-compose run --rm bot python -m unittest
+$ docker-compose exec worker python -m unittest
 ```
 
 ## References / Game list

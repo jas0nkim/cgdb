@@ -166,10 +166,11 @@ class WikipediaParser:
         
         def __filter_ret(_ret):
             """
-            remove ',' , empty string, (...), [...] items from the return list
+            remove ',' , empty string, (mobile), (...), [...] items from the return list
             """
             r = []
             for x in _ret:
+                x = x.replace('(mobile)', '')
                 x = x.rstrip(',').lstrip(',').strip()
                 # remove empty, -, _, :, (...), [...]
                 if not x or x in ['-', '_', ':',] or re.match(r'\((.*?)\)|\[(.*?)\]', x):

@@ -247,7 +247,7 @@
             "title_lc": "Uno",
             "description_lc": "Uno is the video game adaptation of the card game of the same name. It has been released for a number of platforms. The Xbox 360 version by Carbonated Games and Microsoft Game Studios was released on May 9, 2006, as a digital download via Xbox Live Arcade. A version for iPhone OS devices was released in 2008 by Gameloft. Gameloft released the PlayStation 3 version on October 1, 2009, and also released a version for iPod, WiiWare, Nintendo DSi via DSiWare, and PlayStation Portable. An updated version developed and published by Ubisoft was released for Xbox One and PlayStation 4 in August 2016, with a Steam version to follow later in the year. On November 7, 2017, Uno was released for the Nintendo Switch. The game was also released for the Stadia cloud gaming service, operated by Google, on September 15, 2020.",
             "pictures": ["https://upload.wikimedia.org/wikipedia/en/f/f1/Cboxuno.jpg"],
-            "developers": ["Carbonated Games", "Gameloft", "Ubisoft Chengdu"],
+            "developers": ["Carbonated Games", "Gameloft", "Bethesda Chengdu"],
             "publishers": ["Microsoft Game Studios", "Gameloft", "Ubisoft"],
             "series": ["Uno"],
             "genres": ["card game"],
@@ -327,10 +327,10 @@
             "title_lc": "Human: Fall Flat",
             "description_lc": "Human: Fall Flat is a platform-puzzle video game developed by Lithuanian studio No Brakes Games and published by Curve Digital. It was released for Microsoft Windows, Linux and MacOS in July 2016, with PlayStation 4 and Xbox One versions in May 2017 and a Nintendo Switch version in December 2017. A mobile port developed by Codeglue and published by 505 Games was released on 26 June 2019 for iOS and Android. A Stadia version was released on 1 October 2020.",
             "pictures": ["https://upload.wikimedia.org/wikipedia/en/0/0e/Human_Fall_Flat_logo.png"],
-            "developers": ["No Brakes Games"],
-            "publishers": ["Curve Digital"],
+            "developers": ["No Brakes Games", "Codeglue"],
+            "publishers": ["Curve Digital", "505 Games"],
             "series": [],
-            "genres": ["platform", "puzzle"],
+            "genres": ["puzzle-platform"],
             "modes": ["single-player", "multiplayer"],
             "link": "https://en.wikipedia.org/wiki/Human:_Fall_Flat"
         }
