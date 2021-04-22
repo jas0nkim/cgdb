@@ -2,8 +2,8 @@ import csv
 import requests
 from os import path
 from requests.exceptions import ConnectionError
-from twisted.internet import reactor, defer
-from scrapy.crawler import CrawlerRunner, CrawlerProcess
+from twisted.internet import defer
+from scrapy.crawler import CrawlerRunner
 from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
 from cgdb_bot.spiders.wikipedia import (WikipediaGameSpider,
@@ -11,10 +11,11 @@ from cgdb_bot.spiders.wikipedia import (WikipediaGameSpider,
 from cgdb_bot.spiders.metacritic import MetacriticSpider
 from cgdb_bot.spiders.reddit import RedditStadiaSpider
 from cgdb_bot.spiders.steampowered import SteampoweredSpider
+from crochet import setup as crochet_setup
 from .settings import API_SERVER_HOST, CRAWL_ARG_DELIMITER
 
 ALLOWED_PLATFORMS = ('XboxGamePass', 'Stadia', 'Luna',)
-ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit',)
+ALLOWED_SOURCES = ('Steam', 'Metacritic', 'Wikipedia', 'Reddit', 'SMW')
 
 def crawl(platform, source, file):
     if not platform:
@@ -23,6 +24,8 @@ def crawl(platform, source, file):
     if platform not in ALLOWED_PLATFORMS:
         print(f"Platform must be one of fillowings: {', '.join(ALLOWED_PLATFORMS)}")
         return False
+    # avoid celery scrapy error: twisted.internet.error.ReactorNotRestartable https://stackoverflow.com/a/50140913
+    crochet_setup()
     if platform == 'Stadia':
         if source == 'Wikipedia':
             return _crawl_stadia_wikipedia()
@@ -30,6 +33,8 @@ def crawl(platform, source, file):
             return _crawl_stadia_steam()
         elif source == 'Metacritic':
             return _crawl_stadia_metacritic()
+        elif source == 'SMW':
+            return _crawl_stadia_steam() or _crawl_stadia_metacritic() or _crawl_stadia_wikipedia()
         else:
             return _crawl_stadia_reddit()
     else:
@@ -63,13 +68,13 @@ def _crawl_from_file(file, platform):
             except IndexError as err:
                 print(f'IndexError: {str(err)}, on line {line_num} of {file}')
                 return False
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(WikipediaGameSpider,
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+    runner.crawl(WikipediaGameSpider,
                 titles=CRAWL_ARG_DELIMITER.join(titles),
                 urls=CRAWL_ARG_DELIMITER.join(urls),
                 platform=platform,
                 postdata='True')
-    process.start()
     return True
 
 def _crawl_stadia_reddit():
@@ -84,16 +89,14 @@ def _crawl_stadia_reddit():
                             type='pro_games', postdata='True')
         yield runner.crawl(RedditStadiaSpider,
                             type='allstats', postdata='True')
-        reactor.stop()
 
     crawl()
-    reactor.run() # the script will block here until the last crawl call is finished
     return True
 
 def _crawl_stadia_wikipedia():
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
-    process.start()
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+    runner.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
     return True
 
 def _crawl_stadia_steam():
@@ -102,23 +105,23 @@ def _crawl_stadia_steam():
     except ConnectionError as err:
         print(f"ConnectionError: {str(err)}")
         return False
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(SteampoweredSpider,
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+    runner.crawl(SteampoweredSpider,
                 titles=CRAWL_ARG_DELIMITER.join(
                             game.get('title') for game in resp.json()
                         ),
                 platform='Stadia',
                 postdata='True')
-    process.start()
     return True
 
 def _crawl_stadia_metacritic():
     # for missing Gunsport. manual url insert
     _urls = ['https://www.metacritic.com/game/playstation-4/gunsport',]
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(MetacriticSpider,
+    configure_logging()
+    runner = CrawlerRunner(get_project_settings())
+    runner.crawl(MetacriticSpider,
                 urls=CRAWL_ARG_DELIMITER.join(_urls),
                 platform='Stadia',
                 postdata='True')
-    process.start()
     return True
