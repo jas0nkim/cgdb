@@ -7,7 +7,7 @@ Provides easily searchable game titles by cloud gaming platforms, such as Google
 - Multi-language support
 
 ## Live Demo
-[Live demo](http://52.91.151.66/platform/stadia/games)
+[Live demo](http://54.146.80.135/platform/stadia/games)
 
 ## Installation
 1. Create environment/config files
@@ -136,9 +136,18 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ```
 http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Reddit
 # set active all Stadia games before run Stadia Steam
+
+# crawl from Steam
 http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Steam
+# crawl from Metacritic
 http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Metacritic
+# crawl from Wikipedia
 http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/Wikipedia
+
+or
+
+# crawl from Steam, Metacritic, and Wikipedia at once.
+http://YOUR-BACKEND-SERVER/api/producer/crawl/Stadia/SMW
 ```
 - Wikipedia
 ```
