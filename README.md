@@ -131,6 +131,21 @@ $ docker-compose exec backend python manage.py migrate
 $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 ```
 
+## Run crawlers with AWS Lambda
+- Build docker image
+```
+$ cd bot
+$ docker build --file Dockerfile.lambda -t scraper:1.0 .
+```
+- Run docker image in local
+```
+$ docker run -p 9000:8080 --env-file ../.env/bot.env scraper:1.0
+```
+- Test the container in local
+```
+$ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"platform":"TEST_PLATFORM", "source":"TEST_SOURCE"}'
+```
+
 ## Run crawlers with REST API
 - Stadia games
 ```

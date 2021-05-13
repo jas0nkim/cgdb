@@ -1,0 +1,47 @@
+# Based on official Python 3.8
+FROM python:3.8
+
+# Define custom function directory
+ARG function_dir="/home/app"
+
+# Install aws-lambda-cpp build dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    g++ \
+    make \
+    cmake \
+    unzip \
+    libcurl4-openssl-dev
+
+# Add Lambda Runtime Interface Emulator and use a script in the ENTRYPOINT for simpler local runs
+ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/bin/aws-lambda-rie
+
+# Create data folders
+RUN mkdir -p /etc/.data/dropped_items \
+    /etc/.data/game_list \
+    /etc/.data/logs \
+    /etc/.data/scraped_items
+
+# Set environment variable for app
+ENV SCRAPY_SETTINGS_MODULE=cgdb_bot.settings
+ENV PYTHONUNBUFFERED=1
+ENV DATA_ROOT=/etc/.data
+
+# Install Lambda Runtime Interface Client for Python
+RUN mkdir -p ${function_dir}
+WORKDIR ${function_dir}
+RUN pip install awslambdaric
+# Copy requirements.txt and install dependencies before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY ./requirements.txt /tmp/requirements.txt
+# Install other python dependencies
+RUN pip install -r /tmp/requirements.txt
+
+# Copy all source files
+COPY ./src ${function_dir}
+
+COPY ./src/entrypoint.sh /etc/
+RUN chmod 755 /usr/bin/aws-lambda-rie /etc/entrypoint.sh
+
+ENTRYPOINT [ "/etc/entrypoint.sh" ]
+CMD [ "lambda.handler" ]
