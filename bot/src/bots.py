@@ -9,4 +9,5 @@ app = Celery('bots',
 
 @app.task
 def crawl(platform, source, file=None):
-    return tasks.crawl(platform, source, file)
+    status, _ = tasks.crawl(platform, source, file)
+    return status

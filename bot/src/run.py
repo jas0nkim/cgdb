@@ -24,7 +24,8 @@ def main(argv):
             platform = str(arg)
         elif opt in ('-s', '--source'):
             source = str(arg)
-    if not tasks.crawl(platform, source, file):
+    status, _ = tasks.crawl(platform, source, file)
+    if not status:
         usage()
         sys.exit(2)
 

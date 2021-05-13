@@ -26,10 +26,10 @@ _metacritic_urls = [
 def crawl(platform, source, file):
     if not platform:
         print("Please enter -p or --platform")
-        return False
+        return False, "Please enter -p or --platform"
     if platform not in ALLOWED_PLATFORMS:
         print(f"Platform must be one of fillowings: {', '.join(ALLOWED_PLATFORMS)}")
-        return False
+        return False, f"Platform must be one of fillowings: {', '.join(ALLOWED_PLATFORMS)}"
     # avoid celery scrapy error: twisted.internet.error.ReactorNotRestartable https://stackoverflow.com/a/50140913
     crochet_setup()
     if platform == 'Stadia':
@@ -46,10 +46,10 @@ def crawl(platform, source, file):
     else:
         if not file:
             print("Please enter -f or --file")
-            return False
+            return False, "Please enter -f or --file"
         if not path.exists(file):
             print(f"File ({file}) does not exists. Please enter correct file.")
-            return False
+            return False, f"File ({file}) does not exists. Please enter correct file."
         return _crawl_from_file(file=file, platform=platform)
 
 def _crawl_from_file(file, platform):
@@ -73,7 +73,7 @@ def _crawl_from_file(file, platform):
                     titles.append(row[0])
             except IndexError as err:
                 print(f'IndexError: {str(err)}, on line {line_num} of {file}')
-                return False
+                return False, f'IndexError: {str(err)}, on line {line_num} of {file}'
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(WikipediaGameSpider,
@@ -81,7 +81,7 @@ def _crawl_from_file(file, platform):
                 urls=CRAWL_ARG_DELIMITER.join(urls),
                 platform=platform,
                 postdata='True')
-    return True
+    return True, "Successfully scraped"
 
 def _crawl_stadia_reddit():
     configure_logging()
@@ -97,13 +97,13 @@ def _crawl_stadia_reddit():
                             type='allstats', postdata='True')
 
     crawl()
-    return True
+    return True, "Successfully scraped"
 
 def _crawl_stadia_wikipedia():
     configure_logging()
     runner = CrawlerRunner(get_project_settings())
     runner.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
-    return True
+    return True, "Successfully scraped"
 
 def _fetch_all_stadia_games():
     try:
@@ -122,7 +122,7 @@ def _crawl_stadia_steam():
                         ),
                 platform='Stadia',
                 postdata='True')
-    return True
+    return True, "Successfully scraped"
 
 def _crawl_stadia_metacritic():
     # for missing Gunsport. manual url insert
@@ -132,7 +132,7 @@ def _crawl_stadia_metacritic():
                 urls=CRAWL_ARG_DELIMITER.join(_metacritic_urls),
                 platform='Stadia',
                 postdata='True')
-    return True
+    return True, "Successfully scraped"
 
 def _crawl_stadia_smw():
     """
@@ -151,4 +151,4 @@ def _crawl_stadia_smw():
                         platform='Stadia',
                         postdata='True')
     runner.crawl(WikipediaStadiaSpider, platform='Stadia', postdata='True')
-    return True
+    return True, "Successfully scraped"

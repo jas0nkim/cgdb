@@ -135,15 +135,29 @@ $ docker-compose exec postgres psql -h postgres -U cgdb cgdb
 - Build docker image
 ```
 $ cd bot
-$ docker build --file Dockerfile.lambda -t scraper:1.0 .
+$ docker build --file Dockerfile.lambda -t lambda/scraper:1.0 .
 ```
 - Run docker image in local
 ```
-$ docker run -p 9000:8080 --env-file ../.env/bot.env scraper:1.0
+$ docker run -p 9000:8080 --env-file ../.env/bot.env lambda/scraper:1.0
 ```
 - Test the container in local
 ```
-$ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"platform":"TEST_PLATFORM", "source":"TEST_SOURCE"}'
+$ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{"queryStringParameters":{"platform":"TEST_PLATFORM","source":"TEST_SOURCE"}}'
+```
+- Upload docker image to the AWS ECR repository
+```
+# Authenticate the Docker CLI to your Amazon ECR registry
+$ aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 094000180617.dkr.ecr.us-east-1.amazonaws.com
+
+# Create a repository in Amazon ECR using the create-repository command
+$ aws ecr create-repository --repository-name lambda/scraper --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
+
+# Tag your image to match your repository name using the docker tag command
+$ docker tag lambda/scraper:1.0 094000180617.dkr.ecr.us-east-1.amazonaws.com/lambda/scraper:1.0
+
+# Deploy the image to Amazon ECR using the docker push command
+$ docker push 094000180617.dkr.ecr.us-east-1.amazonaws.com/lambda/scraper:1.0
 ```
 
 ## Run crawlers with REST API
