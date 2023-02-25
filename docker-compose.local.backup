@@ -15,19 +15,19 @@ services:
         restart:
             unless-stopped
 
-    # rabbit:
-    #     image: rabbitmq:3.8-management
-    #     container_name: rabbit
-    #     env_file:
-    #         - ./.env/rabbit.env
-    #     expose:
-    #         - 5672
-    #     ports:
-    #         - 15672:15672
-    #     networks:
-    #         - cgdb
-    #     restart:
-    #         unless-stopped
+    rabbit:
+        image: rabbitmq:3.8-management
+        container_name: rabbit
+        env_file:
+            - ./.env/rabbit.env
+        expose:
+            - 5672
+        ports:
+            - 15672:15672
+        networks:
+            - cgdb
+        restart:
+            unless-stopped
 
     backend:
         build:
@@ -54,7 +54,7 @@ services:
         expose:
             - 8000
         depends_on:
-            # - rabbit
+            - rabbit
             - postgres
         networks:
             - cgdb
@@ -77,27 +77,27 @@ services:
     #
     ##########################
 
-    # worker:
-    #     build:
-    #         context: ./bot
-    #     container_name: worker
-    #     env_file:
-    #         - ./.env/bot.env
-    #     volumes:
-    #         - ./bot/.data:/etc/.data
-    #         - ./bot/src:/home/appuser/app
-    #     ####### production #######
-    #     #
-    #     # remove one of volumes:
-    #     # - ./bot/src:/home/appuser/app
-    #     #
-    #     ##########################
-    #     command: celery -A bots worker --loglevel=INFO
-    #     depends_on:
-    #         - rabbit
-    #         - backend
-    #     networks:
-    #         - cgdb
+    worker:
+        build:
+            context: ./bot
+        container_name: worker
+        env_file:
+            - ./.env/bot.env
+        volumes:
+            - ./bot/.data:/etc/.data
+            - ./bot/src:/home/appuser/app
+        ####### production #######
+        #
+        # remove one of volumes:
+        # - ./bot/src:/home/appuser/app
+        #
+        ##########################
+        command: celery -A bots worker --loglevel=INFO
+        depends_on:
+            - rabbit
+            - backend
+        networks:
+            - cgdb
 
     frontend:
         build:
